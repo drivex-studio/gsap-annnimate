@@ -1,0 +1,101 @@
+{
+  "hero": {
+    "headline": "Landmark Kits.",
+    "ctaPrimary": "See the Reveal Kit",
+    "moreComing": "More Kits are coming",
+    "notifyButton": "Notify me",
+    "emailPlaceholder": "your@email.com"
+  },
+  "feature": {
+    "eyebrow": "The Kit",
+    "headline": "The Reveal Kit.",
+    "imageAlt": "{title} Kit preview",
+    "specComponents": "{total} components",
+    "specSplit": "{covers} preloader covers, {heroes} hero sections",
+    "specVariants": "WebGL and GSAP variants",
+    "specFormats": "React, Vue, HTML / CSS / JS. {notWebflow}",
+    "specPrice": "{price}, one purchase",
+    "specLicense": "Perpetual license, yours forever",
+    "priceFallback": "One-time",
+    "cta": "See the Reveal Kit"
+  },
+  "system": {
+    "eyebrow": "How the first Kit works",
+    "headline": "One system. Mixed deep.",
+    "body": "Reveal is the moment a site loads and opens. Pair any preloader cover with any hero section - WebGL or GSAP - and the handoff is built to coordinate. The full vocabulary for the moment, built once, properly.",
+    "property1Label": "Stand-alone system.",
+    "property1Body": "Kits are separate products. Not bundled with the Library, not unlocked by a subscription tier. Each Kit is its own piece of work, owned on its own.",
+    "property2Label": "Bound by one moment.",
+    "property2Body": "Reveal covers the moment a site loads and reveals itself. Preloaders, hero sections, the cover-to-content handoff - one coordinated system.",
+    "property3Label": "Depth over breadth.",
+    "property3Body": "Every variant of the moment, not a sampler. WebGL covers, GSAP covers, scrambled-text reveals, mask wipes - the full set, mixable. One purchase, every project, forever.",
+    "stageIdentifier": "Landmark Kit / 01",
+    "stageName": "/ Reveal",
+    "stageStatus": "Available",
+    "shipsIn": "Ships in",
+    "formats": [
+      "React",
+      "Vue",
+      "HTML / CSS / JS"
+    ],
+    "formatNotSupportedTitle": "{label} - not supported",
+    "formatNotSupportedAria": "{label}, not supported"
+  },
+  "vsLibrary": {
+    "eyebrow": "Kit or Library?",
+    "headline": "Two products. One question.",
+    "body": "A short either-or. Whichever you pick, the other one stacks later. Most builders who stay around end up with both.",
+    "pickThis": "Pick this if",
+    "libraryLabel": "The Library",
+    "libraryBilling": "Annual subscription",
+    "libraryTitle": "Everything on tap.",
+    "libraryBody": "Every named signature component, ready to copy. Subscribe once and use the catalog across every project you build.",
+    "libraryPicks": [
+      "You ship a lot, across many projects.",
+      "You want one component for one use.",
+      "You like fresh components dropped weekly."
+    ],
+    "libraryCta": "Browse the library",
+    "kitLabel": "Landmark Kits",
+    "kitBilling": "Buy once / yours forever",
+    "kitTitle": "Own a system.",
+    "kitBody": "A deep, stand-alone collection. Two Kits so far: Reveal, preloaders and hero sections as one mixable system, and Menu, ten site navigation menus as one system. React, Vue, HTML / CSS / JS. Not for Webflow.",
+    "kitPicks": [
+      "You want depth in one system, not breadth.",
+      "You want the hard pieces already built right.",
+      "You prefer one-time ownership over subscription."
+    ],
+    "kitCta": "Get the Reveal Kit",
+    "reciprocalEyebrow": "Want both? They reward each other.",
+    "discount1Label": "off every Kit",
+    "discount1Who": "Library member",
+    "discount1When": "buying a Kit, while subscribed",
+    "discount2Label": "off your first year",
+    "discount2Who": "Past Kit owner",
+    "discount2When": "joining any Library plan",
+    "reciprocalCta": "See pricing"
+  },
+  "provenance": {
+    "eyebrow": "Provenance / Field exhibit",
+    "nowPlaying": "Now playing",
+    "headline": "Hard-to-build, in motion.",
+    "body": "Every piece we ship started as production work for a brand site. This is one of the hard ones. A Kit bundles the whole vocabulary for one system - paired and mixable, end to end.",
+    "creditFeatured": "Featured",
+    "creditCurrentlyIn": "Currently in",
+    "creditBuiltWith": "Built with",
+    "cta": "See the Reveal Kit"
+  },
+  "capture": {
+    "headline": "See the craft first. Free.",
+    "body": "Grab the free component pack, built to the standard we ship for real brands, in your inbox now. It grows every week. No card, no catch. When you want the full Reveal system, it is one click away.",
+    "buttonLabel": "Send me the free pack",
+    "emailPlaceholder": "you@studio.com"
+  },
+  "endCta": {
+    "eyebrow": "The Reveal Kit",
+    "headline": "Build the entrance once.",
+    "subtext": "Preloaders and hero sections, paired and mixable, end to end. One purchase, every project, forever.",
+    "primaryCta": "See the Reveal Kit",
+    "secondaryCta": "Browse the library"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "landing": {
+    "seoTitle": "Landing Page Motion Pack - 7 GSAP Components | Annnimate",
+    "seoDescription": "Seven production GSAP components for one landing page - hero, scroll chapters, text effect, menu, slider, accordion, footer. React, Vue, HTML. EUR 29, yours forever.",
+    "hero": {
+      "eyebrowLeft": "The Pack",
+      "eyebrowRight": "7 components, one landing page",
+      "headline": "Every move your landing page needs.",
+      "body": "Seven production GSAP components, curated for one job: a landing page that feels expensive. Hero, scroll chapters, text effect, menu, slider, accordion, footer - in React, Vue, and plain HTML / CSS / JS.",
+      "price": "EUR 29",
+      "priceNote": "One purchase. Every project. Forever.",
+      "cta": "Get the Pack",
+      "ownedCta": "Open your Pack",
+      "ownedLabel": "Already bought it?"
+    },
+    "tiles": {
+      "label": "Inside the Pack",
+      "empty": "The Pack contents are loading - check back in a minute."
+    },
+    "facts": [
+      "All three stacks for every component: HTML / CSS / JS, React, Vue",
+      "Configurable via data-anm-* attributes - no source edits",
+      "Built to the standard we ship for real brand sites",
+      "Unlimited personal and client projects, forever",
+      "14-day money-back guarantee"
+    ],
+    "endCta": {
+      "headline": "Want the whole Library?",
+      "subtext": "Every Pack component is part of it, along with everything else we ship weekly.",
+      "primaryLabel": "See Library pricing",
+      "secondaryLabel": "Browse the components"
+    }
+  }
+}

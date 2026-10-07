@@ -1,0 +1,282 @@
+{
+  "endCta": {
+    "headline": "Take the component you'd have built yourself.",
+    "subtext": "Browse the library, grab one, drop it into your build. The first one is free.",
+    "primaryLabel": "Get Annnimate",
+    "secondaryLabel": "Browse the library"
+  },
+  "faq": {
+    "headline": "Questions and answers.",
+    "subtext": "Everything worth knowing before buying. Full list lives on the FAQ page.",
+    "ctaLabel": "See all questions",
+    "items": [
+      {
+        "q": "What is Annnimate?",
+        "a": "Annnimate is a GSAP motion component library for React and Vue, built by Good Fella. Every component is built to the standard we ship for real brands. Some shipped on those brand sites, the rest are Good Fella originals held to the same bar. Either way you are not copying an experiment, you are copying motion built to ship."
+      },
+      {
+        "q": "How often do new Annnimate components ship?",
+        "a": "Annnimate ships new signature components regularly, included in any active Library subscription at no extra cost. The changelog lists every component as it lands, so you can see the cadence for yourself before you buy."
+      },
+      {
+        "q": "How is Annnimate different from Aceternity, Magic UI, and other Framer Motion libraries?",
+        "a": "Annnimate is built on GSAP, not Framer Motion. Aceternity and Magic UI are great for Framer Motion landing-page UI. Annnimate is production code you can ship to a client on Monday, on the engine that runs award-level work, the GSAP option for developers who notice."
+      },
+      {
+        "q": "Does Annnimate work with Next.js App Router and Nuxt?",
+        "a": "Yes. Annnimate's React components are Server Component safe and work with the Next.js App Router. The Vue components are Nuxt ready. Each one uses useGSAP in React or a composable in Vue, so the GSAP context cleans up on unmount without extra plumbing from you."
+      },
+      {
+        "q": "Do I need GSAP installed to use Annnimate?",
+        "a": "Yes. Annnimate runs on GSAP, which is free for any project including every plugin. Install it with one npm install gsap. The docs walk you through the setup for React, Vue, and HTML."
+      },
+      {
+        "q": "Are Annnimate components accessible and reduced-motion aware?",
+        "a": "Yes. Every Annnimate component respects prefers-reduced-motion and falls back to a calm, usable state. Interactive components handle keyboard focus and ARIA. The docs spell out what each one does when motion is reduced."
+      },
+      {
+        "q": "Is there a free version of Annnimate?",
+        "a": "There is a free Starter Pack of production components in React, Vue and HTML, delivered to your inbox and free to use in any project with no expiration. A new component goes free every week and joins the pack. Every component's live preview is also free to explore with no account needed, and the full code library is a paid subscription."
+      },
+      {
+        "q": "Does Annnimate have a lifetime plan?",
+        "a": "Annnimate no longer offers a lifetime plan. The Library is a subscription billed quarterly or yearly, so the catalog keeps growing and the components keep getting maintained. Developers who bought Lifetime before the 2026 relaunch keep their access. See the What's New page for the migration detail."
+      },
+      {
+        "q": "Can I use Annnimate in commercial and client work?",
+        "a": "Yes. Every Annnimate tier covers unlimited commercial client projects. You and your seats can ship with the components on any work you produce. The only limit is repackaging or reselling the components as a competing library."
+      },
+      {
+        "q": "Do Library subscribers get a discount on Landmark Kits?",
+        "a": "Annnimate Library members get 20% off every Landmark Kit purchase for as long as the subscription is active. Past Kit buyers get 20% off their first year of any Library plan. The two products are separate, but they reward each other."
+      },
+      {
+        "q": "What is Annnimate's refund policy?",
+        "a": "Annnimate has a 14-day, no-questions-asked refund on both Library subscriptions and Landmark Kits. If it does not fit how you work, email us within 14 days of purchase and we refund you in full."
+      }
+    ]
+  },
+  "header": {
+    "actions": {
+      "account": "Account",
+      "login": "Login",
+      "getAnnnimate": "Get Annnimate"
+    },
+    "logoByline": "by Good Fella",
+    "latestComponentLabel": "Latest component",
+    "marquee": {
+      "label": "Road to 100 pricing - the library from €20 a month",
+      "labelMenuKit": "The Menu Kit is out now"
+    },
+    "nav": {
+      "library": {
+        "label": "Library",
+        "intro": {
+          "eyebrow": "The library",
+          "heading": "Curated, not a catalog dump.",
+          "text": "Every component built to the bar we ship for real brands. Filter, preview live, copy in React or Vue.",
+          "ctaLabel": "Browse the library"
+        },
+        "columns": {
+          "byCategory": "By category",
+          "collections": "Collections"
+        },
+        "links": {
+          "allComponents": "All components",
+          "mostPopular": "Most popular",
+          "saved": "Saved"
+        }
+      },
+      "kits": {
+        "label": "Kits",
+        "badge": "New",
+        "intro": {
+          "eyebrow": "Landmark Kits",
+          "heading": "Depth, not breadth.",
+          "text": "A deep, stand-alone collection built around one system. Two Kits so far: Reveal, preloaders and hero sections as one mixable system, and Menu, ten site navigation menus as one system. React, Vue, HTML / CSS / JS. Not for Webflow.",
+          "ctaLabel": "See the Menu Kit"
+        },
+        "columns": {
+          "theKits": "The Kits",
+          "learn": "Learn",
+          "stayClose": "Stay close"
+        },
+        "links": {
+          "revealKit": "Reveal",
+          "menuKit": "Menu",
+          "whatAKitIs": "What a Kit is",
+          "kitVsLibrary": "Kit vs. the Library",
+          "foundingOffer": "Founding offer",
+          "roadmap": "Roadmap",
+          "pricing": "Pricing"
+        },
+        "featured": {
+          "eyebrow": "Out now",
+          "title": "The Menu Kit",
+          "imageAlt": "The Menu Kit"
+        }
+      },
+      "learn": {
+        "label": "Learn",
+        "intro": {
+          "eyebrow": "Concepts, patterns, tools",
+          "heading": "Learn the vocabulary.",
+          "text": "Definitions and examples for the GSAP and animation concepts behind production motion. Free, citable, and cross-linked with the components that use each idea.",
+          "ctaLabel": "Open concepts"
+        },
+        "columns": {
+          "concepts": "Concepts",
+          "explore": "Explore"
+        },
+        "links": {
+          "easing": "Easing",
+          "scroll": "Scroll",
+          "timeline": "Timeline",
+          "text": "Text",
+          "react": "React",
+          "performance": "Performance",
+          "plugins": "Plugins",
+          "patterns": "Patterns",
+          "freeTools": "Free tools",
+          "documentation": "Documentation",
+          "comparisons": "Comparisons"
+        }
+      },
+      "docs": {
+        "label": "Docs"
+      },
+      "pricing": {
+        "label": "Pricing"
+      },
+      "showcase": {
+        "label": "Showcase"
+      }
+    }
+  },
+  "footer": {
+    "columns": {
+      "platform": "Platform",
+      "library": "Library",
+      "kits": "Kits"
+    },
+    "platformLinks": {
+      "howItWorks": "How it works",
+      "documentation": "Documentation",
+      "mcpServer": "MCP server",
+      "learnGsap": "Learn GSAP",
+      "freeTools": "Free tools",
+      "compare": "Compare",
+      "stateOfWebAnimation": "State of Web Animation",
+      "changelog": "Changelog",
+      "roadmap": "Roadmap",
+      "pricing": "Pricing",
+      "faqs": "FAQs",
+      "affiliates": "Affiliates"
+    },
+    "libraryLinks": {
+      "allComponents": "All components",
+      "showcase": "Showcase"
+    },
+    "kitsLinks": {
+      "seeTheKits": "See the Kits",
+      "whatAKitIs": "What a Kit is",
+      "kitVsLibrary": "Kit vs. the Library",
+      "foundingOffer": "Founding offer"
+    },
+    "legalLinks": {
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies",
+      "refund": "Refund"
+    },
+    "status": {
+      "justShipped": "Just shipped:",
+      "default": "Library shipping weekly"
+    },
+    "relativeTime": {
+      "today": "today",
+      "yesterday": "yesterday",
+      "daysAgo": "{n} days ago",
+      "weekAgo": "1 week ago",
+      "weeksAgo": "{n} weeks ago",
+      "monthAgo": "1 month ago",
+      "monthsAgo": "{n} months ago"
+    },
+    "studioClock": "{time} CET",
+    "askAi": "Ask about Annnimate on",
+    "contact": "Contact",
+    "copyright": "© {year} Annnimate",
+    "builtBy": "Built by",
+    "builtByName": "Good Fella",
+    "cookiePreferences": "Cookie Preferences"
+  },
+  "starterPack": {
+    "headline": "A new free component every week.",
+    "body": "Production components in React, Vue and HTML, built to the same standard we ship for real brands. The free pack grows every week. In your inbox now. No card, no catch.",
+    "buttonLabel": "Send me the free pack"
+  },
+  "docCapture": {
+    "headline": "Try the library before you decide.",
+    "body": "The Starter Pack: free production components in React, Vue and HTML, straight from the library. A new one lands every week. No card, no catch.",
+    "railBody": "Free production components in React, Vue and HTML. No card, no catch.",
+    "buttonLabel": "Get the free pack"
+  },
+  "testimonials": {
+    "heading": "The people using it ship for a living.",
+    "sub": "Studios and senior developers, on real client work.",
+    "items": [
+      {
+        "body": "In the process of creating a digital first studio, assets like Annnimate are essential for providing that interactive edge on our products. Julian has created a tool that really helps us in the creative iteration process and saves us quite a bit of time.",
+        "name": "Lukas Haentjens",
+        "role": "Co-founder, Three Sixty One"
+      },
+      {
+        "body": "Annnimate makes it easier to work with animations without overcomplicating the setup. The library is broad, the tool is well built, and the animations are smooth and well crafted. I especially like the React integration, it fits naturally into how I usually build things.",
+        "name": "Edoardo Lunardi",
+        "role": "Award-winning Senior Frontend Developer"
+      },
+      {
+        "body": "I'm a lifetime user of Annnimate. It's really good - clean documentation, code is nice and light, and the animations it gives me are world class. Similar services are 2-3 times the cost and don't offer the level of polish that Annnimate does.",
+        "name": "Matthew Stobo",
+        "role": "Lifetime Member"
+      }
+    ]
+  },
+  "valueMath": {
+    "headline": "What building this yourself costs.",
+    "intro": "Every number here is real work, priced at €80 an hour. Pick how much you'd actually use.",
+    "usageAria": "How much you would use",
+    "usage": {
+      "site": "One site",
+      "projects": "A few projects",
+      "client": "Client work"
+    },
+    "modeLabel": "What one component costs you to build",
+    "modeAria": "Built by hand or with AI",
+    "mode": {
+      "hand": "By hand",
+      "ai": "With AI"
+    },
+    "rows": {
+      "design": "Motion design and timing",
+      "build": "Build and interaction states",
+      "responsive": "Responsive and reduced motion",
+      "qa": "Cross-browser and device QA"
+    },
+    "rowTotal": "One component",
+    "savedLabel": "What you don't spend building",
+    "savedHours": "{hours} hours of work at €80 an hour.",
+    "points": {
+      "components": "{count} components you never scope, build or QA.",
+      "breakEven": "It pays for itself before you finish the first one.",
+      "ownership": "Anything you paste stays yours and keeps working, even if you cancel."
+    },
+    "compareBuildLabel": "Build it yourself",
+    "compareUsLabel": "With Annnimate",
+    "compareBuildValue": "€{money}",
+    "priceLine": "€{price} a year.",
+    "priceSupport": "The whole library, every format and everything we ship next.",
+    "ctaLanding": "Get the library",
+    "ctaPricing": "See the plans"
+  }
+}

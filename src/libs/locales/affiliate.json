@@ -1,0 +1,118 @@
+{
+  "hero": {
+    "headline": "on every payment your referrals make,\nfor as long as they keep paying.",
+    "subtext": "Library plans renew and Kits sell one at a time, and your link gets a quarter of all of it. Signing up takes a minute and you don't need an Annnimate account.",
+    "ctaPrimary": "Get your link",
+    "ctaSecondary": "See the library"
+  },
+  "calculator": {
+    "headline": "What that is worth to you.",
+    "sliderLabel": "Referrals per month",
+    "buyLabel": "What they buy",
+    "payLabel": "How they pay",
+    "perMonth": "You earn per month",
+    "perReferral": "Per referral",
+    "yearOne": "First 12 months",
+    "recurring": "Every year after, if they all stay",
+    "paidOnce": "Paid once",
+    "anchors": [
+      "25% recurring",
+      "30-day cookie",
+      "Paid monthly",
+      "No account needed"
+    ]
+  },
+  "rates": {
+    "headline": "What you earn per sale.",
+    "subline": "A quarter of the charge, on every charge.",
+    "columns": [
+      "Price",
+      "You earn",
+      "Repeats"
+    ],
+    "repeatsYearly": "Every year",
+    "repeatsOnce": "Once per Kit",
+    "closing": "Quarterly plans pay you every quarter instead, and the calculator above uses the same EUR list prices, with Mixed assuming mostly Solo, some Studio and a fifth Kits. Some markets pay a local price in a local currency. That changes the amount, never the rate: you get 25% of whatever they paid."
+  },
+  "why": {
+    "headline": "Why it sells.",
+    "items": [
+      "There is no free tier, so every referral that converts is a paid sale.",
+      "Every component moves, and a ten-second screen recording does the selling for you.",
+      "The free Starter Pack is the front door, and the cookie is already set when they come back to buy.",
+      "The Library and the Kits credit the same link.",
+      "New components ship every week, so there is always something to show.",
+      "Renewals pay you again, yearly or quarterly, for as long as they stay.",
+      "Buyers are freelancers and agencies who bill for their time and know what a finished component is worth.",
+      "Built by Good Fella, a studio that uses these components on its own client work."
+    ]
+  },
+  "steps": {
+    "headline": "Four steps. One link.",
+    "items": [
+      {
+        "title": "Sign up",
+        "body": "Approval is automatic, your link works within a minute."
+      },
+      {
+        "title": "Share it",
+        "body": "Point it at a component, a Kit, the pricing page or the free Starter Pack."
+      },
+      {
+        "title": "Track it",
+        "body": "Clicks, referrals and pending or confirmed commission, live in your dashboard."
+      },
+      {
+        "title": "Get paid",
+        "body": "Once a month by PayPal or bank transfer."
+      }
+    ],
+    "attributionLabel": "Attribution",
+    "attribution": "A first-party cookie, set on annnimate.com for 30 days and served from our own domain, so ad blockers leave it alone. There is no consent pop-up between the click and the credit, and it is disclosed in the cookie policy.",
+    "rulesLabel": "Rules",
+    "rules": [
+      "No self-referrals, and no routing your own clients through your link.",
+      "No paid search on Annnimate or close variants.",
+      "No coupon, deal or cashback sites, and no link-injecting extensions.",
+      "No calling the Library free or inventing discounts.",
+      "No spam, no DM blasts, no scraped lists.",
+      "Refunds reverse the commission. It stays pending through the 14-day money-back window."
+    ],
+    "rulesFootnote": "We may decline or end a partnership, usually for one of these. The terms of service cover every purchase your referrals make, and anything else you can ask us directly."
+  },
+  "faq": {
+    "headline": "Questions.",
+    "items": [
+      {
+        "q": "Do I need an Annnimate account to be an affiliate?",
+        "a": "Annnimate does not require an account for affiliates. You sign up at annnimate.affonso.io with an email and your link works straight away. Owning the Library helps you show real work instead of describing it, but it isn't required."
+      },
+      {
+        "q": "Is 25% really paid on every renewal?",
+        "a": "Annnimate pays 25% of every payment a referred customer makes, for as long as they stay: yearly renewals, quarterly renewals and any Kit they add later, even if they already owned the Library when they clicked your link."
+      },
+      {
+        "q": "What if the buyer pays a discounted or regional price?",
+        "a": "Annnimate pays 25% of the amount the customer actually paid, whatever that amount is. A discount or a regional price means a smaller commission rather than none, and a full-price payment means the full commission."
+      },
+      {
+        "q": "When is a commission confirmed?",
+        "a": "Annnimate offers a 14-day money-back guarantee on first purchases, so a commission stays pending for 14 days and confirms once that window closes without a refund. Renewals are not refundable and confirm immediately."
+      },
+      {
+        "q": "How and when am I paid?",
+        "a": "Annnimate pays affiliates once a month by PayPal or bank transfer through the Affonso dashboard, where pending and confirmed earnings are shown separately."
+      },
+      {
+        "q": "Which page should I link to, and can I use your recordings?",
+        "a": "Annnimate sets the cookie on arrival anywhere on annnimate.com, so link to the component you are actually talking about, the library or the free Starter Pack. Anything public on the site, component previews and recordings included, can be used to promote it. The only thing you may not redistribute is the source code."
+      }
+    ]
+  },
+  "endCta": {
+    "headline": "A recommendation you'd make anyway.",
+    "subtext": "25% on every payment, for life, with a 30-day cookie and a monthly payout.",
+    "primaryLabel": "Get your link",
+    "secondaryLabel": "See pricing"
+  }
+}

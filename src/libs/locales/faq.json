@@ -1,0 +1,17 @@
+{
+  "hero": {
+    "stamp": "Reference · Updated",
+    "updatedFallback": "recently",
+    "headline": "Questions and answers.",
+    "subtext": "The single source of truth on Annnimate. The library, the Kits, the pricing, the licensing. If your question isn't here, write us and it gets added."
+  },
+  "group": {
+    "questionsCountSuffix": "questions"
+  },
+  "endCta": {
+    "headline": "That covers it.",
+    "subtext": "If something slipped through, write us and we add it. Otherwise the library is here, ready to ship into your next project.",
+    "primaryLabel": "Get the library",
+    "secondaryLabel": "Write us"
+  }
+}

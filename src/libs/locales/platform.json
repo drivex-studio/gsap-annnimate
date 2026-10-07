@@ -1,0 +1,117 @@
+{
+  "hero": {
+    "eyebrow": "The platform",
+    "headline": "Everything inside Annnimate.",
+    "body": "A curated library of GSAP signature components, full Landmark Kits, real React and Vue code, and documentation written by the people who built the originals. Here is how all of it works.",
+    "ctaPrimary": "Browse the library",
+    "ctaSecondary": "View pricing"
+  },
+  "mockup": {
+    "sectionPlatform": "Platform",
+    "navAnimations": "Animations",
+    "navSaved": "Saved",
+    "navKits": "Kits",
+    "navKitsBadge": "Soon",
+    "navRoadmap": "Roadmap",
+    "sectionSupport": "Support",
+    "navDocumentation": "Documentation",
+    "navMcp": "MCP server",
+    "navLearn": "Learn",
+    "navHelp": "Help & Support",
+    "navSettings": "Settings",
+    "navDiscord": "Discord",
+    "userInitials": "JD",
+    "userName": "John Doe",
+    "userPlan": "Pro Plan",
+    "headerTitle": "Animations",
+    "headerCount": "{count} components",
+    "headerShowingOfTotal": "Showing {shown} of {total}"
+  },
+  "library": {
+    "eyebrow": "The library",
+    "headline": "Curated, not a catalog dump.",
+    "body": "Annnimate is deliberately not five hundred components. It is the components worth keeping, each one chosen because it earned its place on a real site. Hover a category to isolate it.",
+    "categoriesLabel": "Categories / {count}"
+  },
+  "provenance": {
+    "eyebrow": "Provenance",
+    "headline": "Built for a job. Made for the library.",
+    "body": "Every component is built to the standard we ship for real brands. Some shipped on those brand sites, the rest are Good Fella originals held to the same bar. The version you copy is production-grade either way."
+  },
+  "formats": {
+    "eyebrow": "Formats",
+    "headline": "One component. Every stack.",
+    "body": "React and Vue come first - same component, framework-idiomatic. Plain HTML ships alongside for projects without a framework.",
+    "centerStageLabel": "CircularSlider",
+    "centerStageStatus": "live",
+    "secondaryTier": "{id} / Secondary",
+    "htmlName": "HTML",
+    "htmlTagline": "Drop-in markup with data-anm-* attributes. Works in vanilla JS, Astro, or any static site that can load a script.",
+    "footnote": "Same component. Every stack.",
+    "cta": "Browse the library"
+  },
+  "kits": {
+    "eyebrow": "Landmark Kits",
+    "headline": "One system. Built deep.",
+    "body": "A Kit is a deep, stand-alone collection of animations built around one system you would otherwise build from scratch. Separate product, not bundled with the Library. Two Kits so far: Reveal and Menu. One purchase, every project, forever.",
+    "kitName": "Reveal Landmark Kit",
+    "kitStatus": "First Kit / out now",
+    "kitImageAlt": "The Reveal Kit",
+    "specStatus": "Out now",
+    "specPrice": "EUR 149, one-time, yours forever",
+    "specCta": "See the Reveal Kit"
+  },
+  "docs": {
+    "eyebrow": "Documentation",
+    "headline": "Documented by the people who built it.",
+    "body": "Every component carries the things that bit us when we shipped it the first time. Real warnings, real fixes, real reasons - written by the studio that built the original. And when you'd rather not leave the editor: connect the MCP server and your coding agent pulls components for you.",
+    "listHeading": "Real edge cases / {count} entries",
+    "listSource": "From the Annnimate docs",
+    "footnote": "{count} of many guides shown. The full set lives in the docs.",
+    "cta": "Read the docs",
+    "edges": [
+      {
+        "area": "Installation",
+        "description": "GSAP, the library, and the first component running in a minute.",
+        "quote": "GSAP 3.13+ ships ESM-only - older bundlers need the legacy CJS path or builds silently exclude the timeline."
+      },
+      {
+        "area": "Quick start",
+        "description": "From copy-paste to a tuned component in under five minutes.",
+        "quote": "useGSAP without a scope leaks selectors across remounts - every animation needs { scope: ref }."
+      },
+      {
+        "area": "Customization",
+        "description": "The data-anm-* attribute system. Every component tuned without touching the source.",
+        "quote": "data-anm-* attributes read null on first render in Next.js 16 Strict Mode - gate the read inside useGSAP."
+      },
+      {
+        "area": "Performance",
+        "description": "What we tune before shipping, and what to watch in your own build.",
+        "quote": "GSAP does not return early under prefers-reduced-motion - wrap entries in gsap.matchMedia or the animation runs at full speed for users who asked it not to."
+      },
+      {
+        "area": "Accessibility",
+        "description": "Focus, keyboard, reduced motion. The defaults that ship with every component.",
+        "quote": "Focus trap inside overlays needs inert on siblings - aria-hidden alone still leaves keyboard reachable."
+      },
+      {
+        "area": "React",
+        "description": "useGSAP, scoped refs, cleanup that survives Strict Mode remounts.",
+        "quote": "Cleanup with ctx.revert(), not tl.kill() - kill leaves scoped selectors mounted and the next remount double-binds."
+      },
+      {
+        "area": "Vue",
+        "description": "Composable for the script-setup workflow. Nuxt-ready.",
+        "quote": "Setup script timing - onMounted fires before children mount; use nextTick before binding refs."
+      }
+    ]
+  },
+  "endCta": {
+    "eyebrow": "License / Free forever / Use in production / No account",
+    "headline": "Take one. No paywall.",
+    "subtext": "One real component per category, free in production. No trial, no expiring license - copy it once and ship it.",
+    "primaryCtaLabel": "Try a free component",
+    "secondaryCtaLabel": "View pricing"
+  }
+}

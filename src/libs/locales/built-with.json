@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "headline": "Built with Annnimate.",
+    "body": "Sites that shipped with components from the library. Submit yours and get it in front of the developers and studios who read us every week.",
+    "cta": "Submit your site"
+  },
+  "filters": {
+    "industryLabel": "Industry",
+    "sort": {
+      "new": "Newest",
+      "featured": "Featured",
+      "az": "A to Z"
+    },
+    "allLabel": "All industries",
+    "searchPlaceholder": "Search sites..."
+  },
+  "empty": {
+    "noun": "sites"
+  },
+  "endCta": {
+    "headline": "Show what you shipped.",
+    "subtext": "Got a site running on Annnimate components? Submit it and we feature it.",
+    "primaryCtaLabel": "Submit your site",
+    "secondaryCtaLabel": "Browse the library"
+  },
+  "modal": {
+    "title": "Submit your site.",
+    "description": "Three short steps. We look at every site by hand and feature the best ones."
+  },
+  "form": {
+    "industries": [
+      "Agency",
+      "SaaS",
+      "E-commerce",
+      "Portfolio",
+      "Marketing",
+      "Other"
+    ],
+    "steps": {
+      "site": "The site",
+      "media": "Show it",
+      "you": "You"
+    },
+    "headings": {
+      "site": "Where does it live?",
+      "media": "Show it moving.",
+      "you": "Who made it?"
+    },
+    "optional": "(optional)",
+    "continue": "Continue",
+    "back": "Back",
+    "submit": "Submit for review",
+    "siteUrlLabel": "Site URL",
+    "siteNameLabel": "Site name",
+    "siteNamePlaceholder": "Studio, product or client name",
+    "industryLabel": "Industry",
+    "componentsLabel": "Annnimate components in it",
+    "componentsPlaceholder": "Search the library",
+    "componentsAddCustom": "Add “{query}”",
+    "descriptionLabel": "What you built",
+    "descriptionPlaceholder": "Two sentences on the project and where the motion is.",
+    "uploadExceeds": "{name} is over the {size}MB limit",
+    "uploadFailed": "Upload failed: {message}",
+    "nameLabel": "Your name",
+    "namePlaceholder": "First and last name",
+    "companyLabel": "Company or studio",
+    "companyPlaceholder": "Studio name",
+    "emailLabel": "Email",
+    "emailHint": "Only for follow-up. Never shown publicly.",
+    "emailPlaceholder": "you@studio.com",
+    "twitterLabel": "X",
+    "twitterPlaceholder": "handle",
+    "linkedinLabel": "LinkedIn",
+    "linkedinPlaceholder": "handle",
+    "awardsLabel": "Awards",
+    "awardsHint": "Press Enter after each one.",
+    "awardsPlaceholder": "Awwwards SOTD, CSSDA, FWA",
+    "submitFailed": "Submission failed",
+    "successHeadline": "Submission received",
+    "successBody": "We look at every site by hand. If it is a fit, it goes into the showcase and we let you know.",
+    "errors": {
+      "required": "Required",
+      "url": "Enter a full address like https://yoursite.com",
+      "email": "Enter a valid email",
+      "media": "Add a recording or a screenshot"
+    },
+    "industryPlaceholder": "Pick one",
+    "mediaLabel": "Recording or screenshots",
+    "mediaHint": "One screen recording shows the motion best. Screenshots work too.",
+    "mediaDrop": "Drop files here, or click to browse",
+    "mediaAddMore": "Add more files",
+    "mediaFormats": "MP4, WebM or MOV up to 100MB. JPEG, PNG or WebP up to 10MB.",
+    "recordingTag": "Recording",
+    "removeFile": "Remove file",
+    "uploadType": "{name} is not a video or image we can take"
+  },
+  "detail": {
+    "eyebrow": "Showcase",
+    "visit": "Visit site",
+    "submit": "Submit yours",
+    "studioLabel": "Studio",
+    "studioTitle": "Who built it",
+    "rows": {
+      "studio": "Studio",
+      "builtBy": "Built by",
+      "website": "Website",
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "industry": "Industry",
+      "added": "Added"
+    },
+    "componentsLabel": "Components",
+    "componentsTitle": "Annnimate components in it",
+    "componentsUnmatched": "Also in the build",
+    "awardsLabel": "Recognition",
+    "awardsTitle": "Awards",
+    "moreLabel": "More",
+    "moreTitle": "More from the showcase",
+    "screenshotsLabel": "Screens",
+    "screenshotsTitle": "More screens"
+  }
+}

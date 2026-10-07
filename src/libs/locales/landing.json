@@ -1,0 +1,114 @@
+{
+  "hero": {
+    "headlineLine1": "The components behind",
+    "headlineLine2": "work that gets noticed.",
+    "sub": "Production-grade GSAP components for React, Vue and HTML, built to the standard we ship for real brands. Copy one in, change a few values and skip the days of rebuilding it yourself.",
+    "badges": [
+      "React",
+      "Vue",
+      "HTML"
+    ],
+    "ctaPrimary": "Browse {count} components",
+    "ctaSecondary": "Get the free Starter Pack",
+    "ctaNote": "No signup to browse, no card for the free pack.",
+    "userCount": "{userCount} users already signed up — browse the library"
+  },
+  "provenance": {
+    "line": "Built by the studio that ships motion for global brands."
+  },
+  "problem": {
+    "headlineLine1": "Good motion takes days.",
+    "headlineLine2": "Fast motion looks generic.",
+    "resolve": "Annnimate is the version that's fast and good: the component you'd build yourself, already done in real GSAP and React, held to the standard we ship for real brands.",
+    "card1Label": "01 / The fast way",
+    "card1Body": "Fast to drop in, but landing-page polish, not what award winners run on.",
+    "card2Label": "02 / The good way",
+    "card2Body": "Rebuild it from an Awwwards site yourself. Great result, if you have the week.",
+    "card3Label": "03 / The third option",
+    "card3Term": "Annnimate",
+    "card3Body": "already built it. Real GSAP, real React, paste it in and you're done.",
+    "cta": "Browse the library"
+  },
+  "howItWorks": {
+    "headline": "Find it, copy it, ship it.",
+    "answer": "You see exactly how every component moves before you copy it, so you know what you're shipping.",
+    "stepWord": "Step",
+    "stepJumpAria": "Jump to step {num}: {label}",
+    "steps": [
+      {
+        "label": "Find the component you need",
+        "body": "Browse the library by category or search by name. Every component runs live, so you see exactly how it behaves before you commit."
+      },
+      {
+        "label": "Copy it in your format",
+        "body": "One click copies production-ready code, or pull it straight into your editor over MCP. React with useGSAP, Vue with the composable, or vanilla HTML. Typed, documented, reduced-motion aware."
+      },
+      {
+        "label": "Ship it your way",
+        "body": "Paste it into Next.js, Nuxt, Astro, wherever modern JS runs. Adjust with data attributes or props. No wrestling with the GSAP lifecycle."
+      }
+    ],
+    "scenes": {
+      "copyTabs": [
+        "React",
+        "Vue",
+        "HTML"
+      ],
+      "copyLabel": "Copy",
+      "copiedLabel": "Copied",
+      "shipButtonLabel": "Get started"
+    }
+  },
+  "twoWays": {
+    "headline": "Two ways to use it.",
+    "body": "A library of signature components you reach for on every project, and Landmark Kits, deep motion systems you buy once and own.",
+    "libraryTitle": "The Library",
+    "libraryMeta": "{count} components / ship weekly",
+    "libraryBody": "Every named signature component, each one production-grade and documented. Subscribe and use the whole catalog across every project you build. New components ship regularly.",
+    "libraryCta": "Browse the library",
+    "kitTitle": "The Menu Kit",
+    "kitMeta": "New Kit / out now",
+    "kitBody": "Ten navigations built as one system, and its own product - not a single component, not part of the Library. Fullscreen menus, drawers, and one that tilts the whole page away in perspective. React, Vue, HTML / CSS / JS.",
+    "kitCta": "See the Menu Kit"
+  },
+  "oneComponent": {
+    "headline": "One component, told properly.",
+    "body": "Circular Slider, a draggable carousel that rides a giant arc. The kind of thing you would spend a day getting right, built the same way every one of the {count} ships.",
+    "cta": "Browse the library",
+    "exhibitLabel": "Circular Slider",
+    "snapFeelLabel": "Snap feel",
+    "presetLabels": [
+      "Subtle",
+      "Default",
+      "Strong"
+    ],
+    "snapGroupAria": "Snap feel preset",
+    "tabs": [
+      "HTML",
+      "React",
+      "Vue"
+    ],
+    "codeTablistAria": "Source format"
+  },
+  "kitSpotlight": {
+    "reveal": {
+      "headline": "The Reveal Kit.",
+      "badge": "One-time",
+      "price": "€149",
+      "body": "Thirteen preloader and hero-reveal components, built as one system. Pair any cover with any hero, in WebGL or GSAP. React, Vue, plain JS. One purchase, yours forever.",
+      "cta": "See the Reveal Kit"
+    },
+    "menu": {
+      "headline": "The Menu Kit.",
+      "badge": "New",
+      "price": "€149",
+      "body": "Ten navigations, each one its own component. Fullscreen menus, drawers, and one that tilts the whole page away in perspective. React, Vue, plain JS. One purchase, yours forever.",
+      "cta": "See the Menu Kit"
+    }
+  },
+  "pricingSection": {
+    "headline": "Simple pricing.",
+    "subhead": "One afternoon of freelance work covers a year of the whole library. Solo is €29 a month billed quarterly for one developer, Studio adds five seats and Studio+ fifteen. Pay yearly to save. Landmark Kits are a one-time purchase, and there are no lifetime tiers or per-feature add-ons.",
+    "bottomCta": "Learn more about the pricing"
+  }
+}

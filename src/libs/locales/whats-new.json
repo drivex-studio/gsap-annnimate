@@ -1,0 +1,82 @@
+{
+  "hero": {
+    "stamp": [
+      "Annnimate",
+      "Volume 02",
+      "May 2026"
+    ],
+    "headline": "Annnimate grew up.",
+    "subtext": "Annnimate is now Annnimate by Good Fella. GSAP for React and Vue, where every component carries the landmark site it shipped on - the same library you know, rebuilt around the craft underneath it.",
+    "ctaPrimary": "See the new library",
+    "ctaSecondary": "What I keep"
+  },
+  "reframe": {
+    "headline": "What changed, and why.",
+    "body": "Annnimate started as a GSAP component library. Useful, but it looked like a lot of other things. What it never said out loud is where the components actually came from. We build motion for landmark brand sites at Good Fella, and the best of that work is what fills the library. So we rebuilt Annnimate around it. Every component now carries its provenance - the real site it shipped on. The library is curated harder, the focus is React and Vue, and the whole thing reads like what it is: the motion craft of a working studio, made copyable."
+  },
+  "changes": {
+    "headline": "What is new.",
+    "subline": "In five moves.",
+    "items": [
+      {
+        "label": "Provenance on every component.",
+        "body": "Where each one came from: a client brand site, or a Good Fella original built to the same bar."
+      },
+      {
+        "label": "React and Vue first.",
+        "body": "Proper framework integration, not wrapped snippets."
+      },
+      {
+        "label": "Curated harder.",
+        "body": "Fewer components, every one worth keeping."
+      },
+      {
+        "label": "One honest set of pages.",
+        "body": "No contradictions, one refund policy, one voice."
+      },
+      {
+        "label": "Landmark Kits, live.",
+        "body": "Deep, stand-alone collections of hard-to-build animations. The first one, Reveal, is out now."
+      }
+    ]
+  },
+  "kept": {
+    "headline": "If you already have Annnimate.",
+    "subline": "Nothing taken. Both segments gain.",
+    "columns": [
+      "You keep",
+      "You gain"
+    ],
+    "rows": [
+      {
+        "category": "Pro or Team subscription",
+        "values": [
+          "Full access at your current price, until your renewal date.",
+          "The rewritten library, provenance on every component, and the founding-member 25% off every future Annnimate product."
+        ]
+      },
+      {
+        "category": "Lifetime access",
+        "values": [
+          "The full Library, forever, exactly as promised - including every future component.",
+          "The founding-member 25% off every future Annnimate product, Landmark Kits included."
+        ]
+      }
+    ],
+    "closing": "Every member counts as a founding member, so the 25% lifetime discount on future products is yours automatically. If anything here is unclear, email us. We would rather answer you personally than hide behind a help doc."
+  },
+  "founding": {
+    "headline": "The founding offer.",
+    "caption": "Off everything Annnimate ships from now on",
+    "body": "Lock in 25%, then keep it. New Kits, new tiers, future add-ons. Anything Annnimate launches after the founding window comes priced at the founding rate, for as long as you stay a founding member.",
+    "windowLabel": "Founding window · Closes",
+    "windowClose": "later this year",
+    "cta": "Become a founding member"
+  },
+  "endCta": {
+    "headline": "See what it is now.",
+    "subtext": "Browse the new library, or read the story behind it. Both lead to the same place - the work the studio actually ships.",
+    "primaryLabel": "Browse the new library",
+    "secondaryLabel": "Read the story"
+  }
+}

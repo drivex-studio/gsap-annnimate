@@ -1,0 +1,63 @@
+{
+  "hero": {
+    "eyebrowLeft": "Free starter pack",
+    "eyebrowRight": "New every week",
+    "headline": "Free components, on the house.",
+    "body": "{count} production GSAP components in React, Vue and HTML, and they land in your inbox the moment you confirm your email."
+  },
+  "variants": {
+    "hours-static": {
+      "headline": "Make your landing page feel expensive.",
+      "body": "{count} production GSAP components for free, and you paste them in React, Vue or HTML instead of building the motion by hand."
+    },
+    "note-v3": {
+      "headline": "Steal these for your site.",
+      "body": "{count} production GSAP components for free in React, Vue and HTML, built to the standard we ship for real clients."
+    },
+    "vid-slider": {
+      "headline": "Free GSAP components.",
+      "body": "{count} of them in React, Vue and HTML, and a new one joins every week."
+    }
+  },
+  "form": {
+    "buttonLabel": "Send me the pack",
+    "emailPlaceholder": "name@yourstudio.com",
+    "consentBefore": "One email a week and one click to leave. By signing up you agree to the",
+    "consentLink": "privacy policy",
+    "consentAfter": ".",
+    "label": "Your email address"
+  },
+  "proof": {
+    "count": "1,100+ developers on the list",
+    "quote": "Clean documentation, code is nice and light, and the animations it gives me are world class.",
+    "quoteName": "Matthew Stobo",
+    "quoteRole": "lifetime member"
+  },
+  "strip": {
+    "label": "Three from the pack"
+  },
+  "tiles": {
+    "label": "The other {count} in the pack",
+    "empty": "Preview tiles loading. Every free component is in the pack, and a new one joins every week."
+  },
+  "sticky": {
+    "label": "{count} free components",
+    "cta": "Get the free pack"
+  },
+  "inbox": {
+    "title": "One click to go.",
+    "body": "Open the email from julian@annnimate.com and press the button, and the ZIP follows a few seconds later.",
+    "subject": "Confirm and grab your Starter Pack",
+    "gmail": "Open Gmail",
+    "appleMail": "Open Apple Mail"
+  },
+  "packUpsell": {
+    "label": "While the email is on its way",
+    "body": "The Landing Page Motion Pack is seven of these at full production depth, hero to footer. EUR 29, yours forever.",
+    "cta": "See the Landing Page Pack"
+  },
+  "endCta": {
+    "headline": "One email, {count} components.",
+    "subtext": "Type your address, confirm it, and the ZIP is in your inbox a minute later."
+  }
+}

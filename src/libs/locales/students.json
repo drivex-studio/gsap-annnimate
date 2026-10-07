@@ -1,0 +1,94 @@
+{
+  "hero": {
+    "headline": "off for students",
+    "subtext": "Studying design or development? Get half off the Solo plan for your first year, or any Landmark Kit. Ask with your university email and we send you a code.",
+    "ctaPrimary": "Ask for your code",
+    "ctaSecondary": "Browse the library"
+  },
+  "steps": {
+    "headline": "How it works",
+    "items": [
+      {
+        "title": "Send the form",
+        "body": "Your name, your university and the email your school gave you."
+      },
+      {
+        "title": "We check it",
+        "body": "A person reads every request, usually within two days."
+      },
+      {
+        "title": "Use your code",
+        "body": "It lands in your inbox. Enter it at checkout within 30 days."
+      }
+    ],
+    "coversLabel": "What the code covers",
+    "covers": [
+      "50% off Solo, every payment for your first 12 months",
+      "Or 50% off the Reveal or Menu Kit",
+      "Every component, every format, every new drop"
+    ],
+    "rulesLabel": "The rules",
+    "rules": [
+      "One code per student.",
+      "The code works once and runs for 30 days.",
+      "One discount per checkout, so it does not stack with regional or member pricing.",
+      "We may cancel a code that went to someone who is not a current student."
+    ]
+  },
+  "request": {
+    "headline": "Ask for your code",
+    "subtext": "Takes a minute. We reply within a couple of days."
+  },
+  "form": {
+    "nameLabel": "Your name",
+    "namePlaceholder": "First and last name",
+    "universityLabel": "University",
+    "universityPlaceholder": "Northeastern University",
+    "emailLabel": "University email",
+    "emailPlaceholder": "you@university.edu",
+    "emailHint": "The one your school gave you. Your code goes here.",
+    "proofLabel": "Proof of enrolment",
+    "proofPlaceholder": "https://",
+    "proofHint": "Only if your email doesn't show your school: a link to your student ID or enrolment letter.",
+    "noteLabel": "Anything else",
+    "submit": "Ask for the discount",
+    "terms": "One code per student. We may cancel a code that was not given to a current student.",
+    "errors": {
+      "required": "Required",
+      "email": "Enter an email like you@university.edu",
+      "url": "Enter a full link like https://..."
+    },
+    "failed": "Could not send your request. Try again.",
+    "doneHeadline": "Request sent",
+    "doneBody": "We check every request by hand and reply within a couple of days. Keep an eye on {email}."
+  },
+  "faq": {
+    "headline": "Questions.",
+    "items": [
+      {
+        "q": "Who counts as a student?",
+        "a": "Anyone currently enrolled at a university, college or coding school. If your email doesn't show your school, add a link to your student ID or enrolment letter."
+      },
+      {
+        "q": "What does 50% off Solo mean?",
+        "a": "Every Solo payment in your first 12 months is half price, quarterly or yearly. After that it renews at the normal price, and you can cancel any time before it does."
+      },
+      {
+        "q": "Can I use it on a Landmark Kit instead?",
+        "a": "Yes. The code takes 50% off the Reveal or Menu Kit. It works once, so it covers one purchase."
+      },
+      {
+        "q": "Does the money-back guarantee still apply?",
+        "a": "Yes. The 14-day money-back guarantee works the same with a student code, on the terms in the refund policy."
+      },
+      {
+        "q": "Can I use it for client work?",
+        "a": "Yes. The license is the same as any other plan, so anything you build with it, for yourself or for clients, is covered."
+      }
+    ]
+  },
+  "endCta": {
+    "headline": "Browse the library first",
+    "subtext": "Every component has a live preview, so you know what you get before you ask."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "anchor": "Usually a same-day reply",
+    "headline": "Reach a person.",
+    "subtext": "Annnimate is two people, Julian and Adrian. Send anything below, or jump straight to the answers most questions already have."
+  },
+  "channels": {
+    "eyebrow": "Talk to the studio",
+    "headline": "Tell us what you need.",
+    "body": "Use the form for anything. If it's a common question, the links beside it are faster.",
+    "routes": [
+      {
+        "name": "FAQ",
+        "role": "Most answers already live here."
+      },
+      {
+        "name": "Docs",
+        "role": "Install, attributes, React and Vue."
+      },
+      {
+        "name": "Roadmap",
+        "role": "Want a component built? Request it and vote."
+      }
+    ]
+  },
+  "form": {
+    "errorName": "Tell us your name.",
+    "errorEmailRequired": "Email is required.",
+    "errorEmailInvalid": "Enter a valid email address.",
+    "errorMessage": "Add a message so we know what you need.",
+    "honeypotLabel": "Company",
+    "labelName": "Name",
+    "labelEmail": "Email",
+    "labelSubject": "Subject (optional)",
+    "labelMessage": "Message",
+    "placeholderName": "Your name",
+    "placeholderEmail": "you@studio.com",
+    "placeholderSubject": "Subject (optional)",
+    "placeholderMessage": "What's going on?",
+    "privacyPrefix": "By sending this you agree to our",
+    "privacyLink": "privacy policy",
+    "preferEmail": "Prefer plain email?",
+    "submit": "Send message",
+    "submitLoading": "Sending...",
+    "doneHeadline": "Got it. We read every one.",
+    "doneBody": "A real person replies from a real address, usually the same day.",
+    "toastSuccess": "Message sent. We'll get back to you.",
+    "toastError": "Something went wrong. Try again?",
+    "errorSend": "Could not send your message."
+  },
+  "endCta": {
+    "headline": "It's all built already.",
+    "subtext": "Every component ships as real React and Vue code, ready for production. Take a look around, or get the whole library.",
+    "primaryLabel": "Get the library",
+    "secondaryLabel": "Browse components"
+  }
+}
