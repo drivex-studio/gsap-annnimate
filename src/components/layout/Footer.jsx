@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 
 import { translate as t } from '@/libs/utils/i18n';
-import { isRouteActive } from '@libs/config/isRouteActive';
+import { isRouteActive } from '@/libs/config/isRouteActive';
 import { createClient } from '@/libs/supabase/client';
 import LogoIcon from '@/assets/logos/LogoIcon';
 import Link from '@/components/navigation/Link'; 
