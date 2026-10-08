@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { translate as t } from '@/libs/utils/i18n';
 import { analytics } from '@/libs/utils/analytics';
-import { isRouteActive } from '@libs/config/isRouteActive';
+import { isRouteActive } from '@/libs/config/isRouteActive';
 import NavLink from '@/components/navigation/NavLink';
 import LogoText from '@/assets/logos/LogoText';
 import { AI_LINKS } from './FooterData';
