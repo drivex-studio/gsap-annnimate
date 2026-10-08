@@ -1,5 +1,5 @@
-import '@/styles/main.css';
-import AppProviders from '@/app/provider';
+import '@/styles/style.css';
+import Provider from '@/app/provider';
 import AppLayout from '@/components/AppLayout';
 import localFont from 'next/font/local';
 import { getLatestAnimation } from '@/libs/supabase/latestAnimation';
@@ -101,11 +101,11 @@ export default async function RootLayout({ children }) {
         className="bg-background text-foreground font-sans"
         data-preloader-ready="true"
       >
-        <AppProviders>
+        <Provider>
           <AppLayout latestAnimation={latestAnimation}>
             {children}
           </AppLayout>
-        </AppProviders>
+        </Provider>
       </body>
     </html>
   );

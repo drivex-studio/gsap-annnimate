@@ -1,27 +1,31 @@
+"use client";
+import React, { useRef } from 'react';
+import { cn } from '@/libs/utils/className';
+import { translate } from '@/libs/utils/i18n';
+import { useTransitionClick } from '@/hooks/useTransitionClick'; 
+import MenuTrigger from 'next/link';
+import LogoIcon from './LogoIcon';
+import LogoText from './LogoText';
 
-import React from 'react';
+export default function Logo({ className }) {
+  let handleClick = useTransitionClick('/');
+  let iconRef = useRef(null);
 
-export default function SiteLogo({ width, height, ...props }) {
   return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 254 127"
-      fill="none"
-      {...props}
+    <MenuTrigger
+      href="/"
+      onClick={handleClick}
+      onMouseEnter={() => iconRef.current?.play()}
+      aria-label="Annnimate - Home"
+      className={cn('flex shrink-0 items-end justify-start gap-8', className)}
     >
-     <path
-        d="M126.713 0C196.695 0 253.426 56.7307 253.426 126.713H229.859C229.858 69.7466 183.68 23.5674 126.713 23.5674C69.7469 23.5679 23.5679 69.7469 23.5674 126.713H0C0.000493986 56.731 56.731 0.000493953 126.713 0Z"
-        fill="currentColor"
-      />
-      <path
-        d="M83.0019 44.2031C128.821 44.2033 166.004 81.1655 166.004 126.714H142.379C142.379 94.1359 115.774 67.6882 83.0019 67.6881C50.2299 67.6881 23.6247 94.1358 23.6247 126.714H0C0 81.1654 37.1823 44.2031 83.0019 44.2031Z"
-        fill="currentColor"
-      />
-      <path
-        d="M55.4983 70.7236C86.1708 70.7236 110.996 95.7693 110.997 126.713H87.5131C87.5124 108.854 73.2012 94.415 55.4983 94.415C37.796 94.4157 23.4842 108.854 23.4836 126.713H0C0.000656602 95.7697 24.8264 70.7243 55.4983 70.7236Z"
-        fill="currentColor"
-      />
-    </svg>
+      <span className="flex items-end gap-6">
+        <LogoIcon ref={iconRef} className="h-[15px] lg:h-[18px]" />
+        <LogoText className="h-[15px] w-auto text-foreground lg:h-[18px]" />
+      </span>
+      <span className="-mb-2 mt-auto text-[9px] text-foreground-muted lg:text-[10px]">
+        {translate('common.header.logoByline')}
+      </span>
+    </MenuTrigger>
   );
 }

@@ -3,7 +3,6 @@
 import React, { useEffect } from 'react';
 import { cn } from '@/libs/utils/className'; 
 
-/* --- BaseSpinner --- */
 function BaseSpinner({
   size = 40,
   speed = '0.9',
@@ -45,7 +44,6 @@ function BaseSpinner({
   );
 }
 
-/* --- InlineLoader --- */
 export function InlineLoader({
   size = '20',
   speed = '0.9',
@@ -82,8 +80,6 @@ export function QuantumLoader({
   );
 }
 
-/* --- DefaultLoader --- */
-// module id: 461376
 export default function DefaultLoader({
   size = '40',
   speed = '0.9',

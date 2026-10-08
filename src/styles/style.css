@@ -1,3 +1,5 @@
-@import url('main.css');
-@import url('cursor.css');
-@import url('prose-blog.css');
+@import './main.css';
+@import './cursor.css';
+@import './prose-blog.css';
+@import './components/NavLink.css';
+@import './components/LoginPage.css';

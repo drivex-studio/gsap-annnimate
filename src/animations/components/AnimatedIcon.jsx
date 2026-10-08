@@ -1,28 +1,12 @@
-"use client"; // inferred: use* hook from react, directive not literal in bundle
+"use client";
 
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 import { cn } from '@/libs/utils/className';
-import Icon from '@/assets/icons/customIcon'; // module id: 737611
+import Icon from '@/assets/icons/customIcon';
 
-// renamed:
-// s -> AnimatedIcon
-// e (prop) -> className, e (var) -> path
-// s (prop) -> strokeWidth
-// o -> restProps
-// c -> ref
-// u -> containerRef
-// d -> timelineRef
-// m -> getPaths
-// p -> setupPaths
-// f -> play
-// a -> staggerConfig
-// n -> tl (timeline)
-// h -> baseIconClass
-
-// module id: 503433
 const AnimatedIcon = forwardRef(function AnimatedIcon({
   className,
   strokeWidth = 26,

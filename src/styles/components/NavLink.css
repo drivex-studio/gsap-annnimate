@@ -1,0 +1,72 @@
+@layer components {
+  .NavLink {
+    position: relative;
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+  }
+
+  .NavLink--inline {
+    width: auto;
+    align-items: baseline;
+    vertical-align: baseline;
+    padding-left: 0;
+    transition-property: padding-left, color;
+    transition-duration: 500ms;
+    transition-timing-function: var(--ease-power3-out);
+  }
+  .NavLink--inline.is-indicatorVisible,
+  .NavLink--inline:hover,
+  .NavLink--inline[data-active="true"] {
+    padding-left: 1.4em;
+  }
+
+  .NavLink-label {
+    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .NavLink-label--slide {
+    transition-property: transform, translate, scale, rotate;
+    transition-duration: 500ms;
+    transition-timing-function: var(--ease-power3-out);
+  }
+  .NavLink-label--slide.is-indicatorVisible,
+  .NavLink:hover .NavLink-label--slide,
+  .NavLink[data-active="true"] .NavLink-label--slide {
+    translate: 1.5em 0;
+  }
+
+  .NavLink-indicator {
+    pointer-events: none;
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    margin-block: auto;
+    width: 0.75em;
+    height: 0.75em;
+    translate: 0 -0.05em;
+    rotate: -90deg;
+    scale: 0;
+    background-color: var(--color-brand);
+    transition-property: transform, translate, scale, rotate;
+    transition-duration: 500ms;
+    transition-timing-function: var(--ease-out-back);
+  }
+  .NavLink-indicator--inline {
+    left: 0.25em;
+  }
+  .NavLink-indicator.is-indicatorVisible,
+  .NavLink:hover .NavLink-indicator,
+  .NavLink[data-active="true"] .NavLink-indicator {
+    rotate: 0deg;
+    scale: 100%;
+  }
+
+  .NavLink-icon {
+    margin-left: 0.5em;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+}

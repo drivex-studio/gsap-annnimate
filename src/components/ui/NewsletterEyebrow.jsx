@@ -1,11 +1,10 @@
 'use client'
 import React, { Fragment, useState, useRef, useEffect } from 'react';
-import { toast } from 'react-hot-toast';
-import Link from '@/components/ui/TransitionLink'; 
+import { toast } from 'sonner';
+import Link from '@/components/navigation/Link'; 
 import Button from '@/components/ui/Button'; 
 import { analytics } from '@/libs/utils/analytics'; 
 
-/* Data */
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const STARTER_PACK_SOURCES = new Set([
@@ -24,8 +23,6 @@ const STARTER_PACK_SOURCES = new Set([
   'reference-rail'
 ]);
 
-/* --- NewsletterEyebrow --- */
-// module id: 42242
 export function NewsletterEyebrow({
   primary = 'Weekly drop',
   secondary = 'Join over 1,000+ developers and designers'
@@ -39,8 +36,6 @@ export function NewsletterEyebrow({
   );
 }
 
-/* --- NewsletterForm --- */
-// module id: 42242
 export default function NewsletterForm({
   source = 'footer',
   eyebrow,
@@ -226,7 +221,6 @@ export default function NewsletterForm({
       });
       analytics.track('newsletter_profile_completed', getAnalyticsPayload());
     } catch (err) {
-      // Empty catch preserved from original bundle
     } finally {
       setIsProfileSubmitting(false);
       setIsSuccess(true);

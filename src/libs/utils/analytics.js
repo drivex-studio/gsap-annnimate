@@ -1,4 +1,3 @@
-
 let eventQueue = [];
 let flushInterval = null;
 let queueTimeout = 0;
@@ -53,7 +52,7 @@ const captureEvent = (eventName, properties = {}, options) => {
     }
     
     if (!flushInterval) {
-        queueTimeout = Date.now() + 20000; // 20s
+        queueTimeout = Date.now() + 20000;
         flushInterval = setInterval(flushQueue, 200);
     }
 };
@@ -283,7 +282,7 @@ export const analytics = {
 };
 
 export const trackRetention = (userId, signupDateString) => {
-    const daysSinceSignup = Math.floor((new Date() - new Date(signupDateString)) / 86400000); // 864e5
+    const daysSinceSignup = Math.floor((new Date() - new Date(signupDateString)) / 86400000);
     
     if (daysSinceSignup === 7) {
         analytics.track('week_1_retention', {

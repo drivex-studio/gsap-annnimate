@@ -1,7 +1,5 @@
 import { prices, landingPrices, quarterlyPrices, isOfferActive } from '@/libs/config/PACK_SLUGS'; 
 
-/* Data */
-// module id: 516799
 const config = {
   appName: 'Annnimate',
   appDescription: 'Production GSAP motion components for React and Vue. Every component shipped on a real brand site before it reached the library. By Good Fella.',
@@ -174,7 +172,7 @@ const config = {
 
 export default config;
 
-export function effectiveCyclePrice(planCycle, timestamp = Date.now()) { // mangled: u, t
+export function effectiveCyclePrice(planCycle, timestamp = Date.now()) {
   return planCycle
     ? isOfferActive(timestamp)
       ? planCycle.price
@@ -182,7 +180,7 @@ export function effectiveCyclePrice(planCycle, timestamp = Date.now()) { // mang
     : null;
 }
 
-export function effectiveCycleTotal(planCycle, timestamp = Date.now()) { // mangled: u, t
+export function effectiveCycleTotal(planCycle, timestamp = Date.now()) {
   return planCycle?.cycleTotal
     ? isOfferActive(timestamp)
       ? planCycle.cycleTotal

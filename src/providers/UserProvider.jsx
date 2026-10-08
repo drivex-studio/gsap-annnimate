@@ -106,7 +106,6 @@ export function UserProvider({
       return { error: "No user logged in" };
     }
     
-    // Optimistic update
     setProfile(prev => ({
       ...prev,
       ...updates
@@ -139,7 +138,6 @@ export function UserProvider({
       return { data: updatedData, error: null };
     } catch (error) {
       console.error("Error updating profile:", error);
-      // Revert on error
       setProfile(profile); 
       return { data: null, error: error };
     }

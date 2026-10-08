@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import Link from '@/components/ui/TransitionLink';
+import Link from '@/components/navigation/Link'; 
 import { getConsent, acceptAll } from '@/libs/config/setConsent';
 import Button from '@/components/ui/Button'; 
 
