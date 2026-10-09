@@ -1,23 +1,22 @@
-import { translate as t } from '@/libs/utils/i18n'; // module id: 398682
-import { isOfferActive } from '@/libs/pricing'; // module id: 825740
-import { getPppDisplayPrice, getPppEffectivePrice } from '@/libs/ppp'; // module id: 397242
-import { relativeShipped } from '@/libs/utils/date'; // module id: 402646
-import { analytics } from '@/libs/utils/analytics'; // module id: 943348
-import siteConfig, { effectiveCyclePrice, effectiveCycleTotal } from '@/libs/auth/data/ServerData'; 
+import { translate } from '@/libs/utils/i18n';
+import { isOfferActive } from '@/libs/config/PACK_SLUGS';
+import { getPppDisplayPrice, getPppEffectivePrice } from '@/components/pricing/utils/ppp';
+import { relativeShipped } from '@/components/ui/LibraryPreview';
+import { analytics } from '@/libs/utils/analytics';
+import siteConfig, { effectiveCyclePrice, effectiveCycleTotal } from '@/libs/auth/data/ServerData';
+import { usePppTier } from '@/hooks/usePppGeo';
 
-import Button from '@/components/ui/Button'; // module id: 687989
-import Link from '@/components/navigation/NavLink'; // module id: 520237
-import NumberRoller from '@/components/ui/NumberRoller'; // module id: 162387
-import FeatureList from '@/components/pricing/FeatureList'; // module id: 702954
-import PppLabel from '@/components/pricing/PppLabel'; // module id: 245647
+import Button from '@/components/ui/Button';
+import Link from '@/components/navigation/NavLink';
+import NumberRoller from '@/animations/components/AnimatedNumber';
+import FeatureList from '@/components/pricing/FeatureList';
+import PppNotice from '@/components/pricing/PppLabel';
 
-import { usePppTier } from '@/hooks/usePppTier'; // module id: 12895
 
-/* Data */
 const SURFACE_STYLES = {
   dark: 'bg-foreground text-background',
   surface: 'bg-surface text-foreground',
-  'surface-light': 'bg-foreground/[0.06] text-foreground'
+  'surface-light': 'bg-foreground/[0.06] text-foreground',
 };
 
 const TOTAL_ANIMATIONS = siteConfig?.animationStats?.totalCount ?? 50;
@@ -26,16 +25,21 @@ function calculateSavings(plan, pppTier) {
   if (pppTier) {
     const quarterlyPpp = getPppEffectivePrice(plan.key, 'quarterly', pppTier);
     const yearlyPpp = getPppEffectivePrice(plan.key, 'yearly', pppTier);
+
     if (quarterlyPpp != null && yearlyPpp != null) {
       const savings = 4 * quarterlyPpp - yearlyPpp;
+
       return savings > 0 ? savings : 0;
     }
   }
-  const savings = (effectiveCyclePrice(plan.quarterly) ?? 0) * 12 - (effectiveCyclePrice(plan.yearly) ?? 0);
+
+  const savings =
+    (effectiveCyclePrice(plan.quarterly) ?? 0) * 12 -
+    (effectiveCyclePrice(plan.yearly) ?? 0);
+
   return savings > 0 ? savings : 0;
 }
 
-// module id: 199155
 export default function PricingCard({
   plan,
   cycle,
@@ -43,7 +47,7 @@ export default function PricingCard({
   onCheckout,
   rollerDuration = 2,
   latestShip = null,
-  shippedRecently = 0
+  shippedRecently = 0,
 }) {
   const cycleData = plan[cycle];
   const surfaceClass = SURFACE_STYLES[plan.surface] ?? SURFACE_STYLES.surface;
@@ -55,52 +59,71 @@ export default function PricingCard({
   const pppTier = usePppTier();
   const pppDisplay = pppTier ? getPppDisplayPrice(plan.key, cycle, pppTier) : null;
   const effectivePrice = effectiveCyclePrice(cycleData);
-  
+
   const displayPrice = pppDisplay ? pppDisplay.price : effectivePrice;
   const cycleTotal = pppDisplay ? pppDisplay.cycleTotal : effectiveCycleTotal(cycleData);
   const hasPpp = !!pppDisplay;
-  
-  const showOfferListPrice = !hasPpp && offerActive && typeof cycleData.listPrice === 'number' && cycleData.listPrice > displayPrice;
-  const strikethroughPrice = hasPpp ? effectivePrice : (showOfferListPrice ? cycleData.listPrice : null);
+
+  const showOfferListPrice =
+    !hasPpp &&
+    offerActive &&
+    typeof cycleData.listPrice === 'number' &&
+    cycleData.listPrice > displayPrice;
+
+  const strikethroughPrice = hasPpp
+    ? effectivePrice
+    : showOfferListPrice
+      ? cycleData.listPrice
+      : null;
+
   const priceId = cycleData.priceId;
 
   const savingsAmount = calculateSavings(plan, pppTier);
   const showSavings = cycle === 'yearly' && savingsAmount > 0;
 
-  const rawFeatures = (plan.features || []).map((feature) => {
-    if (typeof feature === 'string') return feature;
-    if (feature?.componentCount) {
-      return {
-        label: t('pricing.tiers.allComponents', { count: TOTAL_ANIMATIONS }),
-        highlight: true
-      };
-    }
-    if (feature?.shippedRecently) {
-      if (shippedRecently >= 2) {
+  const rawFeatures = (plan.features || [])
+    .map((feature) => {
+      if (typeof feature === 'string') return feature;
+
+      if (feature?.componentCount) {
         return {
-          label: t('pricing.tiers.shippedRecently', { count: shippedRecently }),
-          solid: true
+          label: translate('pricing.tiers.allComponents', { count: TOTAL_ANIMATIONS }),
+          highlight: true,
         };
       }
-      return null;
-    }
-    return feature?.label || '';
-  }).filter(Boolean);
+
+      if (feature?.shippedRecently) {
+        if (shippedRecently >= 2) {
+          return {
+            label: translate('pricing.tiers.shippedRecently', { count: shippedRecently }),
+            solid: true,
+          };
+        }
+
+        return null;
+      }
+
+      return feature?.label || '';
+    })
+    .filter(Boolean);
 
   const computedFeatures = rawFeatures.map((feature) => {
     if (typeof feature === 'string') return feature;
+
     if (feature.highlight) {
       return {
         label: feature.label,
-        className: isDark ? '!text-background font-medium' : '!text-foreground font-medium'
+        className: isDark ? '!text-background font-medium' : '!text-foreground font-medium',
       };
     }
+
     if (feature.solid) {
       return {
         label: feature.label,
-        className: isDark ? '!text-background' : '!text-foreground'
+        className: isDark ? '!text-background' : '!text-foreground',
       };
     }
+
     return feature;
   });
 
@@ -111,7 +134,9 @@ export default function PricingCard({
     >
       <header className="flex items-start justify-between gap-16">
         {plan.isPopular ? (
-          <span className="text-mono-sm text-brand">{t('pricing.tiers.mostPopular')}</span>
+          <span className="text-mono-sm text-brand">
+            {translate('pricing.tiers.mostPopular')}
+          </span>
         ) : (
           <span aria-hidden="true" />
         )}
@@ -122,22 +147,30 @@ export default function PricingCard({
 
       <div className="mt-32">
         <p className={`text-h4 font-normal ${baseText}`}>{plan.name}</p>
-        
+
         {hasPpp ? (
           <div className="mt-4 flex justify-start">
-            <PppLabel tone={isDark ? 'light' : 'dark'} />
+            <PppNotice tone={isDark ? 'light' : 'dark'} />
           </div>
         ) : showOfferListPrice ? (
-          <p className="mt-4 text-mono-sm text-brand">{t('pricing.tiers.offerName')}</p>
+          <p className="mt-4 text-mono-sm text-brand">
+            {translate('pricing.tiers.offerName')}
+          </p>
         ) : null}
-        
+
         <div
           className="mt-8 flex items-baseline gap-6"
           aria-label={
             hasPpp
-              ? t('pricing.tiers.pppAria', { price: effectivePrice, cycle: cycleData.cycleLabel })
+              ? translate('pricing.tiers.pppAria', {
+                  price: effectivePrice,
+                  cycle: cycleData.cycleLabel,
+                })
               : showOfferListPrice
-                ? t('pricing.tiers.offerAria', { price: cycleData.listPrice, cycle: cycleData.cycleLabel })
+                ? translate('pricing.tiers.offerAria', {
+                    price: cycleData.listPrice,
+                    cycle: cycleData.cycleLabel,
+                  })
                 : undefined
           }
         >
@@ -162,8 +195,8 @@ export default function PricingCard({
         {cycleTotal ? (
           <p className={`text-body-sm mt-6 ${mutedText}`}>
             {hasPpp
-              ? t('pricing.tiers.billedQuarterlyExact', { total: cycleTotal })
-              : t('pricing.tiers.billedQuarterly')}
+              ? translate('pricing.tiers.billedQuarterlyExact', { total: cycleTotal })
+              : translate('pricing.tiers.billedQuarterly')}
           </p>
         ) : null}
 
@@ -174,7 +207,7 @@ export default function PricingCard({
         >
           <div className="overflow-hidden">
             <p className="text-mono-sm pt-12 text-brand">
-              {t('pricing.tiers.savings', { amount: savingsAmount })}
+              {translate('pricing.tiers.savings', { amount: savingsAmount })}
             </p>
           </div>
         </div>
@@ -191,7 +224,7 @@ export default function PricingCard({
         />
         {latestShip ? (
           <p className={`text-body-sm mt-20 ${mutedText}`}>
-            {t('pricing.tiers.latestShip')}:{' '}
+            {translate('pricing.tiers.latestShip')}:{' '}
             <Link
               href={`/animations/${latestShip.slug}`}
               inline={true}
@@ -214,11 +247,15 @@ export default function PricingCard({
               plan: plan.key,
               cycle: cycle,
               price: displayPrice,
-              ...(pppTier ? { ppp_tier: pppTier } : {})
+              ...(pppTier ? { ppp_tier: pppTier } : {}),
             });
+
             onCheckout?.(plan.key, priceId);
           }}
-          aria-label={t('pricing.tiers.ctaAria', { cta: plan.cta, cycle: cycle })}
+          aria-label={translate('pricing.tiers.ctaAria', {
+            cta: plan.cta,
+            cycle: cycle,
+          })}
           loading={isLoading}
         >
           {plan.cta}
@@ -226,7 +263,7 @@ export default function PricingCard({
       </div>
 
       <p className={`text-body-sm mt-16 ${mutedText}`}>
-        {t('pricing.tiers.cardFinePrint')}
+        {translate('pricing.tiers.cardFinePrint')}
       </p>
     </article>
   );

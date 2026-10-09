@@ -1,0 +1,70 @@
+
+
+import React from 'react';
+import { cn } from '@/libs/utils/className'; // module id: 103746
+import { ArrowUpRight } from '@phosphor-icons/react'; // module id: 683845
+import { useAnimation } from '@/animations/hooks/useAnimation'; // module id: 488843
+
+function BookmarkIcon({ filled = false, className = "" }) { // original mangled: h
+  return (
+    <svg viewBox="0 0 16 16" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1" strokeLinejoin="miter" strokeLinecap="square" className={className} aria-hidden="true">
+      <path d="M3 2 H13 V14 L8 10 L3 14 Z" />
+    </svg>
+  );
+}
+
+const VARIANTS = { // original mangled: p
+  overlay: {
+    bg: "bg-background/85 backdrop-blur-md hover:bg-background",
+    transition: "transition-[opacity,translate,background-color] duration-(--duration-quick) ease-(--ease-back-out)"
+  },
+  inline: {
+    bg: "bg-foreground/[0.06] hover:bg-foreground/10",
+    transition: "transition-colors duration-(--duration-quick) ease-(--ease-back-out)"
+  }
+};
+
+// module id: 878512
+export default function SaveButton({
+  animation, // original mangled: e
+  initialIsSaved = false, // original mangled: a
+  variant = "inline", // original mangled: n
+  isAuthenticated = true, // original mangled: i
+  fadeOnHover = false, // original mangled: s
+  unauthHint = "none", // original mangled: o
+  className = "" // original mangled: c
+}) {
+  let config = VARIANTS[variant] ?? VARIANTS.inline; // original mangled: d
+  let { isSaved, isLoading, toggleSave } = useAnimation(isAuthenticated ? animation?.id : null, initialIsSaved, isAuthenticated ? animation : null);
+
+  if (!isAuthenticated) {
+    return unauthHint === "arrow" ? (
+      <span aria-hidden="true" className={cn("flex size-32 items-center justify-center", config.bg, config.transition, fadeOnHover && "translate-y-16 opacity-0 group-hover:translate-y-0 group-hover:opacity-100", className)}>
+        <ArrowUpRight className="size-16 text-foreground"/>
+      </span>
+    ) : null;
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleSave?.(e);
+      }}
+      disabled={isLoading}
+      aria-label={isSaved ? "Remove from saved" : "Save animation"}
+      aria-pressed={isSaved}
+      className={cn(
+        "flex size-32 items-center justify-center",
+        config.bg,
+        config.transition,
+        fadeOnHover && (isSaved ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 focus-visible:translate-y-0 focus-visible:opacity-100"),
+        className
+      )}
+    >
+      <BookmarkIcon "text-brand" "text-foreground")} : ? className="{cn(" filled="{isSaved}" isSaved size-16","/>
+    </button>
+  );
+}

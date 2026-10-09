@@ -1,24 +1,24 @@
+"use client";
 import React, { useState } from 'react';
+import { translate } from '@/libs/utils/i18n';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+import Button from '@/components/ui/Button';
+import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
+import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
+import CircularSlider from '@/components/landing/CircularSlider';
+import ServerData from '@/libs/auth/data/ServerData';
 
-import { translate as t } from '@/libs/utils/i18n'; // module id: 398682
-import { useBreakpoint } from '@/hooks/useBreakpoint'; // module id: 400701
-import Button from '@/components/ui/Button'; // module id: 687989
-import AnimatedSubtext from '@/animations/components/AnimatedSubtext'; // module id: 218091
-import AnimatedHeadline from '@/animations/components/AnimatedHeadline'; // module id: 963160
-import CircularSlider from '@/components/landing/CircularSlider'; // module id: (internal)
-import ServerData from '@/libs/auth/data/ServerData'; // module id: 516799 (Q)
+const TABS = t('landing.oneComponent.tabs');
+const PRESET_LABELS = t('landing.oneComponent.presetLabels');
 
-const TABS = t('landing.oneComponent.tabs'); // original mangled: eu
-const PRESET_LABELS = t('landing.oneComponent.presetLabels'); // original mangled: eg
-
-const PRESETS = [ // original mangled: em
+const PRESETS = [
   { label: PRESET_LABELS[0], duration: 0.7, ease: 'power3.out' },
   { label: PRESET_LABELS[1], duration: 0.9, ease: 'back.out(1.4)' },
   { label: PRESET_LABELS[2], duration: 1.1, ease: 'elastic.out(1, 0.6)' }
 ];
 
-const CDN_BASE = 'https://annnimate.b-cdn.net/preview-assets/images/posters'; // original mangled: ep
-const BASE_IMAGES = [ // original mangled: ex
+const CDN_BASE = 'https://annnimate.b-cdn.net/preview-assets/images/posters';
+const BASE_IMAGES = [
   { src: `${CDN_BASE}/running-poster-neutral-3x4-1.avif`, alt: 'Running' },
   { src: `${CDN_BASE}/tennis-poster-orange-3x4.avif`, alt: 'Tennis' },
   { src: `${CDN_BASE}/cycling-poster-blue-3x4.avif`, alt: 'Cycling' },
@@ -40,9 +40,9 @@ const BASE_IMAGES = [ // original mangled: ex
 const CIRCULAR_IMAGES = [...BASE_IMAGES, ...BASE_IMAGES.slice(0, 8)].map(img => ({
   ...img,
   src: `${img.src}?width=600&format=auto`
-})); // original mangled: ef
+}));
 
-function ComponentDemo({ preset }) { // original mangled: eh
+function ComponentDemo({ preset }) {
   return (
     <CircularSlider
       type="snap"
@@ -55,7 +55,7 @@ function ComponentDemo({ preset }) { // original mangled: eh
   );
 }
 
-function PresetControls({ preset, presetIdx, setPresetIdx }) { // original mangled: ev
+function PresetControls({ preset, presetIdx, setPresetIdx }) {
   return (
     <div className="rounded-md border border-foreground/12 bg-background/80 p-14 text-foreground backdrop-blur-sm">
       <div className="mb-10 flex items-center justify-between gap-24">
@@ -83,7 +83,7 @@ function PresetControls({ preset, presetIdx, setPresetIdx }) { // original mangl
   );
 }
 
-function CodePreview({ tab, setTab, preset }) { // original mangled: eb
+function CodePreview({ tab, setTab, preset }) {
   let codeStr = (function(mode, config) {
     let { duration, ease } = config;
     if (mode === 'HTML') return `<div data-anm-circular-slider
@@ -137,7 +137,7 @@ function CodePreview({ tab, setTab, preset }) { // original mangled: eb
   );
 }
 
-export default function OneComponentSection() { // original mangled: ey
+export default function OneComponentSection() {
   let [activeTab, setActiveTab] = useState('HTML');
   let [presetIdx, setPresetIdx] = useState(1);
   let activePreset = PRESETS[presetIdx];

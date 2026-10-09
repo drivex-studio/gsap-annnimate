@@ -1,9 +1,9 @@
 "use client";
 import React, { useRef, useMemo } from 'react';
-import gsap from 'gsap'; // module id: 989970
+import gsap from 'gsap';
 import { translate } from '@/libs/utils/i18n';
-import { useReveal } from '@/hooks/useReveal'; // module id: 228414
-import AnimatedSubtext from '@/animations/components/AnimatedSubtext'; // module id: 218091
+import { useReveal } from '@/hooks/useReveal';
+import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
 
 import { Columns } from '@phosphor-icons/react'; 
@@ -14,10 +14,10 @@ import { Funnel } from '@phosphor-icons/react';
 import { Copy } from '@phosphor-icons/react'; 
 import { Check } from '@phosphor-icons/react'; 
 
-const HOW_IT_WORKS_STEPS = t('landing.howItWorks.steps'); // original mangled: H
-const COPY_TABS = t('landing.howItWorks.scenes.copyTabs'); // original mangled: Z
+const HOW_IT_WORKS_STEPS = t('landing.howItWorks.steps');
+const COPY_TABS = t('landing.howItWorks.scenes.copyTabs');
 
-const ANIMATION_PROPS = { // original mangled: F
+const ANIMATION_PROPS = {
   type: 'lines',
   mask: 'lines',
   duration: 0.5,
@@ -27,7 +27,7 @@ const ANIMATION_PROPS = { // original mangled: F
   triggerMode: 'manual'
 };
 
-const CODE_SNIPPETS = { // original mangled: X
+const CODE_SNIPPETS = {
   React: `import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 
@@ -66,7 +66,7 @@ onMounted(() => {
 </script>`
 };
 
-const TOKEN_REGEX = /("(?:[^"\\]|\\.)*")|(\b\d+(?:\.\d+)?\b)/g; // original mangled: U
+const TOKEN_REGEX = /("(?:[^"\\]|\\.)*")|(\b\d+(?:\.\d+)?\b)/g;
 
 function tokenizeCode(codeStr) {
   let match, result = [], lastIndex = 0;
@@ -84,7 +84,7 @@ function tokenizeCode(codeStr) {
   return result;
 }
 
-function SceneFind({ thumbs, count }) { // original mangled: K
+function SceneFind({ thumbs, count }) {
   let LayoutIcons = [Columns, GridFour, List];
   return (
     <div className="relative h-full">
@@ -121,11 +121,11 @@ function SceneFind({ thumbs, count }) { // original mangled: K
   );
 }
 
-function SceneCopy({ tabs }) { // original mangled: V
-  let [activeTab, setActiveTab] = React.useState(tabs[0]); // original mangled: a, n
-  let [isCopied, setIsCopied] = React.useState(false); // original mangled: s, l
-  let codeRef = useRef(null); // original mangled: i
-  let codeStr = CODE_SNIPPETS[activeTab] || ''; // original mangled: o
+function SceneCopy({ tabs }) {
+  let [activeTab, setActiveTab] = React.useState(tabs[0]);
+  let [isCopied, setIsCopied] = React.useState(false);
+  let codeRef = useRef(null);
+  let codeStr = CODE_SNIPPETS[activeTab] || '';
 
   React.useEffect(() => {
     let container = codeRef.current;
@@ -153,7 +153,7 @@ function SceneCopy({ tabs }) { // original mangled: V
     return () => ctx.revert();
   }, [codeStr]);
 
-  let handleCopy = async () => { // original mangled: c
+  let handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(codeStr);
       setIsCopied(true);
@@ -199,9 +199,9 @@ function SceneCopy({ tabs }) { // original mangled: V
   );
 }
 
-function SceneShip({ item }) { // original mangled: Y
-  let containerRef = useRef(null); // original mangled: a
-  let [isVisible, setIsVisible] = React.useState(false); // original mangled: n, s
+function SceneShip({ item }) {
+  let containerRef = useRef(null);
+  let [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
     let container = containerRef.current;
@@ -242,7 +242,7 @@ function SceneShip({ item }) { // original mangled: Y
   );
 }
 
-function StepArticle({ num, label, body, visual, labelOnReady, bodyOnReady }) { // original mangled: q
+function StepArticle({ num, label, body, visual, labelOnReady, bodyOnReady }) {
   return (
     <article className="flex flex-col">
       <div data-theme="dark" className="aspect-[16/10] w-full overflow-hidden border border-foreground/12 bg-background">
@@ -263,11 +263,10 @@ function StepArticle({ num, label, body, visual, labelOnReady, bodyOnReady }) { 
   );
 }
 
-// module id: (exported implicitly as part of 377090)
-export default function HowItWorksSection({ animations = [] }) { // original mangled: G
-  let sectionRef = useRef(null); // original mangled: a
-  let headlineRef = useRef(null); // original mangled: s
-  let revealCallbacks = useRef([]); // original mangled: l
+export default function HowItWorksSection({ animations = [] }) {
+  let sectionRef = useRef(null);
+  let headlineRef = useRef(null);
+  let revealCallbacks = useRef([]);
 
   let animationsWithImages = useMemo(() => animations.filter(a => a.preview_image_url), [animations]);
   let thumbSelection = animationsWithImages.length >= 8 ? animationsWithImages.slice(4, 8) : animationsWithImages.slice(0, 4);

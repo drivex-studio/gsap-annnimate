@@ -1,29 +1,27 @@
+"use client";
 import React, { forwardRef, useRef, useState, useLayoutEffect, useImperativeHandle } from 'react';
+import gsap from 'gsap';
+import { useReveal } from '@/hooks/useReveal';
 
-import gsap from 'gsap'; // module id: 989970
-import { useReveal } from '@/hooks/useReveal'; // module id: 228414
-
-// module id: 963160
 const RevealHeadline = forwardRef(function RevealHeadline({
-  children, // original mangled: e
-  as: Tag = 'h2', // original mangled: l
-  sizeClass = 'text-h2', // original mangled: s
-  className = '', // original mangled: a
-  trigger = 'scroll', // original mangled: o
-  start = 'top 80%', // original mangled: u
-  skip = false // original mangled: c
-}, ref) { // original mangled: d
-  let containerRef = useRef(null); // original mangled: h
-  let [lines, setLines] = useState(null); // original mangled: p, f
+  children,
+  as: Tag = 'h2',
+  sizeClass = 'text-h2',
+  className = '',
+  trigger = 'scroll',
+  start = 'top 80%',
+  skip = false
+}, ref) {
+  let containerRef = useRef(null);
+  let [lines, setLines] = useState(null);
 
-  // Recursively extract text from children
-  let extractText = (node) => { // original mangled: g
+  let extractText = (node) => {
     if (node == null || node === false) return '';
     if (typeof node === 'string' || typeof node === 'number') return String(node);
     if (Array.isArray(node)) return node.map(extractText).join('');
     return '';
   };
-  let textContent = extractText(children); // original mangled: m
+  let textContent = extractText(children);
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
@@ -31,17 +29,16 @@ const RevealHeadline = forwardRef(function RevealHeadline({
     let wordNodes = containerRef.current.querySelectorAll('[data-rh-word]');
     if (wordNodes.length === 0) return;
     
-    let computedLines = []; // original mangled: t
-    let currentLineWords = []; // original mangled: r
-    let prevTop = -Infinity; // original mangled: n
-    let prevExplicitIndex = -1; // original mangled: i
+    let computedLines = [];
+    let currentLineWords = [];
+    let prevTop = -Infinity;
+    let prevExplicitIndex = -1;
     
     for (let node of wordNodes) {
       let top = node.getBoundingClientRect().top;
       let explicitIndex = Number(node.dataset.rhExplicit ?? -1);
       let hasExplicitBreak = explicitIndex !== prevExplicitIndex && prevExplicitIndex !== -1;
       
-      // If the word drops to a new line visually (top difference > 2px) or there is an explicit \n break
       if ((prevTop > -Infinity && top - prevTop > 2) || hasExplicitBreak) {
         computedLines.push(currentLineWords.join(' '));
         currentLineWords = [];
@@ -59,7 +56,7 @@ const RevealHeadline = forwardRef(function RevealHeadline({
     setLines(computedLines);
   }, [textContent]);
 
-  let { reveal } = useReveal(containerRef, { // original mangled: x
+  let { reveal } = useReveal(containerRef, {
     mode: trigger === 'pageEnter' ? 'hero' : trigger === 'manual' ? 'manual' : 'scroll',
     build: skip || !lines ? null : (element) => {
       let tl = gsap.timeline({ paused: true });
@@ -101,9 +98,8 @@ const RevealHeadline = forwardRef(function RevealHeadline({
     reveal
   }), [reveal]);
 
-  let combinedClassName = `${sizeClass} ${className}`.trim(); // original mangled: b
+  let combinedClassName = `${sizeClass} ${className}`.trim();
 
-  // Phase 1: Pre-split (Hidden render to calculate wrapping)
   if (!lines) {
     let explicitLines = textContent.split('\n');
     return (
@@ -125,7 +121,6 @@ const RevealHeadline = forwardRef(function RevealHeadline({
     );
   }
 
-  // Phase 2: Post-split (Visible render with overlays)
   return (
     <Tag ref={containerRef} className={combinedClassName}>
       {lines.map((lineText, lineIdx) => (

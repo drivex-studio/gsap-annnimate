@@ -2,7 +2,7 @@ import '@/styles/style.css';
 import Provider from '@/app/provider';
 import AppLayout from '@/components/AppLayout';
 import localFont from 'next/font/local';
-import { getLatestAnimation } from '@/libs/supabase/latestAnimation';
+import { getLatestAnimation, getCategories } from '@/libs/supabase/latestAnimation';
 
 const geistSans = localFont({
   src: '../../public/fonts/Geist-Variable.woff2',
@@ -81,7 +81,10 @@ const themeScript = `
 `;
 
 export default async function RootLayout({ children }) {
-  const latestAnimation = await getLatestAnimation();
+  const [latestAnimation, categories] = await Promise.all([
+    getLatestAnimation(),
+    getCategories(),
+  ]);
 
   return (
     <html
@@ -101,7 +104,7 @@ export default async function RootLayout({ children }) {
         className="bg-background text-foreground font-sans"
         data-preloader-ready="true"
       >
-        <Provider>
+        <Provider categories={categories}>
           <AppLayout latestAnimation={latestAnimation}>
             {children}
           </AppLayout>

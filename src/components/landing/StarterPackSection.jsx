@@ -1,8 +1,8 @@
 import React from 'react';
 import { translate } from '@/libs/utils/i18n';
-import RevealHeadline from '@/animations/components/RevealHeadline'; 
+import RevealHeadline from '@/animations/shared/RevealHeadline'; 
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext'; 
-import NewsletterForm from '@/components/ui/NewsletterForm'; 
+import NewsletterForm from '@/components/ui/NewsletterEyebrow'; 
 
 export default function StarterPackSection({
   source = "homepage",

@@ -1,11 +1,10 @@
-import { translate as t } from '@/libs/utils/i18n'; // module id: 398682
-import { getKitPriceId } from '@/libs/pricing'; // module id: 825740
+import { translate } from '@/libs/utils/i18n';
+import { getKitPriceId } from '@/libs/config/PACK_SLUGS';
 
-import CheckoutButton from '@/components/pricing/CheckoutButton'; // module id: 569424
-import KitPrice from '@/components/pricing/KitPrice'; // module id: 597274
-import VideoPlayer from '@/components/media/VideoPlayer'; // module id: 233230
+import CheckoutButton from '@/components/pricing/CheckoutButton';
+import KitPrice from '@/components/pricing/utils/KitPrice';
+import VideoPlayer from '@/components/ui/VideoLabelOverlay';
 
-// module id: 468463
 export default function PricingFeatures({ className = '' }) {
   return (
     <div className={`grid grid-cols-1 gap-24 lg:grid-cols-3 ${className}`}>
@@ -20,20 +19,20 @@ export default function PricingFeatures({ className = '' }) {
         <div className="flex flex-1 flex-col">
           <div className="mb-12 flex flex-wrap items-center gap-12">
             <h3 className="text-h4 m-0 text-foreground">
-              {t('landing.kitSpotlight.menu.headline')}
+              {translate('landing.kitSpotlight.menu.headline')}
             </h3>
             <span className="text-accent-xs bg-brand px-10 py-4 text-[#141314]">
-              {t('landing.kitSpotlight.menu.badge')}
+              {translate('landing.kitSpotlight.menu.badge')}
             </span>
           </div>
           <p className="text-body-sm m-0 max-w-[52ch] text-foreground-muted">
-            {t('landing.kitSpotlight.menu.body')}
+            {translate('landing.kitSpotlight.menu.body')}
           </p>
           <div className="mt-24 flex flex-wrap items-center gap-24">
             <span className="text-h3 leading-none text-foreground">
               <KitPrice
                 kitSlug="menu"
-                fallback={t('landing.kitSpotlight.menu.price')}
+                fallback={translate('landing.kitSpotlight.menu.price')}
                 struckClassName="text-body text-foreground-muted"
               />
             </span>
@@ -50,20 +49,20 @@ export default function PricingFeatures({ className = '' }) {
       <div className="flex flex-col bg-surface p-24 lg:p-32">
         <div className="mb-12 flex flex-wrap items-center gap-12">
           <h3 className="text-h4 m-0 text-foreground">
-            {t('landing.kitSpotlight.reveal.headline')}
+            {translate('landing.kitSpotlight.reveal.headline')}
           </h3>
           <span className="text-accent-xs bg-brand px-10 py-4 text-[#141314]">
-            {t('landing.kitSpotlight.reveal.badge')}
+            {translate('landing.kitSpotlight.reveal.badge')}
           </span>
         </div>
         <p className="text-body-sm m-0 max-w-[52ch] text-foreground-muted">
-          {t('landing.kitSpotlight.reveal.body')}
+          {translate('landing.kitSpotlight.reveal.body')}
         </p>
         <div className="mt-auto flex flex-wrap items-center gap-24 pt-24">
           <span className="text-h3 leading-none text-foreground">
             <KitPrice
               kitSlug="reveal"
-              fallback={t('landing.kitSpotlight.reveal.price')}
+              fallback={translate('landing.kitSpotlight.reveal.price')}
               struckClassName="text-body text-foreground-muted"
             />
           </span>

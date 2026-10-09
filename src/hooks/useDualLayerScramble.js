@@ -1,8 +1,9 @@
+"use client"; 
 import { useRef, useEffect, useCallback } from 'react'; // module id: 271645
 import gsap from 'gsap'; // module id: 989970
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'; // module id: 437302
 
-import { ASCII_CHARS } from '@/libs/utils/chars'; // module id: 254359
+import { ASCII_CHARS } from '@/hooks/useScramble'; // module id: 254359
 
 gsap.registerPlugin(ScrambleTextPlugin);
 

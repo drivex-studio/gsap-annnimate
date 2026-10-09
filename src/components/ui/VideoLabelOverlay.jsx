@@ -1,6 +1,6 @@
-
+'use client';
 import React, { useRef, useState, useEffect } from 'react';
-import { SHOWREEL_SRC, SHOWREEL_POSTER } from '@/libs/constants'; // module id: 846057
+import { SHOWREEL_SRC, SHOWREEL_POSTER } from '@/libs/config/constants'; // module id: 846057
 
 // module id: 233230
 export default function VideoLabelOverlay({ className = "", label = "Menu Kit showreel" }) { // original mangled: e, a

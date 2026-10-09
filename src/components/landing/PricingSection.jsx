@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button'; // module id: 687989
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext'; // module id: 218091
 import AnimatedHeadline from '@/animations/components/AnimatedHeadline'; // module id: 963160
 
-import PricingToggle from '@/components/pricing/PricingToggle'; // module id: 821980
+import PricingToggle from '@/components/pricing/utils/PricingToggle'; // module id: 821980
 import PricingCard from '@/components/pricing/PricingCard'; // module id: 199155
 import PricingFeatures from '@/components/pricing/PricingFeatures'; // module id: 468463
 

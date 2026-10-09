@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useEffect, useRef } from 'react';
 import { translate as t } from '@/libs/utils/i18n';
-import { preloadSharedImages } from '@/libs/utils/preload';
+import { preloadSharedImages } from '@/libs/utils/loadSharedImage';
 
 import { perfLog } from '@/libs/utils/perfLog';
 import { useAnimation } from '@/providers/AnimationProvider';
@@ -87,7 +87,7 @@ export default function LandingClient({ animations = [], shippedRecently = 0 }) 
         <OneComponentSection />
         <TwoWaysSection images={imageUrls} animations={animations} cursorRef={cursorRef} />
         <LibraryPreview items={animations} count={animations.length} />
-        <Testimonials images={imageUrls} />
+        <LogoWall images={imageUrls} />
         <StarterPackSection theme="dark" />
         <PricingSection shippedRecently={shippedRecently} />
         <ValueMath cta={{ label: t('common.valueMath.ctaLanding'), href: '/pricing' }} />
