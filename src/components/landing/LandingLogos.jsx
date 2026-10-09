@@ -4,7 +4,7 @@ import CocaColaLogo from '@/components/logos/CocaColaLogo';
 import BodyArmorLogo from '@/components/logos/BodyArmorLogo';
 import WkndhrsLogo from '@/components/logos/WkndhrsLogo';
 import PoweradeLogo from '@/components/logos/PoweradeLogo';
-import LogoMarquee from '@/components/ui/LogoMarquee';
+import AnimatedList from '@/animations/components/AnimatedList';
 
 const LOGOS = [
   { name: 'Coca-Cola', Logo: CocaColaLogo, className: 'h-24' },
@@ -34,7 +34,7 @@ const LOGOS = [
 
 export default function LandingLogos({ className = '', trigger = 'scroll', delay = 0 }) {
   return (
-    <LogoMarquee
+    <AnimatedList
       tag="ul"
       className={`flex flex-wrap items-center gap-x-24 gap-y-24 ${className}`}
       itemClassName="text-foreground-muted opacity-60 transition-opacity duration-300 hover:opacity-100"
@@ -47,6 +47,6 @@ export default function LandingLogos({ className = '', trigger = 'scroll', delay
           <span className="sr-only">{name}</span>
         </span>
       ))}
-    </LogoMarquee>
+    </AnimatedList>
   );
 }

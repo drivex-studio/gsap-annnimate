@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { t } from '@/libs/i18n';
-import Button from '@/components/ui/Button';
-import AnimatedSubtext from '@/components/ui/AnimatedSubtext';
-import AnimatedText from '@/components/ui/AnimatedText';
-import AnimationsFilterBar from '@/components/animations/AnimationsFilterBar';
+import { translate as t } from '@/libs/utils/i18n';
+import Button from '@/components/ui/Button'; // module id: 687989
+import AnimatedSubtext from '@/animations/components/AnimatedSubtext'; // module id: 218091
+import AnimatedText from '@/animations/components/AnimatedText'; // module id: 460391
+import AnimationsFilterBar from '@/animations/components/AnimationsFilterBar'; // module id: 572332
 import LandingLogos from './LandingLogos';
 
 const ANIMATION_PROPS = {
