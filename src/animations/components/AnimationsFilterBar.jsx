@@ -2,9 +2,9 @@ import { useState, useEffect, useRef, useMemo, Fragment } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useReveal } from '@/hooks/useReveal';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/providers/UserProvider';
 import { getDiscordLinkForUser } from '@/libs/discord';
-import { t } from '@/libs/i18n';
+import { translate as t } from '@/libs/utils/i18n';
 import {
   SquaresFour,
   BookmarkSimple,
@@ -21,10 +21,10 @@ import {
   List,
 } from '@phosphor-icons/react';
 
-import LogoText from '@/components/LogoText';
+import LogoText from '@/assets/logos/LogoText';
 import LogoIcon from '@/components/LogoIcon';
-import Link from '@/components/ui/Link';
-import AnimatedNumber from '@/components/ui/AnimatedNumber';
+import Link from '@/components/navigation/Link';
+import AnimatedNumber from '@/animations/components/AnimatedNumber';
 import AnimationCard from '@/components/animations/AnimationCard';
 
 const CATEGORY_LABELS = {

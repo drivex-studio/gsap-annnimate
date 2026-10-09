@@ -1,9 +1,10 @@
+"use client";
 import React, { useMemo, useEffect, useRef } from 'react';
-
-import { t } from '@/libs/i18n';
+import { translate as t } from '@/libs/utils/i18n';
 import { preloadSharedImages } from '@/libs/utils/preload';
-import { perfLog } from '@/libs/utils/perf';
-import { useAnimation } from '@/hooks/usePageEnterAnimation';
+
+import { perfLog } from '@/libs/utils/perfLog';
+import { useAnimation } from '@/providers/AnimationProvider';
 
 import HeroSection from './HeroSection';
 import ProblemSection from './ProblemSection';
@@ -13,11 +14,11 @@ import TwoWaysSection from './TwoWaysSection';
 import PricingSection from './PricingSection';
 import CustomCursor from './CustomCursor';
 
-import LibraryPreview from '@/components/landing/LibraryPreview';
-import LogoWall from '@/components/landing/LogoWall';
-import Testimonials from '@/components/landing/Testimonials';
+import LibraryPreview from '@/components/ui/LibraryPreview';
+import LogoWall from '@/components/landing/Testimonials';
+import StarterPackSection from '@/components/landing/StarterPackSection';
 import ValueMath from '@/components/landing/ValueMath';
-import FAQ from '@/components/landing/FAQ';
+import FAQ from '@/components/landing/FAQSection';
 import BottomCTA from '@/components/landing/BottomCTA';
 
 const PREFERRED_SLUGS = [
@@ -48,6 +49,7 @@ export default function LandingClient({ animations = [], shippedRecently = 0 }) 
     let handle = typeof requestIdleCallback === 'function'
       ? requestIdleCallback(() => preloadSharedImages(imageUrls, { maxWidth: 384 }), { timeout: 2000 })
       : setTimeout(() => preloadSharedImages(imageUrls, { maxWidth: 384 }), 1000);
+    
     return () => {
       if (typeof cancelIdleCallback === 'function') {
         try { cancelIdleCallback(handle); } catch (e) { clearTimeout(handle); }
@@ -81,14 +83,13 @@ export default function LandingClient({ animations = [], shippedRecently = 0 }) 
       <div className="landing">
         <HeroSection animations={heroAnimations} count={animations.length} pool={animations} />
         <ProblemSection />
-        {}
-        {}
-        {}
-        {}
+        <HowItWorksSection animations={animations} />
+        <OneComponentSection />
+        <TwoWaysSection images={imageUrls} animations={animations} cursorRef={cursorRef} />
         <LibraryPreview items={animations} count={animations.length} />
-        <LogoWall images={imageUrls} />
-        <Testimonials theme="dark" />
-        {}
+        <Testimonials images={imageUrls} />
+        <StarterPackSection theme="dark" />
+        <PricingSection shippedRecently={shippedRecently} />
         <ValueMath cta={{ label: t('common.valueMath.ctaLanding'), href: '/pricing' }} />
         <FAQ />
         <BottomCTA images={imageUrls} bleed={true} />

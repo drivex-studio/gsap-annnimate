@@ -1,11 +1,9 @@
-import React from 'react';
-
 import { translate as t } from '@/libs/utils/i18n';
-import Button from '@/components/ui/Button'; // module id: 687989
-import AnimatedSubtext from '@/animations/components/AnimatedSubtext'; // module id: 218091
-import AnimatedText from '@/animations/components/AnimatedText'; // module id: 460391
-import AnimationsFilterBar from '@/animations/components/AnimationsFilterBar'; // module id: 572332
-import LandingLogos from './LandingLogos';
+import Button from '@/components/ui/Button';
+import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
+import AnimatedText from '@/animations/components/AnimatedText';
+import AnimationsFilterBar from '@/animations/components/AnimationsFilterBar';
+import LandingLogos from '@/components/landing/LandingLogos';
 
 const ANIMATION_PROPS = {
   type: 'lines',
@@ -14,12 +12,15 @@ const ANIMATION_PROPS = {
   stagger: 0.03,
   ease: 'power2.out',
   animationProps: { yPercent: 100 },
-  triggerMode: 'pageEnter'
+  triggerMode: 'pageEnter',
 };
 
 export default function HeroSection({ animations = [], count = 0, pool = [] }) {
   return (
-    <section data-theme="dark" className="relative overflow-hidden bg-background pt-96 pb-0 text-foreground lg:pt-160">
+    <section
+      data-theme="dark"
+      className="relative overflow-hidden bg-background pt-96 pb-0 text-foreground lg:pt-160"
+    >
       <div className="v2-container">
         <div className="grid grid-cols-12 items-end gap-x-24 gap-y-40 lg:gap-x-32">
           <div className="col-span-12 lg:col-span-7">
