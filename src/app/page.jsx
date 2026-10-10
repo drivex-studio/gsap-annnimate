@@ -1,6 +1,8 @@
 import LandingClient from '@/components/landing/LandingClient';
 import { getPublishedAnimations, getShippedRecently } from '@/libs/supabase/latestAnimation';
 
+export const revalidate = 60;
+
 export default async function HomePage() {
   const [animations, shippedRecently] = await Promise.all([
     getPublishedAnimations(),
