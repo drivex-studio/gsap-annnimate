@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { translate } from '@/libs/utils/i18n';
+import { translate,  translate as t } from '@/libs/utils/i18n';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import Button from '@/components/ui/Button';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';

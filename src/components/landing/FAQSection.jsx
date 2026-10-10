@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useCallback } from 'react';
 import { translate as t } from '@/libs/utils/i18n';
 import { useBreakpoint } from '@/hooks/useBreakpoint';

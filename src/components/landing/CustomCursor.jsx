@@ -1,3 +1,4 @@
+"use client";
 import React, { forwardRef, useRef, useState, useEffect, useCallback, useImperativeHandle } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';

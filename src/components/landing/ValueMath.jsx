@@ -4,7 +4,7 @@ import { Hand, Robot } from '@phosphor-icons/react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useReveal } from '@/hooks/useReveal';
-import { translate } from '@/libs/utils/i18n';
+import { translate,  translate as t } from '@/libs/utils/i18n';
 
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
