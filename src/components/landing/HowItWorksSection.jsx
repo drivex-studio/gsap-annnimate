@@ -14,7 +14,7 @@ import { Funnel } from '@phosphor-icons/react';
 import { Copy } from '@phosphor-icons/react'; 
 import { Check } from '@phosphor-icons/react'; 
 
-const HOW_IT_WORKS_STEPS = t('landing.howItWorks.steps');
+const HOW_IT_WORKS_STEPS = translate('landing.howItWorks.steps');
 const COPY_TABS = t('landing.howItWorks.scenes.copyTabs');
 
 const ANIMATION_PROPS = {
