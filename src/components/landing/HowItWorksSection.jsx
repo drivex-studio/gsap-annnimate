@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useMemo } from 'react';
 import gsap from 'gsap';
-import { translate } from '@/libs/utils/i18n';
+import { translate,  translate as t } from '@/libs/utils/i18n';
 import { useReveal } from '@/hooks/useReveal';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
