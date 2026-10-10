@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
   TooltipContent 
- } from '@/components/ui/SmartTooltip';
+} from '@/components/ui/Tooltip'; 
 import { usePppGeo } from '@/hooks/usePppGeo';
 
 function getCountryName(code) {

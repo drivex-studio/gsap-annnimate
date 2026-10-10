@@ -6,7 +6,6 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { loadSharedImage } from '@/libs/utils/loadSharedImage';
 import { useWebGLSupport } from '@/hooks/useWebGLSupport';
-import { useWebGLSupport } from '@/hooks/useWebGLSupport'; // module id: 143848
 
 // Constants
 const ROTATION_X = Math.PI / 7; // original mangled: c
