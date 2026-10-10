@@ -1,40 +1,36 @@
 import React, { useRef, useEffect } from 'react';
-
-import gsap from 'gsap'; // module id: 989970
-import { SplitText } from '@/libs/utils/vendor'; // module id: 875324
-
-import { useDualLayerScramble } from '@/hooks/useDualLayerScramble'; // module id: 798851
+import gsap from 'gsap';
+import { SplitText } from '@/libs/utils/vendor';
+import useDualLayerScramble from '@/hooks/useDualLayerScramble';
 
 gsap.registerPlugin(SplitText);
 
-// module id: 327018
 export default function FAQItem({
-  q, // original mangled: e
-  a, // original mangled: s
-  isOpen, // original mangled: i
-  onToggle, // original mangled: c
-  isDesktop, // original mangled: o
-  duration = 0.8, // original mangled: d
-  ease = "expo.inOut" // original mangled: u
+  q,
+  a,
+  isOpen,
+  onToggle,
+  isDesktop,
+  duration = 0.8,
+  ease = "expo.inOut"
 }) {
-  let contentRef = useRef(null); // original mangled: m
-  let iconRef = useRef(null); // original mangled: h
-  let verticalLineRef = useRef(null); // original mangled: f
+  let contentRef = useRef(null);
+  let iconRef = useRef(null);
+  let verticalLineRef = useRef(null);
   
-  let timelineRef = useRef(null); // original mangled: g
-  let splitTextRef = useRef(null); // original mangled: p
-  let textAnimRef = useRef(null); // original mangled: x
+  let timelineRef = useRef(null);
+  let splitTextRef = useRef(null);
+  let textAnimRef = useRef(null);
   
-  let prevIsOpen = useRef(false); // original mangled: b
+  let prevIsOpen = useRef(false);
 
-  let { ref: scrambleRef, scramble: triggerScramble } = useDualLayerScramble({ // original mangled: v, y
+  let { ref: scrambleRef, scramble: triggerScramble } = useDualLayerScramble({
     duration: 0.5,
     speed: 1,
     firstColorClass: "scramble-brand",
     secondColorClass: "scramble-inherit"
   });
 
-  // Setup the accordion expand/collapse timeline
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     
@@ -86,7 +82,6 @@ export default function FAQItem({
     };
   }, [duration, ease]);
 
-  // Handle open/close state changes
   useEffect(() => {
     if (timelineRef.current && isOpen !== prevIsOpen.current) {
       prevIsOpen.current = isOpen;

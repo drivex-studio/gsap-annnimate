@@ -12,7 +12,6 @@ import NumberRoller from '@/animations/components/AnimatedNumber';
 import FeatureList from '@/components/pricing/FeatureList';
 import PppNotice from '@/components/pricing/PppLabel';
 
-
 const SURFACE_STYLES = {
   dark: 'bg-foreground text-background',
   surface: 'bg-surface text-foreground',

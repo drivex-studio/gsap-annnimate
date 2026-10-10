@@ -1,44 +1,42 @@
-
 import React, { forwardRef, useRef, useState, useEffect, useCallback, useImperativeHandle } from 'react';
-import { createPortal } from 'react-dom'; // module id: 174080
-import gsap from 'gsap'; // module id: 989970
-import { useGSAP } from '@gsap/react'; // module id: 365747
+import { createPortal } from 'react-dom';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(useGSAP);
 
-// module id: (exported implicitly as part of 377090)
 const CustomCursor = forwardRef(function CustomCursor({
-  className = '', // original mangled: e
-  children, // original mangled: a
-  speed = 0.7, // original mangled: n
-  ease = 'expo.out', // original mangled: s
-  size = 48, // original mangled: l
-  maxRotation = 35, // original mangled: i
-  rotationDecay = 0.92, // original mangled: o
-  velocityMultiplier = 0.5, // original mangled: c
-  hideNativeCursor = false // original mangled: d
-}, ref) { // original mangled: u
+  className = '',
+  children,
+  speed = 0.7,
+  ease = 'expo.out',
+  size = 48,
+  maxRotation = 35,
+  rotationDecay = 0.92,
+  velocityMultiplier = 0.5,
+  hideNativeCursor = false
+}, ref) {
   
-  let wrapperRef = useRef(null); // original mangled: g
-  let cursorElRef = useRef(null); // original mangled: m
-  let textElRef = useRef(null); // original mangled: p
+  let wrapperRef = useRef(null);
+  let cursorElRef = useRef(null);
+  let textElRef = useRef(null);
   
-  let mousePos = useRef({ x: 0, y: 0 }); // original mangled: x
-  let prevMousePos = useRef({ x: 0, y: 0 }); // original mangled: f
-  let velocity = useRef({ x: 0, y: 0 }); // original mangled: h
+  let mousePos = useRef({ x: 0, y: 0 });
+  let prevMousePos = useRef({ x: 0, y: 0 });
+  let velocity = useRef({ x: 0, y: 0 });
   
-  let currentRotation = useRef(0); // original mangled: y
-  let targetRotation = useRef(0); // original mangled: j
+  let currentRotation = useRef(0);
+  let targetRotation = useRef(0);
   
-  let rAF = useRef(null); // original mangled: w
-  let lastTime = useRef(0); // original mangled: N
+  let rAF = useRef(null);
+  let lastTime = useRef(0);
   
-  let isVisible = useRef(false); // original mangled: k
-  let isTextActive = useRef(false); // original mangled: C
-  let timeoutRef = useRef(null); // original mangled: P
+  let isVisible = useRef(false);
+  let isTextActive = useRef(false);
+  let timeoutRef = useRef(null);
 
-  let [isTouchDevice, setIsTouchDevice] = useState(true); // original mangled: R, M
-  let [mounted, setMounted] = useState(false); // original mangled: T, E
+  let [isTouchDevice, setIsTouchDevice] = useState(true);
+  let [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setIsTouchDevice(
@@ -49,9 +47,9 @@ const CustomCursor = forwardRef(function CustomCursor({
     setMounted(true);
   }, []);
 
-  let { contextSafe } = useGSAP({ scope: wrapperRef }); // original mangled: L
+  let { contextSafe } = useGSAP({ scope: wrapperRef });
 
-  let moveCursor = useCallback((x, y, immediate = false) => { // original mangled: S
+  let moveCursor = useCallback((x, y, immediate = false) => {
     if (cursorElRef.current) {
       gsap.to(cursorElRef.current, {
         x, 
@@ -64,21 +62,21 @@ const CustomCursor = forwardRef(function CustomCursor({
     }
   }, [ease, speed]);
 
-  let showCursor = useCallback(() => { // original mangled: _
+  let showCursor = useCallback(() => {
     if (!isVisible.current && cursorElRef.current) {
       isVisible.current = true;
       cursorElRef.current.classList.add('is-visible');
     }
   }, []);
 
-  let hideCursor = useCallback(() => { // original mangled: I
+  let hideCursor = useCallback(() => {
     if (isVisible.current && cursorElRef.current) {
       isVisible.current = false;
       cursorElRef.current.classList.remove('is-visible');
     }
   }, []);
 
-  let setLabel = contextSafe((text, bgColor, textColor) => { // original mangled: $
+  let setLabel = contextSafe((text, bgColor, textColor) => {
     if (textElRef.current && cursorElRef.current) {
       gsap.killTweensOf(textElRef.current);
       textElRef.current.innerHTML = text;
@@ -96,7 +94,7 @@ const CustomCursor = forwardRef(function CustomCursor({
     }
   });
 
-  let clearLabel = contextSafe(() => { // original mangled: A
+  let clearLabel = contextSafe(() => {
     if (textElRef.current && cursorElRef.current) {
       gsap.killTweensOf(textElRef.current);
       cursorElRef.current.classList.remove('is-text');
@@ -148,13 +146,12 @@ const CustomCursor = forwardRef(function CustomCursor({
       listeners.push({ element: el, handleEnter, handleLeave });
     });
 
-    let currentTheme = null; // original mangled: a
+    let currentTheme = null;
     
-    let updateTheme = (target) => { // original mangled: n
+    let updateTheme = (target) => {
       if (!cursorElRef.current) return;
       let themedParent = target?.closest?.('[data-theme]');
       let parentTheme = themedParent?.dataset?.theme || 'light';
-      // Invert theme for cursor: dark background gets light cursor and vice versa
       let cursorTheme = parentTheme === 'dark' ? 'light' : 'dark';
       
       if (cursorTheme !== currentTheme) {
@@ -163,7 +160,7 @@ const CustomCursor = forwardRef(function CustomCursor({
       }
     };
 
-    let onMouseMove = (e) => { // original mangled: r
+    let onMouseMove = (e) => {
       mousePos.current.x = e.clientX;
       mousePos.current.y = e.clientY;
       moveCursor(mousePos.current.x, mousePos.current.y);
@@ -172,7 +169,7 @@ const CustomCursor = forwardRef(function CustomCursor({
     
     document.addEventListener('mousemove', onMouseMove);
 
-    let tick = (time) => { // original mangled: s
+    let tick = (time) => {
       if (!lastTime.current) lastTime.current = time;
       let dt = time - lastTime.current;
       lastTime.current = time;

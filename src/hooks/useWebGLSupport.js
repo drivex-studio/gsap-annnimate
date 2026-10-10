@@ -2,11 +2,10 @@
 
 import { useState } from 'react';
 
-let supportResult; // original mangled: t
+let supportResult;
 
-// module id: 143848
-function checkWebGLSupport() { // original mangled: n
-  if (typeof document === "undefined") return true; // SSR fallback
+function checkWebGLSupport() {
+  if (typeof document === "undefined") return true;
   if (supportResult !== undefined) return supportResult;
   
   try {
@@ -24,6 +23,6 @@ function checkWebGLSupport() { // original mangled: n
   return supportResult;
 }
 
-export function useWebGLSupport() { // exported implicitly via module s[]
+export function useWebGLSupport() {
   return useState(checkWebGLSupport)[0];
 }

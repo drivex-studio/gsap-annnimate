@@ -2,26 +2,25 @@
 import React, { useState } from 'react';
 
 import { translate } from '@/libs/utils/i18n';
-import { useTransitionRouter } from '@/providers/TransitionRouterProvider'; // module id: 676040
+import { useTransitionRouter } from '@/providers/TransitionRouterProvider';
 
-import Button from '@/components/ui/Button'; // module id: 687989
-import AnimatedSubtext from '@/animations/components/AnimatedSubtext'; // module id: 218091
-import AnimatedHeadline from '@/animations/components/AnimatedHeadline'; // module id: 963160
+import Button from '@/components/ui/Button';
+import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
+import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
 
-import PricingToggle from '@/components/pricing/utils/PricingToggle'; // module id: 821980
-import PricingCard from '@/components/pricing/PricingCard'; // module id: 199155
-import PricingFeatures from '@/components/pricing/PricingFeatures'; // module id: 468463
+import PricingToggle from '@/components/pricing/utils/PricingToggle';
+import PricingCard from '@/components/pricing/PricingCard';
+import PricingFeatures from '@/components/pricing/PricingFeatures';
 
-import ServerData from '@/libs/auth/data/ServerData'; // module id: 516799
+import ServerData from '@/libs/auth/data/ServerData';
 
-const LANDING_PLANS = ServerData.stripe.landingPlans; // original mangled: eR
+const LANDING_PLANS = ServerData.stripe.landingPlans;
 
-// module id: (exported implicitly as part of 377090)
-export default function PricingSection({ shippedRecently = 0 }) { // original mangled: eM
-  let [cycle, setCycle] = useState('quarterly'); // original mangled: s, l
-  let router = useTransitionRouter(); // original mangled: i
+export default function PricingSection({ shippedRecently = 0 }) {
+  let [cycle, setCycle] = useState('quarterly');
+  let router = useTransitionRouter();
   
-  let handleCheckout = (planId) => { // original mangled: o
+  let handleCheckout = (planId) => {
     router.push(`/checkout?plan=${planId}&cycle=${cycle}`);
   };
 

@@ -1,12 +1,12 @@
-
 "use client";
 
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber'; // module id: 575056, 925234, 828600
-import * as THREE from 'three'; // module id: 190072
-import gsap from 'gsap'; // module id: 989970
-import { loadSharedImage } from '@/libs/utils/loadSharedImage'; // module id: 457714
-import { useWebGLSupport } from '@/hooks/useWebGLSupport'; // module id: 457714
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import * as THREE from 'three';
+import gsap from 'gsap';
+import { loadSharedImage } from '@/libs/utils/loadSharedImage';
+import { useWebGLSupport } from '@/hooks/useWebGLSupport';
+import { useWebGLSupport } from '@/hooks/useWebGLSupport'; // module id: 143848
 
 // Constants
 const ROTATION_X = Math.PI / 7; // original mangled: c

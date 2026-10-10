@@ -1,13 +1,12 @@
 "use client"; 
-import { useRef, useEffect, useCallback } from 'react'; // module id: 271645
-import gsap from 'gsap'; // module id: 989970
-import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'; // module id: 437302
+import { useRef, useEffect, useCallback } from 'react';
+import gsap from 'gsap';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 
-import { ASCII_CHARS } from '@/hooks/useScramble'; // module id: 254359
+import { ASCII_CHARS } from '@/hooks/useScramble';
 
 gsap.registerPlugin(ScrambleTextPlugin);
 
-// module id: 798851
 export default function useDualLayerScramble(options = {}) {
   const elementRef = useRef(null);
   const timelineRef = useRef(null);

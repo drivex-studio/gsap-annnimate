@@ -64,7 +64,6 @@ const fetchPppData = () => {
   return fetchPromise;
 };
 
-// module id: 12895
 export function usePppGeo() {
   const [pppData, setPppData] = useState(cachedPppData === undefined ? null : cachedPppData);
 
@@ -86,7 +85,6 @@ export function usePppGeo() {
   return pppData;
 }
 
-// module id: 12895
 export function usePppTier() {
   const geoData = usePppGeo();
   return geoData?.tier ?? null;

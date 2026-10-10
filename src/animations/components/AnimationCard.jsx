@@ -1,50 +1,48 @@
-
 import React, { useRef, useState, useCallback } from 'react';
-import { cn } from '@/libs/utils/className'; // module id: 103746
-import Link from '@/components/navigation/Link'; // module id: 101836
+import { cn } from '@/libs/utils/className';
+import Link from '@/components/navigation/Link';
 
-import { bunnyImageUrl } from '@/libs/utils/bunnyImageUrl'; // module id: 632021 (Mapped)
-import ProvenanceChip from '@/components/ui/ProvenanceChip'; // module id: 909247 (Mapped)
-import FreeChip from '@/components/ui/FreeChip'; // module id: 993603 (Mapped)
-import { getProvenanceSite } from '@/libs/utils/provenance'; // module id: 809630 (Mapped)
-import SaveButton from '@/components/ui/SaveButton'; // module id: 878512
+import { bunnyImageUrl } from '@/libs/utils/bunnyImageUrl';
+import ProvenanceChip from '@/components/ui/ProvenanceChip';
+import FreeChip from '@/components/ui/FreeChip';
+import { getProvenanceSite } from '@/libs/utils/provenance';
+import SaveButton from '@/components/ui/SaveButton';
 
-function isNew(animation) { // original mangled: b
+function isNew(animation) {
   if (!animation?.published_at) return false;
   let pubDate = new Date(animation.published_at).getTime();
-  return (Date.now() - pubDate) < 1209600000; // 14 days
+  return (Date.now() - pubDate) < 1209600000;
 }
 
-const RATIOS = { // original mangled: y
+const RATIOS = {
   grid: "aspect-[16/10]",
   duo: "aspect-[16/10]",
   condensed: "aspect-[16/10]",
   list: "aspect-[16/10]"
 };
 
-// module id: 591611
 export default function AnimationCard({
-  animation, // original mangled: e
-  viewMode = "grid", // original mangled: l
-  isAuthenticated = false, // original mangled: o
-  initialIsSaved = false, // original mangled: c
-  priority = false, // original mangled: d
-  hrefBase = "/animations", // original mangled: u
-  chipLabel, // original mangled: m
-  hideSave = false, // original mangled: f
-  badge = null // original mangled: h
+  animation,
+  viewMode = "grid",
+  isAuthenticated = false,
+  initialIsSaved = false,
+  priority = false,
+  hrefBase = "/animations",
+  chipLabel,
+  hideSave = false,
+  badge = null
 }) {
-  let provenanceLabel = chipLabel || getProvenanceSite(animation) || "Studio Original"; // original mangled: p
-  let { id, title, slug, category, preview_image_url, preview_video_url } = animation; // original mangled: j, w, k, N, E, H
+  let provenanceLabel = chipLabel || getProvenanceSite(animation) || "Studio Original";
+  let { id, title, slug, category, preview_image_url, preview_video_url } = animation;
   
-  let videoRef = useRef(null); // original mangled: S
-  let [isHovering, setIsHovering] = useState(false); // original mangled: V, A
-  let [isVideoLoaded, setIsVideoLoaded] = useState(false); // original mangled: _, M
+  let videoRef = useRef(null);
+  let [isHovering, setIsHovering] = useState(false);
+  let [isVideoLoaded, setIsVideoLoaded] = useState(false);
   
-  let showNewBadge = isNew(animation); // original mangled: T
-  let showUpdatedBadge = !showNewBadge && animation?.content_updated_at && (Date.now() - new Date(animation.content_updated_at).getTime()) < 604800000; // original mangled: C
+  let showNewBadge = isNew(animation);
+  let showUpdatedBadge = !showNewBadge && animation?.content_updated_at && (Date.now() - new Date(animation.content_updated_at).getTime()) < 604800000;
   
-  let handleMouseEnter = useCallback(() => { // original mangled: L
+  let handleMouseEnter = useCallback(() => {
     setIsHovering(true);
     if (preview_video_url && !isVideoLoaded) {
       setIsVideoLoaded(true);
@@ -56,7 +54,7 @@ export default function AnimationCard({
     }
   }, [preview_video_url, isVideoLoaded]);
 
-  let handleMouseLeave = useCallback(() => { // original mangled: P
+  let handleMouseLeave = useCallback(() => {
     setIsHovering(false);
     if (videoRef.current && preview_video_url) {
       videoRef.current.pause();
@@ -64,14 +62,14 @@ export default function AnimationCard({
     }
   }, [preview_video_url]);
 
-  let handleVideoLoaded = useCallback(() => { // original mangled: Z
+  let handleVideoLoaded = useCallback(() => {
     if (isHovering && videoRef.current) {
       let playPromise = videoRef.current.play();
       if (playPromise?.catch) playPromise.catch(() => {});
     }
   }, [isHovering]);
 
-  let ratioClass = RATIOS[viewMode] ?? RATIOS.grid; // original mangled: R
+  let ratioClass = RATIOS[viewMode] ?? RATIOS.grid;
 
   return (
     <Link

@@ -1,11 +1,10 @@
 'use client';
 import React, { useRef, useState, useEffect } from 'react';
-import { SHOWREEL_SRC, SHOWREEL_POSTER } from '@/libs/config/constants'; // module id: 846057
+import { SHOWREEL_SRC, SHOWREEL_POSTER } from '@/libs/config/constants';
 
-// module id: 233230
-export default function VideoLabelOverlay({ className = "", label = "Menu Kit showreel" }) { // original mangled: e, a
-  let videoRef = useRef(null); // original mangled: r
-  let [reducedMotion, setReducedMotion] = useState(false); // original mangled: l, n
+export default function VideoLabelOverlay({ className = "", label = "Menu Kit showreel" }) {
+  let videoRef = useRef(null);
+  let [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     let mediaQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
@@ -13,7 +12,7 @@ export default function VideoLabelOverlay({ className = "", label = "Menu Kit sh
     
     setReducedMotion(mediaQuery.matches);
     
-    let handleChange = (e) => setReducedMotion(e.matches); // original mangled: t
+    let handleChange = (e) => setReducedMotion(e.matches);
     
     if (mediaQuery.addEventListener) {
       mediaQuery.addEventListener('change', handleChange);

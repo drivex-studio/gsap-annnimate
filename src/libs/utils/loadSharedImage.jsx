@@ -1,16 +1,15 @@
-const imageCache = new Map(); // original mangled: t
+const imageCache = new Map();
 
-// module id: 457714
-export function loadSharedImage(url, options = {}) { // original mangled: r, e, n
-  let { maxWidth } = options; // original mangled: a
-  let cacheKey = maxWidth ? `${url}@w${maxWidth}` : url; // original mangled: i
-  let cachedPromise = imageCache.get(cacheKey); // original mangled: s
+export function loadSharedImage(url, options = {}) {
+  let { maxWidth } = options;
+  let cacheKey = maxWidth ? `${url}@w${maxWidth}` : url;
+  let cachedPromise = imageCache.get(cacheKey);
   
   if (cachedPromise) {
     return cachedPromise;
   }
   
-  let fetchPromise = (async () => { // original mangled: o
+  let fetchPromise = (async () => {
     try {
       let response = await fetch(url, {
         mode: "cors",
@@ -42,8 +41,8 @@ export function loadSharedImage(url, options = {}) { // original mangled: r, e, 
   return fetchPromise;
 }
 
-export function preloadSharedImages(urls, options) { // original mangled: e, t
-  for (let url of urls) { // original mangled: n
+export function preloadSharedImages(urls, options) {
+  for (let url of urls) {
     loadSharedImage(url, options).catch(() => {});
   }
 }

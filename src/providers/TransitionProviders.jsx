@@ -1,24 +1,23 @@
 "use client";
 
 import React, { useRef, useEffect, useCallback } from 'react';
-import { usePathname } from 'next/navigation'; // module id: 618566
+import { usePathname } from 'next/navigation';
 
-import gsap from 'gsap'; // module id: 989970
-import { ScrambleTextPlugin } from '@/libs/utils/vendor'; // module id: 437302 (Mapped)
-import { ASCII_CHARS } from '@/hooks/useScramble'; // module id: 254359 (Mapped)
+import gsap from 'gsap';
+import { ScrambleTextPlugin } from '@/libs/utils/vendor';
+import { ASCII_CHARS } from '@/hooks/useScramble';
 
 import { 
   RouterTransition,
   TransitionRouterProvider
-} from '@/providers/TransitionRouterProvider'; // module id: 676040
-import { useAnimation } from '@/providers/AnimationProvider'; // module id: 488463
+} from '@/providers/TransitionRouterProvider';
+import { useAnimation } from '@/providers/AnimationProvider';
 import { getLayoutType } from '@/libs/config/GetLayoutType'; 
-import { setTransitionTarget, getTransitionTarget, getTransitionLabel } from '@/libs/config/getTransitionLabel'; // module id: 842365
+import { setTransitionTarget, getTransitionTarget, getTransitionLabel } from '@/libs/config/getTransitionLabel';
 
 gsap.registerPlugin(ScrambleTextPlugin);
 
-// Transition Configuration
-const TRANSITION_CONFIG = { // original mangled: c
+const TRANSITION_CONFIG = {
   app: {
     mechanism: "fade",
     leave: { duration: 0.3, ease: "power4.out" },
@@ -47,21 +46,20 @@ const TRANSITION_CONFIG = { // original mangled: c
   }
 };
 
-const DEFAULT_CONFIG = { // original mangled: u
+const DEFAULT_CONFIG = {
   mechanism: "panel",
   cover: { duration: 0.6, ease: "expo.inOut" },
   reveal: { duration: 0.8, ease: "expo.inOut" }
 };
 
-function getConfig(type) { // original mangled: d
+function getConfig(type) {
   return type in TRANSITION_CONFIG ? TRANSITION_CONFIG[type] : DEFAULT_CONFIG;
 }
 
-// Clip Path Constants
-const CLIP_COVER = "inset(50% 50% 50% 50%)"; // original mangled: f
-const CLIP_REVEAL = "inset(0% 0% 0% 0%)"; // original mangled: m
+const CLIP_COVER = "inset(50% 50% 50% 50%)";
+const CLIP_REVEAL = "inset(0% 0% 0% 0%)";
 
-function getWipePolygon(progress) { // original mangled: h
+function getWipePolygon(progress) {
   let t = 50 * progress;
   let p1 = (50 - t).toFixed(3);
   let p2 = (50 + t).toFixed(3);
@@ -70,20 +68,19 @@ function getWipePolygon(progress) { // original mangled: h
   return `polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, ${p1}% ${p3}%, ${p1}% ${p4}%, ${p2}% ${p4}%, ${p2}% ${p3}%, ${p1}% ${p3}%)`;
 }
 
-// Debugger stub
-const debugLog = (...args) => 0; // original mangled: ((...e)=>0)
+const debugLog = (...args) => 0;
 
-function TransitionOverlay() { // original mangled: v
-  let overlayClass = "absolute inset-0 [will-change:clip-path]"; // original mangled: e
-  let initStyle = { clipPath: CLIP_COVER }; // original mangled: n
+function TransitionOverlay() {
+  let overlayClass = "absolute inset-0 [will-change:clip-path]";
+  let initStyle = { clipPath: CLIP_COVER };
   
-  let { revealed } = useAnimation(); // original mangled: a
-  let textWrapperRef = useRef(null); // original mangled: i
-  let textElRef = useRef(null); // original mangled: s
-  let tlRef = useRef(null); // original mangled: c
-  let timeoutRef = useRef(null); // original mangled: u
+  let { revealed } = useAnimation();
+  let textWrapperRef = useRef(null);
+  let textElRef = useRef(null);
+  let tlRef = useRef(null);
+  let timeoutRef = useRef(null);
   
-  let cleanup = useCallback(() => { // original mangled: d
+  let cleanup = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
@@ -107,7 +104,7 @@ function TransitionOverlay() { // original mangled: v
       let textEl = textElRef.current;
       if (!wrapper || !textEl) return;
       
-      let label = (e.detail?.label || "Loading").trim() || "Loading"; // original mangled: n
+      let label = (e.detail?.label || "Loading").trim() || "Loading";
       
       tlRef.current?.kill();
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -121,7 +118,7 @@ function TransitionOverlay() { // original mangled: v
         return;
       }
       
-      let charCount = label.replace(/\s/g, "").length; // original mangled: a
+      let charCount = label.replace(/\s/g, "").length;
       textEl.className = "text-accent-base";
       textEl.innerText = label.replace(/[^\s]/g, " ");
       
@@ -161,7 +158,7 @@ function TransitionOverlay() { // original mangled: v
       tlRef.current = tl;
     };
     
-    let handleReveal = () => cleanup(); // original mangled: t
+    let handleReveal = () => cleanup();
     
     window.addEventListener("seedtransition:cover", handleCover);
     window.addEventListener("seedtransition:reveal", handleReveal);
@@ -185,8 +182,7 @@ function TransitionOverlay() { // original mangled: v
   );
 }
 
-// Helpers
-const scrollToTop = () => { // original mangled: w
+const scrollToTop = () => {
   if (window.lenis) {
     window.lenis.scrollTo(0, { immediate: true });
   } else {
@@ -194,8 +190,8 @@ const scrollToTop = () => { // original mangled: w
   }
 };
 
-const determineLayout = (pathname) => { // original mangled: b
-  let type = getLayoutType(pathname); // original mangled: t
+const determineLayout = (pathname) => {
+  let type = getLayoutType(pathname);
   if (type !== "app") return type;
   if (typeof document !== "undefined" && document.querySelector("[data-anon-app-shell]")) {
     return "marketing";
@@ -203,28 +199,27 @@ const determineLayout = (pathname) => { // original mangled: b
   return type;
 };
 
-const getBaseSlug = (url) => { // original mangled: x
+const getBaseSlug = (url) => {
   return url && typeof url === "string" 
     ? url.split("?")[0].split("#")[0].split("/").filter(Boolean)[0] || "" 
     : "";
 };
 
-const isSameSection = (urlA, urlB) => { // original mangled: _
+const isSameSection = (urlA, urlB) => {
   let slugA = getBaseSlug(urlA);
   let slugB = getBaseSlug(urlB);
   return slugA !== "" && slugA === slugB;
 };
 
-// module id: 791141
-export default function TransitionLayout({ children }) { // original mangled: e
-  let pathname = usePathname(); // original mangled: s
-  let { triggerPageEnter, revealPage, onGatesClear } = useAnimation(); // original mangled: c, u, p
+export default function TransitionLayout({ children }) {
+  let pathname = usePathname();
+  let { triggerPageEnter, revealPage, onGatesClear } = useAnimation();
   
-  let currentType = useRef(null); // original mangled: g
-  let lastPathname = useRef(pathname); // original mangled: x
-  let isIntercepted = useRef(false); // original mangled: S
-  let transitionConfig = useRef(null); // original mangled: E
-  let leftElements = useRef([]); // original mangled: k
+  let currentType = useRef(null);
+  let lastPathname = useRef(pathname);
+  let isIntercepted = useRef(false);
+  let transitionConfig = useRef(null);
+  let leftElements = useRef([]);
 
   debugLog("TransitionLayout render, pathname:", pathname);
 
@@ -233,8 +228,8 @@ export default function TransitionLayout({ children }) { // original mangled: e
     currentType.current = determineLayout(pathname);
   }, [pathname]);
 
-  let leaveRef = useRef(null); // original mangled: A
-  let enterRef = useRef(null); // original mangled: C
+  let leaveRef = useRef(null);
+  let enterRef = useRef(null);
 
   useEffect(() => {
     debugLog("Setting up Navigation API listener");
@@ -304,16 +299,16 @@ export default function TransitionLayout({ children }) { // original mangled: e
     };
   }, []);
 
-  let handleLeave = useCallback(async () => { // original mangled: T
+  let handleLeave = useCallback(async () => {
     debugLog("leave() called");
-    let fromType = currentType.current; // original mangled: e
-    let target = getTransitionTarget(); // original mangled: t
-    let toType = target ? determineLayout(target) : fromType; // original mangled: r
-    let currentPath = window.location.pathname; // original mangled: n
+    let fromType = currentType.current;
+    let target = getTransitionTarget();
+    let toType = target ? determineLayout(target) : fromType;
+    let currentPath = window.location.pathname;
     
     let config = fromType === toType 
       ? getConfig(fromType) 
-      : (fromType === "marketing" || toType === "marketing") ? getConfig("marketing") : getConfig(fromType); // original mangled: a
+      : (fromType === "marketing" || toType === "marketing") ? getConfig("marketing") : getConfig(fromType);
       
     if (config && isSameSection(currentPath, target)) {
       config = getConfig("sectionFade");
@@ -328,8 +323,8 @@ export default function TransitionLayout({ children }) { // original mangled: e
     }
     
     if (config.mechanism === "panel") {
-      let brandEl = document.querySelector("#transition-overlay .ts-brand"); // original mangled: e
-      let darkEl = document.querySelector("#transition-overlay .ts-dark"); // original mangled: t
+      let brandEl = document.querySelector("#transition-overlay .ts-brand");
+      let darkEl = document.querySelector("#transition-overlay .ts-dark");
       
       debugLog("leave() panel mechanism, squares found:", !!brandEl, !!darkEl, "reduce:", window.matchMedia("(prefers-reduced-motion: reduce)").matches);
       
@@ -346,9 +341,9 @@ export default function TransitionLayout({ children }) { // original mangled: e
         return Promise.resolve();
       }
       
-      let { duration, ease } = config.cover; // original mangled: r, n
+      let { duration, ease } = config.cover;
       
-      return new Promise((resolve) => { // original mangled: a
+      return new Promise((resolve) => {
         gsap.set("#transition-overlay", { pointerEvents: "auto" });
         window.dispatchEvent(new CustomEvent("seedtransition:cover", { detail: { label: getTransitionLabel() } }));
         
@@ -359,15 +354,13 @@ export default function TransitionLayout({ children }) { // original mangled: e
           }
         });
         
-        // Inline panel cover function
         tl.fromTo(brandEl, { clipPath: CLIP_COVER }, { clipPath: CLIP_REVEAL, duration: duration || 0.6, ease: ease || "expo.inOut" }, 0);
         tl.fromTo(darkEl, { clipPath: CLIP_COVER }, { clipPath: CLIP_REVEAL, duration: duration || 0.6, ease: ease || "expo.inOut" }, 0.08);
       });
     }
     
-    // Fade Mechanism
-    let contentEls = document.querySelectorAll("[data-transition-content]"); // original mangled: i
-    let footerEl = document.querySelector("footer"); // original mangled: l
+    let contentEls = document.querySelectorAll("[data-transition-content]");
+    let footerEl = document.querySelector("footer");
     
     debugLog("leave() - found content elements:", contentEls.length, "footer:", !!footerEl);
     
@@ -377,10 +370,10 @@ export default function TransitionLayout({ children }) { // original mangled: e
       return;
     }
     
-    let { duration: fDur, ease: fEase } = config.leave; // original mangled: s, c
+    let { duration: fDur, ease: fEase } = config.leave;
     debugLog("leave() - animating with duration:", fDur, "ease:", fEase);
     
-    let elementsArray = Array.from(contentEls); // original mangled: u
+    let elementsArray = Array.from(contentEls);
     if (footerEl) elementsArray.push(footerEl);
     leftElements.current = elementsArray;
     
@@ -397,9 +390,9 @@ export default function TransitionLayout({ children }) { // original mangled: e
     });
   }, []);
 
-  let handleEnter = useCallback(async () => { // original mangled: j
+  let handleEnter = useCallback(async () => {
     debugLog("enter() called");
-    let config = transitionConfig.current || getConfig(determineLayout(pathname)); // original mangled: e
+    let config = transitionConfig.current || getConfig(determineLayout(pathname));
     debugLog("enter() - config:", config);
     
     if (!config) {
@@ -407,7 +400,7 @@ export default function TransitionLayout({ children }) { // original mangled: e
       return Promise.resolve();
     }
     
-    let finishEnter = () => { // original mangled: t
+    let finishEnter = () => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           debugLog("enter() - triggering pageEnter animations");
@@ -417,8 +410,8 @@ export default function TransitionLayout({ children }) { // original mangled: e
     };
     
     if (config.mechanism === "panel") {
-      let brandEl = document.querySelector("#transition-overlay .ts-brand"); // original mangled: r
-      let darkEl = document.querySelector("#transition-overlay .ts-dark"); // original mangled: n
+      let brandEl = document.querySelector("#transition-overlay .ts-brand");
+      let darkEl = document.querySelector("#transition-overlay .ts-dark");
       
       debugLog("enter() panel mechanism, squares found:", !!brandEl, !!darkEl, "reduce:", window.matchMedia("(prefers-reduced-motion: reduce)").matches);
       
@@ -435,14 +428,14 @@ export default function TransitionLayout({ children }) { // original mangled: e
         return Promise.resolve();
       }
       
-      let { duration, ease } = config.reveal; // original mangled: a, i
+      let { duration, ease } = config.reveal;
       
-      return new Promise((resolve) => { // original mangled: e
-        let hasRevealed = false; // original mangled: t
-        let unregisterGate = null; // original mangled: l
-        let revealTimeout = null; // original mangled: s
+      return new Promise((resolve) => {
+        let hasRevealed = false;
+        let unregisterGate = null;
+        let revealTimeout = null;
         
-        let runReveal = () => { // original mangled: c
+        let runReveal = () => {
           if (hasRevealed) return;
           hasRevealed = true;
           if (revealTimeout) clearTimeout(revealTimeout);
@@ -459,8 +452,7 @@ export default function TransitionLayout({ children }) { // original mangled: e
             }
           });
           
-          // Inline panel reveal function
-          let progressObj = { pd: 0, pb: 0 }; // original mangled: l
+          let progressObj = { pd: 0, pb: 0 };
           if (darkEl) darkEl.style.clipPath = getWipePolygon(0);
           if (brandEl) brandEl.style.clipPath = getWipePolygon(0);
           
@@ -490,16 +482,14 @@ export default function TransitionLayout({ children }) { // original mangled: e
       });
     }
     
-    // Fade Mechanism Enter
-    let fadeConfig = config.enter; // original mangled: r
-    let contentEls = document.querySelectorAll("[data-transition-content]"); // original mangled: n
-    let footerEl = document.querySelector("footer"); // original mangled: a
+    let fadeConfig = config.enter;
+    let contentEls = document.querySelectorAll("[data-transition-content]");
+    let footerEl = document.querySelector("footer");
     
     debugLog("enter() - found content elements:", contentEls.length, "footer:", !!footerEl);
     
-    let currentElSet = new Set(contentEls); // original mangled: i
-    // Cleanup old elements left behind
-    let staleEls = leftElements.current.filter(el => el && !currentElSet.has(el)); // original mangled: l
+    let currentElSet = new Set(contentEls);
+    let staleEls = leftElements.current.filter(el => el && !currentElSet.has(el));
     if (staleEls.length) {
       gsap.set(staleEls, { opacity: 1 });
     }
@@ -511,11 +501,11 @@ export default function TransitionLayout({ children }) { // original mangled: e
       return;
     }
     
-    let { duration: eDur, ease: eEase } = fadeConfig; // original mangled: m, g
+    let { duration: eDur, ease: eEase } = fadeConfig;
     debugLog("enter() - animating with duration:", eDur, "ease:", eEase);
     
-    let tl = gsap.timeline(); // original mangled: v
-    return new Promise((resolve) => { // original mangled: e
+    let tl = gsap.timeline();
+    return new Promise((resolve) => {
       tl.fromTo(contentEls, { opacity: 0 }, { opacity: 1, duration: eDur, ease: eEase }, 0);
       if (footerEl) {
         tl.fromTo(footerEl, { opacity: 0 }, { opacity: 1, duration: eDur, ease: eEase }, 0);

@@ -1,6 +1,4 @@
-// module id: 185161
-
-export async function sendUserEvent(eventName, payload = {}) { // original mangled: t, e, a
+export async function sendUserEvent(eventName, payload = {}) {
   try {
     let response = await fetch("/api/events", {
       method: "POST",

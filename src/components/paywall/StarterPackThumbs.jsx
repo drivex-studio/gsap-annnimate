@@ -1,24 +1,22 @@
-
 import React, { useRef } from 'react';
-import gsap from 'gsap'; // module id: 989970
-import { useGSAP } from '@gsap/react'; // module id: 365747
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
-const DEFAULT_THUMBS = [ // original mangled: x
+const DEFAULT_THUMBS = [
   { title: "Text Reveal", img: "[https://annnimate.b-cdn.net/video-thumbnails/scroll/text-reveal/text-reveal_cover.avif](https://annnimate.b-cdn.net/video-thumbnails/scroll/text-reveal/text-reveal_cover.avif)" },
   { title: "Dual Scramble", img: "[https://annnimate.b-cdn.net/video-thumbnails/ui-component/dual-scramble/dual_scramble_cover.avif](https://annnimate.b-cdn.net/video-thumbnails/ui-component/dual-scramble/dual_scramble_cover.avif)" },
   { title: "Accordion", img: "[https://annnimate.b-cdn.net/video-thumbnails/ui-component/accordion/accordion_cover.avif](https://annnimate.b-cdn.net/video-thumbnails/ui-component/accordion/accordion_cover.avif)" },
   { title: "Drawer Menu", img: "[https://annnimate.b-cdn.net/video-thumbnails/menu/multi-level-drawer-menu/multi-level-drawer-menu_cover.avif](https://annnimate.b-cdn.net/video-thumbnails/menu/multi-level-drawer-menu/multi-level-drawer-menu_cover.avif)" }
 ];
 
-// module id: 993603 (named export 'StarterPackThumbs')
-export default function StarterPackThumbs({ className = "", items = null }) { // original mangled: g, e, i
-  let thumbs = items && items.length ? items : DEFAULT_THUMBS; // original mangled: s
-  let containerRef = useRef(null); // original mangled: l
-  let trackRef = useRef(null); // original mangled: o
+export default function StarterPackThumbs({ className = "", items = null }) {
+  let thumbs = items && items.length ? items : DEFAULT_THUMBS;
+  let containerRef = useRef(null);
+  let trackRef = useRef(null);
 
   useGSAP(() => {
-    let track = trackRef.current; // original mangled: e
-    let container = containerRef.current; // original mangled: t
+    let track = trackRef.current;
+    let container = containerRef.current;
     
     if (track && container) {
       let mm = gsap.matchMedia();
@@ -29,10 +27,10 @@ export default function StarterPackThumbs({ className = "", items = null }) { //
           ease: "none",
           repeat: -1,
           force3D: true
-        }); // original mangled: a
+        });
         
-        let onEnter = () => gsap.to(tween, { timeScale: 0, duration: 0.4, overwrite: true }); // original mangled: r
-        let onLeave = () => gsap.to(tween, { timeScale: 1, duration: 0.4, overwrite: true }); // original mangled: i
+        let onEnter = () => gsap.to(tween, { timeScale: 0, duration: 0.4, overwrite: true });
+        let onLeave = () => gsap.to(tween, { timeScale: 1, duration: 0.4, overwrite: true });
         
         container.addEventListener("mouseenter", onEnter);
         container.addEventListener("mouseleave", onLeave);

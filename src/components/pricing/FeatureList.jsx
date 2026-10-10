@@ -1,4 +1,3 @@
-/* Data */
 const SIZE_VARIANTS = {
   sm: {
     rect: 'size-8 mt-[0.35em]',
@@ -11,7 +10,6 @@ const SIZE_VARIANTS = {
     text: 'text-body-lg leading-snug'
   }
 };
-
 
 export default function FeatureList({
   items = [],

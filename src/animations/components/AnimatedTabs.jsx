@@ -1,25 +1,24 @@
 import React, { useRef, useEffect, useCallback } from 'react';
-import gsap from 'gsap'; // module id: 989970
-import { Flip } from 'gsap/Flip'; // module id: 433965
+import gsap from 'gsap';
+import { Flip } from 'gsap/Flip';
 import { cn } from '@/libs/utils/className';
 
 gsap.registerPlugin(Flip);
 
-// module id: 876355
 export default function AnimatedTabs({
-  activeId, // original mangled: t
-  pillClassName, // original mangled: a
-  containerClassName, // original mangled: o
-  duration = 0.4, // original mangled: l
-  ease = "expo.inOut", // original mangled: u
-  children, // original mangled: c
-  ...rest // original mangled: h
+  activeId,
+  pillClassName,
+  containerClassName,
+  duration = 0.4,
+  ease = "expo.inOut",
+  children,
+  ...rest
 }) {
-  let containerRef = useRef(null); // original mangled: f
-  let pillRef = useRef(null); // original mangled: p
-  let isMounted = useRef(false); // original mangled: d
+  let containerRef = useRef(null);
+  let pillRef = useRef(null);
+  let isMounted = useRef(false);
 
-  let setPosition = useCallback((target, opacity = 1) => { // original mangled: g
+  let setPosition = useCallback((target, opacity = 1) => {
     if (!pillRef.current || !target || !containerRef.current) return;
     
     let targetRect = target.getBoundingClientRect();
@@ -34,7 +33,7 @@ export default function AnimatedTabs({
     });
   }, []);
 
-  let animateTo = useCallback((target) => { // original mangled: m
+  let animateTo = useCallback((target) => {
     if (!pillRef.current || !target || !containerRef.current) return;
     
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -52,7 +51,6 @@ export default function AnimatedTabs({
     });
   }, [setPosition, duration, ease]);
 
-  // Initial layout and resize handling
   useEffect(() => {
     let timeoutId;
     
@@ -74,9 +72,8 @@ export default function AnimatedTabs({
       clearTimeout(timeoutId);
       window.removeEventListener("resize", handleResize);
     };
-  }, []); // Note: Emulates the original code's exact dependency array
+  }, []);
 
-  // Animate when activeId changes
   useEffect(() => {
     if (!isMounted.current) return;
     

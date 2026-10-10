@@ -1,44 +1,42 @@
 import React, { useRef } from 'react';
-import gsap from 'gsap'; // module id: 989970
+import gsap from 'gsap';
 
 import { translate as t } from '@/libs/utils/i18n';
-import { useReveal } from '@/hooks/useReveal'; // module id: 228414
+import { useReveal } from '@/hooks/useReveal';
 
 import Button from '@/components/ui/Button'; 
-import RevealHeadline from '@/animations/shared/RevealHeadline'; // module id: 963160
-import AnimatedSubtext from '@/animations/components/AnimatedSubtext'; // module id: 218091
+import RevealHeadline from '@/animations/shared/RevealHeadline';
+import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 
+import RingBackground, { RING_SECTION_MIN_VH } from '@/components/landing/RingBackground';
 
-import RingBackground, { RING_SECTION_MIN_VH } from '@/components/landing/RingBackground'; // module id: 809214
+const DEFAULT_HEADLINE = t("common.endCta.headline");
+const DEFAULT_SUBTEXT = t("common.endCta.subtext");
 
-const DEFAULT_HEADLINE = t("common.endCta.headline"); // original mangled: c
-const DEFAULT_SUBTEXT = t("common.endCta.subtext"); // original mangled: h
-
-const DEFAULT_PRIMARY_CTA = { // original mangled: d
+const DEFAULT_PRIMARY_CTA = {
   label: t("common.endCta.primaryLabel"),
   href: "/pricing"
 };
 
-const DEFAULT_SECONDARY_CTA = { // original mangled: m
+const DEFAULT_SECONDARY_CTA = {
   label: t("common.endCta.secondaryLabel"),
   href: "/animations"
 };
 
-// module id: 482232
 export default function BottomCTA({
-  headline = DEFAULT_HEADLINE, // original mangled: e
-  subtext = DEFAULT_SUBTEXT, // original mangled: u
-  primaryCta = DEFAULT_PRIMARY_CTA, // original mangled: f
-  secondaryCta = DEFAULT_SECONDARY_CTA, // original mangled: g
-  images = [], // original mangled: p
-  bleed = false, // original mangled: v
-  eyebrow, // original mangled: x
-  minimal = false, // original mangled: E
-  children = null // original mangled: y
+  headline = DEFAULT_HEADLINE,
+  subtext = DEFAULT_SUBTEXT,
+  primaryCta = DEFAULT_PRIMARY_CTA,
+  secondaryCta = DEFAULT_SECONDARY_CTA,
+  images = [],
+  bleed = false,
+  eyebrow,
+  minimal = false,
+  children = null
 }) {
-  let sectionRef = useRef(null); // original mangled: A
-  let headlineRef = useRef(null); // original mangled: H
-  let subtextRevealFn = useRef(null); // original mangled: M
+  let sectionRef = useRef(null);
+  let headlineRef = useRef(null);
+  let subtextRevealFn = useRef(null);
 
   useReveal(sectionRef, {
     mode: "scroll",
@@ -50,13 +48,13 @@ export default function BottomCTA({
     }
   });
 
-  let midpoint = Math.ceil(images.length / 2); // original mangled: w
-  let leftImages = images.slice(0, midpoint); // original mangled: b
-  let rightImages = images.slice(midpoint); // original mangled: V
+  let midpoint = Math.ceil(images.length / 2);
+  let leftImages = images.slice(0, midpoint);
+  let rightImages = images.slice(midpoint);
   
-  let shouldBleed = bleed && !minimal; // original mangled: C
-  let minHeight = minimal ? 50 : RING_SECTION_MIN_VH; // original mangled: Z
-  let buttonSize = minimal ? "sm" : "default"; // original mangled: L
+  let shouldBleed = bleed && !minimal;
+  let minHeight = minimal ? 50 : RING_SECTION_MIN_VH;
+  let buttonSize = minimal ? "sm" : "default";
 
   return (
     <section

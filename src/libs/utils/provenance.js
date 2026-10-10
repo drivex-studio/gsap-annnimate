@@ -1,9 +1,7 @@
-// module id: 809630
+const VALID_TYPES = new Set(["client_commissioned", "internal_project", "studio_original"]);
+const SITE_BASED_TYPES = new Set(["client_commissioned", "internal_project"]);
 
-const VALID_TYPES = new Set(["client_commissioned", "internal_project", "studio_original"]); // original mangled: n
-const SITE_BASED_TYPES = new Set(["client_commissioned", "internal_project"]); // original mangled: r
-
-export function getProvenance(animation) { // original mangled: i
+export function getProvenance(animation) {
   let prov = animation?.metadata?.provenance;
   if (prov && typeof prov === "object" && VALID_TYPES.has(prov.type)) {
     return prov;
@@ -11,7 +9,7 @@ export function getProvenance(animation) { // original mangled: i
   return null;
 }
 
-export function getProvenanceLine(animation) { // original mangled: s
+export function getProvenanceLine(animation) {
   let prov = getProvenance(animation);
   if (prov && SITE_BASED_TYPES.has(prov.type) && prov.site) {
     let contextStr = prov.context ? ` ${prov.context}` : "";

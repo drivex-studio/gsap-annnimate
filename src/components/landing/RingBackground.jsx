@@ -1,29 +1,27 @@
 import React, { useRef, useMemo } from 'react';
-import gsap from 'gsap'; // module id: 989970
-import { useGSAP } from '@gsap/react'; // module id: 365747
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
-// Complex layout calculations derived from CSS Grid and Viewport sizing
-const CENTER_DIAMETER = "calc(min(95vw, 480px) + 64px)"; // original mangled: l
-const GRID_OFFSET = "calc(max(32px, (100vw - 1920px) / 2) + 3 * (min(1920px, 100vw - 64px) - 264px) / 12 + 48px - 32px)"; // original mangled: i
-const SIDE_DIAMETER_BASE = `calc(${GRID_OFFSET} * 1.5 / 1.09)`; // original mangled: s
-const SIDE_DIAMETER = `calc(${SIDE_DIAMETER_BASE} * 2)`; // original mangled: o
-const SIDE_X_OFFSET = `calc(${GRID_OFFSET} * 0.5)`; // original mangled: u
-const SIDE_ITEM_WIDTH = `calc(${SIDE_DIAMETER_BASE} * 0.32)`; // original mangled: c
-const SIDE_ITEM_HEIGHT = `calc(${SIDE_ITEM_WIDTH} * 9 / 16)`; // original mangled: h
+const CENTER_DIAMETER = "calc(min(95vw, 480px) + 64px)";
+const GRID_OFFSET = "calc(max(32px, (100vw - 1920px) / 2) + 3 * (min(1920px, 100vw - 64px) - 264px) / 12 + 48px - 32px)";
+const SIDE_DIAMETER_BASE = `calc(${GRID_OFFSET} * 1.5 / 1.09)`;
+const SIDE_DIAMETER = `calc(${SIDE_DIAMETER_BASE} * 2)`;
+const SIDE_X_OFFSET = `calc(${GRID_OFFSET} * 0.5)`;
+const SIDE_ITEM_WIDTH = `calc(${SIDE_DIAMETER_BASE} * 0.32)`;
+const SIDE_ITEM_HEIGHT = `calc(${SIDE_ITEM_WIDTH} * 9 / 16)`;
 
 export const RING_SECTION_MIN_VH = 66;
 
-// module id: 809214
-export default function RingBackground({ side, images = [] }) { // original mangled: e, i
-  let itemsRef = useRef([]); // original mangled: s
+export default function RingBackground({ side, images = [] }) {
+  let itemsRef = useRef([]);
   
-  let isCenter = side === "center"; // original mangled: d
-  let itemCount = isCenter ? 12 : 24; // original mangled: m
-  let ringDiameter = isCenter ? CENTER_DIAMETER : SIDE_DIAMETER; // original mangled: f
-  let itemWidth = isCenter ? `calc(${ringDiameter} / 2 * 0.26)` : SIDE_ITEM_WIDTH; // original mangled: g
-  let itemHeight = isCenter ? `calc(${itemWidth} * 9 / 16)` : SIDE_ITEM_HEIGHT; // original mangled: p
+  let isCenter = side === "center";
+  let itemCount = isCenter ? 12 : 24;
+  let ringDiameter = isCenter ? CENTER_DIAMETER : SIDE_DIAMETER;
+  let itemWidth = isCenter ? `calc(${ringDiameter} / 2 * 0.26)` : SIDE_ITEM_WIDTH;
+  let itemHeight = isCenter ? `calc(${itemWidth} * 9 / 16)` : SIDE_ITEM_HEIGHT;
   
-  let angles = useMemo(() => { // original mangled: v
+  let angles = useMemo(() => {
     let arr = [];
     for (let i = 0; i < itemCount; i++) {
       arr.push((i / itemCount) * 360);
@@ -32,26 +30,26 @@ export default function RingBackground({ side, images = [] }) { // original mang
   }, [itemCount]);
 
   useGSAP(() => {
-    let validItems = itemsRef.current.filter(Boolean); // original mangled: t
+    let validItems = itemsRef.current.filter(Boolean);
     if (validItems.length === 0) return;
     
-    let fixedRotation = side === "left" ? 90 : 270; // original mangled: r
-    let translateYString = `translateY(calc(${ringDiameter} / -2))`; // original mangled: a
+    let fixedRotation = side === "left" ? 90 : 270;
+    let translateYString = `translateY(calc(${ringDiameter} / -2))`;
     
-    let updatePositions = (orbitOffset) => { // original mangled: l
+    let updatePositions = (orbitOffset) => {
       for (let n = 0; n < validItems.length; n++) {
-        let currentAngle = angles[n] + orbitOffset; // original mangled: l
-        let counterRotation = isCenter ? -currentAngle : -fixedRotation; // original mangled: i
+        let currentAngle = angles[n] + orbitOffset;
+        let counterRotation = isCenter ? -currentAngle : -fixedRotation;
         validItems[n].style.transform = `rotate(${currentAngle}deg) ${translateYString} rotate(${counterRotation}deg)`;
       }
     };
     
     updatePositions(0);
     
-    let mm = gsap.matchMedia(); // original mangled: i
+    let mm = gsap.matchMedia();
     
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      let tweenObj = { orbit: 0 }; // original mangled: e
+      let tweenObj = { orbit: 0 };
       gsap.to(tweenObj, {
         orbit: 360,
         duration: 90,
@@ -66,7 +64,7 @@ export default function RingBackground({ side, images = [] }) { // original mang
     dependencies: [side, angles, isCenter, ringDiameter]
   });
 
-  let wrapperStyle = isCenter ? { // original mangled: x
+  let wrapperStyle = isCenter ? {
     width: ringDiameter,
     height: ringDiameter,
     left: "50%",
@@ -83,8 +81,8 @@ export default function RingBackground({ side, images = [] }) { // original mang
       : `translate(calc(50% + ${SIDE_X_OFFSET}), -50%)`
   };
 
-  let displayClass = isCenter ? "block sm:hidden" : "hidden sm:block"; // original mangled: E
-  let opacityClass = isCenter ? "opacity-40" : ""; // original mangled: y
+  let displayClass = isCenter ? "block sm:hidden" : "hidden sm:block";
+  let opacityClass = isCenter ? "opacity-40" : "";
 
   return (
     <div
@@ -94,8 +92,8 @@ export default function RingBackground({ side, images = [] }) { // original mang
     >
       <div className="relative h-full w-full">
         {angles.map((angle, index) => {
-          let imgSrc = images[index % Math.max(images.length, 1)]; // original mangled: a
-          let initCounterRotation = isCenter ? -angle : (side === "left" ? -90 : -270); // original mangled: l
+          let imgSrc = images[index % Math.max(images.length, 1)];
+          let initCounterRotation = isCenter ? -angle : (side === "left" ? -90 : -270);
           
           return (
             <div

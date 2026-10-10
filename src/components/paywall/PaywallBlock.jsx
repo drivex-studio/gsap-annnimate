@@ -1,21 +1,20 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { useBreakpoint } from '@/hooks/useBreakpoint'; // module id: 400701
-import { analytics } from '@/libs/utils/analytics'; // module id: 943348
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { analytics } from '@/libs/utils/analytics';
 
-import { parseFirstTouch, KIT_TOUCH_COOKIE } from '@/libs/auth/serialize'; // module id: 660219 (Mapped)
-import ServerData, { effectiveCyclePrice } from '@/libs/auth/data/ServerData'; // module id: 516799
-import { TESTIMONIALS } from '@/libs/auth/data/TestimonialsData'; // module id: 967791 (Mapped)
+import { parseFirstTouch, KIT_TOUCH_COOKIE } from '@/libs/auth/serialize';
+import ServerData, { effectiveCyclePrice } from '@/libs/auth/data/ServerData';
+import { TESTIMONIALS } from '@/libs/auth/data/TestimonialsData';
 
 import { Lock } from '@phosphor-icons/react'; 
-import NewsletterForm from '@/components/ui/NewsletterEyebrow'; // module id: 42242
-import ReturnSubscriberWall from '@/components/paywall/ReturnSubscriberWall'; // module id: 928862 (Mapped)
-import Button from '@/components/ui/Button'; // module id: 687989
-import NavLink from '@/components/navigation/NavLink'; // module id: 520237
-import FreeChip from '@/components/ui/FreeChip'; // module id: 993603
-import StarterPackThumbs from '@/components/paywall/StarterPackThumbs'; // module id: 993603
+import NewsletterForm from '@/components/ui/NewsletterEyebrow';
+import ReturnSubscriberWall from '@/components/paywall/ReturnSubscriberWall';
+import Button from '@/components/ui/Button';
+import NavLink from '@/components/navigation/NavLink';
+import FreeChip from '@/components/ui/FreeChip';
+import StarterPackThumbs from '@/components/paywall/StarterPackThumbs';
 
-function LockIcon() { // original mangled: y
+function LockIcon() {
   return (
     <span className="flex size-32 items-center justify-center border border-foreground/15 bg-background">
       <Lock size={14} className="text-foreground-muted" />
@@ -23,28 +22,27 @@ function LockIcon() { // original mangled: y
   );
 }
 
-// module id: 993603 (default export)
 export default function PaywallBlock({
-  animation, // original mangled: e
-  isAuthenticated = false, // original mangled: n
-  starterPack = null, // original mangled: r
-  trackShown = true, // original mangled: i
-  showCheckout = true // original mangled: f
+  animation,
+  isAuthenticated = false,
+  starterPack = null,
+  trackShown = true,
+  showCheckout = true
 }) {
-  let isLg = useBreakpoint("lg"); // original mangled: x
-  let animName = animation?.title || animation?.name || "this component"; // original mangled: j
-  let animSlug = animation?.slug; // original mangled: w
-  let isFreePreview = !!animation?.is_free_preview; // original mangled: k
+  let isLg = useBreakpoint("lg");
+  let animName = animation?.title || animation?.name || "this component";
+  let animSlug = animation?.slug;
+  let isFreePreview = !!animation?.is_free_preview;
   
-  let displayCount = ServerData.animationStats?.displayCount || "100+"; // original mangled: N
-  let soloPlan = ServerData.stripe?.landingPlans?.find(p => p.key === "solo"); // original mangled: E
-  let soloPrice = effectiveCyclePrice(soloPlan?.quarterly); // original mangled: H
+  let displayCount = ServerData.animationStats?.displayCount || "100+";
+  let soloPlan = ServerData.stripe?.landingPlans?.find(p => p.key === "solo");
+  let soloPrice = effectiveCyclePrice(soloPlan?.quarterly);
   
-  let checkoutUrl = `/checkout?plan=solo&cycle=quarterly${animSlug ? `&component=${animSlug}` : ""}`; // original mangled: S
-  let unlockLabel = soloPrice ? `Unlock everything - €${soloPrice}/mo` : "Unlock everything"; // original mangled: V
+  let checkoutUrl = `/checkout?plan=solo&cycle=quarterly${animSlug ? `&component=${animSlug}` : ""}`;
+  let unlockLabel = soloPrice ? `Unlock everything - €${soloPrice}/mo` : "Unlock everything";
   
-  let showNewsletterWall = isLg && !isAuthenticated; // original mangled: A
-  let [isReturnSubscriber, setIsReturnSubscriber] = useState(false); // original mangled: _, M
+  let showNewsletterWall = isLg && !isAuthenticated;
+  let [isReturnSubscriber, setIsReturnSubscriber] = useState(false);
 
   useEffect(() => {
     setIsReturnSubscriber(!!(function() {
@@ -54,7 +52,7 @@ export default function PaywallBlock({
     })());
   }, []);
 
-  let hasTrackedRef = useRef(false); // original mangled: T
+  let hasTrackedRef = useRef(false);
   
   useEffect(() => {
     if (trackShown && showNewsletterWall && !hasTrackedRef.current) {
@@ -68,14 +66,14 @@ export default function PaywallBlock({
     }
   }, [trackShown, showNewsletterWall, animSlug, animName, isFreePreview, isReturnSubscriber]);
 
-  let handleCheckoutClick = () => { // original mangled: C
+  let handleCheckoutClick = () => {
     analytics.track("paywall_checkout_clicked", {
       animation_slug: animSlug,
       animation_name: animName
     });
   };
 
-  let primaryCheckoutBlock = ( // original mangled: L
+  let primaryCheckoutBlock = (
     <div className="flex flex-col items-center gap-12">
       <Button href={checkoutUrl} onClick={handleCheckoutClick} theme="brand" size="sm">
         {unlockLabel}
@@ -89,7 +87,7 @@ export default function PaywallBlock({
     </div>
   );
 
-  let testimonial = TESTIMONIALS[2] || null; // original mangled: p
+  let testimonial = TESTIMONIALS[2] || null;
 
   if (showNewsletterWall) {
     if (isReturnSubscriber) {

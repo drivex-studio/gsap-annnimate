@@ -1,35 +1,33 @@
 import React, { useRef, useState, useEffect } from 'react';
-import dynamic from 'next/dynamic'; // module id: 770703
+import dynamic from 'next/dynamic';
 
-import gsap from 'gsap'; // module id: 989970
-import { useGSAP } from '@gsap/react'; // module id: 365747
-import { ScrollTrigger } from 'gsap/ScrollTrigger'; // module id: 883495
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { translate as t } from '@/libs/utils/i18n';
-import { useBreakpoint } from '@/hooks/useBreakpoint'; // module id: 400701
-import AnimatedSubtext from '@/animations/components/AnimatedSubtext'; // module id: 218091
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-// 3D Globe Component Lazy Load
-const Globe = dynamic(() => import('@/components/globe/Globe'), { // original mangled: u, 307589
+const Globe = dynamic(() => import('@/components/globe/Globe'), {
   ssr: false
 });
 
-// module id: 650542
 export function TestimonialCard({
-  body, // original mangled: e
-  name, // original mangled: n
-  role, // original mangled: r
-  avatarSrc, // original mangled: i
-  avatarBg = "#3a3a3a", // original mangled: s
-  wantsPlay = false, // original mangled: c
-  className = "", // original mangled: d
-  revealTrigger = "manual" // original mangled: u
+  body,
+  name,
+  role,
+  avatarSrc,
+  avatarBg = "#3a3a3a",
+  wantsPlay = false,
+  className = "",
+  revealTrigger = "manual"
 }) {
-  let initials = name?.trim()?.[0]?.toUpperCase() || "?"; // original mangled: m
-  let revealFn = useRef(null); // original mangled: f
-  let hasRevealed = useRef(false); // original mangled: h
+  let initials = name?.trim()?.[0]?.toUpperCase() || "?";
+  let revealFn = useRef(null);
+  let hasRevealed = useRef(false);
 
   useEffect(() => {
     if (wantsPlay && !hasRevealed.current && revealFn.current) {
@@ -92,26 +90,24 @@ export function TestimonialCard({
   );
 }
 
-// Data Setup
-const AVATARS = [ // original mangled: m
+const AVATARS = [
   "/imgs/lukas_avatar.avif", 
   "/imgs/edoardo_avatar.avif", 
   "/imgs/matthew_avatar.avif"
 ];
 
-export const TESTIMONIALS = t("common.testimonials.items").map((item, index) => ({ // original mangled: f
+export const TESTIMONIALS = t("common.testimonials.items").map((item, index) => ({
   ...item,
   avatarSrc: AVATARS[index]
 }));
 
-const PARALLAX_OFFSETS = [80, 56, 120]; // original mangled: h
+const PARALLAX_OFFSETS = [80, 56, 120];
 
-// module id: 967791
 export default function Testimonials({ images = [], globe = true }) {
-  let sectionRef = useRef(null); // original mangled: s
-  let globeWrapperRef = useRef(null); // original mangled: l
-  let cardsRef = useRef([]); // original mangled: m
-  let isDesktop = useBreakpoint("lg"); // original mangled: p
+  let sectionRef = useRef(null);
+  let globeWrapperRef = useRef(null);
+  let cardsRef = useRef([]);
+  let isDesktop = useBreakpoint("lg");
 
   useGSAP(() => {
     if (!isDesktop) return;
@@ -146,8 +142,8 @@ export default function Testimonials({ images = [], globe = true }) {
     dependencies: [isDesktop]
   });
 
-  let [wantsPlay, setWantsPlay] = useState(false); // original mangled: x, g
-  let [isActive, setIsActive] = useState(false); // original mangled: v, b
+  let [wantsPlay, setWantsPlay] = useState(false);
+  let [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     let sectionEl = sectionRef.current;

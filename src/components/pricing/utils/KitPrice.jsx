@@ -1,7 +1,6 @@
 import { getPppKitEffectivePrice, PPP_KIT_PRICING } from './ppp'; 
 
 import { usePppTier } from '@/hooks/usePppGeo'; 
-// module id: 597274
 export default function KitPrice({ kitSlug, fallback = null, struckClassName = '' }) {
   const pppTier = usePppTier();
   const effectivePrice = pppTier ? getPppKitEffectivePrice(kitSlug, pppTier) : null;

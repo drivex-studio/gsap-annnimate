@@ -1,11 +1,9 @@
-
-
 import React from 'react';
-import { cn } from '@/libs/utils/className'; // module id: 103746
-import { ArrowUpRight } from '@phosphor-icons/react'; // module id: 683845
-import { useAnimation } from '@/animations/hooks/useAnimation'; // module id: 488843
+import { cn } from '@/libs/utils/className';
+import { ArrowUpRight } from '@phosphor-icons/react';
+import { useAnimation } from '@/animations/hooks/useAnimation';
 
-function BookmarkIcon({ filled = false, className = "" }) { // original mangled: h
+function BookmarkIcon({ filled = false, className = "" }) {
   return (
     <svg viewBox="0 0 16 16" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1" strokeLinejoin="miter" strokeLinecap="square" className={className} aria-hidden="true">
       <path d="M3 2 H13 V14 L8 10 L3 14 Z" />
@@ -13,7 +11,7 @@ function BookmarkIcon({ filled = false, className = "" }) { // original mangled:
   );
 }
 
-const VARIANTS = { // original mangled: p
+const VARIANTS = {
   overlay: {
     bg: "bg-background/85 backdrop-blur-md hover:bg-background",
     transition: "transition-[opacity,translate,background-color] duration-(--duration-quick) ease-(--ease-back-out)"
@@ -24,17 +22,16 @@ const VARIANTS = { // original mangled: p
   }
 };
 
-// module id: 878512
 export default function SaveButton({
-  animation, // original mangled: e
-  initialIsSaved = false, // original mangled: a
-  variant = "inline", // original mangled: n
-  isAuthenticated = true, // original mangled: i
-  fadeOnHover = false, // original mangled: s
-  unauthHint = "none", // original mangled: o
-  className = "" // original mangled: c
+  animation,
+  initialIsSaved = false,
+  variant = "inline",
+  isAuthenticated = true,
+  fadeOnHover = false,
+  unauthHint = "none",
+  className = ""
 }) {
-  let config = VARIANTS[variant] ?? VARIANTS.inline; // original mangled: d
+  let config = VARIANTS[variant] ?? VARIANTS.inline;
   let { isSaved, isLoading, toggleSave } = useAnimation(isAuthenticated ? animation?.id : null, initialIsSaved, isAuthenticated ? animation : null);
 
   if (!isAuthenticated) {

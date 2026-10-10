@@ -1,6 +1,5 @@
-import * as pricing from '@/libs/config/PACK_SLUGS'; // module id: 825740
+import * as pricing from '@/libs/config/PACK_SLUGS';
 
-// module id: 516799
 const ServerData = {
   appName: 'Annnimate',
   appDescription: 'Production GSAP motion components for React and Vue. Every component shipped on a real brand site before it reached the library. By Good Fella.',

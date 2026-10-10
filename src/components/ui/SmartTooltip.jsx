@@ -1,14 +1,13 @@
-
+'use client'
 import React, { createContext, useContext, useRef, useState, useCallback, useEffect } from 'react';
-import gsap from 'gsap'; // module id: 989970
-import { cn } from '@/libs/utils/className'; // module id: 103746
+import gsap from 'gsap';
+import { cn } from '@/libs/utils/className';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/Tooltip';
 
 const SmartTooltipContext = createContext(null);
 
 const TOOLTIP_BASE_CLASSES = "z-50 overflow-hidden border border-foreground/10 bg-surface px-10 py-6 text-accent-xs text-foreground";
 
-// module id: 672706 (SmartTooltipGroup)
 export function SmartTooltipGroup({
   children,
   delayDuration = 300,
@@ -102,7 +101,6 @@ export function SmartTooltipGroup({
       hideTimeout.current = null;
     }
 
-    // Flip Animation (moving from one to another)
     if (isVisible && activeTooltipId !== id && timeSinceLast < flipThreshold && floatingRef.current) {
       setContent(tooltipContent);
       setActiveTooltipId(id);
@@ -120,7 +118,6 @@ export function SmartTooltipGroup({
         });
       });
     } else {
-      // Enter Animation (fresh appearance)
       setContent(tooltipContent);
       setActiveTooltipId(id);
       setIsVisible(true);
@@ -215,7 +212,6 @@ export function SmartTooltipGroup({
   );
 }
 
-
 export function SmartTooltip({ children, content, id }) {
   let context = useContext(SmartTooltipContext);
   let fallbackId = useRef(id || `tooltip-${Math.random().toString(36).substr(2, 9)}`);
@@ -234,7 +230,6 @@ export function SmartTooltip({ children, content, id }) {
     }
   }, [context, triggerNode]);
 
-  // If inside a SmartTooltipGroup, use the GSAP custom tooltip
   if (context) {
     return (
       <div
@@ -248,7 +243,6 @@ export function SmartTooltip({ children, content, id }) {
     );
   }
 
-  // Fallback: If used standalone without a group, use standard Radix Tooltip
   return (
     <TooltipProvider delayDuration="{300}">
       <Tooltip>

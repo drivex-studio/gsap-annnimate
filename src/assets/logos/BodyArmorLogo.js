@@ -1,9 +1,8 @@
 import React from 'react';
-// module id: 846075
 export default function BodyArmorLogo({
-className = '', // original mangled: e
-style, // original mangled: r
-...rest // original mangled: n
+className = '',
+style,
+...rest
 }) {
 return (
 <svg
