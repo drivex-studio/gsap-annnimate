@@ -2,7 +2,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Info } from 'lucide-react';
-import { translate } from '@/libs/utils/i18n';
+import { translate, translate as t } from '@/libs/utils/i18n';
 import { getPppDiscountPercent } from '@/components/pricing/utils/ppp';
 import { 
   Tooltip, 

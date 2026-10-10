@@ -5,6 +5,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import Button from '@/components/ui/Button';
 import AnimatedText from '@/animations/components/AnimatedText';
 import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
+import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 import ImageGrid from '@/components/ui/ImageCarousel';
 import VideoLabelOverlay from '@/components/ui/VideoLabelOverlay';
 import ServerData from '@/libs/auth/data/ServerData';

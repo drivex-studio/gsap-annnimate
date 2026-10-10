@@ -1,4 +1,4 @@
-import { t } from '@/libs/utils/i18n';
+import { translate as t } from '@/libs/utils/i18n';
 
 const AVATAR_IMAGES = [
   "/imgs/lukas_avatar.avif", 

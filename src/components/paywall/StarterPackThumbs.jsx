@@ -3,10 +3,10 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 const DEFAULT_THUMBS = [
-  { title: "Text Reveal", img: "[https://annnimate.b-cdn.net/video-thumbnails/scroll/text-reveal/text-reveal_cover.avif](https://annnimate.b-cdn.net/video-thumbnails/scroll/text-reveal/text-reveal_cover.avif)" },
-  { title: "Dual Scramble", img: "[https://annnimate.b-cdn.net/video-thumbnails/ui-component/dual-scramble/dual_scramble_cover.avif](https://annnimate.b-cdn.net/video-thumbnails/ui-component/dual-scramble/dual_scramble_cover.avif)" },
-  { title: "Accordion", img: "[https://annnimate.b-cdn.net/video-thumbnails/ui-component/accordion/accordion_cover.avif](https://annnimate.b-cdn.net/video-thumbnails/ui-component/accordion/accordion_cover.avif)" },
-  { title: "Drawer Menu", img: "[https://annnimate.b-cdn.net/video-thumbnails/menu/multi-level-drawer-menu/multi-level-drawer-menu_cover.avif](https://annnimate.b-cdn.net/video-thumbnails/menu/multi-level-drawer-menu/multi-level-drawer-menu_cover.avif)" }
+  { title: "Text Reveal", img: "https://annnimate.b-cdn.net/video-thumbnails/scroll/text-reveal/text-reveal_cover.avif" },
+  { title: "Dual Scramble", img: "https://annnimate.b-cdn.net/video-thumbnails/ui-component/dual-scramble/dual_scramble_cover.avif" },
+  { title: "Accordion", img: "https://annnimate.b-cdn.net/video-thumbnails/ui-component/accordion/accordion_cover.avif" },
+  { title: "Drawer Menu", img: "https://annnimate.b-cdn.net/video-thumbnails/menu/multi-level-drawer-menu/multi-level-drawer-menu_cover.avif" }
 ];
 
 export default function StarterPackThumbs({ className = "", items = null }) {

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 
-import { translate } from '@/libs/utils/i18n';
+import { translate, translate as t } from '@/libs/utils/i18n';
 import { useTransitionRouter } from '@/providers/TransitionRouterProvider';
 
 import Button from '@/components/ui/Button';
