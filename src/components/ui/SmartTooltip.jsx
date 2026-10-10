@@ -197,7 +197,7 @@ export function SmartTooltipGroup({
   }, []);
 
   return (
-    <SmartTooltipContext.Provider activeTooltipId handleMouseEnter, handleMouseLeave, registerTrigger, value="{{" }}>
+    <SmartTooltipContext.Provider value={{ activeTooltipId, handleMouseEnter, handleMouseLeave, registerTrigger }}>
       {children}
       {isVisible && (
         <div

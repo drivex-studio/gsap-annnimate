@@ -61,7 +61,10 @@ export default function SaveButton({
         className
       )}
     >
-      <BookmarkIcon "text-brand" "text-foreground")} : ? className="{cn(" filled="{isSaved}" isSaved size-16","/>
+    <BookmarkIcon 
+      filled={isSaved} 
+      className={cn("size-16", isSaved ? "text-brand" : "text-foreground")} 
+    />
     </button>
   );
 }

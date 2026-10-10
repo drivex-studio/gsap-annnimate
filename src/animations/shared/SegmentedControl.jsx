@@ -50,7 +50,20 @@ export default function SegmentedControl({
 
   return (
     <div ref={wrapperRef} className={cn(fill && "w-full")}>
-      <AnimatedTabs "[scrollbar-width:none] "items-stretch "w-full", && )} [&::-webkit-scrollbar]:hidden", activeId="{activeId}" aria-label="{ariaLabel}" bg-foreground/[0.04]", className containerClassName="{cn(" fill overflow-x-auto role="tablist">
+      <AnimatedTabs
+        activeId={activeId}
+        aria-label={ariaLabel}
+        role="tablist"
+        containerClassName={cn(
+          "overflow-x-auto bg-foreground/[0.04] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          fill && "w-full",
+          className
+        )}
+        className={cn(
+          "items-stretch",
+          fill && "w-full"
+        )}
+      >
         {tabs.map((tab, index) => {
           let isActive = activeId === tab.id;
           let Icon = tab.Icon;
@@ -79,7 +92,7 @@ export default function SegmentedControl({
                   className={cn("flex shrink-0 items-center justify-center", iconSize)}
                   style={tab.color ? { color: tab.color } : undefined}
                 >
-                  <Icon className="{iconSize}"/>
+                  <Icon className={iconSize} />
                 </span>
               ) : null}
               <span>{tab.label}</span>

@@ -354,14 +354,25 @@ export default function Globe({ images = [], wantsPlay = false, active = true })
   
   if (!supportsWebGL) return null;
 
-  return (
-    <Canvas "always" "low-power" "never"} "transparent" 0, 1.5]} 11], 35 : ? [0, alpha: antialias: background: camera="{{" className="size-full block" dpr="{[1," false, fov: frameloop="{active" gl onCreated="{({" position: powerPreference: style="{{" true, }}> {
-        debugLog("r3f-created");
-        gl.domElement.addEventListener("webglcontextlost", e => e.preventDefault());
-      }}
-    >
-      <Warmup/>
-      <InteractiveGlobe images="{images}" reducedMotion="{reducedMotion}" wantsPlay="{wantsPlay}"/>
-    </Canvas>
-  );
+    return (
+      <Canvas
+        className="size-full block"
+        style={{ background: "transparent" }}
+        frameloop={active ? "always" : "never"}
+        dpr={[1, 1.5]}
+        camera={{ position: [0, 0, 11], fov: 35 }}
+        gl={{ alpha: true, antialias: false, powerPreference: "low-power" }}
+        onCreated={({ gl }) => {
+          debugLog("r3f-created");
+          gl.domElement.addEventListener("webglcontextlost", e => e.preventDefault());
+        }}
+      >
+        <Warmup />
+        <InteractiveGlobe 
+          images={images} 
+          reducedMotion={reducedMotion} 
+          wantsPlay={wantsPlay} 
+        />
+      </Canvas>
+    );
 }
