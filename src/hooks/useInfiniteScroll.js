@@ -1,73 +1,63 @@
 "use client"; 
-import { useState, useRef, useEffect, useCallback, startTransition } from 'react'; // module id: 271645
-
-/* --- useInfiniteScroll --- */
-// module id: 451945
+import { useState, useRef, useEffect, useCallback, startTransition } from 'react';
 
 export const BATCH_SIZE = 12;
 
-export function useInfiniteScroll(totalItems, resetDependencies = []) {
-  const [displayedCount, setDisplayedCount] = useState(BATCH_SIZE);
-  const sentinelRef = useRef(null);
-  const lastTimeRef = useRef(0);
-  const countRef = useRef(displayedCount);
+export function useInfiniteScroll(maxCount, resetDependencies = []) {
+  let [displayedCount, setDisplayedCount] = useState(BATCH_SIZE);
+  let sentinelRef = useRef(null);
+  let lastScrollTime = useRef(0);
+  let currentCountRef = useRef(displayedCount);
 
   useEffect(() => {
-    countRef.current = displayedCount;
+    currentCountRef.current = displayedCount;
   }, [displayedCount]);
 
   useEffect(() => {
     setDisplayedCount(BATCH_SIZE);
-    countRef.current = BATCH_SIZE;
-    lastTimeRef.current = 0;
+    currentCountRef.current = BATCH_SIZE;
+    lastScrollTime.current = 0;
   }, resetDependencies);
 
-  const handleScroll = useCallback(() => {
-    if (countRef.current >= totalItems) return;
+  let handleScroll = useCallback(() => {
+    if (currentCountRef.current >= maxCount) return;
     
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
+    let el = sentinelRef.current;
+    if (!el) return;
     
-    const now = performance.now();
-    if (now - lastTimeRef.current < 150) return;
-    if (sentinel.getBoundingClientRect().top - window.innerHeight >= 1500) return;
+    let now = performance.now();
+    if (now - lastScrollTime.current < 150 || el.getBoundingClientRect().top - window.innerHeight >= 1500) return;
     
-    lastTimeRef.current = now;
-    
-    const nextCount = Math.min(countRef.current + BATCH_SIZE, totalItems);
-    countRef.current = nextCount;
+    lastScrollTime.current = now;
+    let nextCount = Math.min(currentCountRef.current + BATCH_SIZE, maxCount);
+    currentCountRef.current = nextCount;
     
     startTransition(() => {
       setDisplayedCount(nextCount);
     });
-  }, [totalItems]);
+  }, [maxCount]);
 
   useEffect(() => {
     let scrollParent = null;
     let isAttached = false;
     
-    const onScroll = () => handleScroll();
+    let onScrollEvent = () => handleScroll();
     
-    const animationFrameId = requestAnimationFrame(() => {
+    let rafId = requestAnimationFrame(() => {
       if (!isAttached) {
-        const getScrollParent = (node) => {
+        scrollParent = (function getScrollParent(node) {
           if (!node) return null;
-          let current = node.parentElement;
-          while (current && current !== document.body && current !== document.documentElement) {
-            const style = window.getComputedStyle(current);
-            if (/(auto|scroll|overlay)/.test(style.overflowY)) {
-              return current;
-            }
-            current = current.parentElement;
+          let parent = node.parentElement;
+          while (parent && parent !== document.body && parent !== document.documentElement) {
+            let style = window.getComputedStyle(parent);
+            if (/(auto|scroll|overlay)/.test(style.overflowY)) return parent;
+            parent = parent.parentElement;
           }
           return window;
-        };
-
-        scrollParent = getScrollParent(sentinelRef.current);
+        })(sentinelRef.current);
         
         if (scrollParent) {
-          const target = scrollParent === window ? window : scrollParent;
-          target.addEventListener('scroll', onScroll, { passive: true });
+          (scrollParent === window ? window : scrollParent).addEventListener("scroll", onScrollEvent, { passive: true });
           isAttached = true;
           handleScroll();
         }
@@ -75,10 +65,9 @@ export function useInfiniteScroll(totalItems, resetDependencies = []) {
     });
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(rafId);
       if (isAttached && scrollParent) {
-        const target = scrollParent === window ? window : scrollParent;
-        target.removeEventListener('scroll', onScroll);
+        (scrollParent === window ? window : scrollParent).removeEventListener("scroll", onScrollEvent);
       }
     };
   }, [handleScroll]);
@@ -86,6 +75,6 @@ export function useInfiniteScroll(totalItems, resetDependencies = []) {
   return {
     displayedCount,
     sentinelRef,
-    hasMore: displayedCount < totalItems
+    hasMore: displayedCount < maxCount
   };
 }

@@ -48,8 +48,6 @@ export function readSubscriberId() {
   return parseFirstTouch(cookieMatch)?.id || null;
 }
 
-/* --- NewsletterEyebrow --- */
-
 export function NewsletterEyebrow({
   primary = 'Weekly drop',
   secondary = 'Join over 1,000+ developers and designers'
@@ -62,8 +60,6 @@ export function NewsletterEyebrow({
     </div>
   );
 }
-
-/* --- NewsletterForm (Default) --- */
 
 export default function NewsletterForm({
   source = 'footer',
@@ -235,7 +231,6 @@ export default function NewsletterForm({
       });
       analytics.track('newsletter_profile_completed', getAnalyticsContext());
     } catch (err) {
-      // Silently fail profile updates
     } finally {
       setIsProfileLoading(false);
       setIsProfileDone(true);

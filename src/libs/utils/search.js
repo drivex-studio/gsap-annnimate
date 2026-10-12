@@ -1,4 +1,3 @@
-
 export const SORT_OPTIONS = [
   { value: 'hot', label: 'Popular' },
   { value: 'new', label: 'Newest' },

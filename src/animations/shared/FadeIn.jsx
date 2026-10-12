@@ -1,10 +1,8 @@
 "use client";
-import React, { useRef, useEffect } from 'react'; // module id: 271645
-import gsap from 'gsap'; // module id: 989970
-import { useReveal } from '@/hooks/useReveal'; // module id: 228414
+import React, { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { useReveal } from '@/hooks/useReveal';
 
-/* --- FadeIn --- */
-// module id: 460391
 export default function FadeIn({
   as: Component = 'div',
   children,

@@ -1,11 +1,9 @@
-import Button from '@/components/ui/Button'; // module id: 687989
-import { SentToDetail } from '@/components/ui/SentToDetail'; // module id: 430550
-import { analytics } from '@/libs/utils/analytics'; // module id: 943348
+import Button from '@/components/ui/Button';
+import { SentToDetail } from '@/components/ui/SentToDetail';
+import { analytics } from '@/libs/utils/analytics';
 
-/* Constants */
 const SENDER_EMAIL = 'julian@annnimate.com';
 
-/* Helpers */
 export function inboxFor(email) {
   const domain = String(email || '').split('@')[1]?.toLowerCase() || '';
   
@@ -40,8 +38,6 @@ export function inboxFor(email) {
   return null;
 }
 
-/* --- NewsletterProfilePanel --- */
-// module id: 987025
 export default function NewsletterProfilePanel({
   email,
   wantsPack = false,

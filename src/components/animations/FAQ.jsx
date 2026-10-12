@@ -1,16 +1,15 @@
-import React from 'react'; // module id: 843476
+import React from 'react';
 
-/* --- FaqList --- */
-// module id: 126272
-export default function FaqList({
+export default function FAQ({ 
   items = [],
-  heading = 'FAQ',
-  className = ''
+  heading = "FAQ",
+  className = ""
 }) {
-  return items.length ? (
+  if (!items.length) return null;
+
+  return (
     <section className={className}>
       <h2 className="text-h4 m-0 font-medium">{heading}</h2>
-      
       <dl className="m-0 mt-8">
         {items.map(({ q, a }) => (
           <div key={q} className="border-t border-foreground/10 py-20 first:mt-16">
@@ -22,5 +21,5 @@ export default function FaqList({
         ))}
       </dl>
     </section>
-  ) : null;
+  );
 }

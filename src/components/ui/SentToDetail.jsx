@@ -1,21 +1,18 @@
 'use client'
-import React, { useRef, Fragment } from 'react'; // module id: 271645
+import React, { useRef, Fragment } from 'react';
 
-import Logo from '@/assets/logos/SiteLogo'; // module id: 635566
-import Button from '@/components/ui/Button'; // module id: 687989
-import TextLink from '@/components/navigation/NavLink'; // module id: 520237
-import FadeIn from '@/animations/shared/FadeIn'; // module id: 460391
-import ImageCarousel from '@/components/ui/ImageCarousel'; // module id: 73062
+import Logo from '@/assets/logos/SiteLogo';
+import Button from '@/components/ui/Button';
+import TextLink from '@/components/navigation/NavLink';
+import FadeIn from '@/animations/shared/FadeIn';
+import ImageCarousel from '@/components/ui/ImageCarousel';
 
-import { usePageEnterAnimation } from '@/providers/AnimationProvider'; // module id: 488463
+import { usePageEnterAnimation } from '@/providers/AnimationProvider';
 
-/* Data & Constants */
 const GRID_LAYOUT = {
   rowCount: 9,
   cols: 9
 };
-
-/* --- Internal Subcomponents --- */
 
 function ActionButton({ as = 'button', icon, children, ...rest }) {
   const className = 'text-mono-sm flex h-48 w-full items-center justify-center gap-10 border border-foreground/15 bg-surface text-foreground transition-colors duration-(--duration-quick) ease-(--ease-expo-out) hover:bg-foreground/5 disabled:opacity-50';
@@ -57,9 +54,6 @@ function BackgroundGrid({ images }) {
     </div>
   );
 }
-
-/* --- Exported Components --- */
-// module id: 430550
 
 export function SentToDetail({
   to,
