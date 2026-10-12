@@ -11,8 +11,7 @@ import { cn } from '@/libs/utils/className';
 import { useNotificationFeed } from '@/providers/NotificationProvider';
 import { useSidebar } from '@/providers/SidebarProvider';
 import { useScrollLockContext } from '@/providers/ScrollLockProvider';
-import BellIcon from '@/assets/icons/BellIcon';
-import CloseIcon from '@/assets/icons/CloseIcon';
+import { Bell, Close } from '@phosphor-icons/react'; 
 
 const badgeVariants = cva("inline-flex items-center rounded-full border px-10 py-2 text-xs font-medium", {
   variants: {
@@ -210,7 +209,7 @@ function NotificationsModal({ open, onClose, items, lastSeenAt }) {
             aria-label="Close"
             className="flex h-32 w-32 items-center justify-center rounded-md microinteraction hover:bg-secondary"
           >
-            <CloseIcon className="h-16 w-16" />
+            <Close className="h-16 w-16" />
           </button>
         </div>
         
@@ -296,7 +295,7 @@ export default function NotificationsTrigger({ className }) {
         )}
       >
         <span aria-hidden="true" className="pointer-events-none relative inline-flex shrink-0 items-center justify-center">
-          <BellIcon className="size-18" aria-hidden="true" />
+          <Bell className="size-18" aria-hidden="true" />
           {isIconOnly && hasUnread ? (
             <span className="absolute -right-2 -top-2 h-6 w-6 rounded-full bg-brand" />
           ) : null}

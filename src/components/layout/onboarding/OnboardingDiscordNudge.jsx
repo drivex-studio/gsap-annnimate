@@ -10,7 +10,7 @@ import { useOnboarding } from '@/providers/OnboardingProvider';
 import { useUser } from '@/providers/UserProvider';
 import { useSidebar } from '@/providers/SidebarProvider';
 import { getDiscordLinkForUser } from '@/libs/utils/discord';
-import { useDualLayerScramble } from '@/hooks/useDualLayerScramble';
+import useDualLayerScramble from '@/hooks/useDualLayerScramble';
 
 const DISCORD_DISMISSED_KEY = "anm_onboarding_discord_dismissed";
 

@@ -8,10 +8,7 @@ import { useUser } from '@/hooks/useUser';
 import { useTransitionRouter } from '@/providers/TransitionRouterProvider';
 import Avatar from '@/components/ui/Avatar'; 
 import { InlineLoader } from '@/components/ui/InlineLoader'; 
-import { CaretUp, GearSix } from '@phosphor-icons/react'; 
-import CreditCardIcon from '@/assets/icons/CreditCardIcon';
-import SignOutIcon from '@/assets/icons/SignOutIcon';
-import ShieldCheckIcon from '@/assets/icons/ShieldCheckIcon';
+import { CaretUp, GearSix, CreditCard, SignOut, ShieldCheck } from '@phosphor-icons/react'; 
 
 import {
   DropdownMenu,
@@ -165,7 +162,7 @@ export default function SidebarUserMenu({ user, extraItems = [] }) {
             {isBillingLoading ? (
               <InlineLoader size="16" color="currentColor" className="shrink-0" />
             ) : (
-              <CreditCardIcon className="size-16 shrink-0 text-foreground-muted" aria-hidden="true" />
+              <CreditCard className="size-16 shrink-0 text-foreground-muted" aria-hidden="true" />
             )}
             <span>Billing</span>
           </DropdownMenuItem>
@@ -187,7 +184,7 @@ export default function SidebarUserMenu({ user, extraItems = [] }) {
               <DropdownMenuSeparator className="!my-4 !-mx-0 !bg-foreground/10" />
               <DropdownMenuItem asChild className={cn(menuItemClass, "!text-brand hover:!text-brand focus:!text-brand data-[highlighted]:!text-brand")}>
                 <Link href="/admin" onClick={handleNav("/admin")}>
-                  <ShieldCheckIcon className="size-16 shrink-0 text-brand" aria-hidden="true" />
+                  <ShieldCheck className="size-16 shrink-0 text-brand" aria-hidden="true" />
                   <span>Admin dashboard</span>
                 </Link>
               </DropdownMenuItem>
@@ -199,7 +196,7 @@ export default function SidebarUserMenu({ user, extraItems = [] }) {
         
         <div className="!p-4">
           <DropdownMenuItem onClick={handleLogout} className={menuItemClass}>
-            <SignOutIcon className="size-16 shrink-0 text-foreground-muted" aria-hidden="true" />
+            <SignOut className="size-16 shrink-0 text-foreground-muted" aria-hidden="true" />
             <span>Log out</span>
           </DropdownMenuItem>
         </div>

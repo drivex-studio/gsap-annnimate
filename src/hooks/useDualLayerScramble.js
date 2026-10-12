@@ -7,7 +7,7 @@ import { ASCII_CHARS } from '@/hooks/useScramble';
 
 gsap.registerPlugin(ScrambleTextPlugin);
 
-export default function useDualLayerScramble(options = {}) {
+export function useDualLayerScramble(options = {}) {
   const elementRef = useRef(null);
   const timelineRef = useRef(null);
   const originalTextRef = useRef('');
@@ -268,3 +268,4 @@ export default function useDualLayerScramble(options = {}) {
     kill
   };
 }
+export default useDualLayerScramble;

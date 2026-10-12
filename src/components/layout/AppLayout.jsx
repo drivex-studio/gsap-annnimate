@@ -27,12 +27,10 @@ import { SidebarProvider, useSidebar } from '@/providers/SidebarProvider';
 import { OnboardingProvider } from '@/providers/OnboardingProvider';
 import OnboardingDiscordNudge from '@/components/layout/onboarding/OnboardingDiscordNudge';
 import NotificationsTrigger from '@/components/layout/notifications/NotificationsTrigger';
-import { WrenchIcon } from '@/assets/icons/WrenchIcon';
-
 import { 
   SquaresFour, BookOpen, BookmarkSimple, Lightbulb, 
   Question, GearSix, GraduationCap, PlugsConnected, 
-  Package, DiscordLogo 
+  Package, DiscordLogo, Wrench 
 } from '@phosphor-icons/react';
 
 let hasInitializedWatchdog = false;
@@ -58,7 +56,7 @@ const SUPPORT_NAV_ITEMS = [
   { title: "Documentation", url: "/docs", icon: BookOpen },
   { title: "MCP server", url: "/docs/guides/mcp", icon: PlugsConnected, exact: true },
   { title: "Learn", url: "/learn", icon: GraduationCap },
-  { title: "Tools", url: "/tools", icon: WrenchIcon },
+  { title: "Tools", url: "/tools", icon: Wrench }, 
   { title: "Help & Support", url: "/help", icon: Question },
   { title: "Settings", url: "/settings", icon: GearSix }
 ];
