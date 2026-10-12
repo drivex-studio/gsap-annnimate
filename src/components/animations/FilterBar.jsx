@@ -229,29 +229,20 @@ function FilterOption({ label, count, active, onClick }) {
 }
 
 function ViewModeSelector({ viewMode, onChange }) {
+  const tabs = VIEW_MODE_OPTIONS.map(({ id, label, Icon }) => ({
+    id,
+    label,
+    Icon,
+  }));
+
   return (
-    <SegmentedControl activeId={viewMode} containerClassName="items-center" role="tablist">
-      {VIEW_MODE_OPTIONS.map(({ id, label, Icon }) => {
-        const isActive = viewMode === id;
-        return (
-          <button 
-            key={id} 
-            type="button" 
-            data-flip-id={id} 
-            onClick={() => onChange(id)} 
-            aria-label={label} 
-            aria-pressed={isActive} 
-            role="tab" 
-            className={cx(
-              'relative z-10 flex size-48 items-center justify-center transition-colors duration-(--duration-fast) ease-(--ease-expo-out)',
-              isActive ? 'text-foreground' : 'text-foreground-muted hover:text-foreground'
-            )}
-          >
-            <Icon className="size-16" />
-          </button>
-        );
-      })}
-    </SegmentedControl>
+    <SegmentedControl
+      tabs={tabs}
+      activeId={viewMode}
+      onChange={onChange}
+      ariaLabel="View mode"
+      iconSize="size-16"
+    />
   );
 }
 
