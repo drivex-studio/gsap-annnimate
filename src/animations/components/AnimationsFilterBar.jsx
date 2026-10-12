@@ -1,12 +1,11 @@
-'use client';
-
+"use client";
 import { useState, useEffect, useRef, useMemo, Fragment } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useReveal } from '@/hooks/useReveal';
-import { useUser } from '@/hooks/useUser';
-import { getDiscordLinkForUser } from '@/libs/discord';
-import { translate } from '@/libs/i18n';
+import { useUser } from '@/providers/UserProvider';
+import { getDiscordLinkForUser } from '@/libs/utils/discord';
+import { translate } from '@/libs/utils/i18n';
 import {
   SquaresFour,
   BookmarkSimple,
@@ -23,11 +22,11 @@ import {
   List,
 } from '@phosphor-icons/react';
 
-import LogoText from '@/components/LogoText';
-import LogoIcon from '@/components/LogoIcon';
-import Link from '@/components/ui/Link';
-import AnimatedNumber from '@/components/ui/AnimatedNumber';
-import AnimationCard from '@/components/animations/AnimationCard';
+import LogoText from '@/assets/logos/LogoText';
+import LogoIcon from '@/assets/logos/LogoIcon';
+import Link from '@/components/navigation/Link';
+import AnimatedNumber from '@/animations/components/AnimatedNumber';
+import AnimationCard from '@/animations/components/AnimationCard';
 
 const CATEGORY_LABELS = {
   button: 'Buttons',
