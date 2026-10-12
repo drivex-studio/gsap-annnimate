@@ -11,7 +11,8 @@ import { cn } from '@/libs/utils/className';
 import { useNotificationFeed } from '@/providers/NotificationProvider';
 import { useSidebar } from '@/providers/SidebarProvider';
 import { useScrollLockContext } from '@/providers/ScrollLockProvider';
-import { Bell, Close } from '@phosphor-icons/react'; 
+import { Bell } from '@phosphor-icons/react'; 
+import CloseIcon from '@/assets/icons/Icons'; 
 
 const badgeVariants = cva("inline-flex items-center rounded-full border px-10 py-2 text-xs font-medium", {
   variants: {
@@ -209,7 +210,7 @@ function NotificationsModal({ open, onClose, items, lastSeenAt }) {
             aria-label="Close"
             className="flex h-32 w-32 items-center justify-center rounded-md microinteraction hover:bg-secondary"
           >
-            <Close className="h-16 w-16" />
+            <CloseIcon className="h-16 w-16" />
           </button>
         </div>
         

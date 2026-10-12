@@ -1,7 +1,6 @@
 'use client'
 import React, { memo, useId, useState, useEffect } from 'react';
 
-// Legacy Avatar Colors & Transforms (mangled identifiers: a, l, n, i, s, o, c, u, d)
 const LEGACY_COLORS = {
   bg: "#8b5cf6",
   path1: { color: "#06b6d4", translateX: 1, translateY: 2, rotate: 75, scale: 1.3 },
@@ -14,11 +13,10 @@ const LEGACY_COLORS = {
   path7: { color: "#fd7142", translateX: -2, translateY: 2, rotate: -75, scale: 1.2 }
 };
 
-// module id: 813920 (LegacyAvatar)
-export const LegacyAvatar = memo(function LegacyAvatar({ size = 32, className = "" }) { // original mangled: f, e, a
-  let titleId = useId(); // original mangled: l
-  let maskId = useId(); // original mangled: n
-  let filterId = useId(); // original mangled: i
+export const LegacyAvatar = memo(function LegacyAvatar({ size = 32, className = "" }) {
+  let titleId = useId();
+  let maskId = useId();
+  let filterId = useId();
 
   return (
     <div
@@ -77,7 +75,7 @@ export const LegacyAvatar = memo(function LegacyAvatar({ size = 32, className = 
   );
 });
 
-export const avatarPatterns = [ // original mangled: h
+export const avatarPatterns = [
   {
     bgColor: "#E63525",
     path1: { color: "#050D4C", translateX: 2, translateY: 2, rotate: 98, scale: 1.2 },
@@ -100,7 +98,6 @@ export const avatarPatterns = [ // original mangled: h
   }
 ];
 
-// Helper to hash string to index
 function getStringHash(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -110,22 +107,21 @@ function getStringHash(str) {
   return Math.abs(hash);
 }
 
-// module id: 813920 (AvatarFallback)
-export const AvatarFallback = memo(function AvatarFallback({ name, avatarIndex, size = 40, className = "" }) { // original mangled: m, e, a, l, n
-  let titleId = useId(); // original mangled: i
-  let maskId = useId(); // original mangled: s
-  let filterId = useId(); // original mangled: o
+export const AvatarFallback = memo(function AvatarFallback({ name, avatarIndex, size = 40, className = "" }) {
+  let titleId = useId();
+  let maskId = useId();
+  let filterId = useId();
 
   if (avatarIndex === 4) {
     return <LegacyAvatar size={size} className={className} />;
   }
 
-  let indexToUse = avatarIndex; // original mangled: c
+  let indexToUse = avatarIndex;
   if (indexToUse == null) {
     indexToUse = getStringHash(name || "User") % avatarPatterns.length;
   }
 
-  let pattern = avatarPatterns[indexToUse % avatarPatterns.length]; // original mangled: u
+  let pattern = avatarPatterns[indexToUse % avatarPatterns.length];
 
   return (
     <div
@@ -165,11 +161,10 @@ export const AvatarFallback = memo(function AvatarFallback({ name, avatarIndex, 
   );
 });
 
-// module id: 813920 (AnnnimateAI)
-export const AnnnimateAI = memo(function AnnnimateAI({ size = 32, className = "" }) { // original mangled: g, e, s
-  let titleId = useId(); // original mangled: o
-  let maskId = useId(); // original mangled: c
-  let filterId = useId(); // original mangled: u
+export const AnnnimateAI = memo(function AnnnimateAI({ size = 32, className = "" }) {
+  let titleId = useId();
+  let maskId = useId();
+  let filterId = useId();
 
   return (
     <div
@@ -219,16 +214,15 @@ export const AnnnimateAI = memo(function AnnnimateAI({ size = 32, className = ""
   );
 });
 
-// module id: 813920 (default export Avatar)
-export default memo(function Avatar({ src, alt, name, avatarIndex, size = 40, className = "" }) { // original mangled: p, e, a, l, n, i, s
-  let [hasError, setHasError] = useState(false); // original mangled: o, c
+export default memo(function Avatar({ src, alt, name, avatarIndex, size = 40, className = "" }) {
+  let [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     if (src) setHasError(false);
   }, [src]);
 
-  let displayName = name || alt || "User"; // original mangled: u
-  let showFallback = !src || hasError; // original mangled: d
+  let displayName = name || alt || "User";
+  let showFallback = !src || hasError;
 
   return (
     <div

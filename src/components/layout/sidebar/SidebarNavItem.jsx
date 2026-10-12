@@ -1,6 +1,6 @@
 import React from 'react';
 import NextLink from 'next/link';
-import { useTransitionClick } from '@/hooks/useTransitionRouter';
+import { useTransitionClick } from '@/hooks/useTransitionClick';
 import { cn } from '@/libs/utils/className';
 import { useSidebar } from '@/providers/SidebarProvider';
 

@@ -7,25 +7,22 @@ import gsap from 'gsap';
 import { loadSharedImage } from '@/libs/utils/loadSharedImage';
 import { useWebGLSupport } from '@/hooks/useWebGLSupport';
 
-// Constants
-const ROTATION_X = Math.PI / 7; // original mangled: c
-const PHI = Math.PI * (3 - Math.sqrt(5)); // original mangled: d
-const PLANE_GEO = new THREE.PlaneGeometry(0.6, 0.44); // original mangled: f
+const ROTATION_X = Math.PI / 7;
+const PHI = Math.PI * (3 - Math.sqrt(5));
+const PLANE_GEO = new THREE.PlaneGeometry(0.6, 0.44);
 
-// Debugger stub
-function debugLog(msg) {} // original mangled: p
+function debugLog(msg) {}
 
-// Warmup component to compile shaders early
-function Warmup() { // original mangled: m
+function Warmup() {
   let { gl, scene, camera } = useThree();
-  let hasWarmedUp = useRef(false); // original mangled: n
+  let hasWarmedUp = useRef(false);
   
   useEffect(() => {
     if (hasWarmedUp.current) return;
     hasWarmedUp.current = true;
     
-    let compileShaders = () => { // original mangled: a
-      let start = performance.now(); // original mangled: n
+    let compileShaders = () => {
+      let start = performance.now();
       try {
         gl.compile(scene, camera);
       } catch (e) {}
@@ -44,10 +41,9 @@ function Warmup() { // original mangled: m
   return null;
 }
 
-// Single Image Node on the Globe
-function GlobeNode({ position, rotation, texture, wantsPlay, revealDelay, reducedMotion }) { // original mangled: g
-  let meshRef = useRef(null); // original mangled: c
-  let animRef = useRef(null); // original mangled: d
+function GlobeNode({ position, rotation, texture, wantsPlay, revealDelay, reducedMotion }) {
+  let meshRef = useRef(null);
+  let animRef = useRef(null);
   
   useEffect(() => {
     if (meshRef.current) {
@@ -83,11 +79,10 @@ function GlobeNode({ position, rotation, texture, wantsPlay, revealDelay, reduce
   );
 }
 
-// Custom hook to incrementally load textures via idle callbacks
 function useGlobeTextures(images) {
-  let { gl } = useThree(); // original mangled: t
-  let [, setForceRender] = useState(0); // original mangled: r
-  let stateRef = useRef({ // original mangled: n
+  let { gl } = useThree();
+  let [, setForceRender] = useState(0);
+  let stateRef = useRef({
     textures: [],
     uploaded: new Set(),
     target: 0,
@@ -96,20 +91,20 @@ function useGlobeTextures(images) {
   });
   
   useEffect(() => {
-    let state = stateRef.current; // original mangled: a
+    let state = stateRef.current;
     if (state.initialized) return;
     state.initialized = true;
     
-    let targetCount = Math.min(70, images.length); // original mangled: o
+    let targetCount = Math.min(70, images.length);
     if (state.target = targetCount, targetCount === 0) return;
     
-    let startTime = performance.now(); // original mangled: l
-    let isCancelled = false; // original mangled: s
-    let currentIdx = 0; // original mangled: c
-    let activeLoads = 0; // original mangled: d
-    let handles = new Set(); // original mangled: f
+    let startTime = performance.now();
+    let isCancelled = false;
+    let currentIdx = 0;
+    let activeLoads = 0;
+    let handles = new Set();
     
-    function processQueue() { // original mangled: m
+    function processQueue() {
       if (isCancelled) return;
       while (activeLoads < 4 && currentIdx < targetCount) {
         let loadIdx = currentIdx++;
@@ -123,26 +118,26 @@ function useGlobeTextures(images) {
       }
     }
     
-    async function fetchAndUpload(index, handle) { // original mangled: g
+    async function fetchAndUpload(index, handle) {
       if (handle) handles.delete(handle);
       if (isCancelled) return;
       
       try {
-        let bitmap = await loadSharedImage(images[index], { maxWidth: 384 }); // original mangled: c
+        let bitmap = await loadSharedImage(images[index], { maxWidth: 384 });
         if (isCancelled) {
           bitmap.close?.();
           return;
         }
         
-        let tex = new THREE.Texture(bitmap); // original mangled: d
+        let tex = new THREE.Texture(bitmap);
         tex.colorSpace = THREE.SRGBColorSpace;
         tex.anisotropy = Math.min(4, gl.capabilities.getMaxAnisotropy());
         tex.flipY = false;
         tex.needsUpdate = true;
         
-        let uploadStart = performance.now(); // original mangled: f
+        let uploadStart = performance.now();
         gl.initTexture(tex);
-        let uploadTime = performance.now() - uploadStart; // original mangled: m
+        let uploadTime = performance.now() - uploadStart;
         
         if (uploadTime > 10) debugLog(`upload-slow #${index} ${uploadTime.toFixed(1)}ms`);
         
@@ -188,10 +183,9 @@ function useGlobeTextures(images) {
   return { textures: stateRef.current.textures, uploaded: stateRef.current.uploaded };
 }
 
-// Main Interactive Globe Manager
-function InteractiveGlobe({ images, wantsPlay, reducedMotion }) { // original mangled: x
-  let groupRef = useRef(null); // original mangled: s
-  let physics = useRef({ // original mangled: f
+function InteractiveGlobe({ images, wantsPlay, reducedMotion }) {
+  let groupRef = useRef(null);
+  let physics = useRef({
     spin: 0,
     inertia: 0,
     dragAccum: 0,
@@ -206,26 +200,25 @@ function InteractiveGlobe({ images, wantsPlay, reducedMotion }) { // original ma
   
   let { textures, uploaded } = useGlobeTextures(images);
   
-  // Calculate spherical Fibonacci points
-  let nodesData = useMemo(() => { // original mangled: w
+  let nodesData = useMemo(() => {
     let arr = [];
     for (let i = 0; i < 70; i++) {
-      let yStr = 1 - (i / 69) * 2; // original mangled: r
-      let radius = Math.sqrt(Math.max(0, 1 - yStr * yStr)); // original mangled: n
-      let theta = i * PHI; // original mangled: a
+      let yStr = 1 - (i / 69) * 2;
+      let radius = Math.sqrt(Math.max(0, 1 - yStr * yStr));
+      let theta = i * PHI;
       
-      let x = Math.cos(theta) * radius * 3; // original mangled: o
-      let y = yStr * 3; // original mangled: l
-      let z = Math.sin(theta) * radius * 3; // original mangled: u
+      let x = Math.cos(theta) * radius * 3;
+      let y = yStr * 3;
+      let z = Math.sin(theta) * radius * 3;
       
       let lookMat = new THREE.Matrix4().lookAt(
         new THREE.Vector3(x, y, z),
         new THREE.Vector3(x * 2, y * 2, z * 2),
         new THREE.Vector3(0, 1, 0)
-      ); // original mangled: s
+      );
       
-      let quat = new THREE.Quaternion().setFromRotationMatrix(lookMat); // original mangled: c
-      let euler = new THREE.Euler().setFromQuaternion(quat); // original mangled: f
+      let quat = new THREE.Quaternion().setFromRotationMatrix(lookMat);
+      let euler = new THREE.Euler().setFromQuaternion(quat);
       
       arr.push({
         position: [x, y, z],
@@ -236,9 +229,8 @@ function InteractiveGlobe({ images, wantsPlay, reducedMotion }) { // original ma
     return arr;
   }, []);
 
-  // Update loop for rotation and drag physics
   useFrame((state, delta) => {
-    let p = physics.current; // original mangled: r
+    let p = physics.current;
     p.frames++;
     if (delta > p.maxDt) p.maxDt = delta;
     if (delta > 0.033) p.droppedFrames++;
@@ -247,7 +239,7 @@ function InteractiveGlobe({ images, wantsPlay, reducedMotion }) { // original ma
       debugLog("first-render");
     }
     
-    let dragForce = -0.0015 * p.dragAccum; // original mangled: n
+    let dragForce = -0.0015 * p.dragAccum;
     p.dragAccum = 0;
     
     if (p.dragging) {
@@ -262,7 +254,7 @@ function InteractiveGlobe({ images, wantsPlay, reducedMotion }) { // original ma
     
     if (groupRef.current) groupRef.current.rotation.y = p.spin;
     
-    let now = performance.now(); // original mangled: a
+    let now = performance.now();
     if (now - p.lastLog > 1000) {
       let fps = p.frames / ((now - p.lastLog) / 1000);
       debugLog(`fps=${fps.toFixed(0)} maxDt=${(p.maxDt * 1000).toFixed(1)}ms dropped=${p.droppedFrames}`);
@@ -273,28 +265,27 @@ function InteractiveGlobe({ images, wantsPlay, reducedMotion }) { // original ma
     }
   });
 
-  let { gl } = useThree(); // original mangled: y
+  let { gl } = useThree();
   
-  // Drag event bindings
   useEffect(() => {
-    let dom = gl.domElement; // original mangled: e
-    let p = physics.current; // original mangled: t
+    let dom = gl.domElement;
+    let p = physics.current;
     
-    function onDown(e) { // original mangled: r
+    function onDown(e) {
       p.dragging = true;
       p.lastX = e.clientX;
       dom.setPointerCapture?.(e.pointerId);
       dom.style.cursor = "grabbing";
     }
     
-    function onMove(e) { // original mangled: n
+    function onMove(e) {
       if (p.dragging) {
         p.dragAccum += e.clientX - p.lastX;
         p.lastX = e.clientX;
       }
     }
     
-    function onUp(e) { // original mangled: a
+    function onUp(e) {
       if (p.dragging) {
         p.dragging = false;
         dom.releasePointerCapture?.(e.pointerId);
@@ -322,7 +313,7 @@ function InteractiveGlobe({ images, wantsPlay, reducedMotion }) { // original ma
     <group rotation={[-ROTATION_X, 0, -(0.4 * ROTATION_X)]}>
       <group ref={groupRef}>
         {nodesData.map((node, index) => {
-          let tex = textures[index]; // original mangled: a
+          let tex = textures[index];
           return tex && uploaded.has(index) ? (
             <GlobeNode key="{index}" position="{node.position}" reducedMotion="{reducedMotion}" revealDelay="{node.revealDelay}" rotation="{node.rotation}" texture="{tex}" wantsPlay="{wantsPlay}"/>
           ) : null;
@@ -334,15 +325,14 @@ function InteractiveGlobe({ images, wantsPlay, reducedMotion }) { // original ma
 
 if (typeof performance !== "undefined") performance.now();
 
-// module id: 607601
 export default function Globe({ images = [], wantsPlay = false, active = true }) {
   debugLog("mount");
-  let [reducedMotion, setReducedMotion] = useState(false); // original mangled: i, l
+  let [reducedMotion, setReducedMotion] = useState(false);
   
   useEffect(() => {
-    let mql = window.matchMedia("(prefers-reduced-motion: reduce)"); // original mangled: e
+    let mql = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReducedMotion(mql.matches);
-    let onChange = (e) => setReducedMotion(e.matches); // original mangled: t
+    let onChange = (e) => setReducedMotion(e.matches);
     if (mql.addEventListener) {
       mql.addEventListener("change", onChange);
       return () => mql.removeEventListener("change", onChange);

@@ -1,12 +1,13 @@
+'use client';
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { useUser } from '@/hooks/useUser'; // module id: 201220
-import { analytics } from '@/libs/analytics'; // module id: 943348
-import { STARTER_SLUG, ONBOARDING_EVENTS } from '@/libs/constants/onboarding'; // module id: 734601 (Mapped)
+import { useUser } from '@/providers/UserProvider';
+import analytics from '@/libs/utils/analytics';
+import { STARTER_SLUG, ONBOARDING_EVENTS } from '@/libs/config/onboarding';
 
-const COPIED_STORAGE_KEY = "anm_onboarding_copied"; // original mangled: i
-const TUNED_STORAGE_KEY = "anm_onboarding_tuned"; // original mangled: s
+const COPIED_STORAGE_KEY = "anm_onboarding_copied";
+const TUNED_STORAGE_KEY = "anm_onboarding_tuned";
 
-const initialState = { // original mangled: o
+const initialState = {
   active: false,
   starterSlug: STARTER_SLUG,
   steps: {
@@ -19,13 +20,12 @@ const initialState = { // original mangled: o
   dismiss: () => {}
 };
 
-const OnboardingContext = createContext(initialState); // original mangled: c
+const OnboardingContext = createContext(initialState);
 
-// module id: 92451 (OnboardingProvider)
-export function OnboardingProvider({ children }) { // original mangled: e
-  let { profile, updateProfile } = useUser(); // original mangled: o, u
-  let [hasCopied, setHasCopied] = useState(false); // original mangled: d, f
-  let [hasTuned, setHasTuned] = useState(false); // original mangled: h, m
+export function OnboardingProvider({ children }) {
+  let { profile, updateProfile } = useUser();
+  let [hasCopied, setHasCopied] = useState(false);
+  let [hasTuned, setHasTuned] = useState(false);
 
   useEffect(() => {
     try {
@@ -35,7 +35,7 @@ export function OnboardingProvider({ children }) { // original mangled: e
   }, []);
 
   useEffect(() => {
-    let handleCopied = () => { // original mangled: e
+    let handleCopied = () => {
       let alreadyCopied = (() => {
         try {
           return localStorage.getItem(COPIED_STORAGE_KEY) === "1";
@@ -54,7 +54,7 @@ export function OnboardingProvider({ children }) { // original mangled: e
       }
     };
 
-    let handleTuned = () => { // original mangled: t
+    let handleTuned = () => {
       let alreadyTuned = (() => {
         try {
           return localStorage.getItem(TUNED_STORAGE_KEY) === "1";
@@ -82,15 +82,14 @@ export function OnboardingProvider({ children }) { // original mangled: e
     };
   }, []);
 
-  let isStackPicked = !!profile?.preferred_platform; // original mangled: p
-  let createdAtTime = profile?.created_at ? new Date(profile.created_at).getTime() : null; // original mangled: g
+  let isStackPicked = !!profile?.preferred_platform;
+  let createdAtTime = profile?.created_at ? new Date(profile.created_at).getTime() : null;
   
-  // 2592e6 = 30 days in milliseconds
-  let isWithin30Days = createdAtTime != null && (Date.now() - createdAtTime) < 2592e6; // original mangled: A
-  let isActive = profile?.onboarding_completed === false && isWithin30Days; // original mangled: y
-  let isAllDone = isStackPicked && hasCopied && hasTuned; // original mangled: v
+  let isWithin30Days = createdAtTime != null && (Date.now() - createdAtTime) < 2592e6;
+  let isActive = profile?.onboarding_completed === false && isWithin30Days;
+  let isAllDone = isStackPicked && hasCopied && hasTuned;
 
-  let completeOnboarding = useCallback(() => { // original mangled: x
+  let completeOnboarding = useCallback(() => {
     if (profile && profile.onboarding_completed === false) {
       analytics.activation.onboardingCompleted(null, [
         ...(profile?.preferred_platform ? ["stack"] : []),
@@ -121,7 +120,6 @@ export function OnboardingProvider({ children }) { // original mangled: e
   );
 }
 
-// module id: 92451 (useOnboarding)
 export function useOnboarding() {
   return useContext(OnboardingContext);
 }

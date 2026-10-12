@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { cn } from '@/libs/utils/className';
 import { useSidebar } from '@/providers/SidebarProvider';
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/providers/UserProvider';
 import { useTransitionRouter } from '@/providers/TransitionRouterProvider';
 import Avatar from '@/components/ui/Avatar'; 
 import { InlineLoader } from '@/components/ui/InlineLoader'; 
@@ -39,7 +39,7 @@ export default function SidebarUserMenu({ user, extraItems = [] }) {
 
   let handleLogout = async () => {
     try {
-      let { createClient } = await import('@/libs/supabase/client'); // original mangled: 628469
+      let { createClient } = await import('@/libs/supabase/client');
       let supabase = createClient();
       await supabase.auth.signOut();
       router.push("/login");
