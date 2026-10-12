@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-
-import CloseIcon from '@/components/icons/CloseIcon';
-import SubscribeForm from '@/components/forms/SubscribeForm';
+import CloseIcon from '@/assets/icons/Icons';
+import NewsletterForm,{
+  STARTER_PROMPT_KEY,
+  readSubscriberId
+} from '@/components/ui/NewsletterEyebrow';
 import { 
   Dialog, 
   DialogContent, 
@@ -11,8 +13,6 @@ import {
   DialogTitle, 
   DialogDescription 
 } from '@/components/ui/Dialog';
-
-import { STARTER_PROMPT_KEY, readSubscriberId } from '@/libs/utils/subscribe';
 
 function isDismissedWithin30Days(key) {
   try {
@@ -110,7 +110,7 @@ export default function StarterPackModal({
           </DialogDescription>
         </div>
         <div className="mt-24 lg:mt-32">
-          <SubscribeForm
+          <NewsletterForm
             source={source}
             idPrefix={idPrefix}
             buttonLabel={buttonLabel}

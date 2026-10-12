@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import AnimationPage from '@/components/animations/AnimationPage';
+import AnimationsPage from '@/components/animations/AnimationsPage';
 import { getPublishedAnimations } from '@/libs/supabase/latestAnimation';
 
 export const revalidate = 60;
@@ -8,11 +8,11 @@ export const metadata = {
   title: 'Library',
 };
 
-export default async function AnimationsPage() {
+export default async function AnimationsLibraryPage() {
   const animations = await getPublishedAnimations();
   return (
     <Suspense fallback={null}>
-      <AnimationPage initialAnimations={animations} />
+      <AnimationsPage initialAnimations={animations} />
     </Suspense>
   );
 }

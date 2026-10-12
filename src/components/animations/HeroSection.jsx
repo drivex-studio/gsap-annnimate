@@ -1,6 +1,6 @@
 import React from 'react';
 import AnimatedHeadline from '@/animations/shared/RevealHeadline'; 
-import AnimatedText from '@/components/animations/AnimatedText';
+import AnimatedText from '@/animations/components/AnimatedText';
 import FadeIn from '@/animations/shared/FadeIn'; 
 
 const SUBTEXT_ANIMATION_PROPS = {
