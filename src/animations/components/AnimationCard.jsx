@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef, useState, useCallback } from 'react';
 import { cn } from '@/libs/utils/className';
 import Link from '@/components/navigation/Link';

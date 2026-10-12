@@ -1,6 +1,6 @@
 import '@/styles/style.css';
 import Provider from '@/app/provider';
-import AppLayout from '@/components/AppLayout';
+import SiteLayout from '@/components/SiteLayout';
 import localFont from 'next/font/local';
 import { getLatestAnimation, getCategories } from '@/libs/supabase/latestAnimation';
 
@@ -92,9 +92,9 @@ export default async function RootLayout({ children }) {
         data-preloader-ready="true"
       >
         <Provider categories={categories}>
-          <AppLayout latestAnimation={latestAnimation}>
+          <SiteLayout latestAnimation={latestAnimation}>
             {children}
-          </AppLayout>
+          </SiteLayout>
         </Provider>
       </body>
     </html>
