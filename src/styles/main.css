@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-@theme {
+@theme inline {
   --fluid-slope: calc((100vw - 375px) / 1225);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -106,9 +106,9 @@
 }
 
 
-@layer base {
-  :root,
-[data-theme="light"] {
+
+:root,
+[data-theme=light] {
   color-scheme: light;
   --background: #eee;
   --foreground: #141314;
@@ -124,10 +124,11 @@
   --type-kit: #e85d2c;
   --type-feature: #c08020;
   --type-update: #4a7390;
-  --type-fix: #6a8a5a;
+  --type-fix: #6a8a5a
 }
+
 .dark,
-[data-theme="dark"] {
+[data-theme=dark] {
   color-scheme: dark;
   --background: #141314;
   --foreground: #eee;
@@ -143,9 +144,10 @@
   --type-kit: #f06d3a;
   --type-feature: #d6a437;
   --type-update: #6a93b3;
-  --type-fix: #84a574;
+  --type-fix: #84a574
 }
-[data-theme="brand"] {
+
+[data-theme=brand] {
   color-scheme: light;
   --background: #fb460d;
   --foreground: #141314;
@@ -156,21 +158,23 @@
   --brand-muted: #fd8d68;
   --border: #0000004d;
   --border-muted: #0003;
-  --surface: #fd8d68;
+  --surface: #fd8d68
 }
-  html,
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-  }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
 
-  * {
-    box-sizing: border-box;
-  }
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: clip;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 @keyframes bodyOverlayFadeOut {

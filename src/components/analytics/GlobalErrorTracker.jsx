@@ -1,6 +1,9 @@
 "use client";
+
 import { useEffect } from 'react';
-import analyticsModule from '@/libs/utils/analytics';
+import analytics from '@/libs/utils/analytics';
+
+const MAX_ERRORS_PER_SESSION = 25;
 
 export function GlobalErrorTracker() {
   useEffect(() => {
@@ -9,18 +12,20 @@ export function GlobalErrorTracker() {
 
     const logError = (source, error, extras) => {
       const message = error?.message || String(error ?? '');
-      if (!message || errorCount >= 25) return;
+      if (!message || errorCount >= MAX_ERRORS_PER_SESSION) return;
 
       const fingerprint = source + '|' + message.slice(0, 200);
-      if (!loggedErrors.has(fingerprint)) {
-        loggedErrors.add(fingerprint);
-        errorCount += 1;
-        try {
-          analyticsModule.analytics.error.exception(
-            error instanceof Error ? error : Error(message),
-            { source, ...extras }
-          );
-        } catch (err) {}
+      if (loggedErrors.has(fingerprint)) return;
+
+      loggedErrors.add(fingerprint);
+      errorCount += 1;
+
+      try {
+        analytics.error.exception(
+          error instanceof Error ? error : Error(message),
+          { source, ...extras }
+        );
+      } catch (err) {
       }
     };
 

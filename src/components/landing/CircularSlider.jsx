@@ -1,11 +1,12 @@
+'use client';
 import React, { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { Draggable } from '@/libs/vendor/Draggable';
-import { InertiaPlugin } from '@/libs/vendor/InertiaPlugin';
-import { MotionPathPlugin } from '@/libs/vendor/MotionPathPlugin';
-
-gsap.registerPlugin(useGSAP, Draggable, InertiaPlugin, MotionPathPlugin);
+import {
+  InertiaPlugin,
+  MotionPathPlugin,
+  Draggable,
+  useGSAP, 
+  gsap
+} from '@/libs/utils/vendor';
 
 export default function CircularSlider({
   className = '',

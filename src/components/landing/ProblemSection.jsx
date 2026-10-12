@@ -1,10 +1,10 @@
+'use client';
 import React, { useRef, useMemo, useEffect } from 'react';
 import gsap from 'gsap';
-
-import { t } from '@/libs/i18n';
+import { translate as t } from '@/libs/utils/i18n';
 import { useReveal } from '@/hooks/useReveal';
 import Button from '@/components/ui/Button';
-import AnimatedHeadline from '@/components/ui/AnimatedHeadline';
+import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
 
 const TOP_LEFT = { cx: 0, cy: 0.36, rx: 0.17, ry: 0.44 };
 const TOP_RIGHT = { cx: 1, cy: 0.22, rx: 0.29, ry: 0.28 };

@@ -5,9 +5,9 @@ import Script from 'next/script';
 import { ConsentListener } from '@/components/analytics/ConsentListener';
 import { PageviewTracker } from '@/components/analytics/PageviewTracker';
 
-const POSTHOG_API_KEY = 'phc_Yecr0Uo2VzDFAMckw6XdMeHxMC8JorR3xFeMYmtBm3v';
-const POSTHOG_API_HOST = '/relay-A8q3';
-const POSTHOG_UI_HOST = 'https://eu.posthog.com';
+const POSTHOG_API_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY || '';
+const POSTHOG_API_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com';
+const POSTHOG_UI_HOST = process.env.NEXT_PUBLIC_POSTHOG_UI_HOST || 'https://eu.posthog.com';
 
 export function PostHogProvider() {
   if (!POSTHOG_API_KEY || POSTHOG_API_KEY.includes('YOUR_PROJECT_API_KEY')) {

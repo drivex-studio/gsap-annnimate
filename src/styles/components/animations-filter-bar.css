@@ -1,0 +1,474 @@
+@layer components {
+  .SectionTitle {
+    margin-bottom: calc(var(--spacing) * 24);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 8);
+    padding-inline: calc(var(--spacing) * 8);
+    padding-block: calc(var(--spacing) * 4);
+  }
+
+  .NavSectionHeader {
+    margin-bottom: calc(var(--spacing) * 4);
+    padding-inline: calc(var(--spacing) * 12);
+    padding-top: calc(var(--spacing) * 4);
+  }
+
+  .NavItem {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: calc(var(--spacing) * 8);
+    border-radius: calc(var(--radius) - 4px);
+    padding-inline: calc(var(--spacing) * 12);
+    padding-block: calc(var(--spacing) * 8);
+    text-align: left;
+    background-color: transparent;
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-duration: var(--duration-quick);
+    transition-timing-function: var(--default-transition-timing-function);
+  }
+  .NavItem:hover {
+    background-color: var(--foreground);
+  }
+  .NavItem.is-active {
+    background-color: var(--foreground);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .NavItem:hover {
+      background-color: color-mix(in oklab, var(--foreground) 6%, transparent);
+    }
+    .NavItem.is-active {
+      background-color: color-mix(in oklab, var(--foreground) 10%, transparent);
+    }
+  }
+
+  .NavItem-indicator {
+    pointer-events: none;
+    position: absolute;
+    inset-block: calc(var(--spacing) * 8);
+    left: 0;
+    width: calc(var(--spacing) * 2);
+    background-color: var(--brand);
+  }
+
+  .NavItem-iconWrapper {
+    display: inline-flex;
+    width: calc(var(--spacing) * 16);
+    height: calc(var(--spacing) * 16);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .NavItem-icon {
+    width: calc(var(--spacing) * 16);
+    height: calc(var(--spacing) * 16);
+  }
+
+  .NavItem-label {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .DropdownCategoryItem {
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--spacing) * 12);
+    border-width: 0;
+    background-color: transparent;
+    padding-inline: calc(var(--spacing) * 12);
+    padding-block: calc(var(--spacing) * 8);
+    text-align: left;
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-expo-out);
+  }
+  .DropdownCategoryItem:hover {
+    background-color: var(--foreground);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .DropdownCategoryItem:hover {
+      background-color: color-mix(in oklab, var(--foreground) 10%, transparent);
+    }
+  }
+
+  .DropdownCategoryItem-countWrapper {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 8);
+  }
+
+  .DropdownCategoryItem-indicator {
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+    background-color: var(--brand);
+  }
+
+  .DropdownList {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 30;
+    margin-top: calc(var(--spacing) * 4);
+    max-height: 300px;
+    min-width: 190px;
+    overflow: auto;
+    border: 1px solid var(--foreground);
+    background-color: var(--surface);
+    padding-block: calc(var(--spacing) * 4);
+    box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.5);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .DropdownList {
+      border-color: color-mix(in oklab, var(--foreground) 12%, transparent);
+    }
+  }
+
+  .DropdownList-allButton {
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--spacing) * 12);
+    border-width: 0;
+    background-color: transparent;
+    padding-inline: calc(var(--spacing) * 12);
+    padding-block: calc(var(--spacing) * 8);
+    text-align: left;
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-expo-out);
+  }
+  .DropdownList-allButton:hover {
+    background-color: var(--foreground);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .DropdownList-allButton:hover {
+      background-color: color-mix(in oklab, var(--foreground) 10%, transparent);
+    }
+  }
+
+  .DropdownList-indicator {
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+    background-color: var(--brand);
+  }
+
+  .Dropdown {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .Dropdown-button {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    gap: calc(var(--spacing) * 8);
+    border-width: 0;
+    background-color: transparent;
+    padding-inline: calc(var(--spacing) * 12);
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-expo-out);
+  }
+  .Dropdown-button:hover {
+    background-color: var(--foreground);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .Dropdown-button:hover {
+      background-color: color-mix(in oklab, var(--foreground) 10%, transparent);
+    }
+  }
+
+  .Dropdown-icon {
+    width: calc(var(--spacing) * 14);
+    height: calc(var(--spacing) * 14);
+  }
+
+  .Dropdown-label {
+    min-width: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .Dropdown-caret {
+    width: calc(var(--spacing) * 14);
+    height: calc(var(--spacing) * 14);
+    transition-property: transform, translate, scale, rotate;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-expo-out);
+  }
+  .Dropdown-caret.is-open {
+    rotate: 180deg;
+  }
+
+  .PlaceholderCard {
+    visibility: hidden;
+    background-color: var(--surface);
+    padding: calc(var(--spacing) * 12);
+  }
+
+  .PlaceholderCard-image {
+    aspect-ratio: 16/10;
+    width: 100%;
+  }
+
+  .PlaceholderCard-title {
+    margin-top: calc(var(--spacing) * 12);
+    height: calc(var(--spacing) * 24);
+  }
+
+  .PlaceholderCard-subtitle {
+    margin-top: calc(var(--spacing) * 36);
+    height: calc(var(--spacing) * 20);
+  }
+
+  .AnimationsFilterBar {
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(var(--radius) - 2px);
+    border: 1px solid var(--foreground);
+    background-color: var(--background);
+    box-shadow: 0 24px 64px -24px rgba(0, 0, 0, 0.5);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .AnimationsFilterBar {
+      border-color: color-mix(in oklab, var(--foreground) 15%, transparent);
+    }
+  }
+
+  .AnimationsFilterBar-layout {
+    display: flex;
+    height: 100%;
+    min-height: 520px;
+  }
+
+  .AnimationsFilterBar-sidebar {
+    display: none;
+    margin: calc(var(--spacing) * 8);
+    width: 220px;
+    flex-shrink: 0;
+    flex-direction: column;
+    border-radius: calc(var(--radius) - 2px);
+    border: 1px solid var(--foreground);
+    background-color: var(--surface);
+    padding: calc(var(--spacing) * 12);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .AnimationsFilterBar-sidebar {
+      border-color: color-mix(in oklab, var(--foreground) 15%, transparent);
+    }
+  }
+
+  .AnimationsFilterBar-nav {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .AnimationsFilterBar-navSection {
+    margin-top: calc(var(--spacing) * 16);
+  }
+
+  .AnimationsFilterBar-user {
+    margin-top: auto;
+    border-top: 1px solid var(--foreground);
+    padding-top: calc(var(--spacing) * 12);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .AnimationsFilterBar-user {
+      border-top-color: color-mix(in oklab, var(--foreground) 10%, transparent);
+    }
+  }
+
+  .AnimationsFilterBar-userInfo {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 8);
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 4);
+  }
+
+  .AnimationsFilterBar-userAvatar {
+    display: flex;
+    width: calc(var(--spacing) * 28);
+    height: calc(var(--spacing) * 28);
+    align-items: center;
+    justify-content: center;
+    border-radius: 3.40282e38px;
+    background-color: var(--foreground);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .AnimationsFilterBar-userAvatar {
+      background-color: color-mix(in oklab, var(--foreground) 10%, transparent);
+    }
+  }
+
+  .AnimationsFilterBar-userDetails {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .AnimationsFilterBar-userName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .AnimationsFilterBar-userPlan {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .AnimationsFilterBar-main {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    background-color: var(--background);
+  }
+
+  .AnimationsFilterBar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--spacing) * 16);
+    border-bottom: 1px solid var(--foreground);
+    padding-inline: calc(var(--spacing) * 16);
+    padding-block: calc(var(--spacing) * 12);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .AnimationsFilterBar-header {
+      border-bottom-color: color-mix(in oklab, var(--foreground) 15%, transparent);
+    }
+  }
+
+  .AnimationsFilterBar-headerLeft {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 12);
+  }
+
+  .AnimationsFilterBar-title {
+    margin: calc(var(--spacing) * 0);
+  }
+
+  .AnimationsFilterBar-stats {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
+  }
+
+  .AnimationsFilterBar-statsNumber {
+    line-height: 1;
+  }
+
+  .AnimationsFilterBar-controls {
+    display: none;
+    align-items: stretch;
+  }
+
+  .AnimationsFilterBar-divider {
+    margin-inline: calc(var(--spacing) * 4);
+    width: 1px;
+    align-self: stretch;
+    background-color: var(--foreground);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .AnimationsFilterBar-divider {
+      background-color: color-mix(in oklab, var(--foreground) 10%, transparent);
+    }
+  }
+
+  .AnimationsFilterBar-viewToggles {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
+    padding-left: calc(var(--spacing) * 8);
+  }
+
+  .AnimationsFilterBar-viewToggle {
+    display: flex;
+    width: calc(var(--spacing) * 24);
+    height: calc(var(--spacing) * 24);
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(var(--radius) - 4px);
+  }
+  .AnimationsFilterBar-viewToggle.is-active {
+    background-color: var(--foreground);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .AnimationsFilterBar-viewToggle.is-active {
+      background-color: color-mix(in oklab, var(--foreground) 10%, transparent);
+    }
+  }
+
+  .AnimationsFilterBar-viewToggleIcon {
+    width: calc(var(--spacing) * 14);
+    height: calc(var(--spacing) * 14);
+  }
+
+  .AnimationsFilterBar-mobileIcons {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 12);
+  }
+
+  .AnimationsFilterBar-content {
+    flex: 1;
+    overflow: hidden;
+    padding: calc(var(--spacing) * 16);
+  }
+
+  .AnimationsFilterBar-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    column-gap: calc(var(--spacing) * 16);
+    row-gap: calc(var(--spacing) * 16);
+  }
+
+  @media (min-width: 40rem) {
+    .AnimationsFilterBar-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .AnimationsFilterBar-sidebar {
+      display: flex;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .AnimationsFilterBar-layout {
+      min-height: 720px;
+    }
+    .AnimationsFilterBar-header {
+      padding-inline: calc(var(--spacing) * 20);
+    }
+    .AnimationsFilterBar-controls {
+      display: flex;
+    }
+    .AnimationsFilterBar-content {
+      padding: calc(var(--spacing) * 24);
+    }
+    .AnimationsFilterBar-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: calc(var(--spacing) * 24);
+      row-gap: calc(var(--spacing) * 24);
+    }
+  }
+}

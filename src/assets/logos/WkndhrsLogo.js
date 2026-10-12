@@ -1,9 +1,8 @@
 import React from 'react';
-// module id: 139469
 export default function WkndhrsLogo({
-className = '', // original mangled: e
-style, // original mangled: r
-...rest // original mangled: n
+className = '',
+style,
+...rest
 }) {
 return (
 <svg

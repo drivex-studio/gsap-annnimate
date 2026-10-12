@@ -1,9 +1,8 @@
 import React from 'react';
-
-import CocaColaLogo from '@/components/logos/CocaColaLogo';
-import BodyArmorLogo from '@/components/logos/BodyArmorLogo';
-import WkndhrsLogo from '@/components/logos/WkndhrsLogo';
-import PoweradeLogo from '@/components/logos/PoweradeLogo';
+import CocaColaLogo from '@/assets/logos/CocaColaLogo';
+import BodyArmorLogo from '@/assets/logos/BodyArmorLogo';
+import WkndhrsLogo from '@/assets/logos/WkndhrsLogo';
+import PoweradeLogo from '@/assets/logos/PoweradeLogo';
 import AnimatedList from '@/animations/components/AnimatedList';
 
 const LOGOS = [

@@ -2,7 +2,7 @@ import '@/styles/style.css';
 import Provider from '@/app/provider';
 import AppLayout from '@/components/AppLayout';
 import localFont from 'next/font/local';
-import { getLatestAnimation } from '@/libs/supabase/latestAnimation';
+import { getLatestAnimation, getCategories } from '@/libs/supabase/latestAnimation';
 
 const geistSans = localFont({
   src: '../../public/fonts/Geist-Variable.woff2',
@@ -65,23 +65,13 @@ const shadowsIntoLight = localFont({
 });
 
 const themeScript = `
-  (function() {
-    try { 
-    const theme = localStorage.getItem('theme') || 'dark';
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-     const resolvedTheme = theme === 'system' ? systemTheme : theme;
-     if (resolvedTheme === 'dark') { 
-     document.documentElement.classList.add('dark');
-      } else { 
-      document.documentElement.classList.remove('dark');
-      }} catch (e) {
-      document.documentElement.classList.add('dark');
-    }
-  })();
-`;
+(function(){try{const theme=localStorage.getItem('theme')||'dark';const systemTheme=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';const resolvedTheme=theme==='system'?systemTheme:theme;if(resolvedTheme==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){document.documentElement.classList.add('dark');}})();`;
 
 export default async function RootLayout({ children }) {
-  const latestAnimation = await getLatestAnimation();
+  const [latestAnimation, categories] = await Promise.all([
+    getLatestAnimation(),
+    getCategories(),
+  ]);
 
   return (
     <html
@@ -101,7 +91,7 @@ export default async function RootLayout({ children }) {
         className="bg-background text-foreground font-sans"
         data-preloader-ready="true"
       >
-        <Provider>
+        <Provider categories={categories}>
           <AppLayout latestAnimation={latestAnimation}>
             {children}
           </AppLayout>

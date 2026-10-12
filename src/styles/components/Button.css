@@ -1,0 +1,136 @@
+@layer components {
+  .Button {
+    display: inline-flex;
+    min-width: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    outline-style: none;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    transition-property: transform, translate, scale, rotate;
+    transition-duration: var(--duration-quick);
+    transition-timing-function: var(--ease-back-out);
+  }
+  .Button:hover,
+  .Button[data-active="true"] {
+    scale: 95%;
+  }
+  .Button:disabled:hover {
+    scale: 100%;
+  }
+  .Button:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .Button:focus-visible {
+      outline-color: color-mix(in srgb, var(--color-brand) 50%, transparent);
+    }
+  }
+  .Button:disabled {
+    cursor: default;
+  }
+
+  .Button-content {
+    pointer-events: none;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke;
+    transition-duration: var(--duration-quick);
+    transition-timing-function: var(--ease-expo-out);
+  }
+  .Button-content--xs {
+    height: calc(var(--spacing) * 24);
+    padding-inline: calc(var(--spacing) * 8);
+  }
+  .Button-content--sm {
+    height: calc(var(--spacing) * 32);
+    padding-inline: calc(var(--spacing) * 10);
+  }
+  .Button-content--default {
+    height: calc(var(--spacing) * 40);
+    padding-inline: calc(var(--spacing) * 14);
+  }
+
+  .Button-content--light,
+  .Button-content--dark {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+  }
+  .Button:hover .Button-content--light,
+  .Button[data-active="true"] .Button-content--light,
+  .Button:hover .Button-content--dark,
+  .Button[data-active="true"] .Button-content--dark {
+    background-color: color-mix(in srgb, var(--color-foreground), #000 10%);
+  }
+
+  .Button-content--brand {
+    background-color: var(--color-brand);
+    color: #141314;
+  }
+  .Button:hover .Button-content--brand,
+  .Button[data-active="true"] .Button-content--brand {
+    background-color: color-mix(in srgb, var(--color-brand), #000 10%);
+  }
+
+  .Button-content--surface {
+    background-color: var(--color-surface);
+    color: var(--color-foreground);
+  }
+  .Button:hover .Button-content--surface,
+  .Button[data-active="true"] .Button-content--surface {
+    background-color: color-mix(in srgb, var(--color-surface), #000 10%);
+  }
+
+  .Button-icon {
+    pointer-events: none;
+    margin-right: calc(var(--spacing) * 6);
+    display: flex;
+    align-items: center;
+  }
+
+  .Button-label {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  .Button-slide {
+    display: block;
+    transition-property: transform, translate, scale, rotate;
+    transition-duration: var(--duration-snap);
+    transition-timing-function: var(--ease-expo-out);
+  }
+  .Button:hover .Button-slide,
+  .Button[data-active="true"] .Button-slide {
+    translate: 0 -100%;
+  }
+  .Button-slide--clone {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .Button-content--xs {
+      height: calc(var(--spacing) * 28);
+      padding-inline: calc(var(--spacing) * 10);
+    }
+    .Button-content--sm {
+      height: calc(var(--spacing) * 40);
+      padding-inline: calc(var(--spacing) * 14);
+    }
+    .Button-content--default {
+      height: calc(var(--spacing) * 48);
+      padding-inline: calc(var(--spacing) * 18);
+    }
+  }
+}

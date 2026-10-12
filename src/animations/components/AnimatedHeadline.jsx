@@ -2,8 +2,8 @@
 import React, { forwardRef, useRef, useState, useEffect, useImperativeHandle } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { SplitText } from '@/libs/vendor/SplitText';
-import { useAnimation, usePageEnterAnimation } from '@/hooks/usePageEnterAnimation';
+import { SplitText } from 'gsap/SplitText';
+import { useAnimation, usePageEnterAnimation } from '@/providers/AnimationProvider';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
