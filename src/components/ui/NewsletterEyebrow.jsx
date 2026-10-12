@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, Fragment } from 'react';
 import { toast } from 'sonner';
 import Button from '@/components/ui/Button';
-import Link from '@/components/navigation/Link'; 
+import NavLink from '@/components/navigation/NavLink'; 
 import NewsletterProfilePanel from '@/components/ui/NewsletterProfilePanel';
 import { analytics } from '@/libs/utils/analytics'; 
 import { buildKitTouch, parseFirstTouch, KIT_TOUCH_COOKIE } from '@/libs/auth/serialize';
@@ -381,9 +381,9 @@ export default function NewsletterForm({
                 <p className="text-mono-sm m-0 max-w-[36ch] self-center text-foreground-muted">
                   {consentCopy?.before || 'By signing up you agree to the'}
                   {' '}
-                  <TextLink href="/privacy" className="text-foreground">
+                  <NavLink href="/privacy" className="text-foreground">
                     {consentCopy?.link || 'privacy policy'}
-                  </TextLink>
+                  </NavLink>
                   {consentCopy?.after || '.'}
                 </p>
               ) : (
@@ -409,9 +409,9 @@ export default function NewsletterForm({
                   />
                   <span className="inline-flex flex-wrap items-center gap-x-6">
                     <span>I agree to the</span>
-                    <TextLink href="/privacy" className="text-foreground">
+                    <NavLink href="/privacy" className="text-foreground">
                       privacy policy
-                    </TextLink>
+                    </NavLink>
                   </span>
                 </label>
               )}

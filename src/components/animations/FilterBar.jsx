@@ -4,9 +4,8 @@ import { CaretDown } from '@phosphor-icons/react';
 import { Funnel, GridFour, Columns, List, MagnifyingGlass, X } from '@phosphor-icons/react';
 import { IconBase } from '@phosphor-icons/react'; 
 import CloseIcon from '@/assets/icons/Icons';
-import AnimatedCounter from '@/animations/components/AnimatedNumber';
+import AnimatedNumber from '@/animations/components/AnimatedNumber';
 import SegmentedControl from '@/animations/shared/SegmentedControl';
-
 import { cn as cx } from '@/libs/utils/className';
 import { useScrollLockContext } from '@/providers/ScrollLockProvider';
 
