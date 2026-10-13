@@ -11,7 +11,7 @@ const PREVIEW_TEMPLATES = new Set([
   "menu",
   "shader",
   "shader-scroll",
-  "full-page"
+  "full-page",
 ]);
 
 const DEPENDENCY_MAP = {
@@ -29,7 +29,7 @@ const DEPENDENCY_MAP = {
   DrawSVGPlugin: "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js",
   MorphSVGPlugin: "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MorphSVGPlugin.min.js",
   ScrambleTextPlugin: "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrambleTextPlugin.min.js",
-  CustomEase: "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/CustomEase.min.js"
+  CustomEase: "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/CustomEase.min.js",
 };
 
 const SHORTCUT_SCRIPT = `
@@ -647,21 +647,50 @@ const FALLBACK_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
+
+const templateCache = new Map();
+
 function getSupabaseServerClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !key) {
     throw new Error("Missing Supabase environment variables");
   }
   return createClient(url, key);
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function safeJson(value) {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
+}
+
+function parseAttrs(raw) {
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      return parsed;
+    }
+  } catch {
+    // invalid JSON → ignore
+  }
+  return {};
+}
+
 function parseDependencies(deps) {
   if (!deps) return [];
   if (Array.isArray(deps)) return deps;
   if (typeof deps === "object") {
-    const keys = Object.keys(deps);
-    return keys.length > 0 ? keys : [];
+    return Object.keys(deps);
   }
   if (typeof deps === "string") {
     try {
@@ -670,8 +699,12 @@ function parseDependencies(deps) {
       if (typeof parsed === "object" && parsed !== null) {
         return Object.keys(parsed);
       }
+      return [];
     } catch {
-      return deps.split(",").map(d => d.trim()).filter(Boolean);
+      return deps
+        .split(",")
+        .map((d) => d.trim())
+        .filter(Boolean);
     }
   }
   return [];
@@ -705,23 +738,47 @@ function resolveTemplateName({ metadata, category, animationName, layout }) {
 }
 
 async function loadTemplateHtml(templateName) {
+  if (templateCache.has(templateName)) return templateCache.get(templateName);
+
+  const filePath = path.join(
+    process.cwd(),
+    "public",
+    "animations",
+    "templates",
+    `${templateName}.html`
+  );
+
+  let html;
   try {
-    const filePath = path.join(process.cwd(), "public", "animations", "templates", `${templateName}.html`);
-    return await fs.readFile(filePath, "utf-8");
-  } catch {
-    return FALLBACK_TEMPLATE;
+    html = await fs.readFile(filePath, "utf-8");
+  } catch (err) {
+    console.warn(
+      `[iframe] template "${templateName}" မတွေ့လို့ fallback သုံးနေပါတယ်:`,
+      err.code || err.message
+    );
+    html = FALLBACK_TEMPLATE;
   }
+
+  templateCache.set(templateName, html);
+  return html;
 }
 
-function buildScriptsBlock({ jsCode, dependencies, category, initialAttrs, defaultSelector, defaultApi }) {
+function buildScriptsBlock({
+  jsCode,
+  dependencies,
+  category,
+  initialAttrs,
+  defaultSelector,
+  defaultApi,
+}) {
   const requiredDeps = Array.isArray(dependencies) ? dependencies : [];
 
   const customizeAndInitScript = `
 <script>
 (function () {
-  var initialAttrs = ${JSON.stringify(initialAttrs || {})};
-  var defaultSelector = ${JSON.stringify(defaultSelector || null)};
-  var defaultApi = ${JSON.stringify(defaultApi || null)};
+  var initialAttrs = ${safeJson(initialAttrs || {})};
+  var defaultSelector = ${safeJson(defaultSelector || null)};
+  var defaultApi = ${safeJson(defaultApi || null)};
 
   function normalizeAttrName(key) {
     return key.indexOf('data-anm-') === 0 ? key : 'data-anm-' + key;
@@ -747,10 +804,14 @@ function buildScriptsBlock({ jsCode, dependencies, category, initialAttrs, defau
       Object.keys(attrs).forEach(function (key) {
         var val = attrs[key];
         var attrName = normalizeAttrName(key);
-        if (val === null || val === undefined || val === false) {
-          el.removeAttribute(attrName);
-        } else {
-          el.setAttribute(attrName, String(val));
+        try {
+          if (val === null || val === undefined || val === false) {
+            el.removeAttribute(attrName);
+          } else {
+            el.setAttribute(attrName, String(val));
+          }
+        } catch (e) {
+          console.error('Invalid attribute name: ' + attrName);
         }
       });
     });
@@ -786,7 +847,10 @@ function buildScriptsBlock({ jsCode, dependencies, category, initialAttrs, defau
 </script>`;
 
   if (!jsCode || jsCode.trim() === "") {
-    return `${customizeAndInitScript}\n<script>window.__applyInitialAnmAttrs && window.__applyInitialAnmAttrs();</script>\n${SHORTCUT_SCRIPT}`;
+    return `${customizeAndInitScript}
+<script>window.__applyInitialAnmAttrs && window.__applyInitialAnmAttrs();</script>
+${SHORTCUT_SCRIPT}
+${FULL_FRAME_SCRIPT}`;
   }
 
   return `
@@ -804,8 +868,8 @@ ${customizeAndInitScript}
   console.log = function () { sendConsole('log', arguments); origLog.apply(console, arguments); };
   console.error = function () { sendConsole('error', arguments); origErr.apply(console, arguments); };
 
-  var dependencyMap = ${JSON.stringify(DEPENDENCY_MAP)};
-  var requiredDeps = ${JSON.stringify(requiredDeps)};
+  var dependencyMap = ${safeJson(DEPENDENCY_MAP)};
+  var requiredDeps = ${safeJson(requiredDeps)};
   var depsToLoad = ['gsap'];
   requiredDeps.forEach(function (d) { if (d !== 'gsap' && !depsToLoad.includes(d)) depsToLoad.push(d); });
 
@@ -820,11 +884,12 @@ ${customizeAndInitScript}
   function loadModule(url, globalName) {
     return new Promise(function (resolve, reject) {
       var eventId = 'anm-esm-' + globalName;
+      var timer = null;
       var s = document.createElement('script');
       s.type = 'module';
-      s.textContent = 'import * as m from "' + url + '"; window.' + globalName + ' = m; window.dispatchEvent(new CustomEvent("' + eventId + '"));';
-      window.addEventListener(eventId, resolve, { once: true });
-      setTimeout(function () { reject(new Error('ESM timeout: ' + url)); }, 20000);
+      s.textContent = 'import * as m from ' + JSON.stringify(url) + '; window.' + globalName + ' = m; window.dispatchEvent(new CustomEvent(' + JSON.stringify(eventId) + '));';
+      window.addEventListener(eventId, function () { clearTimeout(timer); resolve(); }, { once: true });
+      timer = setTimeout(function () { reject(new Error('ESM timeout: ' + url)); }, 20000);
       document.head.appendChild(s);
     });
   }
@@ -883,6 +948,24 @@ ${FULL_FRAME_SCRIPT}
 `;
 }
 
+function htmlResponse(body, status) {
+  return new NextResponse(body, {
+    status,
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-store, max-age=0",
+      "X-Content-Type-Options": "nosniff",
+    },
+  });
+}
+
+function notFoundPage(slug) {
+  return htmlResponse(
+    `<!DOCTYPE html><html><body style="background:#0a0a0a;color:#888;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;">Animation not found: ${escapeHtml(slug)}</body></html>`,
+    404
+  );
+}
+
 export async function GET(request, context) {
   try {
     const resolvedParams = await Promise.resolve(context.params);
@@ -892,18 +975,15 @@ export async function GET(request, context) {
       return new NextResponse("Missing animation slug", { status: 400 });
     }
 
-    const slug = decodeURIComponent(rawSlug);
-    const { searchParams } = new URL(request.url);
-    const rawAttrs = searchParams.get("attrs");
-
-    let initialAttrs = {};
-    if (rawAttrs) {
-      try {
-        initialAttrs = JSON.parse(rawAttrs);
-      } catch {
-        initialAttrs = {};
-      }
+    let slug = rawSlug;
+    try {
+      slug = decodeURIComponent(rawSlug);
+    } catch {
+      slug = rawSlug;
     }
+
+    const { searchParams } = new URL(request.url);
+    const initialAttrs = parseAttrs(searchParams.get("attrs"));
 
     const supabase = getSupabaseServerClient();
     const { data: animation, error } = await supabase
@@ -912,14 +992,21 @@ export async function GET(request, context) {
       .eq("slug", slug)
       .single();
 
-    if (error || !animation) {
-      return new NextResponse(
-        `<!DOCTYPE html><html><body style="background:#0a0a0a;color:#888;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:sans-serif;">Animation not found: ${slug}</body></html>`,
-        {
-          status: 404,
-          headers: { "Content-Type": "text/html; charset=utf-8" }
-        }
+    if (error) {
+      if (error.code === "PGRST116") {
+        console.warn(`[iframe] slug "${slug}" ကို DB မှာ မတွေ့ပါ`);
+        return notFoundPage(slug);
+      }
+      console.error(`[iframe] Supabase error for slug "${slug}":`, error);
+      return htmlResponse(
+        `<!DOCTYPE html><html><body style="background:#0a0a0a;color:#ef4444;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:monospace;">Server Error</body></html>`,
+        500
       );
+    }
+
+    if (!animation) {
+      console.warn(`[iframe] slug "${slug}" ကို DB မှာ မတွေ့ပါ`);
+      return notFoundPage(slug);
     }
 
     const htmlCode = animation.html_code ?? animation.code_html ?? "";
@@ -934,7 +1021,7 @@ export async function GET(request, context) {
       metadata,
       category,
       animationName: animation.title,
-      layout
+      layout,
     });
 
     let templateHtml = await loadTemplateHtml(templateName);
@@ -957,30 +1044,26 @@ export async function GET(request, context) {
       category,
       initialAttrs,
       defaultSelector: metadata?.customizeSelector || null,
-      defaultApi: metadata?.customizeApi || null
+      defaultApi: metadata?.customizeApi || null,
     });
+    const values = {
+      ANIMATION_NAME: escapeHtml(animation.title || "Animation Preview"),
+      ANIMATION_DESCRIPTION: escapeHtml(animation.description || ""),
+      ANIMATION_HTML: htmlCode || '<div class="demo-text">No preview available</div>',
+      ANIMATION_CSS: cssCode || "",
+      ANIMATION_SCRIPTS: scriptsBlock,
+    };
 
-    const finalHtml = templateHtml
-      .replace(/\{\{ANIMATION_NAME\}\}/g, () => animation.title || "Animation Preview")
-      .replace(/\{\{ANIMATION_DESCRIPTION\}\}/g, () => animation.description || "")
-      .replace(/\{\{ANIMATION_HTML\}\}/g, () => htmlCode || '<div class="demo-text">No preview available</div>')
-      .replace(/\{\{ANIMATION_CSS\}\}/g, () => cssCode || "")
-      .replace(/\{\{ANIMATION_SCRIPTS\}\}/g, () => scriptsBlock);
+    const finalHtml = templateHtml.replace(/\{\{(\w+)\}\}/g, (match, key) =>
+      Object.prototype.hasOwnProperty.call(values, key) ? values[key] : match
+    );
 
-    return new NextResponse(finalHtml, {
-      status: 200,
-      headers: {
-        "Content-Type": "text/html; charset=utf-8",
-        "Cache-Control": "no-store, max-age=0"
-      }
-    });
+    return htmlResponse(finalHtml, 200);
   } catch (err) {
-    return new NextResponse(
-      `<!DOCTYPE html><html><body style="background:#0a0a0a;color:#ef4444;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:monospace;">Server Error: ${err.message}</body></html>`,
-      {
-        status: 500,
-        headers: { "Content-Type": "text/html; charset=utf-8" }
-      }
+    console.error("[iframe] Unexpected error:", err);
+    return htmlResponse(
+      `<!DOCTYPE html><html><body style="background:#0a0a0a;color:#ef4444;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:monospace;">Server Error</body></html>`,
+      500
     );
   }
 }
