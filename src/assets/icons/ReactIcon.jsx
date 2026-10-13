@@ -1,7 +1,6 @@
 import React from 'react';
 
-// module id: 408125
-export default function ReactIcon({ className = "", size = 16, ...props }) { // original mangled: e, n, r
+export default function ReactIcon({ className = "", size = 16, ...props }) {
   return (
     <svg
       width={size}

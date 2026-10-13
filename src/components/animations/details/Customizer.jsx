@@ -1,17 +1,14 @@
-// module id: 726368
-// module id: 135178 (Customizer UI)
+"use client";
 
 import React, { useMemo, useRef } from 'react';
 import { analytics } from '@/libs/utils/analytics';
 import { ONBOARDING_EVENTS } from '@/libs/config/onboarding';
-import Select from '@/components/ui/Select'; // TODO: derived from module id 977805
+import Select from '@/components/ui/Select';
 import Switch from '@/animations/shared/Switch';
 import Button from '@/components/ui/Button';
-import NumberInput from '@/animations/components/AnimatedNumber'; // TODO: derived from module id 125303
-import Dropdown from '@/animations/shared/EasingSelect'; // TODO: derived from module id 666542
+import NumberInput from '@/animations/components/AnimatedNumber';
+import Dropdown from '@/animations/shared/EasingSelect';
 import ServerData, { effectiveCyclePrice } from '@/libs/auth/data/ServerData';
-
-/* --- Customize Logic (726368) --- */
 
 const VALID_TYPES = new Set(['number', 'float', 'boolean', 'select', 'color']);
 
@@ -168,8 +165,6 @@ export function getPrimaryAttribute(animation) {
   return primarySelector?.attribute || `data-anm-${animation?.slug || ''}`;
 }
 
-/* --- Control Item Component --- */
-
 function ConfigurableControl({ configurable, value, onChange, onCommit, disabled = false }) {
   const type = String(configurable.type || '').toLowerCase();
   const currentValue = value ?? configurable.value ?? '';
@@ -263,8 +258,6 @@ function ConfigurableControl({ configurable, value, onChange, onCommit, disabled
     </li>
   );
 }
-
-/* --- Customizer UI Component (135178) --- */
 
 export default function Customizer({
   animation,

@@ -1,10 +1,8 @@
-// module id: 120322
 import React from 'react';
 import { cn } from '@/libs/utils/className';
 import Link from '@/components/navigation/Link';
 import CodeSnippet from './CodeSnippet';
-import DemoBlock from '@/components/animations/utils/DynamicInteractiveBlock'; // TODO: derived from module id 45119
-
+import DemoBlock from '@/components/animations/utils/DynamicInteractiveBlock';
 
 const DEFAULT_LINK_SLUGS = new Set();
 

@@ -1,5 +1,3 @@
-// module id: 737322 (Code Utilities)
-
 export function stripComments(code, lang = 'js') {
   if (!code || typeof code !== 'string') return code;
   
@@ -53,7 +51,6 @@ function processString(input, isJsOrSimilar) {
       continue;
     }
 
-    // Multi-line comment
     if (char === '/' && nextChar === '*') {
       i += 2;
       while (i < len && (input[i] !== '*' || input[i + 1] !== '/')) {
@@ -63,14 +60,12 @@ function processString(input, isJsOrSimilar) {
       continue;
     }
 
-    // Single-line comment
     if (isJsOrSimilar && char === '/' && nextChar === '/') {
       let backIndex = result.length - 1;
       while (backIndex >= 0 && (result[backIndex] === ' ' || result[backIndex] === '\t')) {
         backIndex--;
       }
       
-      // Keep URLs (e.g. http://)
       if (backIndex >= 0 && result[backIndex] === ':') {
         result += char;
         i++;

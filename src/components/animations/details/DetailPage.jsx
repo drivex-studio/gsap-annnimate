@@ -1,38 +1,38 @@
-// module id: 521041
+"use client";
 import React, { useRef, useEffect, useState, useMemo, useCallback, Fragment } from 'react';
 
 import { analytics } from '@/libs/utils/analytics';
-import { useUser } from '@/providers/UserProvider'; // TODO: derived from module id 201220
-import CodeViewer from '@/components/animations/details/CodeViewer'; // TODO: derived from module id 343931
+import { useUser } from '@/providers/UserProvider';
+import CodeViewer from '@/components/animations/details/CodeViewer';
 import ServerData, { effectiveCyclePrice } from '@/libs/auth/data/ServerData';
 import StarterPack from '@/components/paywall/PaywallBlock';
 import FreeChip from '@/components/ui/FreeChip';
 import StarterPackThumbs from '@/components/paywall/StarterPackThumbs';
-import Link from '@/components/navigation/Link'; // TODO: derived from module id 101836
-import SaveButton from '@/components/ui/SaveButton'; // TODO: derived from module id 878512
-import FormatSelect from '@/components/animations/details/FormatSelect'; // TODO: derived from module id 367649
+import Link from '@/components/navigation/Link';
+import SaveButton from '@/components/ui/SaveButton';
+import FormatSelect from '@/components/animations/details/FormatSelect';
 import ProvenanceChip from '@/components/ui/ProvenanceChip';
-import TimelineStrip from '@/components/animations/details/TimelineStrip'; // TODO: derived from module id 444230
-import { getProvenance, getProvenanceSite, getProvenanceBody } from '@/libs/utils/provenance'; // TODO: derived from module id 809630
-import { formatInline, ContentBlock } from '@/components/animations/details/ContentBlock'; // TODO: derived from module id 120322
-import { Tag } from '@/components/animations/details/TimelineStrip'; // TODO: derived from module id 506935
+import TimelineStrip from '@/components/animations/details/TimelineStrip';
+import { getProvenance, getProvenanceSite, getProvenanceBody } from '@/libs/utils/provenance';
+import { formatInline, ContentBlock } from '@/components/animations/details/ContentBlock';
+import { Tag } from '@/components/animations/details/TimelineStrip';
 import { PreviewBlock as CodeBlock, AttributesSection as ConceptList, PresetsSection as PresetList } from './PreviewBlock';
-import AnimationGrid from '@/animations/components/AnimationCard'; // TODO: derived from module id 591611
-import { useOnboarding } from '@/providers/OnboardingProvider'; // TODO: derived from module id 92451
-import { STACK_OPTIONS, ONBOARDING_EVENTS } from '@/libs/config/onboarding'; // TODO: derived from module id 734601
-import MobileCapture from '@/components/animations/details/MobileCapture'; // TODO: derived from module id 573564
-import { useBreakpoint } from '@/hooks/useBreakpoint'; // TODO: derived from module id 400701
-import CaptureForm from '@/components/ui/NewsletterEyebrow'; // TODO: derived from module id 42242
+import AnimationGrid from '@/animations/components/AnimationCard';
+import { useOnboarding } from '@/providers/OnboardingProvider';
+import { STACK_OPTIONS, ONBOARDING_EVENTS } from '@/libs/config/onboarding';
+import MobileCapture from '@/components/animations/details/MobileCapture';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+import CaptureForm from '@/components/ui/NewsletterEyebrow';
 import { useCategories } from '@/providers/CategoryProvider';
-import { cn } from '@/libs/utils/className'; // TODO: derived from module id 103746
-import Customizer from '@/components/animations/details/Customizer'; // TODO: derived from module id 135178
+import { cn } from '@/libs/utils/className';
+import Customizer from '@/components/animations/details/Customizer';
 import { Copy, Check, Brain, CaretDown, CaretUp, X, ArrowSquareOut, Lock } from '@phosphor-icons/react';
 import { toast } from 'sonner';
-import { sendUserEvent } from '@/libs/utils/events'; // TODO: derived from module id 185161
-import PlatformSelect, { PLATFORM_LABEL } from '@/components/animations/details/PlatformSelect'; // TODO: derived from module id 247733
-import CodeSnippet from '@/components/animations/details/CodeSnippet'; // TODO: derived from module id 317840
-import { stripComments, stripLangFor } from '@/components/animations/utils/CodeUtilities'; // TODO: derived from module id 737322
-import FAQ from '@/components/animations/FAQ'; // TODO: derived from module id 126272
+import { sendUserEvent } from '@/libs/utils/events';
+import PlatformSelect, { PLATFORM_LABEL } from '@/components/animations/details/PlatformSelect';
+import CodeSnippet from '@/components/animations/details/CodeSnippet';
+import { stripComments, stripLangFor } from '@/components/animations/utils/CodeUtilities';
+import FAQ from '@/components/animations/FAQ';
 import { 
   countUsableConfigurables, 
   CUSTOMIZE_MIN_CONFIGURABLES, 
@@ -42,10 +42,9 @@ import {
   applyValuesToHtml, 
   applyValuesToReact, 
   applyValuesToVue 
-} from './Customizer'; // TODO: derived from module id 726368
-import Button from '@/components/ui/Button'; // TODO: derived from module id 687989
+} from './Customizer';
+import Button from '@/components/ui/Button';
 
-/* --- Tracker --- */
 function Tracker({ animation }) {
   const viewedRef = useRef(false);
 
@@ -83,7 +82,6 @@ function Tracker({ animation }) {
   return null;
 }
 
-/* --- AccessWrapper --- */
 function AccessWrapper({
   hasAccess,
   loading = false,
@@ -110,7 +108,6 @@ function AccessWrapper({
   );
 }
 
-/* --- Skeleton --- */
 function Skeleton() {
   const indents = {
     0: 'ml-0',
@@ -159,7 +156,6 @@ function Skeleton() {
   );
 }
 
-/* --- DetailHeader --- */
 function DetailHeader({
   animation,
   isSaved,
@@ -256,7 +252,6 @@ function DetailHeader({
   );
 }
 
-/* --- ProvenanceSection --- */
 function ProvenanceSection({ animation }) {
   const provenance = getProvenance(animation);
   const site = getProvenanceSite(animation);
@@ -274,7 +269,6 @@ function ProvenanceSection({ animation }) {
   );
 }
 
-/* --- CraftSection --- */
 function CraftSection({ animation }) {
   const blocks = animation?.metadata?.teaching?.blocks;
   const contentBlocks = Array.isArray(blocks) ? blocks : [];
@@ -306,7 +300,6 @@ const DEP_LABELS = {
   gsap: 'GSAP'
 };
 
-/* --- RequirementsSection --- */
 function RequirementsSection({ animation, concepts = [] }) {
   const deps = Array.isArray(animation?.dependencies) ? animation.dependencies : [];
   const conceptList = Array.isArray(concepts) ? concepts : [];
@@ -352,7 +345,6 @@ function RequirementsSection({ animation, concepts = [] }) {
   );
 }
 
-/* --- RelatedSection --- */
 function RelatedSection({
   animation,
   relatedAnimations = [],
@@ -392,7 +384,6 @@ function RelatedSection({
   );
 }
 
-/* --- OnboardingMessage --- */
 function OnboardingMessage({ slug, platform }) {
   const { active, steps, starterSlug } = useOnboarding();
   const [dismissed, setDismissed] = useState(false);
@@ -424,7 +415,6 @@ function OnboardingMessage({ slug, platform }) {
   );
 }
 
-/* --- MobilePrompt --- */
 function MobilePrompt({
   animation,
   isAuthenticated = false,
@@ -515,7 +505,6 @@ function MobilePrompt({
   );
 }
 
-/* --- CategorySection --- */
 function CategorySection({ currentCategory, slug }) {
   const categories = useCategories();
 
@@ -556,7 +545,6 @@ function CategorySection({ currentCategory, slug }) {
   );
 }
 
-/* --- Helpers --- */
 function resolvePlatform(codeState, preferred) {
   const available = {
     react: !!codeState?.react,
@@ -616,7 +604,6 @@ function generateAiPrompt({ animation, code, platform, lang }) {
   return lines.filter(Boolean).join('\n\n');
 }
 
-/* --- SidebarActions --- */
 function SidebarActions({
   animation,
   codeState,
@@ -790,7 +777,6 @@ const SNIPPET_LANG = {
   html: 'html'
 };
 
-/* --- ExpandToggleButton --- */
 function ExpandToggleButton({ icon, label, onClick, topBorder = true }) {
   return (
     <button
@@ -804,7 +790,6 @@ function ExpandToggleButton({ icon, label, onClick, topBorder = true }) {
   );
 }
 
-/* --- InlineCodePreview --- */
 function InlineCodePreview({
   animation,
   codeState,
@@ -926,7 +911,6 @@ function InlineCodePreview({
   );
 }
 
-/* --- UpgradePrompt --- */
 function UpgradePrompt({ isAuthenticated }) {
   const soloPlan = ServerData.stripe?.landingPlans?.find(p => p.key === 'solo');
   const price = effectiveCyclePrice(soloPlan?.quarterly);
@@ -958,7 +942,6 @@ function UpgradePrompt({ isAuthenticated }) {
   );
 }
 
-/* --- DetailPage (Default Export) --- */
 export default function DetailPage({
   animation,
   isSaved,

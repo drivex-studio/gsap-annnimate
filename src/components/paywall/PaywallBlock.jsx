@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { analytics } from '@/libs/utils/analytics';

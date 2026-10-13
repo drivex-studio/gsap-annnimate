@@ -1,20 +1,18 @@
 'use client';
-// module id: 245711
 import React, { useState, useRef } from 'react';
-import { usePathname } from 'next/navigation'; // module id: 618566
-import { gsap } from 'gsap'; // module id: 989970
-import { useGSAP } from '@gsap/react'; // module id: 365747
+import { usePathname } from 'next/navigation';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
-import { CaretLeft } from '@/components/icons/CaretLeft'; // module id: 590961
-import { CaretRight } from '@/components/icons/CaretRight'; // module id: 268817
+import { CaretLeft } from '@/components/icons/CaretLeft';
+import { CaretRight } from '@/components/icons/CaretRight';
 
-import Link from '@components/navigation/Link'; // TODO: derived from module id 101836
-import { useScramble } from '@/hooks/useScramble'; // module id: 254359
-import analytics from '@/libs/utils/analytics'; // TODO: derived from module id 943348
+import Link from '@components/navigation/Link';
+import { useScramble } from '@/hooks/useScramble';
+import analytics from '@/libs/utils/analytics';
 
 gsap.registerPlugin(useGSAP);
 
-/* --- DetailNav --- */
 export default function DetailNav({ items = [] }) {
   const pathname = usePathname();
   const match = pathname?.match(/^\/animations\/([^/]+)$/);

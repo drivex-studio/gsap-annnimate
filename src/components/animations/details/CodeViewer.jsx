@@ -1,14 +1,14 @@
-// module id: 343931 (CodeViewer Main UI)
+"use client";
 import React, { useState, useRef, useMemo, useEffect, useCallback, Fragment } from 'react';
 
 import Link from '@/components/navigation/Link';
-import { EditorState, EditorView, basicSetup } from '@codemirror/basic-setup'; // TODO: derived from 115080, 693125, 459643 (CodeMirror setup)
+import { EditorState, EditorView, basicSetup } from '@codemirror/basic-setup';
 import { keymap } from '@codemirror/view'; 
-import { indentWithTab } from '@codemirror/commands'; // TODO: derived from 781044
-import { html } from '@codemirror/lang-html'; // TODO: derived from 724433
-import { css } from '@codemirror/lang-css'; // TODO: derived from 73840
-import { javascript } from '@codemirror/lang-javascript'; // TODO: derived from 837153
-import { LanguageSupport } from '@codemirror/language'; // TODO: derived from 998540 (JSON setup via LRParser omitted for brevity, represented by language support)
+import { indentWithTab } from '@codemirror/commands';
+import { html } from '@codemirror/lang-html';
+import { css } from '@codemirror/lang-css';
+import { javascript } from '@codemirror/lang-javascript';
+import { LanguageSupport } from '@codemirror/language';
 
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/Tooltip';
 import { SmartTooltipGroup, SmartTooltip } from '@/components/ui/SmartTooltip';
@@ -21,7 +21,7 @@ import { sendUserEvent } from '@/libs/utils/events';
 import { cn } from '@/libs/utils/className';
 import { ONBOARDING_EVENTS } from '@/libs/config/onboarding';
 import { useOnboarding } from '@/providers/OnboardingProvider';
-import { parseAttributesFromJs, createAnmAutocomplete, anmThemeExtensions } from '@/libs/editor/setup'; // TODO: derived from module id 412715
+import { parseAttributesFromJs, createAnmAutocomplete, anmThemeExtensions } from '@/libs/editor/setup';
 import { stripComments, stripLangFor } from '@/components/animations/utils/CodeUtilities';
 
 function getTabsForPlatform(platform, animation) {
@@ -142,7 +142,6 @@ export default function CodeViewer({
     if (animation.vue_code) list.push('vue');
     if (animation.webflow_code) list.push('webflow');
     
-    // Assuming PLATFORM_ORDER is provided by PlatformSelect module
     const PLATFORM_ORDER = ['react', 'vue', 'html', 'webflow']; 
     return PLATFORM_ORDER.filter(p => list.includes(p));
   }, [animation]);
@@ -199,7 +198,7 @@ export default function CodeViewer({
   const editorLanguage = useMemo(() => {
     if (activeTab === 'CSS') return css();
     if (activeTab === 'JS' || activeTab === 'Javascript') return javascript();
-    if (activeTab === 'JSON') return new LanguageSupport(); // JSON support mocked here
+    if (activeTab === 'JSON') return new LanguageSupport();
     if (platform === 'react' && (activeTab === 'JSX' || activeTab === 'Usage')) return javascript({ jsx: true });
     return html();
   }, [platform, activeTab]);
@@ -248,7 +247,6 @@ export default function CodeViewer({
         autocompleteExt,
         EditorView.updateListener.of(update => {
           if (update.docChanged && !isUpdatingRef.current) {
-            // Check if it was a user edit (not remote)
             const isUserEdit = !update.transactions.find(tr => tr.annotation('remote'));
             if (isUserEdit) {
               handleCodeChange(update.state.doc.toString());
@@ -276,7 +274,7 @@ export default function CodeViewer({
       isUpdatingRef.current = true;
       const transaction = editorViewRef.current.state.update({
         changes: { from: 0, to: currentEditorDoc.length, insert: displayedCode },
-        annotations: ['remote'] // Used string annotation as fallback representation
+        annotations: ['remote']
       });
       editorViewRef.current.dispatch(transaction);
       isUpdatingRef.current = false;

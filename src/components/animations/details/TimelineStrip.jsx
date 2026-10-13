@@ -1,9 +1,8 @@
-// module id: 444230
-// module id: 506935 (Tag Component)
+"use client";
 
 import React, { useState, useRef, useEffect, forwardRef, Fragment } from 'react';
-import { gsap } from 'gsap'; // module id: 989970
-import { useGSAP } from '@gsap/react'; // module id: 365747
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 import IconBase from '@/assets/icons/IconBase';
 import { CaretDown, Play } from '@phosphor-icons/react';
@@ -13,7 +12,6 @@ import { cn } from '@/libs/utils/className';
 import { analytics } from '@/libs/utils/analytics';
 import ServerData, { effectiveCyclePrice } from '@/libs/auth/data/ServerData';
 
-/* --- PauseIcon --- */
 const pauseWeights = new Map([
   [
     'bold',
@@ -59,7 +57,6 @@ export const PauseIcon = forwardRef((props, ref) => (
 ));
 PauseIcon.displayName = 'PauseIcon';
 
-/* --- RepeatIcon --- */
 const repeatWeights = new Map([
   [
     'bold',
@@ -105,7 +102,6 @@ export const RepeatIcon = forwardRef((props, ref) => (
 ));
 RepeatIcon.displayName = 'RepeatIcon';
 
-/* --- Tag Component (506935) --- */
 export function Tag({ category, slug, children, className }) {
   return (
     <Link
@@ -122,8 +118,6 @@ export function Tag({ category, slug, children, className }) {
     </Link>
   );
 }
-
-/* --- TimelineStrip Components --- */
 
 const TIMELINE_COLORS = [
   '96 165 250',
@@ -313,7 +307,6 @@ export default function TimelineStrip({ animation, hasAccess = false, className 
     } catch (e) {}
   };
 
-  // Load from local storage
   useEffect(() => {
     if (storageKey && !rowsDataRef.current) {
       try {
@@ -328,7 +321,6 @@ export default function TimelineStrip({ animation, hasAccess = false, className 
     }
   }, [storageKey]);
 
-  // Request timeline from iframe
   useEffect(() => {
     function requestTimeline() {
       document.querySelectorAll('iframe').forEach(iframe => {
@@ -342,7 +334,6 @@ export default function TimelineStrip({ animation, hasAccess = false, className 
     return () => clearTimeout(timer);
   }, []);
 
-  // Handle iframe messages
   useEffect(() => {
     function handleMessage(event) {
       const data = event?.data;
@@ -423,7 +414,6 @@ export default function TimelineStrip({ animation, hasAccess = false, className 
     return () => window.removeEventListener('message', handleMessage);
   }, [animation?.slug, storageKey]);
 
-  // Initial animation
   useGSAP(() => {
     if (!rows || isReducedMotionRef.current) return;
     isReducedMotionRef.current = true;
@@ -440,10 +430,8 @@ export default function TimelineStrip({ animation, hasAccess = false, className 
     }
   }, { dependencies: [rows] });
 
-  // Cleanup timeout
   useEffect(() => () => clearTimeout(hoverTimeoutRef.current), []);
 
-  // Keyboard controls
   useEffect(() => {
     if (!rows || axisType === 'scroll' || !hasAccess) return;
     
@@ -462,7 +450,6 @@ export default function TimelineStrip({ animation, hasAccess = false, className 
 
   const visibilityClass = isMobileExpanded ? 'block' : 'hidden lg:block';
 
-  // Render Skeleton/Empty State
   if (!rows) {
     return (
       <section className={cn("flex flex-col", className)} data-timeline-strip={true}>
@@ -507,7 +494,6 @@ export default function TimelineStrip({ animation, hasAccess = false, className 
   const soloPlan = ServerData.stripe?.landingPlans?.find(plan => plan.key === 'solo');
   const price = effectiveCyclePrice(soloPlan?.quarterly);
 
-  // Determine concepts tags
   const conceptTags = [{ category: 'timeline', slug: 'gsap-timeline', label: 'Timelines' }];
   if (rows.some(r => r.staggerSpread > 0)) {
     conceptTags.push({ category: 'timeline', slug: 'stagger', label: 'Stagger' });

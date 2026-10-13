@@ -1,13 +1,8 @@
 "use client";
 
-// module id: 113861 (PreviewBlock)
-// module id: 747198 (AttributesSection)
-// module id: 799422 (PresetsSection)
-
 import React, { useState, useRef, useEffect, useMemo, useCallback, Fragment } from 'react';
 import { createPortal } from 'react-dom';
 
-// Icons imported directly from @phosphor-icons/react as requested
 import { 
   ArrowsOut, 
   DeviceTablet, 
@@ -22,15 +17,12 @@ import {
   DeviceMobile
 } from '@phosphor-icons/react';
 
-import Select from '@/components/ui/Select'; // module id: 977805
-import { toast } from 'sonner'; // module id: 846696
-import CodeSnippet from './CodeSnippet'; // module id: 317840
-
-// --- PreviewBlock Helpers (113861) --- //
+import Select from '@/components/ui/Select';
+import { toast } from 'sonner';
+import CodeSnippet from './CodeSnippet';
 
 const PREVIEW_TEMPLATES = new Set(["instant", "compact", "scroll-text", "scroll-cover", "menu", "shader", "shader-scroll", "full-page"]);
 
-// The iframe proxy script is preserved exactly as it drives the preview environment logic
 const FRAME_SCRIPT = `
 <script>
 (function () {
@@ -850,7 +842,7 @@ export function PreviewBlock({ animation, codeState, previewSrcOverride = null, 
             options={VIEWPORT_OPTIONS.map(o => ({
               value: o.id,
               label: o.label,
-              icon: o.Icon // Select component will handle Phosphor icons internally
+              icon: o.Icon
             }))}
             size="sm"
             labelSize="xs"
@@ -951,7 +943,6 @@ export function PreviewBlock({ animation, codeState, previewSrcOverride = null, 
   );
 }
 
-// Hook logic extracted from the main component body
 function usePreviewGenerator({
   animationName = "Animation Preview",
   animationDescription = "",
@@ -988,7 +979,6 @@ function usePreviewGenerator({
         
         let templateName = getTemplateName({ metadata, category, animationName, compact });
         
-        // Safety fallback logic from original source
         if (!metadata?.previewTemplate && !metadata?.sandbox_template && layout === "full-viewport" && (templateName === "instant" || templateName === "compact")) {
           templateName = "menu";
         }
@@ -1191,8 +1181,6 @@ ${FULL_FRAME_SCRIPT}
 `;
 }
 
-// --- AttributesSection (747198) --- //
-
 function AttributeItem({ attr }) {
   const attributeName = attr.name || attr.attribute || "";
   const nameToCopy = attributeName.startsWith("data-anm-") ? attributeName : `data-anm-${attributeName}`;
@@ -1328,9 +1316,6 @@ export function AttributesSection({ animation }) {
   );
 }
 
-
-// --- PresetsSection (799422) --- //
-
 function asArray(val) {
   return Array.isArray(val) ? val : [];
 }
@@ -1369,7 +1354,6 @@ function TipArticle({ item }) {
   
   const codeContent = item.code || item.code_example;
   
-  // Basic language inference
   const lang = codeContent 
     ? (codeContent.includes("data-anm-") || codeContent.includes("<div") || codeContent.includes("<button")) ? "html" 
       : (codeContent.includes("{") && (codeContent.includes("animation") || codeContent.includes("transform"))) ? "css" 

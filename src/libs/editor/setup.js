@@ -31,7 +31,6 @@ import {
 } from '@codemirror/autocomplete';
 import { tags as t } from '@lezer/highlight';
 
-// --- 1. Theme & Syntax Highlighting ---
 const COLOR_CARET = '#ff7a32';
 const COLOR_BG = 'transparent';
 const COLOR_FG = '#c9d1d9';
@@ -111,7 +110,6 @@ const anmHighlightStyle = HighlightStyle.define([
 
 const anmTheme = [anmBaseTheme, syntaxHighlighting(anmHighlightStyle)];
 
-// --- 2. Decorator for `data-anm-*` attributes ---
 const attrMark = Decoration.mark({ class: 'cm-anm-attr-highlight' });
 const valMark = Decoration.mark({ class: 'cm-anm-value-highlight' });
 
@@ -124,7 +122,6 @@ function buildAnmDecorations(view) {
     const str = doc.sliceString(from, to);
     let match;
 
-    // data-anm-xyz
     const attrRegex = /data-anm-[a-zA-Z0-9-]+/g;
     while ((match = attrRegex.exec(str)) !== null) {
       matches.push({
@@ -134,7 +131,6 @@ function buildAnmDecorations(view) {
       });
     }
 
-    // data-anm-xyz="value"
     const valRegex = /data-anm-[a-zA-Z0-9-]+="([^"]*)"/g;
     while ((match = valRegex.exec(str)) !== null) {
       if (match[1]) {
@@ -170,9 +166,6 @@ const anmDecoratorPlugin = ViewPlugin.fromClass(
 
 const anmThemeExtensions = [...anmTheme, anmDecoratorPlugin];
 
-// --- 3. Autocomplete for `data-anm-*` attributes ---
-// TODO: original full attribute list was not recoverable from the bundle
-// (only these 4 were present in the snippet). Add the rest here.
 const ANM_ATTRIBUTES = {
   'magnetic-button': { type: 'keyword', info: 'Main magnetic button trigger' },
   'scroll-reveal': { type: 'keyword', info: 'Scroll-triggered reveal animation' },
@@ -216,20 +209,17 @@ function createAnmAutocomplete(keys = Object.keys(ANM_ATTRIBUTES)) {
   });
 }
 
-// --- 4. Extract attribute names from a JS string ---
 function parseAttributesFromJs(codeStr) {
   if (!codeStr) return [];
   const attrs = new Set();
   let match;
 
-  // dataset.anmXyzAbc -> xyz-abc
   const datasetRegex = /dataset\.anm([A-Z][a-zA-Z]*)/g;
   while ((match = datasetRegex.exec(codeStr)) !== null) {
     const attr = match[1].replace(/([A-Z])/g, '-$1').toLowerCase().slice(1);
     attrs.add(attr);
   }
 
-  // [data-anm-xyz]
   const bracketRegex = /\[data-anm-([a-z-]+)\]/g;
   while ((match = bracketRegex.exec(codeStr)) !== null) {
     attrs.add(match[1]);
@@ -238,7 +228,6 @@ function parseAttributesFromJs(codeStr) {
   return Array.from(attrs);
 }
 
-// --- 5. Basic setup ---
 const basicSetup = [
   lineNumbers(),
   highlightActiveLineGutter(),

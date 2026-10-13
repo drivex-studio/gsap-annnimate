@@ -1,7 +1,6 @@
 import React from 'react';
 
-// module id: 732633
-export function HtmlCssIcon({ className = "", size = 16, ...props }) { // original mangled: e, n, r
+export function HtmlCssIcon({ className = "", size = 16, ...props }) {
   return (
     <svg
       width={size}

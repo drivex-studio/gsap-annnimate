@@ -1,41 +1,37 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import gsap from 'gsap'; // module id: 989970
-import { CaretDown } from '@phosphor-icons/react'; // module id: 815330
-import { cn } from '@/libs/utils/className'; // module id: 103746
+import gsap from 'gsap';
+import { CaretDown } from '@phosphor-icons/react';
+import { cn } from '@/libs/utils/className';
 
-// 1. Constants
-const CUSTOM_EASES = [ // original mangled: s
+const CUSTOM_EASES = [
   { value: "annnimate", label: "Annnimate Drift", bezier: [0.3, 0.9, 0.1, 1] },
   { value: "annnimateInOut", label: "Annnimate Punch", bezier: [0.7, 0, 0.16, 1] }
 ];
 
-const STANDARD_EASE_TYPES = [ // original mangled: i
+const STANDARD_EASE_TYPES = [
   "power1", "power2", "power3", "power4", "expo", "circ", "sine", "back", "elastic", "bounce"
 ];
 
-const EASE_DIRECTIONS = [ // original mangled: o
+const EASE_DIRECTIONS = [
   { id: "out", label: "Out" },
   { id: "in", label: "In" },
   { id: "inOut", label: "In-out" }
 ];
 
-// 2. Helper Components
-
-// Renders the visual curve (SVG) for the selected ease
-function EaseCurveIcon({ value, className = "" }) { // original mangled: u, e, a
-  let pathData = useMemo(() => { // original mangled: i
-    let generatePoints = function(easeStr, resolution = 48) { // original mangled: t
-      let easeFn; // original mangled: r
-      let customEase = CUSTOM_EASES.find(item => item.value === easeStr); // original mangled: a
-      let points = []; // original mangled: l
+function EaseCurveIcon({ value, className = "" }) {
+  let pathData = useMemo(() => {
+    let generatePoints = function(easeStr, resolution = 48) {
+      let easeFn;
+      let customEase = CUSTOM_EASES.find(item => item.value === easeStr);
+      let points = [];
       
       if (customEase) {
-        let [x1, y1, x2, y2] = customEase.bezier; // original mangled: e, r, n, s
-        for (let i = 0; i <= resolution; i++) { // original mangled: a
-          points.push(function getBezierPoint(t, p1x, p1y, p2x, p2y) { // original mangled: e, t, r, n, a
-            let u = 1 - t; // original mangled: l
+        let [x1, y1, x2, y2] = customEase.bezier;
+        for (let i = 0; i <= resolution; i++) {
+          points.push(function getBezierPoint(t, p1x, p1y, p2x, p2y) {
+            let u = 1 - t;
             return {
               x: 3 * u * u * t * p1x + 3 * u * t * t * p2x + t * t * t,
               y: 3 * u * u * t * p1y + 3 * u * t * t * p2y + t * t * t
@@ -51,23 +47,22 @@ function EaseCurveIcon({ value, className = "" }) { // original mangled: u, e, a
         easeFn = null;
       }
       
-      if (!easeFn) easeFn = (v) => v; // Fallback to linear
+      if (!easeFn) easeFn = (v) => v;
       
-      for (let i = 0; i <= resolution; i++) { // original mangled: e
-        let progress = i / resolution; // original mangled: n
+      for (let i = 0; i <= resolution; i++) {
+        let progress = i / resolution;
         points.push({ x: progress, y: easeFn(progress) });
       }
       return points;
     }(value);
 
-    let yValues = generatePoints.map(p => p.y); // original mangled: r
-    let minY = Math.min(0, ...yValues); // original mangled: a
-    let maxY = Math.max(1, ...yValues); // original mangled: l
+    let yValues = generatePoints.map(p => p.y);
+    let minY = Math.min(0, ...yValues);
+    let maxY = Math.max(1, ...yValues);
     
-    return generatePoints.map((point, index) => { // original mangled: e, t
-      // Scale to fit viewBox (0 0 44 26) with padding
-      let svgX = 3 + 38 * point.x; // original mangled: r
-      let svgY = 3 + (1 - (point.y - minY) / (maxY - minY)) * 20; // original mangled: n
+    return generatePoints.map((point, index) => {
+      let svgX = 3 + 38 * point.x;
+      let svgY = 3 + (1 - (point.y - minY) / (maxY - minY)) * 20;
       return `${index === 0 ? "M" : "L"}${svgX.toFixed(1)},${svgY.toFixed(1)}`;
     }).join(" ");
   }, [value]);
@@ -79,8 +74,7 @@ function EaseCurveIcon({ value, className = "" }) { // original mangled: u, e, a
   );
 }
 
-// Renders an individual ease option button
-function EaseOptionButton({ value, label, active, onSelect, house = false }) { // original mangled: c, e, r, n, a, s
+function EaseOptionButton({ value, label, active, onSelect, house = false }) {
   return (
     <button
       type="button"
@@ -100,34 +94,32 @@ function EaseOptionButton({ value, label, active, onSelect, house = false }) { /
   );
 }
 
-// 3. Main Component
-// module id: 666542
 export default function EasingSelect({
-  value, // original mangled: e
-  onChange, // original mangled: n
-  disabled = false, // original mangled: d
-  align = "right", // original mangled: m
-  ariaLabel = "Easing", // original mangled: f
-  className = "" // original mangled: g
+  value,
+  onChange,
+  disabled = false,
+  align = "right",
+  ariaLabel = "Easing",
+  className = ""
 }) {
-  let [isOpen, setIsOpen] = useState(false); // original mangled: p, x
-  let [direction, setDirection] = useState(() => { // original mangled: b, h
-    let dirSuffix = String(value || "").split(".")[1]; // original mangled: t
+  let [isOpen, setIsOpen] = useState(false);
+  let [direction, setDirection] = useState(() => {
+    let dirSuffix = String(value || "").split(".")[1];
     return EASE_DIRECTIONS.some(dir => dir.id === dirSuffix) ? dirSuffix : "out";
   });
   
-  let containerRef = useRef(null); // original mangled: v
+  let containerRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) return;
     
-    let handleMouseDown = (e) => { // original mangled: e
+    let handleMouseDown = (e) => {
       if (containerRef.current && !containerRef.current.contains(e.target)) {
         setIsOpen(false);
       }
     };
     
-    let handleKeyDown = (e) => { // original mangled: t
+    let handleKeyDown = (e) => {
       if (e.key === "Escape") {
         setIsOpen(false);
       }
@@ -142,12 +134,12 @@ export default function EasingSelect({
     };
   }, [isOpen]);
 
-  let handleSelect = (val) => { // original mangled: y
+  let handleSelect = (val) => {
     onChange?.(val);
     setIsOpen(false);
   };
 
-  let standardOptions = [ // original mangled: j
+  let standardOptions = [
     ...STANDARD_EASE_TYPES.map(type => ({
       value: `${type}.${direction}`,
       label: type.charAt(0).toUpperCase() + type.slice(1)
@@ -169,14 +161,14 @@ export default function EasingSelect({
         <span className="flex min-w-0 items-center gap-8">
           <EaseCurveIcon value={value} className="text-foreground-muted" />
           <span className="truncate">
-            {(function formatEaseLabel(easeVal) { // original mangled: e
-              let custom = CUSTOM_EASES.find(c => c.value === easeVal); // original mangled: t
+            {(function formatEaseLabel(easeVal) {
+              let custom = CUSTOM_EASES.find(c => c.value === easeVal);
               if (custom) return custom.label;
               if (!easeVal || easeVal === "none" || easeVal === "linear") return "Linear";
               
-              let [type, dir] = String(easeVal).split("."); // original mangled: r, n
-              let capType = type.charAt(0).toUpperCase() + type.slice(1); // original mangled: a
-              let formatDir = dir === "inOut" ? "in-out" : (dir || ""); // original mangled: l
+              let [type, dir] = String(easeVal).split(".");
+              let capType = type.charAt(0).toUpperCase() + type.slice(1);
+              let formatDir = dir === "inOut" ? "in-out" : (dir || "");
               
               return formatDir ? `${capType} ${formatDir}` : capType;
             })(value)}
@@ -197,7 +189,7 @@ export default function EasingSelect({
             align === "right" ? "right-0" : "left-0"
           )}
         >
-          {/* Direction Toggles (In / Out / InOut) */}
+          {}
           <div className="mb-8 flex gap-4">
             {EASE_DIRECTIONS.map(dir => (
               <button
@@ -214,7 +206,7 @@ export default function EasingSelect({
             ))}
           </div>
 
-          {/* Custom Eases (House options) */}
+          {}
           <div className="mb-8 grid grid-cols-2 gap-4">
             {CUSTOM_EASES.map(custom => (
               <button
@@ -236,7 +228,7 @@ export default function EasingSelect({
 
           <div className="mb-8 h-px bg-foreground/10" />
 
-          {/* Standard Eases */}
+          {}
           <div className="grid grid-cols-3 gap-4">
             {standardOptions.map(opt => (
               <EaseOptionButton

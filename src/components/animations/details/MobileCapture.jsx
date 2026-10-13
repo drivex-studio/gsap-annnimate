@@ -1,4 +1,4 @@
-// module id: 573564
+"use client";
 import React, { useState, useRef, useEffect } from 'react';
 import { X } from '@phosphor-icons/react';
 import { Dialog, DialogContent, DialogClose, DialogTitle, DialogDescription } from '@/components/ui/Dialog';
@@ -12,7 +12,6 @@ function hasRecentPromptStorage(storageKey) {
     const timestamp = parseInt(storedTime, 10);
     if (Number.isNaN(timestamp)) return false;
     
-    // Check if prompted within the last 30 days (2592000000 ms)
     return Date.now() - timestamp < 2592000000;
   } catch {
     return false;
@@ -46,7 +45,6 @@ export default function MobileCapture({
 
     const checkAndShowPrompt = () => {
       if (!shouldSkipPrompt(storageKey)) {
-        // Check if the starter pack band is currently visible on screen
         const isBandVisible = (() => {
           const bandElement = document.querySelector('[data-starter-pack-band]');
           if (!bandElement) return false;
@@ -56,7 +54,6 @@ export default function MobileCapture({
         })();
 
         if (isBandVisible) {
-          // Retry after 15 seconds if the band is already visible
           timerRef.current = window.setTimeout(checkAndShowPrompt, 15000);
           return;
         }
@@ -80,7 +77,6 @@ export default function MobileCapture({
     setIsOpen(open);
     
     if (!open) {
-      // Mark as prompted in local storage when closed
       (function markPrompted(key) {
         try {
           const nowString = String(Date.now());

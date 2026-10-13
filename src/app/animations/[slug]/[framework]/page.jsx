@@ -1,4 +1,3 @@
-// src/app/animations/[slug]/[framework]/page.jsx
 import { notFound } from 'next/navigation';
 import DetailPage from '@/components/animations/details/DetailPage';
 import { getAnimationBySlug, getPublishedAnimations } from '@/libs/supabase/latestAnimation';
@@ -22,7 +21,6 @@ export async function generateMetadata({ params }) {
   return {
     title: `${row.title} in ${LABELS[framework]}`,
     description: row.description || undefined,
-    // The base page is the canonical one; this is a framework-specific view of it.
     alternates: { canonical: `/animations/${row.slug}` },
   };
 }

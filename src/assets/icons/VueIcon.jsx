@@ -1,7 +1,6 @@
 import React from 'react';
 
-// module id: 900128
-export default function VueIcon({ className = "", size = 16, ...props }) { // original mangled: e, n, r
+export default function VueIcon({ className = "", size = 16, ...props }) {
   return (
     <svg
       width={size}

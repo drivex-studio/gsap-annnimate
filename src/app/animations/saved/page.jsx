@@ -1,4 +1,3 @@
-
 import { Suspense } from 'react';
 import { redirect } from 'next/navigation';
 import AnimationsPage from '@/components/animations/AnimationsPage';

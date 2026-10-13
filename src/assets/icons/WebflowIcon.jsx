@@ -1,7 +1,6 @@
 import React from 'react';
 
-// module id: 687460
-export default function WebflowIcon({ className = "", size = 16, ...props }) { // original mangled: t, i, e
+export default function WebflowIcon({ className = "", size = 16, ...props }) {
   return (
     <svg
       width={size}

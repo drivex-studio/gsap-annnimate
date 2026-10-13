@@ -1,3 +1,4 @@
+"use client";
 import React, { forwardRef, useContext } from 'react';
 import { IconContext } from '@/assets/icons/IconContext';
 

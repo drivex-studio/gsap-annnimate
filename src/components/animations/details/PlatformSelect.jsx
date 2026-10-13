@@ -1,13 +1,11 @@
-// module id: 247733
 import React from 'react';
-import { HtmlCssIcon } from '@/assets/icons/HtmlCssIcon'; // TODO: derived from 514162
-import { ReactIcon } from '@/assets/icons/ReactIcon'; // TODO: derived from 989080
-import { VueIcon } from '@/assets/icons/VueIcon'; // TODO: derived from 667024
-import WebflowIcon from '@/assets/icons/WebflowIcon'; // TODO: derived from 687460
+import HtmlCssIcon from '@/assets/icons/HtmlCssIcon';
+import ReactIcon from '@/assets/icons/ReactIcon';
+import VueIcon from '@/assets/icons/VueIcon';
+import WebflowIcon from '@/assets/icons/WebflowIcon';
 import { SmartTooltipGroup, SmartTooltip } from '@/components/ui/SmartTooltip';
 import AnimatedTabs from '@/animations/components/AnimatedTabs';
 import { cn } from '@/libs/utils/className';
-
 
 export const PLATFORM_LABEL = {
   html: 'HTML',

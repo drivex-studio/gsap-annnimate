@@ -1,4 +1,3 @@
-// src/app/animations/[slug]/page.jsx
 import { notFound } from 'next/navigation';
 import DetailPage from '@/components/animations/details/DetailPage';
 import { getAnimationBySlug, getPublishedAnimations } from '@/libs/supabase/latestAnimation';
@@ -10,7 +9,6 @@ import {
   pickRelated,
 } from '@/libs/supabase/animationDetail';
 
-// "saved" is its own route (app/animations/saved); this guard is a safety net.
 const RESERVED = new Set(['saved']);
 
 export async function generateMetadata({ params }) {

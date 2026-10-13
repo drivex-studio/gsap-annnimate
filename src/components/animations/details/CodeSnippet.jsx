@@ -1,11 +1,11 @@
-// module id: 317840
+"use client";
 import React, { useState, useRef, useEffect } from 'react';
-import { EditorState, EditorView, basicSetup } from '@codemirror/basic-setup'; // TODO: derived from 115080, 459643
-import { html } from '@codemirror/lang-html'; // TODO: derived from 724433
-import { css } from '@codemirror/lang-css'; // TODO: derived from 73840
-import { javascript } from '@codemirror/lang-javascript'; // TODO: derived from 837153
+import { EditorState, EditorView, basicSetup } from '@codemirror/basic-setup';
+import { html } from '@codemirror/lang-html';
+import { css } from '@codemirror/lang-css';
+import { javascript } from '@codemirror/lang-javascript';
 import { Copy, Check } from '@phosphor-icons/react';
-import { anmThemeExtensions } from '@/libs/editorUtils'; // TODO: derived from 412715
+import { anmThemeExtensions } from '@/libs/editor/setup';
 
 const DEFAULT_FILENAMES = {
   html: 'example.html',

@@ -1,14 +1,12 @@
-// module id: 367649
 import React from 'react';
 import Link from '@/components/navigation/Link';
 import { cn } from '@/libs/utils/className';
 import { SmartTooltipGroup, SmartTooltip } from '@/components/ui/SmartTooltip';
-import { useTransitionClick } from '@/hooks/useTransitionClick'; // TODO: derived from module id 995289
+import { useTransitionClick } from '@/hooks/useTransitionClick';
 
-import { HtmlCssIcon } from '@/assets/icons/HtmlCssIcon'; // TODO: derived from module id 732633
-import { ReactIcon } from '@/assets/icons/ReactIcon'; // TODO: derived from module id 408125
-import { VueIcon } from '@/assets/icons/VueIcon'; // TODO: derived from module id 900128
-
+import HtmlCssIcon from '@/assets/icons/HtmlCssIcon';
+import ReactIcon from '@/assets/icons/ReactIcon';
+import VueIcon from '@/assets/icons/VueIcon';
 
 const FRAMEWORK_LABELS = {
   react: 'React',
