@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 
 const EasingGraph = dynamic(() => import('@/components/animations/interactive/EasingGraph'), { ssr: false });
 const Stagger = dynamic(() => import('@/components/animations/interactive/Stagger'), { ssr: false });
-const SplitText = dynamic(() => import('@/components/animations/interactive/SplitText'), { ssr: false });
+const SplitTextReveal = dynamic(() => import('@/components/animations/interactive/SplitTextReveal'), { ssr: false });
 const ScrubSim = dynamic(() => import('@/components/animations/interactive/ScrubSim'), { ssr: false });
 
 const COMPONENTS_MAP = {
