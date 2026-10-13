@@ -11,7 +11,7 @@ const ScrubSim = dynamic(() => import('@/components/animations/interactive/Scrub
 const COMPONENTS_MAP = {
   "easing-graph": EasingGraph,
   "stagger": Stagger,
-  "split-text": SplitText,
+  "split-text": SplitTextReveal,
   "scrub-sim": ScrubSim
 };
 
