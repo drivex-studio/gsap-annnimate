@@ -211,14 +211,14 @@ function useHeaderTheme(ref) {
 
 function MegaMenuIntro({ intro, onClose }) {
   return (
-    <div data-mm-reveal className="col-span-3 col-start-1 flex flex-col gap-16">
+    <div data-mm-reveal className="MegaMenuIntro">
       <p className="text-mono-sm text-foreground-muted">{intro.eyebrow}</p>
       <p className="text-h4 text-foreground">{intro.heading}</p>
       <p className="text-body-sm text-foreground-muted">{intro.text}</p>
       <Link
         href={intro.cta.href}
         onClick={() => {}}
-        className="text-mono-sm w-fit text-foreground underline underline-offset-4 hover:text-foreground-muted"
+        className="text-mono-sm MegaMenuIntro-cta text-foreground hover:text-foreground-muted"
       >
         {intro.cta.label}
       </Link>
@@ -230,18 +230,18 @@ function MegaMenuColumn({ column }) {
   return (
     <div
       data-mm-reveal
-      className="flex flex-1 flex-col gap-8"
+      className="MegaMenuColumn"
     >
-      <span className="text-mono-sm mb-4 text-foreground-muted">{column.label}</span>
+      <span className="text-mono-sm MegaMenuColumn-label text-foreground-muted">{column.label}</span>
       {column.links.map((link) => (
         <NavLink
           key={link.label}
           href={link.href}
-          className="text-body-sm py-4 text-foreground-muted transition-colors duration-200 hover:text-foreground"
+          className="text-body-sm MegaMenuColumn-link text-foreground-muted hover:text-foreground"
         >
           {link.label}
           {link.badge ? (
-            <span className="text-accent-2xs ml-8 inline-block bg-brand px-6 py-2 align-middle text-black">
+            <span className="text-accent-2xs MegaMenuColumn-badge text-black">
               {link.badge}
             </span>
           ) : null}
@@ -253,7 +253,7 @@ function MegaMenuColumn({ column }) {
 
 function MegaMenuColumns({ columns }) {
   return (
-    <div className="col-span-4 col-start-5 flex gap-48">
+    <div className="MegaMenuColumns">
       {columns.map((column) => (
         <MegaMenuColumn key={column.label} column={column} />
       ))}
@@ -263,13 +263,13 @@ function MegaMenuColumns({ columns }) {
 
 function FeaturedMegaMenu({ featured, onClose }) {
   return (
-    <div data-mm-reveal className="col-span-3 col-start-10">
+    <div data-mm-reveal className="FeaturedMegaMenu">
       <Link
         href={featured.href}
         onClick={onClose}
-        className="flex flex-col gap-12"
+        className="FeaturedMegaMenu-link"
       >
-        <div className="aspect-[16/10] w-full overflow-hidden bg-background-muted">
+        <div className="FeaturedMegaMenu-imageWrapper">
           <picture>
             {featured.image.avif ? (
               <source srcSet={featured.image.avif} type="image/avif" />
@@ -277,12 +277,12 @@ function FeaturedMegaMenu({ featured, onClose }) {
             <img
               src={featured.image.jpg}
               alt={featured.image.alt}
-              className="block object-cover"
+              className="FeaturedMegaMenu-image"
               style={{ width: '100%', height: '100%' }}
             />
           </picture>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="FeaturedMegaMenu-content">
           <p className="text-mono-sm text-foreground-muted">{featured.eyebrow}</p>
           <p className="text-body-sm text-foreground">{featured.title}</p>
         </div>
@@ -293,13 +293,13 @@ function FeaturedMegaMenu({ featured, onClose }) {
 
 function LatestAnimationMegaMenu({ animation, onClose }) {
   return (
-    <div data-mm-reveal className="col-span-3 col-start-10">
+    <div data-mm-reveal className="LatestAnimationMegaMenu">
       <Link
         href={`/animations/${animation.slug}`}
         onClick={onClose}
-        className="flex flex-col gap-12"
+        className="LatestAnimationMegaMenu-link"
       >
-        <div className="aspect-[16/10] w-full overflow-hidden bg-background-muted">
+        <div className="LatestAnimationMegaMenu-mediaWrapper">
           {animation.preview_video_url ? (
             <video
               src={animation.preview_video_url}
@@ -307,17 +307,17 @@ function LatestAnimationMegaMenu({ animation, onClose }) {
               loop
               muted
               playsInline
-              className="h-full w-full object-cover"
+              className="LatestAnimationMegaMenu-media"
             />
           ) : animation.preview_image_url ? (
             <img
               src={bunnyImageUrl(animation.preview_image_url, { width: 480 })}
               alt=""
-              className="h-full w-full object-cover"
+              className="LatestAnimationMegaMenu-media"
             />
           ) : null}
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="LatestAnimationMegaMenu-content">
           <p className="text-mono-sm text-foreground-muted">
             {translate('common.header.latestComponentLabel')}
           </p>
@@ -335,7 +335,7 @@ function MegaMenuGroup({ item, latestAnimation, onClose, setGroupRef }) {
       ref={(el) => setGroupRef(item.key, el)}
       className="v2-mm-group"
     >
-      <div className="grid grid-cols-12 gap-16 py-32">
+      <div className="MegaMenuGroup-inner">
         <MegaMenuIntro
           intro={item.mega.intro}
           onClose={onClose}
@@ -370,7 +370,7 @@ function DesktopNavigation({
       ref={navRef}
       onMouseEnter={clearTimeouts}
       onMouseLeave={onMouseLeave}
-      className="relative hidden h-full items-center justify-center gap-x-32 lg:col-span-4 lg:col-start-5 lg:flex"
+      className="DesktopNavigation"
     >
       {navItems.map((item) =>
         item.mega ? (
@@ -401,7 +401,7 @@ function DesktopNavigation({
             active={isRouteActive(pathname, item.href)}
             onMouseEnter={() => onMouseEnter(item)}
             className={cn(
-              'text-mono h-full items-center',
+              'text-mono DesktopNavigation-link',
               isRouteActive(pathname, item.href)
                 ? 'text-foreground'
                 : 'text-foreground-muted hover:text-foreground',
@@ -439,7 +439,7 @@ function MobileNavigation({
           <Link
             key={item.key}
             href={item.href}
-            className="text-mono border-b border-border-muted py-12 text-foreground"
+            className="text-mono MobileNavigation-link text-foreground"
           >
             {item.label}
           </Link>
@@ -451,11 +451,11 @@ function MobileNavigation({
 
 function HeaderActions({ loading, hasAccess }) {
   return (
-    <div className="hidden items-center justify-end gap-20 lg:col-span-3 lg:col-start-10 lg:flex">
+    <div className="HeaderActions">
       {!loading && (
         <Link
           href={hasAccess ? '/animations' : '/login'}
-          className="text-mono text-foreground-muted transition-colors duration-200 hover:text-foreground"
+          className="text-mono HeaderActions-link text-foreground-muted hover:text-foreground"
         >
           {hasAccess
             ? translate('common.header.actions.account')
@@ -476,22 +476,18 @@ function MobileMenuButton({ isMobileMenuOpen, setIsMobileMenuOpen }) {
       aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
       aria-expanded={isMobileMenuOpen}
       onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-      className="relative size-32 lg:hidden"
+      className="MobileMenuButton"
     >
       <span
         className={cn(
-          'absolute left-1/2 h-[1.5px] w-20 -translate-x-1/2 bg-foreground transition-transform duration-300',
-          isMobileMenuOpen
-            ? 'top-1/2 -translate-y-1/2 rotate-45'
-            : 'top-[calc(50%-4px)]',
+          'MobileMenuButton-lineTop',
+          isMobileMenuOpen ? 'is-open' : '',
         )}
       />
       <span
         className={cn(
-          'absolute left-1/2 h-[1.5px] w-20 -translate-x-1/2 bg-foreground transition-transform duration-300',
-          isMobileMenuOpen
-            ? 'top-1/2 -translate-y-1/2 -rotate-45'
-            : 'top-[calc(50%+4px)]',
+          'MobileMenuButton-lineBottom',
+          isMobileMenuOpen ? 'is-open' : '',
         )}
       />
     </button>
@@ -508,20 +504,20 @@ function MobileMenu({
 }) {
   return (
     <div
-      className="v2-mm-collapse v2-container absolute inset-x-0 top-full lg:hidden"
+      className="v2-mm-collapse v2-container MobileMenu"
       data-open={isMobileMenuOpen}
       inert={!isMobileMenuOpen}
     >
       <div>
-        <div className="max-h-[calc(100vh-var(--v2-header-h)-var(--v2-header-gap))] overflow-y-auto border-b border-border bg-surface">
-          <div className="flex flex-col px-32 py-16">
+        <div className="MobileMenu-scroll">
+          <div className="MobileMenu-content">
             <MobileNavigation
               navItems={navItems}
               mobileExpandedItem={mobileExpandedItem}
               setMobileExpandedItem={setMobileExpandedItem}
             />
 
-            <div className="flex items-center gap-20 pt-16">
+            <div className="MobileMenu-actions">
               {!loading && (
                 <Link
                   href={hasAccess ? '/animations' : '/login'}
@@ -954,19 +950,19 @@ export default function Header({ latestAnimation }) {
         data-pad-state={isStarterPack ? 'top' : padState}
         style={{ top: 'var(--anm-ppp-offset, 0px)' }}
         className={cn(
-          'v2-header inset-x-0 top-0 z-[300] pt-[var(--v2-header-gap)]',
-          isStarterPack ? 'absolute' : 'fixed',
+          'v2-header Header',
+          isStarterPack ? 'Header--starter' : 'Header--fixed',
         )}
       >
         <div ref={mmBarRef} className="v2-mm-bar">
           <div
             ref={mmBarInnerRef}
             className={cn(
-              'v2-bar-padx v2-container flex h-full items-center justify-between transition-colors duration-300 ease-power3-out lg:grid lg:grid-cols-12 lg:gap-16',
-              isSurfaceBg ? 'bg-surface' : 'bg-transparent',
+              'v2-bar-padx v2-container Header-barInner',
+              isSurfaceBg ? 'is-surfaceBg' : '',
             )}
           >
-            <Logo className="lg:col-span-3" />
+            <Logo className="Header-logo" />
 
             {!isStarterPack && (
               <DesktopNavigation

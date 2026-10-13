@@ -1,3 +1,3 @@
 export default {
-  allowedDevOrigins: ['13.59.70.11'],
+  allowedDevOrigins: ['54.253.149.151'],
 };

@@ -14,7 +14,7 @@ export default function StarterPackSection({
       <div className="v2-container py-96 lg:py-160">
         <div className="mx-auto flex max-w-[640px] flex-col items-center gap-16 text-center">
           
-          <RevealHeadline as="h2" sizeClass="text-h2" trigger="scroll" className="font-medium">
+          <RevealHeadline as="h2" trigger="scroll" className="text-h2 font-medium">
             {translate("common.starterPack.headline")}
           </RevealHeadline>
           

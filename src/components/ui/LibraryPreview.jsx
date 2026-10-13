@@ -38,7 +38,7 @@ export default function LibraryPreview({ items = [], count = 0 }) {
     <section data-theme="dark" className="bg-background text-foreground">
       <div className="v2-container py-32 lg:py-48">
         <div className="mb-32 flex flex-wrap items-baseline justify-between gap-x-24 gap-y-12 lg:mb-48">
-          <AnimatedHeadline as="h2" sizeClass="text-h2" trigger="scroll" className="font-medium">
+          <AnimatedHeadline as="h2" trigger="scroll" className="text-h2 font-medium">
             Just shipped.
           </AnimatedHeadline>
           <span className="text-accent-xs text-foreground-muted">

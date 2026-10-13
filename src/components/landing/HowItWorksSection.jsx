@@ -296,7 +296,7 @@ export default function HowItWorksSection({ animations = [] }) {
     <section ref={sectionRef} data-theme="light" className="bg-background py-64 text-foreground lg:py-96">
       <div className="v2-container">
         <header className="mb-24 max-w-[42rem] lg:mb-32">
-          <AnimatedHeadline ref={headlineRef} as="h2" sizeClass="text-h2" className="max-w-[28ch]" trigger="manual">
+          <AnimatedHeadline ref={headlineRef} as="h2" className="text-h2 max-w-[28ch]" trigger="manual">
             {translate('landing.howItWorks.headline')}
           </AnimatedHeadline>
           <AnimatedSubtext tag="p" className="text-body-lg mt-16 max-w-[40ch] text-foreground-muted" {...ANIMATION_PROPS} onReady={registerCallback(0)}>

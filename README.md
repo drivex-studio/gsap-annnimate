@@ -6,7 +6,7 @@
 
 Browse, preview live, copy the code, and ship motion that holds up on real client work.
 
-[Live site](https://gsap-annnimate.vercel.app) · [Component library](https://gsap-annnimate.vercel.app/animations) · [Documentation](https://gsap-annnimate.vercel.app/docs) · [Roadmap](https://gsap-annnimate.vercel.app/roadmap)
+[Live site](https://anm.drivexstore.shop) · [Component library](https://anm.drivexstore.shop/animations) · [Documentation](https://anm.drivexstore.shop/docs) · [Roadmap](https://anm.drivexstore.shop/roadmap)
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
@@ -164,7 +164,7 @@ The vanilla HTML version is configured through data attributes:
 </div>
 ```
 
-Full setup guides for React, Vue and HTML are in the [documentation](https://gsap-annnimate.vercel.app/docs).
+Full setup guides for React, Vue and HTML are in the [documentation](https://anm.drivexstore.shop/docs).
 
 ## Deployment
 
@@ -182,4 +182,4 @@ The project is deployed on [Vercel](https://vercel.com/). To deploy your own ins
 
 ## License
 
-All rights reserved. The component library is a commercial product; see the [terms](https://gsap-annnimate.vercel.app/terms) on the live site for usage details.
+All rights reserved. The component library is a commercial product; see the [terms](https://anm.drivexstore.shop/terms) on the live site for usage details.

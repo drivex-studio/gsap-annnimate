@@ -26,7 +26,7 @@ export default function HeroSection({
         <div className="col-span-12 lg:col-span-10 lg:col-start-2 lg:text-center">
           <AnimatedHeadline
             as="h1"
-            sizeClass="text-h1"
+            className="text-h1"
             className="mx-auto max-w-[16ch]"
             trigger="pageEnter"
           >
