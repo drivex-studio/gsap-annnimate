@@ -1,17 +1,15 @@
 'use client'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import 'next/link';
 import gsap from 'gsap';
-
 import siteConfig, { effectiveCyclePrice, effectiveCycleTotal } from '@/libs/config/siteConfig';
-import { translate } from '@/libs/utils/i18n';
+import { t } from '@/libs/utils/i18n';
 import { IsoFigure, PUNCH, useIsoLoop } from '@/components/common/iso';
 import { getPppDisplayPrice } from '@/components/pricing/utils/ppp';
 import { STUDIO_CYCLE_MONTHS, studioPppTotalCents } from '@/libs/auth/data/studioPricing';
-import RevealHeadline from '@/animations/shared/RevealHeadline';
+import AnimatedHeading from '@/animations/shared/RevealHeadline';
 import AnimatedNumber from '@/animations/components/AnimatedNumber';
 import RevealFade from '@/animations/shared/RevealFade';
-import PricingToggle from '@/components/pricing/utils/PricingToggle';
+import BillingCycleToggle from '@/components/pricing/utils/PricingToggle';
 import KitPrice from '@/components/pricing/utils/KitPrice';
 import SeatSlider from '@/components/pricing/SeatSlider';
 import Button from '@/components/ui/Button';
@@ -24,24 +22,24 @@ const LANDING_PLANS = siteConfig.stripe.landingPlans;
 const SOLO_PLAN = LANDING_PLANS.find((plan) => plan.key === 'solo');
 const STUDIO_PLAN = LANDING_PLANS.find((plan) => plan.perSeat);
 
-function CycleSwapTextranslate({ cycle, texts, align = 'start', className = '' }) {
+function CycleSwapText({ cycle, texts, align = 'start', className = '' }) {
   const spanRefs = useRef({});
   const prevCycleRef = useRef(cycle);
 
-  useLayoutEffectranslate(() => {
+  useLayoutEffect(() => {
     Object.entries(spanRefs.current).forEach(([key, spanEl]) => {
-      gsap.setranslate(spanEl, { y: 0, yPercent: 110 * (key !== cycle) });
+      gsap.set(spanEl, { y: 0, yPercent: 110 * (key !== cycle) });
     });
   }, []);
 
-  useEffectranslate(() => {
+  useEffect(() => {
     const prevCycle = prevCycleRef.current;
     prevCycleRef.current = cycle;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prevCycle === cycle) {
       Object.entries(spanRefs.current).forEach(([key, spanEl]) => {
-        gsap.setranslate(spanEl, { yPercent: 110 * (key !== cycle) });
+        gsap.set(spanEl, { yPercent: 110 * (key !== cycle) });
       });
       return;
     }
@@ -90,7 +88,7 @@ function MonthsFreeBadge({ plan, cycle }) {
       cycle={cycle}
       texts={{
         quarterly: '\u00A0',
-        yearly: translate('home-v3.pricing.monthsFree', { months: freeMonths }),
+        yearly: t('home-v3.pricing.monthsFree', { months: freeMonths }),
       }}
       className="text-body-sm text-brand"
     />
@@ -134,7 +132,7 @@ function PlanPriceDisplay({ amount, plan, cycle, muted, was }) {
           </span>
         ) : null}
         <span className={`text-body ml-4 font-normal tracking-normal ${muted}`}>
-          {translate('home-v3.pricing.perMonth')}
+          {t('home-v3.pricing.perMonth')}
         </span>
       </div>
 
@@ -142,8 +140,8 @@ function PlanPriceDisplay({ amount, plan, cycle, muted, was }) {
         cycle={cycle}
         align="end"
         texts={{
-          quarterly: translate('home-v3.pricing.billedQuarterly', { total: formatEuro(plan.quarter) }),
-          yearly: translate('home-v3.pricing.billedYearly', { total: formatEuro(plan.year) }),
+          quarterly: t('home-v3.pricing.billedQuarterly', { total: formatEuro(plan.quarter) }),
+          yearly: t('home-v3.pricing.billedYearly', { total: formatEuro(plan.year) }),
         }}
         className={`text-body-sm ${muted}`}
       />
@@ -170,12 +168,12 @@ function PlanCard({ fig = emptyFig, figure, featured = false, compact = false, l
         <div className="flex flex-col items-start gap-8">
           <p className={`text-body-sm ${featured ? 'text-white/75' : 'text-foreground-muted'}`}>{label}</p>
           {featured && compact && (
-            <span className="text-body-sm bg-white/15 px-8 py-4">{translate('home-v3.pricing.popular')}</span>
+            <span className="text-body-sm bg-white/15 px-8 py-4">{t('home-v3.pricing.popular')}</span>
           )}
         </div>
 
         {featured && !compact && (
-          <span className="text-body-sm bg-white/15 px-8 py-4">{translate('home-v3.pricing.popular')}</span>
+          <span className="text-body-sm bg-white/15 px-8 py-4">{t('home-v3.pricing.popular')}</span>
         )}
 
         {compact && (
@@ -199,7 +197,7 @@ function PlanCard({ fig = emptyFig, figure, featured = false, compact = false, l
   );
 }
 
-function FeatureListranslate({ items, featured, strong = 0 }) {
+function FeatureList({ items, featured, strong = 0 }) {
   return (
     <ul className="flex flex-col gap-8">
       {items.map((item, index) => {
@@ -235,7 +233,7 @@ function KitCard({ kit, fig, compact = false }) {
       <div className="flex items-start justify-between gap-16">
         <div className="flex flex-col gap-8">
           <p className="text-body-sm text-foreground-muted">
-            {translate('home-v3.pricing.kitLabel', { title: kit.title })}
+            {t('home-v3.pricing.kitLabel', { title: kit.title })}
           </p>
           <p className="text-h3 font-medium">
             <KitPrice
@@ -245,7 +243,7 @@ function KitCard({ kit, fig, compact = false }) {
             />
             <span className="text-body-sm font-normal tracking-normal text-foreground-muted">
               {' '}
-              {translate('home-v3.pricing.oneTime')}
+              {t('home-v3.pricing.oneTime')}
             </span>
           </p>
         </div>
@@ -258,12 +256,12 @@ function KitCard({ kit, fig, compact = false }) {
       <div className="flex flex-col gap-12">
         <p className="text-body-sm">{kit.tagline}</p>
         {!compact && (
-          <FeatureListranslate
+          <FeatureList
             strong={1}
             items={[
-              translate('home-v3.pricing.kitComponents', { count: kit.componentCount }),
-              translate('home-v3.pricing.kitFormats'),
-              translate('home-v3.pricing.kitOwned'),
+              t('home-v3.pricing.kitComponents', { count: kit.componentCount }),
+              t('home-v3.pricing.kitFormats'),
+              t('home-v3.pricing.kitOwned'),
             ]}
           />
         )}
@@ -271,7 +269,7 @@ function KitCard({ kit, fig, compact = false }) {
 
       <div className="mt-auto">
         <Button href={`/checkout?kit=${kit.slug}`} theme="surface" className="w-full justify-center">
-          {translate('home-v3.pricing.kitCta', { title: kit.title })}
+          {t('home-v3.pricing.kitCta', { title: kit.title })}
         </Button>
       </div>
     </article>
@@ -284,14 +282,14 @@ function buildSoloFeatures(features, { shippedRecently = 0, count = DEFAULT_TOTA
       if (typeof feature === 'string') return feature;
       if (feature?.componentCount) {
         return {
-          label: translate('pricing.tiers.allComponents', { count }),
+          label: t('pricing.tiers.allComponents', { count }),
           highlight: true,
         };
       }
       if (feature?.shippedRecently) {
         return shippedRecently >= 2
           ? {
-              label: translate('pricing.tiers.shippedRecently', { count: shippedRecently }),
+              label: t('pricing.tiers.shippedRecently', { count: shippedRecently }),
               solid: true,
             }
           : null;
@@ -346,14 +344,14 @@ export default function HomeV3Pricing({
       <div className={`v2-container flex flex-col ${compact ? 'gap-40' : 'gap-48 lg:gap-64'}`}>
         <div className="flex flex-wrap items-end justify-between gap-24">
           <div className="flex flex-col gap-16">
-            <RevealHeadline
+            <AnimatedHeading
               as={headingAs}
               sizeClass="text-h2"
               className="max-w-[20ch] font-medium text-balance"
               trigger={triggerMode}
             >
-              {headline ?? translate('home-v3.pricing.headline')}
-            </RevealHeadline>
+              {headline ?? t('home-v3.pricing.headline')}
+            </AnimatedHeading>
 
             {sub ? (
               <RevealFade
@@ -367,11 +365,11 @@ export default function HomeV3Pricing({
             ) : null}
           </div>
 
-          <PricingToggle cycle={cycle} onChange={setCycle} hint={false} />
+          <BillingCycleToggle cycle={cycle} onChange={setCycle} hint={false} />
         </div>
 
         <div className="grid grid-cols-1 gap-px border border-foreground/15 bg-foreground/15 md:grid-cols-2 xl:grid-cols-3">
-          <PlanCard fig={soloFig} featured compact={compact} label={translate('home-v3.pricing.soloLabel')}>
+          <PlanCard fig={soloFig} featured compact={compact} label={t('home-v3.pricing.soloLabel')}>
             <div className="flex flex-col gap-8">
               <PlanPriceDisplay
                 amount={getMonthlyDisplay(soloPricing)}
@@ -385,7 +383,7 @@ export default function HomeV3Pricing({
 
             <p className="text-body-sm text-white/85">{SOLO_PLAN.pitch}</p>
 
-            <FeatureListranslate
+            <FeatureList
               items={buildSoloFeatures(SOLO_PLAN.features, {
                 shippedRecently,
                 ...(count ? { count } : {}),
@@ -404,7 +402,7 @@ export default function HomeV3Pricing({
             <PlanCard
               figure={<StudioSeatsFigure seats={seats} />}
               compact={compact}
-              label={translate('home-v3.pricing.studioLabel')}
+              label={t('home-v3.pricing.studioLabel')}
             >
               <div className="flex flex-col gap-12">
                 <PlanPriceDisplay
@@ -425,12 +423,12 @@ export default function HomeV3Pricing({
 
               <p className="text-body-sm text-foreground-muted">{STUDIO_PLAN.pitch}</p>
 
-              <FeatureListranslate items={STUDIO_PLAN.features} strong={2} />
+              <FeatureList items={STUDIO_PLAN.features} strong={2} />
 
               <div className="mt-auto flex flex-col gap-12">
                 <p className="text-body-sm text-foreground-muted">
                   <a href={`mailto:${siteConfig.resend.supportEmail}`} className="underline underline-offset-2">
-                    {translate('home-v3.pricing.moreSeats', { max: STUDIO_PLAN.maxSeats })}
+                    {t('home-v3.pricing.moreSeats', { max: STUDIO_PLAN.maxSeats })}
                   </a>
                 </p>
                 <Button
