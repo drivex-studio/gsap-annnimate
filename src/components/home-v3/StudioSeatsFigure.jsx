@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { faces, IsoFigure, PUNCH, reduced, str, viewBox } from '@/libs/utils/iso';
+import { faces, IsoFigure, PUNCH, reduced, str, viewBox } from '@/components/common/iso';
 import { buildSeatBoxes, getSeatBoxCoord, parseViewBox } from '@/components/home-v3/pricingFigures';
 
 export function StudioSeatsFigure({ seats }) {

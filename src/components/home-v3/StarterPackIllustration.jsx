@@ -1,6 +1,6 @@
 'use client'
 import { useRef } from 'react';
-import { IsoFigure, PUNCH, useIsoLoop } from '@/libs/utils/iso';
+import { IsoFigure, PUNCH, useIsoLoop } from '@/components/common/iso';
 
 const INNER_ITEM_COORDS = [
   { x: -34, y: -14 },

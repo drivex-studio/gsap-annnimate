@@ -3,7 +3,9 @@ import SiteLayout from '@/components/SiteLayout';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import { getLatestAnimation, getCategories } from '@/libs/supabase/latestAnimation';
-import '@/styles/style.css';
+import '@/styles/main.css';
+import '@/styles/cursor.css';
+import '@/styles/prose-blog.css';
 
 export const metadata = {
   metadataBase: new URL("https://anm.drivexstore.shop"),

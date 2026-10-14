@@ -3,7 +3,7 @@
 import { useCallback, useRef } from 'react';
 import gsap from 'gsap';
 
-import { PUNCH } from '@/libs/utils/iso';
+import { PUNCH } from '@/components/common/iso';
 import { t } from '@/libs/utils/i18n';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import AnimatedText from '@/animations/components/AnimatedText';

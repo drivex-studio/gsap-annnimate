@@ -1,4 +1,4 @@
-import { PUNCH } from '@/libs/utils/iso';
+import { PUNCH } from '@/components/common/iso';
 
 export const soloFig = {
   model: () => [

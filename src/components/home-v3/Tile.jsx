@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { PUNCH, useIsoLoop, IsoFigure, tone } from '@/libs/utils/iso';
+import { PUNCH, useIsoLoop, IsoFigure, tone } from '@/components/common/iso';
 import { t } from '@/libs/utils/i18n';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import Button from '@/components/ui/Button';
@@ -9,7 +9,7 @@ import { ScrollTrigger } from '@/libs/utils/vendor';
 
 const heightConfigs = [50, 80, 32];
 
-const awardFig = {
+export const awardFig = {
   model: () => [
     ...[-1, 0, 1].map((step, index) => ({
       x: -24 + 50 * step,

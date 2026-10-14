@@ -214,20 +214,18 @@ export default function AnimationPreview({
       <div className="flex flex-wrap items-center justify-between gap-12">
         <div className="hidden lg:block">
           <SegmentedControl
-            value={activeViewportId}
+            activeId={activeViewportId}
             onChange={(selectedId) => {
               const matched = VIEWPORT_OPTIONS.find((opt) => opt.id === selectedId);
               if (matched) {
                 setViewportWidth(matched.w);
               }
             }}
-            options={VIEWPORT_OPTIONS.map((opt) => ({
-              value: opt.id,
+            tabs={VIEWPORT_OPTIONS.map((opt) => ({
+              id: opt.id,
               label: opt.label,
-              icon: opt.Icon,
+              Icon: opt.Icon,
             }))}
-            size="sm"
-            labelSize="xs"
             ariaLabel="Viewport size"
           />
         </div>

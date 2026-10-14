@@ -5,7 +5,7 @@ import gsap from 'gsap';
 
 import siteConfig, { effectiveCyclePrice, effectiveCycleTotal } from '@/libs/config/siteConfig';
 import { translate } from '@/libs/utils/i18n';
-import { IsoFigure, PUNCH, useIsoLoop } from '@/libs/utils/iso';
+import { IsoFigure, PUNCH, useIsoLoop } from '@/components/common/iso';
 import { getPppDisplayPrice } from '@/components/pricing/utils/ppp';
 import { STUDIO_CYCLE_MONTHS, studioPppTotalCents } from '@/libs/auth/data/studioPricing';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
