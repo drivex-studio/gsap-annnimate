@@ -4,7 +4,7 @@ import { cn } from '@/libs/utils/className';
 import AnimatedTabs from '@/animations/components/AnimatedTabs';
 
 export default function SegmentedControl({
-  tabs,
+  tabs = [], // <-- ဒီနေရာမှာ = [] ထည့်ပေးထားပါတယ်
   activeId,
   onChange,
   ariaLabel = "Tabs",
@@ -36,7 +36,9 @@ export default function SegmentedControl({
       case " ":
       case "Enter":
         e.preventDefault();
-        onChange(tabs[currentIndex].id);
+        if (tabs[currentIndex]) {
+          onChange?.(tabs[currentIndex].id);
+        }
         return;
       default:
         return;
@@ -73,7 +75,7 @@ export default function SegmentedControl({
               key={tab.id}
               type="button"
               data-flip-id={tab.id}
-              onClick={() => onChange(tab.id)}
+              onClick={() => onChange?.(tab.id)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               aria-selected={isActive}
               role="tab"

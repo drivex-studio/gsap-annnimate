@@ -1,8 +1,10 @@
+"use client";
 import React from 'react';
 import MenuTrigger from "next/link"; 
 import { cn } from "@/libs/utils/className"; 
 import { useTransitionClick } from "@/hooks/useTransitionClick"; 
 import { InlineLoader } from "@/components/ui/InlineLoader"; 
+import '@/styles/components/Button.css';
 
 const SIZES = {
   xs: {
