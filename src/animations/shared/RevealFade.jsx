@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import { jsx } from 'react/jsx-runtime';
 import gsap from 'gsap';
