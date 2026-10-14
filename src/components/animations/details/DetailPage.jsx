@@ -45,7 +45,7 @@ import {
   applyValuesToHtml, 
   applyValuesToReact, 
   applyValuesToVue 
-} from '@/components/common/Customizer';
+} from '@/libs/utils/CONFIGURABLES';
 import Button from '@/components/ui/Button';
 
 function Tracker({ animation }) {

@@ -4,26 +4,28 @@ const SUPPORTED_TYPES = new Set([
   'boolean',
   'select',
   'color',
-]);
+])
+
+const CUSTOMIZE_MIN_CONFIGURABLES = 0
 
 function getConfigurables(animation) {
-  const attributes = animation?.attributes;
+  const attributes = animation?.attributes
   const configurables =
-    attributes?.attributes?.configurables ??
-    attributes?.configurables ??
-    [];
+    attributes?.attributes?.configurables ||
+    attributes?.configurables ||
+    []
 
   return Array.isArray(configurables)
     ? configurables.filter(isValidConfigurable)
-    : [];
+    : []
 }
 
 function isValidConfigurable(configurable) {
-  if (!configurable || !configurable.attribute) return false;
+  if (!configurable || !configurable.attribute) return false
 
-  const type = String(configurable.type || '').toLowerCase();
+  const type = String(configurable.type || '').toLowerCase()
 
-  if (!SUPPORTED_TYPES.has(type)) return false;
+  if (!SUPPORTED_TYPES.has(type)) return false
 
   if (type === 'number' || type === 'float') {
     return (
@@ -31,7 +33,7 @@ function isValidConfigurable(configurable) {
       Number.isFinite(Number(configurable.max)) &&
       configurable.value !== '' &&
       Number.isFinite(Number(configurable.value))
-    );
+    )
   }
 
   if (type === 'select') {
@@ -39,18 +41,18 @@ function isValidConfigurable(configurable) {
       Array.isArray(configurable.options) &&
       configurable.options.length > 1 &&
       configurable.options.includes(configurable.value)
-    );
+    )
   }
 
   if (type === 'boolean') {
-    const value = String(configurable.value).toLowerCase();
-    return value === 'true' || value === 'false';
+    const value = String(configurable.value).toLowerCase()
+    return value === 'true' || value === 'false'
   }
 
   return (
     type !== 'color' ||
     /^#[0-9a-fA-F]{3,8}$/.test(String(configurable.value || ''))
-  );
+  )
 }
 
 function getAnmApiName(value) {
@@ -58,161 +60,163 @@ function getAnmApiName(value) {
     .split('-')
     .filter(Boolean)
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join('');
+    .join('')
 }
 
 function getPrimaryAttribute(animation) {
-  const attributes = animation?.attributes;
+  const attributes = animation?.attributes
   const selectors =
-    attributes?.attributes?.selectors ??
-    attributes?.selectors ??
-    [];
+    attributes?.attributes?.selectors ||
+    attributes?.selectors ||
+    []
 
   const selector =
-    selectors.find((item) => item?.required && item?.attribute) ??
-    selectors[0];
+    selectors.find((item) => item?.required && item?.attribute) ||
+    selectors[0]
 
-  return selector?.attribute || `data-anm-${animation?.slug || ''}`;
+  return selector?.attribute || `data-anm-${animation?.slug || ''}`
 }
 
 function countUsableConfigurables(animation) {
-  return getConfigurables(animation).length;
+  return getConfigurables(animation).length
 }
 
 function toAttributeKey(attribute) {
   return String(attribute || '')
     .replace(/^data-anm-/, '')
-    .replace(/-([a-z0-9])/g, (_, character) => character.toUpperCase());
-}
-
-function escapeRegExp(value) {
-  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    .replace(/-([a-z0-9])/g, (_, character) => character.toUpperCase())
 }
 
 function formatConfigurableValue(value, type) {
-  const normalizedType = String(type || '').toLowerCase();
+  const normalizedType = String(type || '').toLowerCase()
 
   if (normalizedType === 'number' || normalizedType === 'float') {
-    const number = Number(value);
-    return Number.isFinite(number) ? String(number) : null;
+    const number = Number(value)
+    return Number.isFinite(number) ? String(number) : null
   }
 
   if (normalizedType === 'boolean') {
-    return value === true || value === 'true' ? 'true' : 'false';
+    return value === true || value === 'true' ? 'true' : 'false'
   }
 
   return `'${String(value)
     .replace(/\\/g, '\\\\')
-    .replace(/'/g, "\\'")}'`;
+    .replace(/'/g, "\\'")}'`
 }
 
-const VALUE_PATTERN = "('[^']*'|\"[^\"]*\"|[^,}\\s][^,}]*)";
+const VALUE_PATTERN = "('[^']*'|\"[^\"]*\"|[^,}\\s][^,}]*)"
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
 
 function applyValuesToHtml(html, values, primaryAttribute) {
-  let source = String(html || '');
-  if (!source) return source;
+  let source = String(html || '')
+  if (!source) return source
 
   for (const [attribute, value] of Object.entries(values || {})) {
-    if (value == null || value === '') continue;
+    if (value == null || value === '') continue
 
-    const text = String(value);
+    const text = String(value)
     const attributePattern = new RegExp(
-      `(?<![-\\w])${escapeRegExp(attribute)}\\s*=\\s*"[^"]*"`
-    );
+      `(?<![-\\w])${escapeRegExp(attribute)}\\s*=\\s*"[^"]*"`,
+    )
 
     if (attributePattern.test(source)) {
       source = source.replace(
         attributePattern,
-        () => `${attribute}="${text}"`
-      );
+        () => `${attribute}="${text}"`,
+      )
     } else {
       const primaryPattern = new RegExp(
-        `(?<![-\\w])${escapeRegExp(primaryAttribute)}(\\s*=\\s*"[^"]*")?`
-      );
+        `(?<![-\\w])${escapeRegExp(primaryAttribute)}(\\s*=\\s*"[^"]*")?`,
+      )
 
       source = source.replace(
         primaryPattern,
-        (match) => `${match} ${attribute}="${text}"`
-      );
+        (match) => `${match} ${attribute}="${text}"`,
+      )
     }
   }
 
-  return source;
+  return source
 }
 
 function applyValuesToReact(source, values, configurables) {
-  let result = String(source || '');
-  if (!result) return result;
+  let result = String(source || '')
+  if (!result) return result
 
   const match = result.match(
-    /export default function \w+\s*\(\s*\{[\s\S]*?\}\s*\)/
-  );
+    /export default function \w+\s*\(\s*\{[\s\S]*?\}\s*\)/,
+  )
 
-  if (!match) return result;
+  if (!match) return result
 
-  let functionSignature = match[0];
+  let functionSignature = match[0]
 
   for (const [attribute, value] of Object.entries(values || {})) {
-    if (value == null || value === '') continue;
+    if (value == null || value === '') continue
 
     const configurable = (configurables || []).find(
-      (item) => item.attribute === attribute
-    );
+      (item) => item.attribute === attribute,
+    )
 
     const formattedValue = formatConfigurableValue(
       value,
-      configurable?.type
-    );
+      configurable?.type,
+    )
 
-    if (formattedValue == null) continue;
+    if (formattedValue == null) continue
 
-    const key = toAttributeKey(attribute);
+    const key = toAttributeKey(attribute)
     const pattern = new RegExp(
-      `(\\b${escapeRegExp(key)}\\s*=\\s*)${VALUE_PATTERN}`
-    );
+      `(\\b${escapeRegExp(key)}\\s*=\\s*)${VALUE_PATTERN}`,
+    )
 
     functionSignature = functionSignature.replace(
       pattern,
-      (_, prefix) => `${prefix}${formattedValue}`
-    );
+      (_, prefix) => `${prefix}${formattedValue}`,
+    )
   }
 
-  return result.replace(match[0], () => functionSignature);
+  return result.replace(match[0], () => functionSignature)
 }
 
 function applyValuesToVue(source, values, configurables) {
-  let result = String(source || '');
-  if (!result) return result;
+  let result = String(source || '')
+  if (!result) return result
 
   for (const [attribute, value] of Object.entries(values || {})) {
-    if (value == null || value === '') continue;
+    if (value == null || value === '') continue
 
     const configurable = (configurables || []).find(
-      (item) => item.attribute === attribute
-    );
+      (item) => item.attribute === attribute,
+    )
 
     const formattedValue = formatConfigurableValue(
       value,
-      configurable?.type
-    );
+      configurable?.type,
+    )
 
-    if (formattedValue == null) continue;
+    if (formattedValue == null) continue
 
-    const key = toAttributeKey(attribute);
+    const key = toAttributeKey(attribute)
     const pattern = new RegExp(
-      `(\\b${escapeRegExp(key)}\\s*:\\s*\\{[^}]*?\\bdefault:\\s*)${VALUE_PATTERN}`
-    );
+      `(\\b${escapeRegExp(key)}\\s*:\\s*\\{[^}]*?\\bdefault:\\s*)${VALUE_PATTERN}`,
+    )
 
     result = result.replace(
       pattern,
-      (_, prefix) => `${prefix}${formattedValue}`
-    );
+      (_, prefix) => `${prefix}${formattedValue}`,
+    )
   }
 
-  return result;
+  return result
 }
 
+// module id: 726368
 export {
+  CUSTOMIZE_MIN_CONFIGURABLES,
   applyValuesToHtml,
   applyValuesToReact,
   applyValuesToVue,
@@ -220,4 +224,4 @@ export {
   getAnmApiName,
   getConfigurables,
   getPrimaryAttribute,
-};
+}

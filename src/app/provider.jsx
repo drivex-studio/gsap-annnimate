@@ -9,6 +9,7 @@ import { NotificationProvider } from '@/providers/NotificationProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { CategoryProvider } from '@/providers/CategoryProvider';
 import AppProviders from '@/providers/AppProviders';
+import { ListSizeProvider } from '@/providers/ListSizeProvider';
 
 const EMPTY_FEED = { banner: null, items: [], latestDate: null };
 
@@ -27,7 +28,9 @@ export default function Provider({
                 <ThemeProvider>
                   <CategoryProvider value={categories}>
                   <AppProviders>
+                  <ListSizeProvider>
                     {children}
+                    </ListSizeProvider>
                     </AppProviders>
                   </CategoryProvider>
                 </ThemeProvider>
