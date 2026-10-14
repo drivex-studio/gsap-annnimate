@@ -1,3 +1,5 @@
+'use client';
+
 import { jsx } from 'react/jsx-runtime'; 
 import { createContext, useContext } from 'react'; 
 
