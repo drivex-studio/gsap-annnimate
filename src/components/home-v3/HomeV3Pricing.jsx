@@ -258,7 +258,7 @@ function KitCard({ kit, fig, compact = false }) {
       <div className="flex flex-col gap-12">
         <p className="text-body-sm">{kit.tagline}</p>
         {!compact && (
-          <FeatureList
+          <FeatureListranslate
             strong={1}
             items={[
               translate('home-v3.pricing.kitComponents', { count: kit.componentCount }),
@@ -385,7 +385,7 @@ export default function HomeV3Pricing({
 
             <p className="text-body-sm text-white/85">{SOLO_PLAN.pitch}</p>
 
-            <FeatureList
+            <FeatureListranslate
               items={buildSoloFeatures(SOLO_PLAN.features, {
                 shippedRecently,
                 ...(count ? { count } : {}),
@@ -425,7 +425,7 @@ export default function HomeV3Pricing({
 
               <p className="text-body-sm text-foreground-muted">{STUDIO_PLAN.pitch}</p>
 
-              <FeatureList items={STUDIO_PLAN.features} strong={2} />
+              <FeatureListranslate items={STUDIO_PLAN.features} strong={2} />
 
               <div className="mt-auto flex flex-col gap-12">
                 <p className="text-body-sm text-foreground-muted">
