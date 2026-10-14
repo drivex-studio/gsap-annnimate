@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { useReveal } from '@/hooks/useReveal';
+import { useReveal } from '@/animations/hooks/useReveal';
 
 export default function FadeIn({
   as: Component = 'div',

@@ -4,7 +4,7 @@ import { translate } from '@/libs/utils/i18n';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import Button from '@/components/ui/Button';
 import AnimatedText from '@/animations/components/AnimatedText';
-import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
+import RevealHeadline from '@/animations/shared/RevealHeadline';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 import ImageGrid from '@/components/ui/ImageCarousel';
 import VideoLabelOverlay from '@/components/ui/VideoLabelOverlay';
@@ -43,9 +43,9 @@ export default function TwoWaysSection({ images = [], animations = [], cursorRef
     <section data-theme="light" className="two-ways relative bg-background py-96 text-foreground lg:py-128">
       <div className="v2-container">
         <header className="mb-64 max-w-[60ch] lg:mb-96">
-          <AnimatedHeadline as="h2" className="max-w-[18ch]" trigger="scroll">
+          <RevealHeadline as="h2" className="max-w-[18ch]" trigger="scroll">
             {translate('landing.twoWays.headline')}
-          </AnimatedHeadline>
+          </RevealHeadline>
           <AnimatedSubtext tag="p" className="text-body-lg mt-24 max-w-[52ch] text-foreground-muted" {...ANIMATION_PROPS}>
             {translate('landing.twoWays.body')}
           </AnimatedSubtext>

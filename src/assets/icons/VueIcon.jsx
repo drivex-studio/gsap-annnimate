@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function VueIcon({ className = "", size = 16, ...props }) {
+export function VueIcon({ className = "", size = 16, ...props }) {
   return (
     <svg
       width={size}
@@ -18,3 +18,5 @@ export default function VueIcon({ className = "", size = 16, ...props }) {
     </svg>
   );
 }
+
+export default VueIcon;

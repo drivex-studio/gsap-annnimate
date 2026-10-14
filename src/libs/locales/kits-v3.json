@@ -1,0 +1,139 @@
+{
+  "hero": {
+    "headline": "Own the animations that take weeks to build.",
+    "sub": "Each Kit is a deep, stand-alone collection built around one system you'd otherwise build from scratch. Buy it once and use it on every project.",
+    "specs": {
+      "components": "Components",
+      "formats": "Formats",
+      "formatsValue": "React, Vue and HTML",
+      "price": "Price",
+      "priceValue": "{price} one-time"
+    },
+    "cta": "See the {title} Kit"
+  },
+  "inside": {
+    "headline": "See every component before you buy.",
+    "sub": "Pick a Kit and drag through every component that comes with it."
+  },
+  "why": {
+    "headline": "Start from the finished version, not a blank file.",
+    "system": {
+      "title": "One system, not loose pieces",
+      "line": "Every component in a Kit is built to work with the others. Pair any Reveal preloader with any of its hero sections and the handoff is already built."
+    },
+    "properly": {
+      "title": "The hard parts, done properly",
+      "line": "Each piece is the kind of work that takes weeks to get right. We do that work, and you own the result."
+    },
+    "forever": {
+      "title": "Yours on every project",
+      "line": "You pay {price} once and use it on every project you build, with nothing to renew."
+    }
+  },
+  "faq": {
+    "headline": "Questions before you buy a Kit.",
+    "subtext": "Short answers to what people ask about Kits.",
+    "items": [
+      {
+        "q": "Is a Landmark Kit included in the Library?",
+        "a": "No. A Landmark Kit is a separate one-time purchase, not part of the Library subscription. Library members get 20% off every Kit while the subscription is active, and past Kit buyers get 20% off their first year of any Library plan."
+      },
+      {
+        "q": "Do I own it forever, and are updates included?",
+        "a": "Yes. One purchase gives you a perpetual license plus every future update to the Kit at no extra cost. Nothing renews and nothing expires."
+      },
+      {
+        "q": "Which frameworks do the Kits ship in?",
+        "a": "Both Kits ship in React, Vue and plain HTML / CSS / JS. They are not built for Webflow."
+      },
+      {
+        "q": "Can I use a Kit on client and commercial projects?",
+        "a": "Yes. The license covers unlimited commercial and client projects. The only thing you cannot do is repackage or resell the components as a competing product."
+      },
+      {
+        "q": "Can I get a refund on a Kit?",
+        "a": "No. Kits are final sale: you get the full code the moment you pay, so a purchase can't be returned. Watch every component of a Kit before you buy."
+      }
+    ]
+  },
+  "endCta": {
+    "headline": "Pick a Kit and skip the weeks it takes to build.",
+    "subtext": "Each Kit is {price} once and yours on every project."
+  },
+  "menu": {
+    "coverage": {
+      "headline": "Four things a menu can do to a page.",
+      "sub": "Pick by what your layout can take: a pinned hero can't take a menu that pushes the page down, and a live canvas shouldn't be covered. The Kit has all four, so the answer is already in it.",
+      "blurbs": {
+        "cover": "The menu takes the whole screen, and the page waits untouched underneath.",
+        "move": "There is no overlay: the page itself tilts or slides aside to make room.",
+        "float": "The menu opens as its own small surface, and the page keeps running behind it.",
+        "drill": "Levels stack instead of replacing each other, so the path stays visible on deep navigation."
+      }
+    },
+    "craft": {
+      "headline": "A menu is where sites quietly break.",
+      "sub": "The animation is the easy half. Focus, scroll and search are where menus break, and all ten handle them the same way.",
+      "rows": {
+        "nav": {
+          "title": "Google and screen readers still see your nav",
+          "line": "A closed menu stays in the page, so crawlers and assistive tech get the full navigation whether anyone opened it or not.",
+          "specs": [
+            {
+              "label": "Closed menu",
+              "value": "Hidden and inert, never removed"
+            },
+            {
+              "label": "Screen readers",
+              "value": "Modal menus are real dialogs"
+            }
+          ]
+        },
+        "keys": {
+          "title": "Keyboard and scroll just work",
+          "line": "Every menu handles focus, Escape and scroll lock the same way, so you don't re-test them per menu.",
+          "specs": [
+            {
+              "label": "Keyboard",
+              "value": "Focus moves in, Escape closes, focus comes back"
+            },
+            {
+              "label": "Scroll lock",
+              "value": "Locks your real scroller, Lenis included"
+            }
+          ]
+        },
+        "smooth": {
+          "title": "Smooth everywhere, reduced motion included",
+          "line": "All ten move on the same curves without touching layout, and with reduced motion they open almost instantly.",
+          "specs": [
+            {
+              "label": "Reduced motion",
+              "value": "Opens in under 150ms, same menu"
+            },
+            {
+              "label": "Animated",
+              "value": "Only transform, opacity and clip-path"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "reveal": {
+    "inside": {
+      "headline": "Everything you get.",
+      "sub": "All {count} components, preloaders and hero sections, each built to drop in and tune. Hover a name to watch it.",
+      "groups": {
+        "cover": {
+          "label": "Preloaders",
+          "line": "The cover that holds the page while it loads, then opens it."
+        },
+        "hero": {
+          "label": "Hero sections",
+          "line": "The first screen the cover hands over to, in WebGL or GSAP."
+        }
+      }
+    }
+  }
+}

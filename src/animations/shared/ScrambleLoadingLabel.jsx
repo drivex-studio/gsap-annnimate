@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from 'react';
-import { useDualLayerScramble } from '@/hooks/useDualLayerScramble';
+import { useDualLayerScramble } from '@/animations/hooks/useDualLayerScramble';
 
 export function ScrambleLoadingLabel({
   text = "Loading",

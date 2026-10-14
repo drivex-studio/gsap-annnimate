@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { SplitText } from '@/libs/utils/vendor';
-import useDualLayerScramble from '@/hooks/useDualLayerScramble';
+import useDualLayerScramble from '@/animations/hooks/useDualLayerScramble';
 
 gsap.registerPlugin(SplitText);
 

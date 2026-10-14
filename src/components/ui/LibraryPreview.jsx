@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '@/components/navigation/Link'; 
 import Button from '@/components/ui/Button';
-import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
+import AnimatedHeadline from '@/components/common/AnimatedHeadline';
 
 export function relativeShipped(dateString) {
   if (!dateString) return null;

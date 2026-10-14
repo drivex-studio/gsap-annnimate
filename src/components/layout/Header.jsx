@@ -17,6 +17,7 @@ import { themes, navItemsData } from '@/libs/config/navConfig';
 import { DesktopMegaMenuItem } from './Header/DesktopMegaMenuItem';
 import { MobileAccordionItem } from './Header/MobileAccordionItem';
 import { HeaderMarquee } from './Header/HeaderMarquee';
+import '@/styles/components/MegaMenuIntro.css';
 
 function useHeaderAuth() {
   const [user, setUser] = useState(null);

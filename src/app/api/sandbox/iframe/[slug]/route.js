@@ -647,7 +647,6 @@ const FALLBACK_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
-
 const templateCache = new Map();
 
 function getSupabaseServerClient() {
@@ -681,7 +680,6 @@ function parseAttrs(raw) {
       return parsed;
     }
   } catch {
-    // invalid JSON → ignore
   }
   return {};
 }

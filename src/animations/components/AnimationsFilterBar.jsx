@@ -1,11 +1,14 @@
 "use client";
-import { useState, useEffect, useRef, useMemo, Fragment } from 'react';
+import { 
+  useState, useEffect,
+  useRef, useMemo, Fragment } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useReveal } from '@/hooks/useReveal';
+import { useReveal } from '@/animations/hooks/useReveal';
 import { useUser } from '@/providers/UserProvider';
 import { getDiscordLinkForUser } from '@/libs/utils/discord';
 import { translate } from '@/libs/utils/i18n';
+import '@/styles/components/animations-filter.css';
 import {
   SquaresFour,
   BookmarkSimple,

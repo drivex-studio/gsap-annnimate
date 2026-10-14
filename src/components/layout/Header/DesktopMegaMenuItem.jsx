@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/libs/utils/className';
 import MenuTrigger from 'next/link';
-import { useScramble } from '@/hooks/useScramble'; 
+import { useScramble } from '@/animations/hooks/useScramble'; 
 import { useTransitionClick } from '@/hooks/useTransitionClick';
 
 export function DesktopMegaMenuItem({ item, href, badge, active, expanded, setRef, onMouseEnter, onClick }) {

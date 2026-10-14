@@ -1,0 +1,253 @@
+{
+  "common": {
+    "cta": "Get access",
+    "secondary": "Browse components",
+    "start": {
+      "headline": "Four steps from npm install to a working page.",
+      "docs": "Read the quick start",
+      "steps": [
+        "Install GSAP",
+        "Copy the files",
+        "Use it in a page",
+        "Change a value"
+      ]
+    },
+    "handled": {
+      "body": "Each card is a bug you would otherwise fix by hand, and what every component already does about it."
+    },
+    "endCta": {
+      "subtext": "{count} components in React, Vue and HTML, built the way we build for Coca-Cola and Powerade."
+    }
+  },
+  "nextjs": {
+    "name": "Next.js",
+    "hero": {
+      "headline": "A Next.js animation library, built on GSAP.",
+      "body": "Annnimate is a library of {count} GSAP components you copy into a Next.js app. Each file starts with \"use client\" and cleans up when it unmounts, so your pages stay Server Components and nothing leaks between routes."
+    },
+    "start": {
+      "bodies": [
+        "`npm install gsap @gsap/react`, once per project.",
+        "Pick React on a component's page and save its two files side by side.",
+        "Import it into any page, App Router or Pages Router. The page stays a Server Component.",
+        "Every setting is a prop. Tune it live on the component's page, then copy the values."
+      ]
+    },
+    "handled": {
+      "headline": "What breaks GSAP in Next.js is already handled.",
+      "rows": [
+        {
+          "title": "Route changes",
+          "body": "A ScrollTrigger from the last page keeps firing after you navigate.",
+          "aside": "Every component kills its timelines and ScrollTriggers when it unmounts.",
+          "href": "/learn/react/use-gsap",
+          "figure": "use-gsap"
+        },
+        {
+          "title": "StrictMode",
+          "body": "In development React mounts each component twice, so a hand-written animation runs twice.",
+          "aside": "Cleanup runs between the two mounts, so you see one animation.",
+          "href": "/learn/react/gsap-context",
+          "figure": "gsap-context"
+        },
+        {
+          "title": "Server Components",
+          "body": "A component with hooks can't render inside a Server Component page.",
+          "aside": "Each file starts with \"use client\". Import it into any page and the page stays on the server.",
+          "href": "/learn/frameworks/ssr-gsap",
+          "figure": "ssr-gsap"
+        },
+        {
+          "title": "Reduced motion",
+          "body": "Visitors who turned motion off in their system settings still get the full animation.",
+          "aside": "Every component checks prefers-reduced-motion and respects it.",
+          "href": "/docs/guides/production",
+          "figure": "doc-production"
+        }
+      ]
+    },
+    "components": {
+      "headline": "{count} components, every one in React.",
+      "line": "Each one ships a React file that starts with \"use client\". Click one to take a closer look."
+    },
+    "faq": {
+      "headline": "Questions, answered.",
+      "subtext": "What Next.js developers ask before they copy a component.",
+      "items": [
+        {
+          "q": "Does Annnimate work with the Next.js App Router?",
+          "a": "Yes. Every React component starts with \"use client\" and cleans up when it unmounts, so it works from any page in app/ and the page stays a Server Component. The Pages Router works too."
+        },
+        {
+          "q": "Do the animations break on route change?",
+          "a": "No. Each component kills its timelines and ScrollTriggers when it unmounts, so nothing from the last page keeps running after you navigate."
+        },
+        {
+          "q": "Does it work with StrictMode?",
+          "a": "Yes. Cleanup runs between StrictMode's two mounts in development, so you see one animation, not two."
+        },
+        {
+          "q": "Do I need to install GSAP separately?",
+          "a": "Yes, once per project: gsap and @gsap/react. GSAP has been free for commercial use, every plugin included, since version 3.13. Each component's page lists the plugins it uses."
+        }
+      ]
+    },
+    "endCta": {
+      "headline": "Motion for Next.js, without the setup."
+    }
+  },
+  "nuxt": {
+    "name": "Nuxt",
+    "hero": {
+      "headline": "A Nuxt animation library, built on GSAP.",
+      "body": "Annnimate is a library of {count} GSAP components you copy into a Nuxt app as plain Vue files. Each one starts its animation in onMounted, which Nuxt only runs in the browser, and cleans up when you leave the page."
+    },
+    "start": {
+      "bodies": [
+        "`npm install gsap`, once per project. No Nuxt module, no config change.",
+        "Pick Vue on a component's page and save its files in `components/`.",
+        "Import it into any page with its CSS. Nuxt renders the markup, the browser runs the animation.",
+        "Every setting is a prop. Tune it live on the component's page, then copy the values."
+      ]
+    },
+    "handled": {
+      "headline": "What breaks GSAP in Nuxt is already handled.",
+      "rows": [
+        {
+          "title": "Server rendering",
+          "body": "Code that reaches for window or the DOM during setup breaks the server render.",
+          "aside": "Each component starts its animation in onMounted, which Nuxt only runs in the browser.",
+          "href": "/learn/frameworks/ssr-gsap",
+          "figure": "ssr-gsap"
+        },
+        {
+          "title": "Page changes",
+          "body": "Leave a page and its ScrollTriggers keep measuring a layout that's gone.",
+          "aside": "Each component reverts its animation when it unmounts.",
+          "href": "/learn/frameworks/vue-gsap",
+          "figure": "vue-gsap"
+        },
+        {
+          "title": "Plugins",
+          "body": "A ScrollTrigger or SplitText call does nothing until the plugin is registered.",
+          "aside": "Each component imports and registers the plugins it uses.",
+          "href": "/learn/scroll/scrolltrigger",
+          "figure": "scrolltrigger"
+        },
+        {
+          "title": "Reduced motion",
+          "body": "Visitors who turned motion off in their system settings still get the full animation.",
+          "aside": "Every component checks prefers-reduced-motion and respects it.",
+          "href": "/docs/guides/production",
+          "figure": "doc-production"
+        }
+      ]
+    },
+    "components": {
+      "headline": "{count} components, every one in Vue.",
+      "line": "Each one ships a Vue file that drops into any Nuxt page. Click one to take a closer look."
+    },
+    "faq": {
+      "headline": "Questions, answered.",
+      "subtext": "What Nuxt developers ask before they copy a component.",
+      "items": [
+        {
+          "q": "Does Annnimate work with Nuxt?",
+          "a": "Yes. The components are plain Vue 3 files with <script setup>. Import one into any page, layout or component. Each one starts its animation in onMounted, which Nuxt only runs in the browser."
+        },
+        {
+          "q": "Do I need a Nuxt module for GSAP?",
+          "a": "No. Install gsap and import the component. There's no module to register and no nuxt.config change."
+        },
+        {
+          "q": "Do the animations survive page changes?",
+          "a": "Yes. Each component reverts its animation when it unmounts, so nothing keeps running after you leave a page."
+        },
+        {
+          "q": "Do I need ClientOnly?",
+          "a": "No. The markup renders on the server and the animation starts in the browser. Wrap a component in ClientOnly only if you want it to skip server rendering entirely."
+        }
+      ]
+    },
+    "endCta": {
+      "headline": "Motion for Nuxt, without the setup."
+    }
+  },
+  "vue": {
+    "name": "Vue",
+    "hero": {
+      "headline": "A Vue animation library, built on GSAP.",
+      "body": "Annnimate is a library of {count} GSAP components you copy into a Vue 3 app as single-file components. Each one uses <script setup>, needs only gsap and cleans up after itself on unmount."
+    },
+    "start": {
+      "bodies": [
+        "`npm install gsap`, once per project. The plugins ship inside it.",
+        "Pick Vue on a component's page and save its two files.",
+        "Import the component and its CSS where you use it.",
+        "Every setting is a prop. Tune it live on the component's page, then copy the values."
+      ]
+    },
+    "handled": {
+      "headline": "What breaks GSAP in Vue is already handled.",
+      "rows": [
+        {
+          "title": "Unmount",
+          "body": "Tweens and ScrollTriggers keep running after the component is gone.",
+          "aside": "Each component reverts its animation when it unmounts.",
+          "href": "/learn/frameworks/vue-gsap",
+          "figure": "vue-gsap"
+        },
+        {
+          "title": "Server rendering",
+          "body": "Code that reaches for window or the DOM during setup breaks a server render.",
+          "aside": "Each component starts its animation in onMounted, which only runs in the browser.",
+          "href": "/learn/frameworks/ssr-gsap",
+          "figure": "ssr-gsap"
+        },
+        {
+          "title": "Plugins",
+          "body": "A ScrollTrigger or SplitText call does nothing until the plugin is registered.",
+          "aside": "Each component imports and registers the plugins it uses.",
+          "href": "/learn/scroll/scrolltrigger",
+          "figure": "scrolltrigger"
+        },
+        {
+          "title": "Reduced motion",
+          "body": "Visitors who turned motion off in their system settings still get the full animation.",
+          "aside": "Every component checks prefers-reduced-motion and respects it.",
+          "href": "/docs/guides/production",
+          "figure": "doc-production"
+        }
+      ]
+    },
+    "components": {
+      "headline": "{count} components, every one in Vue.",
+      "line": "Each one ships a Vue file with <script setup>. Click one to take a closer look."
+    },
+    "faq": {
+      "headline": "Questions, answered.",
+      "subtext": "What Vue developers ask before they copy a component.",
+      "items": [
+        {
+          "q": "Does Annnimate work with Vue 3?",
+          "a": "Yes. Every component ships as a Vue 3 single-file component with <script setup>. It needs only gsap and works with Vite or any Vue 3 setup."
+        },
+        {
+          "q": "Does it work with Vue 2?",
+          "a": "No. The components use the Composition API and <script setup>, which need Vue 3. The HTML version of each component works anywhere, Vue 2 included."
+        },
+        {
+          "q": "Do I need to install GSAP separately?",
+          "a": "Yes, once per project: npm install gsap. GSAP has been free for commercial use, every plugin included, since version 3.13."
+        },
+        {
+          "q": "Does it work in Nuxt?",
+          "a": "Yes. The same Vue files drop into a Nuxt page. The Nuxt page covers the server rendering details."
+        }
+      ]
+    },
+    "endCta": {
+      "headline": "Motion for Vue, without the setup."
+    }
+  }
+}

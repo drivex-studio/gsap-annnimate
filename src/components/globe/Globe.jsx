@@ -5,7 +5,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { loadSharedImage } from '@/libs/utils/loadSharedImage';
-import { useWebGLSupport } from '@/hooks/useWebGLSupport';
+import { useWebGLSupport } from '@/components/globe/hooks/useWebGLSupport';
 
 const ROTATION_X = Math.PI / 7;
 const PHI = Math.PI * (3 - Math.sqrt(5));

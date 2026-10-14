@@ -16,7 +16,10 @@ import TimelineStrip from '@/components/animations/details/TimelineStrip';
 import { getProvenance, getProvenanceSite, getProvenanceBody } from '@/libs/utils/provenance';
 import { formatInline, ContentBlock } from '@/components/animations/details/ContentBlock';
 import { Tag } from '@/components/animations/details/TimelineStrip';
-import { PreviewBlock as CodeBlock, AttributesSection as ConceptList, PresetsSection as PresetList } from './PreviewBlock';
+
+import AnimationPreview from '@/components/common/AnimationPreview'; 
+import AnimationAttributes from '@/components/common/AnimationAttributes';
+import AnimationDocs from '@/components/common/AnimationDocs'; 
 import AnimationGrid from '@/animations/components/AnimationCard';
 import { useOnboarding } from '@/providers/OnboardingProvider';
 import { STACK_OPTIONS, ONBOARDING_EVENTS } from '@/libs/config/onboarding';
@@ -25,7 +28,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import CaptureForm from '@/components/ui/NewsletterEyebrow';
 import { useCategories } from '@/providers/CategoryProvider';
 import { cn } from '@/libs/utils/className';
-import Customizer from '@/components/animations/details/Customizer';
+import Customizer from '@/components/common/Customizer';
 import { Copy, Check, Brain, CaretDown, CaretUp, X, ArrowSquareOut, Lock } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { sendUserEvent } from '@/libs/utils/events';
@@ -42,7 +45,7 @@ import {
   applyValuesToHtml, 
   applyValuesToReact, 
   applyValuesToVue 
-} from './Customizer';
+} from '@/components/common/Customizer';
 import Button from '@/components/ui/Button';
 
 function Tracker({ animation }) {
@@ -1102,7 +1105,7 @@ export default function DetailPage({
       <section className="v2-container pb-32 lg:pb-64">
         <div className="grid grid-cols-12 gap-x-24">
           <div className="col-span-12 flex flex-col gap-24 lg:col-span-7 lg:col-start-3 lg:gap-32">
-            <CodeBlock
+            <AnimationPreview
               animation={animation}
               codeState={codeState}
               customize={
@@ -1141,8 +1144,8 @@ export default function DetailPage({
             
             {hasAccess ? (
               <Fragment>
-                {!hasConfigurables && <ConceptList animation={animation} />}
-                <PresetList
+                {!hasConfigurables && <AnimationAttributes animation={animation} />}
+                <AnimationDocs
                   animation={animation}
                   onApplyPreset={hasConfigurables && hasAccess ? handleApplyPreset : null}
                 />

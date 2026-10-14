@@ -1,13 +1,7 @@
 "use client";
-import React, { useRef, useState, useEffect, useMemo } from 'react';
-
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import React,{ useRef, useState, useEffect, useMemo } from 'react';
+import { gsap, useGSAP, ScrollTrigger } from '@/libs/utils/vendor';
 import { usePageEnterAnimation } from '@/providers/AnimationProvider';
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function AnimatedNumber({
   value,

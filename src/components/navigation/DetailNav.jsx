@@ -4,11 +4,10 @@ import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-import { CaretLeft } from '@/components/icons/CaretLeft';
-import { CaretRight } from '@/components/icons/CaretRight';
+import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 
 import Link from '@components/navigation/Link';
-import { useScramble } from '@/hooks/useScramble';
+import { useScramble } from '@/animations/hooks/useScramble';
 import analytics from '@/libs/utils/analytics';
 
 gsap.registerPlugin(useGSAP);

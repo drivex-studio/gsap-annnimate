@@ -1,9 +1,9 @@
-import '@/styles/style.css';
 import Provider from '@/app/provider';
 import SiteLayout from '@/components/SiteLayout';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import { getLatestAnimation, getCategories } from '@/libs/supabase/latestAnimation';
+import '@/styles/style.css';
 
 export const metadata = {
   metadataBase: new URL("https://anm.drivexstore.shop"),

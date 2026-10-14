@@ -12,6 +12,14 @@ import seoLocales from '@/libs/locales/seo.json';
 import affiliateLocales from '@/libs/locales/affiliate.json';
 import packsLocales from '@/libs/locales/packs.json';
 import studentsLocales from '@/libs/locales/students.json';
+import affiliateV3Locales from '@/libs/locales/affiliate-v3.json';
+import frameworksV3Locales from '@/libs/locales/frameworks-v3.json';
+import homeV3Locales from '@/libs/locales/home-v3.json';
+import kitsV3Locales from '@/libs/locales/kits-v3.json';
+import packsV3Locales from '@/libs/locales/packs-v3.json';
+import platformV3Locales from '@/libs/locales/platform-v3.json';
+import pricingV3Locales from '@/libs/locales/pricing-v3.json';
+import studentsV3Locales from '@/libs/locales/students-v3.json';
 
 const locales = {
   common: commonLocales,
@@ -27,7 +35,15 @@ const locales = {
   seo: seoLocales,
   affiliate: affiliateLocales,
   packs: packsLocales,
-  students: studentsLocales
+  students: studentsLocales,
+  "affiliate-v3": affiliateV3Locales,
+  "frameworks-v3": frameworksV3Locales,
+  "home-v3": homeV3Locales,
+  "kits-v3": kitsV3Locales,
+  "packs-v3": packsV3Locales,
+  "platform-v3": platformV3Locales,
+  "pricing-v3": pricingV3Locales,
+  "students-v3": studentsV3Locales
 };
 
 export function translate(keyPath, variables) {
@@ -47,3 +63,5 @@ export function translate(keyPath, variables) {
 
   return resolvedValue;
 }
+
+export { translate as t };

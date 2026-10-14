@@ -1,8 +1,8 @@
 import React from 'react';
-
 import { cn } from '@/libs/utils/className';
 import { useTransitionClick } from '@/hooks/useTransitionClick';
 import MenuTrigger from 'next/link';
+import '@/styles/components/NavLink.css';
 
 export default function NavLink({
   href,

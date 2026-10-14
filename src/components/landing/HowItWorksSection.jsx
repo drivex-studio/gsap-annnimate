@@ -2,10 +2,9 @@
 import React, { useRef, useMemo } from 'react';
 import gsap from 'gsap';
 import { translate,  translate as t } from '@/libs/utils/i18n';
-import { useReveal } from '@/hooks/useReveal';
+import { useReveal } from '@/animations/hooks/useReveal';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
-import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
-
+import RevealHeadline from '@/animations/shared/RevealHeadline';
 import { Columns } from '@phosphor-icons/react'; 
 import { GridFour } from '@phosphor-icons/react'; 
 import { List } from '@phosphor-icons/react'; 
@@ -296,9 +295,9 @@ export default function HowItWorksSection({ animations = [] }) {
     <section ref={sectionRef} data-theme="light" className="bg-background py-64 text-foreground lg:py-96">
       <div className="v2-container">
         <header className="mb-24 max-w-[42rem] lg:mb-32">
-          <AnimatedHeadline ref={headlineRef} as="h2" className="text-h2 max-w-[28ch]" trigger="manual">
+          <RevealHeadline ref={headlineRef} as="h2" className="text-h2 max-w-[28ch]" trigger="manual">
             {translate('landing.howItWorks.headline')}
-          </AnimatedHeadline>
+          </RevealHeadline>
           <AnimatedSubtext tag="p" className="text-body-lg mt-16 max-w-[40ch] text-foreground-muted" {...ANIMATION_PROPS} onReady={registerCallback(0)}>
             {translate('landing.howItWorks.answer')}
           </AnimatedSubtext>

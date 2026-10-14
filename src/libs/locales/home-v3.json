@@ -1,0 +1,115 @@
+{
+  "hero": {
+    "headline": "Give any site award‑level animation in minutes.",
+    "sub": "The same GSAP animations we build for Coca-Cola and Powerade, ready for React, Vue and HTML. Copy them or use your AI agent.",
+    "cta": "Get access",
+    "ctaFree": "Get {count} free components",
+    "logosLabel": "Used on sites for"
+  },
+  "spotlight": {
+    "headline": "Try it before you copy it.",
+    "line": "{title}, exactly as it runs in the library. Drag it, then change how it moves.",
+    "open": "Open the component",
+    "formats": "Available in",
+    "browse": "See all {count} components"
+  },
+  "bento": {
+    "headline": "Client-ready the moment you paste it.",
+    "award": {
+      "title": "Motion that wins the pitch",
+      "line": "The reveals, menus and sliders we ship for Coca-Cola and Powerade, on your client's site."
+    },
+    "formats": {
+      "title": "React, Vue or plain HTML",
+      "line": "Every component comes in all three. Pick yours and paste."
+    },
+    "agent": {
+      "title": "Your AI agent gets it right",
+      "line": "Our MCP server hands Claude Code or Cursor the real source, so the GSAP it writes actually runs."
+    },
+    "values": {
+      "title": "\"A bit slower?\" One slider",
+      "line": "Every timing, ease and distance is a setting. The client's next note takes seconds."
+    },
+    "code": {
+      "title": "Code you don't need to check",
+      "line": "Cleans up after itself, respects reduced motion, safe with SSR and StrictMode."
+    },
+    "weekly": {
+      "title": "A new one every week",
+      "line": "{count} components today, and the library keeps growing."
+    },
+    "browse": "Browse the library"
+  },
+  "shipped": {
+    "headline": "Just shipped",
+    "line": "{count} components and counting. Click one to take a closer look.",
+    "open": "Open the component"
+  },
+  "showcase": {
+    "headline": "These sites were built with Annnimate",
+    "link": "See all sites"
+  },
+  "pricing": {
+    "headline": "Every component, for less than a day of building one.",
+    "popular": "Most popular",
+    "soloLabel": "Solo",
+    "studioLabel": "Studio, per seat",
+    "kitLabel": "{title} Kit",
+    "billedQuarterly": "{total} billed quarterly",
+    "moreSeats": "More than {max} seats? Email us.",
+    "oneTime": "One-time payment",
+    "kitComponents": "{count} components, built as one system",
+    "kitFormats": "React, Vue and HTML",
+    "kitOwned": "Not part of the Library subscription",
+    "kitCta": "Get the {title} Kit",
+    "perMonth": "/month",
+    "billedYearly": "{total} billed yearly",
+    "monthsFree": "{months} months free"
+  },
+  "starterPack": {
+    "body": "{count} production components in React, Vue and HTML, free, built to the same standard we ship for real brands. A new one joins every week. In your inbox now, no card."
+  },
+  "faq": {
+    "headline": "Questions, answered.",
+    "subtext": "The ones people ask right before they buy. The full list lives on the FAQ page.",
+    "items": [
+      {
+        "q": "Can I use Annnimate in commercial and client work?",
+        "a": "Yes. Every Annnimate tier covers unlimited commercial client projects. You and your seats can ship with the components on any work you produce. The only limit is repackaging or reselling the components as a competing library."
+      },
+      {
+        "q": "How does Annnimate Studio pricing work?",
+        "a": "Annnimate Studio covers as many seats as you choose, from 2 to 20, and you can add or remove seats any time. Every seat after the first costs 10% less, up to 40% off. Seats are per-developer, so every team member shipping with the components needs one. More than 20, email us."
+      },
+      {
+        "q": "What happens to components I shipped if I cancel?",
+        "a": "Annnimate code you already pasted into your projects is yours and keeps working. Cancelling pauses access to the library and to new components, not to anything you already shipped. The components in your codebase do not phone home."
+      },
+      {
+        "q": "What is Annnimate's refund policy?",
+        "a": "Annnimate has a 14-day money-back guarantee on your first Library payment. Email us within 14 days and we refund you in full. Renewals are not refunded. The guarantee is for trying Annnimate, so it ends once your account has taken more than {cap} components. Landmark Kits and Packs are final sale, because you get the full code the moment you pay."
+      },
+      {
+        "q": "Does Annnimate work with Next.js App Router and Nuxt?",
+        "a": "Yes. Annnimate's React components are Server Component safe and work with the Next.js App Router. The Vue components are Nuxt ready. Every component that runs GSAP uses useGSAP in React and starts in onMounted in Vue, so the GSAP context cleans up on unmount without extra plumbing from you."
+      },
+      {
+        "q": "Does Annnimate work with my AI agent?",
+        "a": "Yes. Annnimate has an MCP server, so Claude Code, Cursor or any MCP client can search the library and pull a component's real source straight into your project. Your agent starts from production GSAP code instead of guessing it."
+      },
+      {
+        "q": "Is there a free version of Annnimate?",
+        "a": "There is a free Starter Pack of production components in React, Vue and HTML, delivered to your inbox and free to use in any project with no expiration. A new component goes free every week and joins the pack. Every component's live preview is also free to explore with no account needed, and the full code library is a paid subscription."
+      },
+      {
+        "q": "Do Library subscribers get a discount on Landmark Kits?",
+        "a": "Annnimate Library members get 20% off every Landmark Kit purchase for as long as the subscription is active. Past Kit buyers get 20% off their first year of any Library plan. The two products are separate, but they reward each other."
+      }
+    ]
+  },
+  "endCta": {
+    "headline": "Give your next site award-level animation.",
+    "subtext": "{count} components in React, Vue and HTML, built the way we build for Coca-Cola and Powerade."
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, Children } from 'react';
 import gsap from 'gsap';
-import { useReveal } from '@/hooks/useReveal';
+import { useReveal } from '@/animations/hooks/useReveal';
 
 export default function ListSlider({
   children,

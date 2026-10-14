@@ -4,7 +4,7 @@ import { translate } from '@/libs/utils/i18n';
 import { useTransitionRouter } from '@/providers/TransitionRouterProvider';
 import Button from '@/components/ui/Button';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
-import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
+import RevealHeadline from '@/animations/shared/RevealHeadline';
 import PricingToggle from '@/components/pricing/utils/PricingToggle';
 import PricingCard from '@/components/pricing/PricingCard';
 import PricingFeatures from '@/components/pricing/PricingFeatures';
@@ -26,9 +26,9 @@ export default function PricingSection({ shippedRecently = 0 }) {
         <div className="grid grid-cols-12 gap-x-24 gap-y-32">
           
           <div className="col-span-12 flex flex-col items-center gap-32 text-center lg:col-span-8 lg:col-start-3">
-            <AnimatedHeadline as="h2" trigger="scroll">
+            <RevealHeadline as="h2" trigger="scroll">
               {translate('landing.pricingSection.headline')}
-            </AnimatedHeadline>
+            </RevealHeadline>
             <AnimatedSubtext
               tag="p"
               className="text-body max-w-[58ch] text-foreground-muted"

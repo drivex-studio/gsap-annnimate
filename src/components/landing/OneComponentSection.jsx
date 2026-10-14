@@ -4,7 +4,7 @@ import { translate,  translate as t } from '@/libs/utils/i18n';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import Button from '@/components/ui/Button';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
-import AnimatedHeadline from '@/animations/components/AnimatedHeadline';
+import RevealHeadline from '@/animations/shared/RevealHeadline';
 import CircularSlider from '@/components/landing/CircularSlider';
 import ServerData from '@/libs/auth/data/ServerData';
 
@@ -152,9 +152,9 @@ export default function OneComponentSection() {
           <div className="hidden grid-cols-12 items-center gap-0 lg:grid">
             <div className="col-span-5 col-start-1 flex flex-col gap-32">
               <header className="max-w-[44ch]">
-                <AnimatedHeadline as="h2" trigger="scroll">
+                <RevealHeadline as="h2" trigger="scroll">
                   {t('landing.oneComponent.headline')}
-                </AnimatedHeadline>
+                </RevealHeadline>
                 <AnimatedSubtext
                   tag="p"
                   className="text-body-lg mt-24 max-w-[44ch] text-foreground-muted"
@@ -198,9 +198,9 @@ export default function OneComponentSection() {
         ) : (
           <div className="flex flex-col gap-32 lg:hidden">
             <header className="max-w-[44ch]">
-              <AnimatedHeadline as="h2" trigger="scroll">
+              <RevealHeadline as="h2" trigger="scroll">
                 {t('landing.oneComponent.headline')}
-              </AnimatedHeadline>
+              </RevealHeadline>
               <AnimatedSubtext
                 tag="p"
                 className="text-body-lg mt-24 max-w-[44ch] text-foreground-muted"

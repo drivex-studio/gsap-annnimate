@@ -3,7 +3,7 @@ import { useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 
-import { ASCII_CHARS } from '@/hooks/useScramble';
+import { ASCII_CHARS } from '@/animations/hooks/useScramble';
 
 gsap.registerPlugin(ScrambleTextPlugin);
 

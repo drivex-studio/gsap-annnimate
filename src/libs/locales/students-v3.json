@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "headline": "50% off for students."
+  },
+  "visual": {
+    "requestLabel": "Your request",
+    "requestSteps": [
+      "Form sent",
+      "Checked by a person",
+      "Code in your inbox"
+    ],
+    "requestLine": "Use it within 30 days",
+    "plan": "Annnimate Solo",
+    "billed": "Billed yearly",
+    "solo": "Solo, yearly",
+    "discount": "Student code applied",
+    "today": "Due today",
+    "renews": "Then {price} a year from year two",
+    "pay": "Pay {price}",
+    "kitLabel": "Or a Kit",
+    "kitLine": "Reveal or Menu, half off"
+  },
+  "steps": {
+    "headline": "Three steps to your code."
+  },
+  "covers": {
+    "headline": "What the code covers.",
+    "solo": {
+      "title": "Half off Solo for a year",
+      "line": "Every Solo payment in your first 12 months is half price, quarterly or yearly."
+    },
+    "kit": {
+      "title": "Or half off a Kit",
+      "line": "The code takes 50% off the Reveal or Menu Kit instead, once."
+    },
+    "formats": {
+      "title": "Everything, in every format",
+      "line": "Every component in React, Vue and HTML, and every new one as it ships."
+    }
+  },
+  "faq": {
+    "headline": "Questions.",
+    "subtext": "What students ask before they apply.",
+    "extra": [
+      {
+        "q": "Does it stack with other discounts?",
+        "a": "Annnimate allows one discount per checkout, so a student code doesn't stack with regional or member pricing."
+      },
+      {
+        "q": "How long does the code last?",
+        "a": "Each student gets one code. It works once and runs for 30 days from the day we send it, so use it at checkout before then. We may cancel a code that went to someone who isn't a current student."
+      }
+    ]
+  }
+}

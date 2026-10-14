@@ -1,0 +1,106 @@
+{
+  "hero": {
+    "headline": "Every move your landing page needs.",
+    "body": "Seven GSAP components picked for one landing page: menu, hero, text effect, scroll chapters, slider, accordion and footer. In React, Vue and HTML.",
+    "cta": "Get the Pack"
+  },
+  "grid": {
+    "headline": "Seven components. One page."
+  },
+  "why": {
+    "headline": "Ready for client work.",
+    "formats": {
+      "title": "React, Vue or plain HTML",
+      "line": "Every component in the Pack comes in all three. Pick yours and paste."
+    },
+    "values": {
+      "title": "Change it without the source",
+      "line": "Every timing, ease and distance is a data attribute, so a client's note never means editing the code."
+    },
+    "forever": {
+      "title": "Every project, forever",
+      "line": "{price} once, for unlimited personal and client projects. No attribution, no per-site licence."
+    }
+  },
+  "packOrLibrary": {
+    "headline": "The Pack, or the whole Library.",
+    "sub": "The Pack is seven Library components on their own, paid once. It doesn't include the rest of the Library and never turns into a subscription.",
+    "pack": {
+      "title": "The Pack",
+      "line": "One landing page's worth of motion, finished and yours for every project.",
+      "facts": [
+        {
+          "label": "Components",
+          "value": "{packCount}, for one landing page"
+        },
+        {
+          "label": "Price",
+          "value": "{price} once"
+        },
+        {
+          "label": "Formats",
+          "value": "React, Vue and HTML"
+        }
+      ]
+    },
+    "library": {
+      "title": "The Library",
+      "line": "Every component we ship, the seven in the Pack included.",
+      "facts": [
+        {
+          "label": "Components",
+          "value": "{count} and counting"
+        },
+        {
+          "label": "Price",
+          "value": "From {perMonth} a month"
+        },
+        {
+          "label": "Formats",
+          "value": "React, Vue and HTML"
+        }
+      ],
+      "cta": "See Library pricing"
+    }
+  },
+  "faq": {
+    "headline": "Questions.",
+    "subtext": "What people ask before they buy.",
+    "items": [
+      {
+        "q": "Is the Pack a subscription?",
+        "a": "The Landing Page Motion Pack is a one-time purchase of {price}. You pay once and keep all {packCount} components; nothing renews and nothing expires."
+      },
+      {
+        "q": "Can I use it on client projects?",
+        "a": "The Pack covers unlimited personal and client projects, forever, with no attribution and no per-site licence."
+      },
+      {
+        "q": "Which frameworks does it come in?",
+        "a": "Every component in the Pack comes in plain HTML, CSS and JavaScript, React and Vue. Each one is set up through data-anm-* attributes, so you change timings, eases and distances without editing the source."
+      },
+      {
+        "q": "How do I get the code after buying?",
+        "a": "Annnimate emails you right after checkout. You sign in with a 6-digit code, no password, and download the Pack as a ZIP from its page in your account. You can download it again any time."
+      },
+      {
+        "q": "Can I get a refund?",
+        "a": "Packs are final sale. The code is yours to download the moment the payment clears, so at checkout you confirm that this ends your right of withdrawal. The 14-day money-back guarantee covers the first Library payment only."
+      },
+      {
+        "q": "Is the Pack part of the Library?",
+        "a": "All {packCount} Pack components are part of the Annnimate Library, which has {count} components and keeps growing. The Pack is those {packCount} on their own, for a one-time price; it does not include the rest of the Library."
+      },
+      {
+        "q": "I already have the Library. Do I need the Pack?",
+        "a": "A Library member already has all {packCount} components, so the Pack adds nothing for you. It's for anyone who wants one landing page's worth of motion without a subscription."
+      }
+    ]
+  },
+  "endCta": {
+    "headline": "Every move your landing page needs.",
+    "subtext": "{packCount} components, {price} once, yours for every project.",
+    "primary": "Get the Pack",
+    "secondary": "Browse the components"
+  }
+}

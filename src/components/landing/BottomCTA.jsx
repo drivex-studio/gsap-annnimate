@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { translate } from '@/libs/utils/i18n';
-import { useReveal } from '@/hooks/useReveal';
+import { useReveal } from '@/animations/hooks/useReveal';
 import Button from '@/components/ui/Button'; 
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';

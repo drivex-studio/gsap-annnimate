@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { cn } from '@/libs/utils/className';
 import Link from '@/components/navigation/Link';
-import { useScramble } from '@/hooks/useScramble';
+import { useScramble } from '@/animations/hooks/useScramble';
 
 export function MobileAccordionItem({ item, expanded, onToggle }) {
   let iconRef = useRef(null);

@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "headline": "Find it. Tune it. Paste it.",
+    "body": "{count} GSAP components, each with a live preview, settings you can change and code in React, Vue and HTML.",
+    "cta": "Get access",
+    "secondary": "Browse the library"
+  },
+  "steps": {
+    "headline": "Four steps to your site.",
+    "items": [
+      {
+        "title": "Find it",
+        "body": "{count} components in {categories} categories, and a new one every week."
+      },
+      {
+        "title": "Tune it",
+        "body": "Change the timing, ease and distance in the live preview until it feels right."
+      },
+      {
+        "title": "Copy it",
+        "body": "React, Vue or plain HTML. Or let your AI agent pull it through our MCP server."
+      },
+      {
+        "title": "Ship it",
+        "body": "It cleans up after itself, respects reduced motion and is safe with server rendering."
+      }
+    ]
+  },
+  "code": {
+    "headline": "One component. Every stack.",
+    "body": "Every component comes as plain HTML, React and Vue. In HTML you tune it with data-anm-* attributes; in React and Vue the same settings are props.",
+    "mcp": "Working with an AI agent? Our MCP server hands Claude Code or Cursor the real source, so the GSAP it writes actually runs.",
+    "mcpLink": "How the MCP server works"
+  },
+  "docs": {
+    "headline": "Documented by the people who built it.",
+    "body": "The docs carry what bit us the first time we shipped each thing: real warnings, real fixes.",
+    "cta": "Read the docs"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "plans": {
+    "headline": "Every component. {perMonth} a month.",
+    "sub": "Billed {yearly} a year, or {quarterly} a quarter. Studio teams pay per seat, and every seat after the first costs less."
+  },
+  "shipped": {
+    "headline": "{count} components. {recent} new in the last 30 days.",
+    "line": "Solo and Studio come with every one of them. Click one to take a closer look."
+  },
+  "buildCost": {
+    "headline": "One component takes a day to build. All {count} cost {yearly} a year.",
+    "rate": "Your hourly rate",
+    "hoursLabel": "Hours to build one component",
+    "yours": "One component, built by you",
+    "ours": "All {count}, a year of Annnimate",
+    "payback": "Annnimate pays for itself after {time} of your work.",
+    "minutes": "{n} minutes",
+    "hour": "1 hour",
+    "hours": "{n} hours"
+  },
+  "quotes": {
+    "headline": "From people who pay for it."
+  },
+  "libraryOrKit": {
+    "headline": "The Library goes broad. A Kit goes deep.",
+    "sub": "Kits are separate products. Not bundled with the Library, not unlocked with a subscription.",
+    "library": {
+      "title": "The Library",
+      "line": "Every kind of component a site needs, from buttons to page transitions, with new ones as they ship.",
+      "facts": [
+        {
+          "label": "Components",
+          "value": "{count} and counting"
+        },
+        {
+          "label": "Price",
+          "value": "From {perMonth} a month"
+        },
+        {
+          "label": "Formats",
+          "value": "React, Vue and HTML"
+        }
+      ],
+      "cta": "Browse the library"
+    },
+    "kit": {
+      "title": "A Landmark Kit",
+      "line": "A deep, stand-alone collection of animations built around one system you'd otherwise build from scratch.",
+      "facts": [
+        {
+          "label": "Kits",
+          "value": "{names}"
+        },
+        {
+          "label": "Price",
+          "value": "{price} one-time"
+        },
+        {
+          "label": "Formats",
+          "value": "React, Vue and HTML"
+        }
+      ],
+      "cta": "See the Kits"
+    },
+    "stack": "They stack. 20% off every Kit while you're a Library member, and 20% off your first Library year when you own a Kit."
+  },
+  "students": {
+    "headline": "Students pay half.",
+    "line": "Studying design or development? Get half off the Solo plan for your first year, or any Landmark Kit. Ask with your university email and we send you a code.",
+    "cta": "Ask for your code"
+  },
+  "faq": {
+    "headline": "Questions before you pay.",
+    "subtext": "Short answers to what people ask on this page.",
+    "items": [
+      {
+        "q": "How does Annnimate Studio pricing work?",
+        "a": "Annnimate Studio covers as many seats as you choose, from 2 to 20, and you can add or remove seats any time. Every seat after the first costs 10% less, up to 40% off. Seats are per-developer, so every team member shipping with the components needs one. More than 20, email us."
+      },
+      {
+        "q": "Can I use Annnimate in commercial and client work?",
+        "a": "Yes. Every Annnimate tier covers unlimited commercial client projects. You and your seats can ship with the components on any work you produce. The only limit is repackaging or reselling the components as a competing library."
+      },
+      {
+        "q": "What is Annnimate's refund policy?",
+        "a": "Annnimate has a 14-day money-back guarantee on your first Library payment. Email us within 14 days and we refund you in full. Renewals are not refunded. The guarantee is for trying Annnimate, so it ends once your account has taken more than {cap} components. Landmark Kits and Packs are final sale, because you get the full code the moment you pay."
+      },
+      {
+        "q": "Can I cancel any time?",
+        "a": "Yes. Cancel from your account and you keep access until the end of the period you paid for. Cancel at least a day before the renewal date and you are not charged again. Annnimate code you already pasted into your projects is yours and keeps working."
+      },
+      {
+        "q": "Is a Landmark Kit included in the Library?",
+        "a": "No. A Landmark Kit is a separate one-time purchase, not part of the Library subscription. Library members get 20% off every Kit while the subscription is active, and past Kit buyers get 20% off their first year of any Library plan."
+      },
+      {
+        "q": "Is there a free version of Annnimate?",
+        "a": "There is a free Starter Pack of production components in React, Vue and HTML, delivered to your inbox and free to use in any project with no expiration. A new component goes free every week and joins the pack. Every component's live preview is also free to explore with no account needed, and the full code library is a paid subscription."
+      }
+    ]
+  },
+  "endCta": {
+    "headline": "All {count} components for {perMonth} a month."
+  }
+}

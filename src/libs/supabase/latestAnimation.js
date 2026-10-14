@@ -4,8 +4,6 @@ import { createClient } from '@supabase/supabase-js';
 const FIELDS =
   'id, title, slug, category, preview_image_url, preview_video_url, published_at, content_updated_at, is_free_preview, metadata';
 
-// Detail page အတွက် code နဲ့ dependencies fields အကုန် ပါရမယ်
-// (မပါရင် formats စစ်တာ fail ပြီး 404 ဖြစ်တယ်၊ dependencies မပါရင် SplitText error ဖြစ်တယ်)
 const DETAIL_FIELDS = `${FIELDS}, description, dependencies, html_code, css_code, js_code, gsap_code, code_react, code_vue, code_html`;
 
 const CATEGORY_LABELS = {

@@ -1,12 +1,10 @@
-// module id: 375403
-import React, { useRef, useState, useEffect } from 'react'; // module id: 271645
+import React, { useRef, useState, useEffect } from 'react';
 
-import gsap from 'gsap'; // module id: 989970
-import { useGSAP } from '@gsap/react'; // module id: 365747
-import { SplitText } from 'gsap/SplitText'; // module id: 875324
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { SplitText } from 'gsap/SplitText';
 
-// Replaced custom Turbopack icon with standard library import per user instruction
-import { ArrowCounterClockwise } from '@phosphor-icons/react'; // module id: 949656
+import { ArrowCounterClockwise } from '@phosphor-icons/react';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -46,7 +44,6 @@ export default function SplitTextReveal({ caption, options = {} }) {
     const textEl = textRef.current;
     if (!textEl) return;
 
-    // Clean up previous SplitText instance if it exists
     if (splitTextInstanceRef.current) {
       splitTextInstanceRef.current.revert();
     }

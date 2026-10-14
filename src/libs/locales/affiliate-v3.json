@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "headline": "Earn 25% of every payment, for as long as they stay.",
+    "body": "Send a developer or a studio to Annnimate. When they buy the Library or a Kit through your link, a quarter of everything they pay goes to you, renewals included.",
+    "cta": "Get your link"
+  },
+  "earnings": {
+    "headline": "See what your link pays.",
+    "big": "Your first year, at {referrals} referrals a month",
+    "referrals": "Referrals per month",
+    "soloYearly": "Solo, yearly",
+    "soloQuarterly": "Solo, quarterly",
+    "studio": "Studio, {seats} seats",
+    "kit": "Landmark Kit",
+    "then": "Then {recurring} a year from renewals, as long as they stay.",
+    "once": "A Kit is paid once, so nothing renews."
+  },
+  "why": {
+    "headline": "Why it's an easy recommendation.",
+    "paid": {
+      "title": "Every sale is a paid one.",
+      "line": "There is no free tier, so a referral that converts is a paying customer, never a free signup."
+    },
+    "clip": {
+      "title": "Your post is already made.",
+      "line": "Every component page has a short clip to download as an mp4. Post it with your link, and they see it live one click later."
+    },
+    "payout": {
+      "title": "Renewals pay you again.",
+      "line": "Yearly or quarterly, every renewal pays you 25% again, for as long as they stay."
+    }
+  },
+  "how": {
+    "headline": "Four steps. One link.",
+    "steps": [
+      {
+        "title": "Sign up",
+        "body": "Approval is automatic, and you don't need an Annnimate account."
+      },
+      {
+        "title": "Share it",
+        "body": "Link to any page. Whoever buys within 30 days of clicking is yours."
+      },
+      {
+        "title": "Track it",
+        "body": "Clicks, sales and commission, live in your dashboard."
+      },
+      {
+        "title": "Get paid",
+        "body": "Once a month, by PayPal or bank transfer."
+      }
+    ]
+  },
+  "faq": {
+    "headline": "Questions.",
+    "subtext": "What people ask before they sign up.",
+    "items": [
+      {
+        "q": "Do I need an Annnimate account to be an affiliate?",
+        "a": "Annnimate does not require an account for affiliates. You sign up at annnimate.affonso.io with an email and your link works straight away. Owning the Library helps you show real work instead of describing it, but it isn't required."
+      },
+      {
+        "q": "Is 25% really paid on every renewal?",
+        "a": "Annnimate pays 25% of every payment a referred customer makes, for as long as they stay: yearly renewals, quarterly renewals and any Kit they add later, even if they already owned the Library when they clicked your link."
+      },
+      {
+        "q": "How long after a click do I get credit?",
+        "a": "Annnimate credits you for 30 days after a click. The cookie is first-party, set on annnimate.com, so ad blockers leave it alone and nothing asks for consent between the click and the sale."
+      },
+      {
+        "q": "What if the buyer pays a discounted or regional price?",
+        "a": "Annnimate pays 25% of the amount the customer actually paid, whatever that amount is. A discount or a regional price means a smaller commission rather than none, and a full-price payment means the full commission."
+      },
+      {
+        "q": "When is a commission confirmed?",
+        "a": "Annnimate offers a 14-day money-back guarantee on first Library payments, so a commission on one stays pending for 14 days and confirms once that window closes without a refund. Renewals are not refundable and confirm immediately."
+      },
+      {
+        "q": "How and when am I paid?",
+        "a": "Annnimate pays affiliates once a month by PayPal or bank transfer through the Affonso dashboard, where pending and confirmed earnings are shown separately."
+      },
+      {
+        "q": "Which page should I link to, and can I use your recordings?",
+        "a": "Annnimate sets the cookie on arrival anywhere on annnimate.com, so link to the component you are actually talking about, the library or the free Starter Pack. Anything public on the site, component previews and recordings included, can be used to promote it. The only thing you may not redistribute is the source code."
+      },
+      {
+        "q": "What isn't allowed?",
+        "a": "Annnimate does not allow self-referrals or routing your own clients through your link, paid search ads on the Annnimate name, coupon or cashback sites, link-injecting extensions, calling the Library free, or spam. Any of these can end the partnership."
+      }
+    ]
+  },
+  "endCta": {
+    "headline": "A recommendation you'd make anyway.",
+    "subtext": "25% of every payment, for as long as they stay, with a 30-day cookie and a monthly payout.",
+    "primary": "Get your link",
+    "secondary": "See pricing"
+  }
+}

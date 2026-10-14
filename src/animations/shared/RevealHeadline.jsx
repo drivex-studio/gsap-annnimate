@@ -1,149 +1,196 @@
 "use client";
-import React, { forwardRef, useRef, useState, useLayoutEffect, useImperativeHandle } from 'react';
+import { forwardRef, Fragment, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { useReveal } from '@/hooks/useReveal';
+import { useReveal } from '@/animations/hooks/useReveal';
 
-const RevealHeadline = forwardRef(function RevealHeadline({
-  children,
-  as: Tag = 'h2',
-  sizeClass = 'text-h2',
-  className = '',
-  trigger = 'scroll',
-  start = 'top 80%',
-  skip = false
-}, ref) {
-  let containerRef = useRef(null);
-  let [lines, setLines] = useState(null);
+function normalizeText(value) {
+  if (value == null || value === false) return '';
+  if (typeof value === 'string' || typeof value === 'number') {
+    return String(value);
+  }
+  if (Array.isArray(value)) {
+    return value.map(normalizeText).join('');
+  }
+  return '';
+}
 
-  let extractText = (node) => {
-    if (node == null || node === false) return '';
-    if (typeof node === 'string' || typeof node === 'number') return String(node);
-    if (Array.isArray(node)) return node.map(extractText).join('');
-    return '';
-  };
-  let textContent = extractText(children);
+const RevealHeadline = forwardRef(function RevealHeadline(
+  {
+    children,
+    as: Tag = 'h2',
+    sizeClass = 'text-h2',
+    className = '',
+    trigger = 'scroll',
+    start = 'top 80%',
+    skip = false,
+  },
+  ref,
+) {
+  const containerRef = useRef(null);
+  const [lines, setLines] = useState(null);
+
+  const text = normalizeText(children);
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
-    
-    let wordNodes = containerRef.current.querySelectorAll('[data-rh-word]');
-    if (wordNodes.length === 0) return;
-    
-    let computedLines = [];
-    let currentLineWords = [];
-    let prevTop = -Infinity;
-    let prevExplicitIndex = -1;
-    
-    for (let node of wordNodes) {
-      let top = node.getBoundingClientRect().top;
-      let explicitIndex = Number(node.dataset.rhExplicit ?? -1);
-      let hasExplicitBreak = explicitIndex !== prevExplicitIndex && prevExplicitIndex !== -1;
-      
-      if ((prevTop > -Infinity && top - prevTop > 2) || hasExplicitBreak) {
-        computedLines.push(currentLineWords.join(' '));
-        currentLineWords = [];
-      }
-      
-      currentLineWords.push(node.textContent || '');
-      prevTop = top;
-      prevExplicitIndex = explicitIndex;
-    }
-    
-    if (currentLineWords.length > 0) {
-      computedLines.push(currentLineWords.join(' '));
-    }
-    
-    setLines(computedLines);
-  }, [textContent]);
 
-  let { reveal } = useReveal(containerRef, {
-    mode: trigger === 'pageEnter' ? 'hero' : trigger === 'manual' ? 'manual' : 'scroll',
-    build: skip || !lines ? null : (element) => {
-      let tl = gsap.timeline({ paused: true });
-      let lineNodes = element.querySelectorAll('[data-rh-line]');
-      
-      for (let i = 0; i < lineNodes.length; i++) {
-        let brandOverlay = lineNodes[i].querySelector('[data-rh-brand]');
-        let fgOverlay = lineNodes[i].querySelector('[data-rh-fg]');
-        
-        if (!brandOverlay || !fgOverlay) continue;
-        
-        gsap.set([brandOverlay, fgOverlay], {
-          scaleX: 1,
-          transformOrigin: 'right'
-        });
-        
-        let delayOffset = 0.12 * i;
-        
-        tl.to(fgOverlay, {
-          scaleX: 0,
-          duration: 0.5,
-          ease: 'power3.inOut'
-        }, delayOffset);
-        
-        tl.to(brandOverlay, {
-          scaleX: 0,
-          duration: 0.5,
-          ease: 'power3.inOut'
-        }, delayOffset + 0.1);
+    const words = containerRef.current.querySelectorAll('[data-rh-word]');
+    if (words.length === 0) return;
+
+    const nextLines = [];
+    let currentWords = [];
+    let previousTop = -Infinity;
+    let previousExplicitLine = -1;
+
+    for (const word of words) {
+      const top = word.getBoundingClientRect().top;
+      const explicitLine = Number(word.dataset.rhExplicit ?? -1);
+      const isExplicitBreak =
+        explicitLine !== previousExplicitLine &&
+        previousExplicitLine !== -1;
+
+      if (
+        (previousTop > -Infinity && top - previousTop > 2) ||
+        isExplicitBreak
+      ) {
+        nextLines.push(currentWords.join(' '));
+        currentWords = [];
       }
-      
-      return tl;
-    },
+
+      currentWords.push(word.textContent || '');
+      previousTop = top;
+      previousExplicitLine = explicitLine;
+    }
+
+    if (currentWords.length > 0) {
+      nextLines.push(currentWords.join(' '));
+    }
+
+    setLines(nextLines);
+  }, [text]);
+
+  const { reveal } = useReveal(containerRef, {
+    mode:
+      trigger === 'pageEnter'
+        ? 'hero'
+        : trigger === 'manual'
+          ? 'manual'
+          : 'scroll',
+    build:
+      skip || !lines
+        ? null
+        : (element) => {
+            const timeline = gsap.timeline({ paused: true });
+            const lineElements = element.querySelectorAll('[data-rh-line]');
+
+            for (let index = 0; index < lineElements.length; index++) {
+              const line = lineElements[index];
+              const brand = line.querySelector('[data-rh-brand]');
+              const foreground = line.querySelector('[data-rh-fg]');
+
+              if (!brand || !foreground) continue;
+
+              gsap.set([brand, foreground], {
+                scaleX: 1,
+                transformOrigin: 'right',
+              });
+
+              const position = 0.12 * index;
+
+              timeline.to(
+                foreground,
+                {
+                  scaleX: 0,
+                  duration: 0.5,
+                  ease: 'power3.inOut',
+                },
+                position,
+              );
+
+              timeline.to(
+                brand,
+                {
+                  scaleX: 0,
+                  duration: 0.5,
+                  ease: 'power3.inOut',
+                },
+                position + 0.1,
+              );
+            }
+
+            return timeline;
+          },
     start,
-    deps: [lines, skip]
+    deps: [lines, skip],
   });
 
-  useImperativeHandle(ref, () => ({
-    reveal
-  }), [reveal]);
+  useImperativeHandle(ref, () => ({ reveal }), [reveal]);
 
-  let combinedClassName = `${sizeClass} ${className}`.trim();
+  const headingClassName = `${sizeClass} ${className}`.trim();
 
   if (!lines) {
-    let explicitLines = textContent.split('\n');
+    const explicitLines = text.split('\n');
+
     return (
-      <Tag ref={containerRef} className={combinedClassName} style={{ visibility: 'hidden' }}>
-        {explicitLines.map((lineText, lineIdx) => (
-          <React.Fragment key={lineIdx}>
-            {lineIdx > 0 && <br />}
-            {lineText.split(/\s+/).filter(Boolean).map((word, wordIdx) => (
-              <React.Fragment key={wordIdx}>
-                {wordIdx > 0 && ' '}
-                <span data-rh-word={true} data-rh-explicit={lineIdx}>
-                  {word}
-                </span>
-              </React.Fragment>
-            ))}
-          </React.Fragment>
+      <Tag
+        ref={containerRef}
+        className={headingClassName}
+        style={{ visibility: 'hidden' }}
+      >
+        {explicitLines.map((line, lineIndex) => (
+          <Fragment key={lineIndex}>
+            {lineIndex > 0 && <br />}
+            {line
+              .split(/\s+/)
+              .filter(Boolean)
+              .map((word, wordIndex) => (
+                <Fragment key={wordIndex}>
+                  {wordIndex > 0 && ' '}
+                  <span
+                    data-rh-word
+                    data-rh-explicit={lineIndex}
+                  >
+                    {word}
+                  </span>
+                </Fragment>
+              ))}
+          </Fragment>
         ))}
       </Tag>
     );
   }
 
   return (
-    <Tag ref={containerRef} className={combinedClassName}>
-      {lines.map((lineText, lineIdx) => (
-        <React.Fragment key={lineIdx}>
-          {lineIdx > 0 && <br />}
-          <span data-rh-line={true} className="relative inline-block">
-            <span className="block whitespace-nowrap">{lineText}</span>
+    <Tag ref={containerRef} className={headingClassName}>
+      {lines.map((line, lineIndex) => (
+        <Fragment key={lineIndex}>
+          {lineIndex > 0 && <br />}
+
+          <span
+            data-rh-line
+            className="relative inline-block"
+          >
+            <span className="block whitespace-nowrap">
+              {line}
+            </span>
+
             {!skip && (
-              <React.Fragment>
+              <>
                 <span
-                  data-rh-brand={true}
+                  data-rh-brand
                   aria-hidden="true"
                   className="absolute -inset-x-[0.1em] -inset-y-[0.1em] block bg-brand"
                 />
+
                 <span
-                  data-rh-fg={true}
+                  data-rh-fg
                   aria-hidden="true"
                   className="absolute -inset-x-[0.1em] -inset-y-[0.1em] block bg-foreground"
                 />
-              </React.Fragment>
+              </>
             )}
           </span>
-        </React.Fragment>
+        </Fragment>
       ))}
     </Tag>
   );

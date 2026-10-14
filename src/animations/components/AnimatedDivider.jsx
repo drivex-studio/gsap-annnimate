@@ -1,7 +1,7 @@
 "use client";
 import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import gsap from 'gsap';
-import { useReveal } from '@/hooks/useReveal';
+import { useReveal } from '@/animations/hooks/useReveal';
 
 const AnimatedDivider = forwardRef(function AnimatedDivider({
   orientation = 'horizontal',
