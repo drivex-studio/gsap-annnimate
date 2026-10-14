@@ -5,7 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
-import { useTransitionRouter } from 'providers/TransitionRouterProvider';
+import { useTransitionRouter } from '@/providers/TransitionRouterProvider';
 import { loadSharedImage } from '@/libs/utils/loadSharedImage';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import Link from '@/components/navigation/Link';
