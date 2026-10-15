@@ -1,7 +1,5 @@
-"use client";
-import { 
-  useState, useEffect,
-  useRef, useMemo, Fragment } from 'react';
+'use client';
+import { useState, useEffect, useRef, useMemo, Fragment } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useReveal } from '@/animations/hooks/useReveal';
@@ -24,7 +22,6 @@ import {
   CaretDown,
   List,
 } from '@phosphor-icons/react';
-
 import LogoText from '@/assets/logos/LogoText';
 import LogoIcon from '@/assets/logos/LogoIcon';
 import Link from '@/components/navigation/Link';
@@ -86,6 +83,93 @@ function NavItem({ icon: Icon, label, active = false, href, external = false }) 
   );
 }
 
+function SidebarUser() {
+  return (
+    <div className="AnimationsFilterBar-user">
+      <div className="AnimationsFilterBar-userInfo">
+        <div className="AnimationsFilterBar-userAvatar text-mono-sm text-foreground-muted">
+          {translate('platform.mockup.userInitials')}
+        </div>
+        <div className="AnimationsFilterBar-userDetails">
+          <div className="AnimationsFilterBar-userName text-sm text-foreground">
+            {translate('platform.mockup.userName')}
+          </div>
+          <div className="AnimationsFilterBar-userPlan text-mono-sm text-foreground-muted/60">
+            {translate('platform.mockup.userPlan')}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SidebarNav({ isAuthenticated, discordLink }) {
+  return (
+    <aside className="AnimationsFilterBar-sidebar">
+      <SectionTitle />
+      <nav className="AnimationsFilterBar-nav">
+        <NavSectionHeader>{translate('platform.mockup.sectionPlatform')}</NavSectionHeader>
+        <NavItem
+          icon={SquaresFour}
+          label={translate('platform.mockup.navAnimations')}
+          href="/animations"
+          active
+        />
+        <NavItem
+          icon={BookmarkSimple}
+          label={translate('platform.mockup.navSaved')}
+          href={isAuthenticated ? '/animations/saved' : '/animations'}
+        />
+        <NavItem
+          icon={Package}
+          label={translate('platform.mockup.navKits')}
+          href="/kits"
+        />
+        <NavItem
+          icon={Lightbulb}
+          label={translate('platform.mockup.navRoadmap')}
+          href="/roadmap"
+        />
+        <div className="AnimationsFilterBar-navSection">
+          <NavSectionHeader>{translate('platform.mockup.sectionSupport')}</NavSectionHeader>
+        </div>
+        <NavItem
+          icon={BookOpen}
+          label={translate('platform.mockup.navDocumentation')}
+          href="/docs"
+        />
+        <NavItem
+          icon={PlugsConnected}
+          label={translate('platform.mockup.navMcp')}
+          href="/docs/guides/mcp"
+        />
+        <NavItem
+          icon={GraduationCap}
+          label={translate('platform.mockup.navLearn')}
+          href="/learn"
+        />
+        <NavItem
+          icon={Question}
+          label={translate('platform.mockup.navHelp')}
+          href={isAuthenticated ? '/help' : '/contact'}
+        />
+        <NavItem
+          icon={GearSix}
+          label={translate('platform.mockup.navSettings')}
+          href={isAuthenticated ? '/settings' : '/login'}
+        />
+        <NavItem
+          icon={DiscordLogo}
+          label={translate('platform.mockup.navDiscord')}
+          href={discordLink}
+          external
+        />
+        <SidebarUser />
+      </nav>
+    </aside>
+  );
+}
+
 function DropdownCategoryItem({ cat, activeCategory, setActiveCategory, setIsDropdownOpen }) {
   return (
     <li>
@@ -136,7 +220,15 @@ function DropdownList({ activeCategory, setActiveCategory, setIsDropdownOpen, ca
   );
 }
 
-function Dropdown({ activeCategoryLabel, isDropdownOpen, setIsDropdownOpen, activeCategory, setActiveCategory, categoryCounts, dropdownRef }) {
+function Dropdown({
+  activeCategoryLabel,
+  isDropdownOpen,
+  setIsDropdownOpen,
+  activeCategory,
+  setActiveCategory,
+  categoryCounts,
+  dropdownRef,
+}) {
   return (
     <div ref={dropdownRef} className="Dropdown">
       <button
@@ -168,6 +260,114 @@ function PlaceholderCard() {
       <div className="PlaceholderCard-image" />
       <div className="PlaceholderCard-title" />
       <div className="PlaceholderCard-subtitle" />
+    </div>
+  );
+}
+
+function HeaderStats({ filterBarDemo, matchCount, totalCount, animationsCount }) {
+  if (filterBarDemo) {
+    return (
+      <span className="AnimationsFilterBar-stats text-mono-sm text-foreground-muted/60">
+        <AnimatedNumber
+          value={matchCount}
+          minDigits={1}
+          triggerMode="immediate"
+          duration={0.6}
+          valueChangeDuration={0.9}
+          ease="power3.inOut"
+          className="AnimationsFilterBar-statsNumber text-mono-sm"
+        />
+        matching
+      </span>
+    );
+  }
+
+  return (
+    <span className="text-mono-sm text-foreground-muted/60">
+      {totalCount
+        ? translate('platform.mockup.headerShowingOfTotal', { shown: Math.min(9, animationsCount), total: totalCount })
+        : translate('platform.mockup.headerCount', { count: animationsCount })}
+    </span>
+  );
+}
+
+function ViewToggles() {
+  return (
+    <div className="AnimationsFilterBar-viewToggles">
+      <span className="AnimationsFilterBar-viewToggle is-active text-foreground">
+        <SquaresFour className="AnimationsFilterBar-viewToggleIcon" />
+      </span>
+      <span className="AnimationsFilterBar-viewToggle text-foreground-muted/40">
+        <List className="AnimationsFilterBar-viewToggleIcon" />
+      </span>
+    </div>
+  );
+}
+
+function FilterHeader({
+  filterBarDemo,
+  matchCount,
+  totalCount,
+  animationsCount,
+  activeCategoryLabel,
+  isDropdownOpen,
+  setIsDropdownOpen,
+  activeCategory,
+  setActiveCategory,
+  categoryCounts,
+  dropdownRef,
+}) {
+  return (
+    <header className="AnimationsFilterBar-header">
+      <div className="AnimationsFilterBar-headerLeft">
+        <p className="AnimationsFilterBar-title text-h6 text-foreground">
+          {translate('platform.mockup.headerTitle')}
+        </p>
+        <HeaderStats
+          filterBarDemo={filterBarDemo}
+          matchCount={matchCount}
+          totalCount={totalCount}
+          animationsCount={animationsCount}
+        />
+      </div>
+      {filterBarDemo ? (
+        <div className="AnimationsFilterBar-controls">
+          <Dropdown
+            activeCategoryLabel={activeCategoryLabel}
+            isDropdownOpen={isDropdownOpen}
+            setIsDropdownOpen={setIsDropdownOpen}
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+            categoryCounts={categoryCounts}
+            dropdownRef={dropdownRef}
+          />
+          <span className="AnimationsFilterBar-divider" />
+          <ViewToggles />
+        </div>
+      ) : (
+        <div className="AnimationsFilterBar-mobileIcons text-foreground-muted/70">
+          <SquaresFour size={18} aria-hidden="true" />
+          <Funnel size={18} aria-hidden="true" />
+          <List size={18} aria-hidden="true" />
+        </div>
+      )}
+    </header>
+  );
+}
+
+function AnimationsGrid({ filterBarDemo, displayedItems, animations, gridRef }) {
+  return (
+    <div className="AnimationsFilterBar-content">
+      <div ref={gridRef} className="AnimationsFilterBar-grid">
+        {(filterBarDemo ? displayedItems : animations).slice(0, 9).map((anim, index) => (
+          <AnimationCard key={anim.id} animation={anim} viewMode="grid" isAuthenticated={false} priority={index === 0} />
+        ))}
+        {filterBarDemo &&
+          displayedItems.length < 9 &&
+          Array.from({ length: 9 - displayedItems.length }).map((_, idx) => (
+            <PlaceholderCard key={`ph-${idx}`} />
+          ))}
+      </div>
     </div>
   );
 }
@@ -247,24 +447,24 @@ export default function AnimationsFilterBar({
   useGSAP(() => {
     if (!filterBarDemo) return;
     const currentCatStr = String(activeCategory);
-    
+
     if (prevCategoryRef.current === null) {
       prevCategoryRef.current = currentCatStr;
       return;
     }
-    
+
     if (currentCatStr === prevCategoryRef.current) return;
     prevCategoryRef.current = currentCatStr;
     const grid = gridRef.current;
-    
+
     if (!grid || !grid.children.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const targets = Array.from(grid.children).slice(0, displayedItems.length);
-    
+
     if (targets.length) {
       gsap.fromTo(
         targets,
         { autoAlpha: 0, y: 18 },
-        { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.035, ease: 'expo.out', overwrite: true }
+        { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.035, ease: 'expo.out', overwrite: true },
       );
     }
   }, { dependencies: [activeCategory], scope: gridRef });
@@ -272,108 +472,27 @@ export default function AnimationsFilterBar({
   return (
     <div className="AnimationsFilterBar">
       <div className="AnimationsFilterBar-layout">
-        <aside className="AnimationsFilterBar-sidebar">
-          <SectionTitle />
-          <nav className="AnimationsFilterBar-nav">
-            <NavSectionHeader>{translate('platform.mockup.sectionPlatform')}</NavSectionHeader>
-            <NavItem icon={SquaresFour} label={translate('platform.mockup.navAnimations')} href="/animations" active />
-            <NavItem icon={BookmarkSimple} label={translate('platform.mockup.navSaved')} href={isAuthenticated ? '/animations/saved' : '/animations'} />
-            <NavItem icon={Package} label={translate('platform.mockup.navKits')} href="/kits" />
-            <NavItem icon={Lightbulb} label={translate('platform.mockup.navRoadmap')} href="/roadmap" />
-            <div className="AnimationsFilterBar-navSection">
-              <NavSectionHeader>{translate('platform.mockup.sectionSupport')}</NavSectionHeader>
-            </div>
-            <NavItem icon={BookOpen} label={translate('platform.mockup.navDocumentation')} href="/docs" />
-            <NavItem icon={PlugsConnected} label={translate('platform.mockup.navMcp')} href="/docs/guides/mcp" />
-            <NavItem icon={GraduationCap} label={translate('platform.mockup.navLearn')} href="/learn" />
-            <NavItem icon={Question} label={translate('platform.mockup.navHelp')} href={isAuthenticated ? '/help' : '/contact'} />
-            <NavItem icon={GearSix} label={translate('platform.mockup.navSettings')} href={isAuthenticated ? '/settings' : '/login'} />
-            <NavItem icon={DiscordLogo} label={translate('platform.mockup.navDiscord')} href={discordLink} external />
-            <div className="AnimationsFilterBar-user">
-              <div className="AnimationsFilterBar-userInfo">
-                <div className="AnimationsFilterBar-userAvatar text-mono-sm text-foreground-muted">
-                  {translate('platform.mockup.userInitials')}
-                </div>
-                <div className="AnimationsFilterBar-userDetails">
-                  <div className="AnimationsFilterBar-userName text-sm text-foreground">
-                    {translate('platform.mockup.userName')}
-                  </div>
-                  <div className="AnimationsFilterBar-userPlan text-mono-sm text-foreground-muted/60">
-                    {translate('platform.mockup.userPlan')}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </aside>
+        <SidebarNav isAuthenticated={isAuthenticated} discordLink={discordLink} />
         <main className="AnimationsFilterBar-main">
-          <header className="AnimationsFilterBar-header">
-            <div className="AnimationsFilterBar-headerLeft">
-              <p className="AnimationsFilterBar-title text-h6 text-foreground">
-                {translate('platform.mockup.headerTitle')}
-              </p>
-              {filterBarDemo ? (
-                <span className="AnimationsFilterBar-stats text-mono-sm text-foreground-muted/60">
-                  <AnimatedNumber
-                    value={matchCount}
-                    minDigits={1}
-                    triggerMode="immediate"
-                    duration={0.6}
-                    valueChangeDuration={0.9}
-                    ease="power3.inOut"
-                    className="AnimationsFilterBar-statsNumber text-mono-sm"
-                  />
-                  matching
-                </span>
-              ) : (
-                <span className="text-mono-sm text-foreground-muted/60">
-                  {totalCount
-                    ? translate('platform.mockup.headerShowingOfTotal', { shown: Math.min(9, animations.length), total: totalCount })
-                    : translate('platform.mockup.headerCount', { count: animations.length })}
-                </span>
-              )}
-            </div>
-            {filterBarDemo ? (
-              <div className="AnimationsFilterBar-controls">
-                <Dropdown
-                  activeCategoryLabel={activeCategoryLabel}
-                  isDropdownOpen={isDropdownOpen}
-                  setIsDropdownOpen={setIsDropdownOpen}
-                  activeCategory={activeCategory}
-                  setActiveCategory={setActiveCategory}
-                  categoryCounts={categoryCounts}
-                  dropdownRef={dropdownRef}
-                />
-                <span className="AnimationsFilterBar-divider" />
-                <div className="AnimationsFilterBar-viewToggles">
-                  <span className="AnimationsFilterBar-viewToggle is-active text-foreground">
-                    <SquaresFour className="AnimationsFilterBar-viewToggleIcon" />
-                  </span>
-                  <span className="AnimationsFilterBar-viewToggle text-foreground-muted/40">
-                    <List className="AnimationsFilterBar-viewToggleIcon" />
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <div className="AnimationsFilterBar-mobileIcons text-foreground-muted/70">
-                <SquaresFour size={18} aria-hidden="true" />
-                <Funnel size={18} aria-hidden="true" />
-                <List size={18} aria-hidden="true" />
-              </div>
-            )}
-          </header>
-          <div className="AnimationsFilterBar-content">
-            <div ref={gridRef} className="AnimationsFilterBar-grid">
-              {(filterBarDemo ? displayedItems : animations).slice(0, 9).map((anim, index) => (
-                <AnimationCard key={anim.id} animation={anim} viewMode="grid" isAuthenticated={false} priority={index === 0} />
-              ))}
-              {filterBarDemo && displayedItems.length < 9 && (
-                Array.from({ length: 9 - displayedItems.length }).map((_, idx) => (
-                  <PlaceholderCard key={`ph-${idx}`} />
-                ))
-              )}
-            </div>
-          </div>
+          <FilterHeader
+            filterBarDemo={filterBarDemo}
+            matchCount={matchCount}
+            totalCount={totalCount}
+            animationsCount={animations.length}
+            activeCategoryLabel={activeCategoryLabel}
+            isDropdownOpen={isDropdownOpen}
+            setIsDropdownOpen={setIsDropdownOpen}
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+            categoryCounts={categoryCounts}
+            dropdownRef={dropdownRef}
+          />
+          <AnimationsGrid
+            filterBarDemo={filterBarDemo}
+            displayedItems={displayedItems}
+            animations={animations}
+            gridRef={gridRef}
+          />
         </main>
       </div>
     </div>

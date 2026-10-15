@@ -24,7 +24,7 @@ export default function ({
         'transition-[padding-left,color] duration-500 ease-power3-out',
         showIndicator ? 'pl-[1.4em]' : 'pl-0',
         'hover:pl-[1.4em] data-[active=true]:pl-[1.4em]',
-        className
+        className,
       )
     : cn('group relative inline-flex w-fit items-center', className);
   const A_labelClass = inline
@@ -33,7 +33,7 @@ export default function ({
         'pointer-events-none inline-flex items-center transition-transform duration-500 ease-power3-out',
         showIndicator && 'translate-x-[1.5em]',
         'group-hover:translate-x-[1.5em]',
-        'group-data-[active=true]:translate-x-[1.5em]'
+        'group-data-[active=true]:translate-x-[1.5em]',
       );
 
   return (
@@ -52,7 +52,7 @@ export default function ({
           showIndicator ? 'rotate-0 scale-100' : '-rotate-90 scale-0',
           'transition-transform duration-500 ease-out-back',
           'group-hover:rotate-0 group-hover:scale-100',
-          'group-data-[active=true]:rotate-0 group-data-[active=true]:scale-100'
+          'group-data-[active=true]:rotate-0 group-data-[active=true]:scale-100',
         )}
       />
       <span className={A_labelClass}>

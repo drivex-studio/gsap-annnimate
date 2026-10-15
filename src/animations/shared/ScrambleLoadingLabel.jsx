@@ -1,38 +1,40 @@
-"use client";
-import React, { useEffect } from 'react';
+'use client';
+import { useEffect } from 'react';
 import { useDualLayerScramble } from '@/animations/hooks/useDualLayerScramble';
 
 export function ScrambleLoadingLabel({
-  text = "Loading",
-  className = "",
+  text = 'Loading',
+  className = '',
   duration = 0.65,
-  holdMs = 950
+  holdMs = 950,
 }) {
-  let { ref, scramble, kill } = useDualLayerScramble();
+  const { ref, scramble, kill } = useDualLayerScramble();
+
   useEffect(() => {
     let timeoutId = null;
     let isCancelled = false;
-    let triggerScramble = () => {
-      if (!isCancelled) {
-        scramble({
-          duration: duration,
-          onComplete: () => {
-            if (!isCancelled) {
-              timeoutId = setTimeout(triggerScramble, holdMs);
-            }
-          }
-        });
-      }
+
+    const triggerScramble = () => {
+      if (isCancelled) return;
+
+      scramble({
+        duration,
+        onComplete: () => {
+          if (isCancelled) return;
+          timeoutId = setTimeout(triggerScramble, holdMs);
+        },
+      });
     };
 
     timeoutId = setTimeout(triggerScramble, 150);
 
-    return () => {
+    return function cleanup() {
       isCancelled = true;
       if (timeoutId) clearTimeout(timeoutId);
       kill();
     };
   }, [scramble, kill, duration, holdMs]);
+
   return (
     <span ref={ref} className={className} aria-label={text}>
       {text}

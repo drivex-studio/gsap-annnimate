@@ -1,4 +1,4 @@
-"use client"; 
+'use client';
 import { useRef, useCallback, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,16 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 let isRefreshing = false;
 
-export function useReveal(
-  ref,
-  {
-    mode = "scroll",
-    build,
-    start = "top 85%",
-    inView,
-    deps = []
-  } = {}
-) {
+export function useReveal(ref, { mode = 'scroll', build, start = 'top 85%', inView, deps = [] } = {}) {
   const { whenRevealed } = useAnimation();
   const animationRef = useRef(null);
   const hasRevealedRef = useRef(false);
@@ -32,13 +23,13 @@ export function useReveal(
 
   const checkInView = useCallback(() => {
     if (inViewRef.current) return inViewRef.current();
-    
+
     const el = ref.current;
     if (!el) return false;
-    
+
     const rect = el.getBoundingClientRect();
     const viewportHeight = window.innerHeight || 0;
-    
+
     return rect.top < 0.9 * viewportHeight && rect.bottom > 0;
   }, [ref]);
 
@@ -54,79 +45,79 @@ export function useReveal(
   useGSAP(() => {
     const el = ref.current;
     if (!el || !buildRef.current) return;
-    
+
     const anim = buildRef.current(el);
     animationRef.current = anim;
-    
+
     if (hasRevealedRef.current) {
       anim.restart(true);
     }
-    
-    return () => {
+
+    return function cleanup() {
       anim?.kill();
       animationRef.current = null;
     };
-  }, {
-    scope: ref,
-    dependencies: [mode, start, ...deps]
-  });
+  }, { scope: ref, dependencies: [mode, start, ...deps] });
 
   useEffect(() => {
-    if (mode === "manual") return;
-    
+    if (mode === 'manual') return;
+
     let trigger = null;
     let rafId = 0;
-    
-    const cleanup = whenRevealed(() => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        hasRevealedRef.current = true;
-        if (animationRef.current) {
-          animationRef.current.progress(1);
-        }
+
+    function skipToFullProgress() {
+      hasRevealedRef.current = true;
+      if (animationRef.current) {
+        animationRef.current.progress(1);
+      }
+    }
+
+    function scheduleReveal() {
+      if (!ref.current) return;
+
+      if (checkInView()) {
+        play();
         return;
       }
-      
-      if (mode === "hero" || checkInView()) {
-        play();
-      } else {
-        rafId = requestAnimationFrame(() => {
-          if (ref.current) {
-            if (checkInView()) {
-              play();
-              return;
-            }
-            
-            trigger = ScrollTrigger.create({
-              trigger: ref.current,
-              start: start,
-              once: true,
-              onEnter: play
-            });
-            
-            if (!isRefreshing) {
-              isRefreshing = true;
-              requestAnimationFrame(() => {
-                isRefreshing = false;
-                perfMeasure(
-                  `ScrollTrigger.refresh (${ScrollTrigger.getAll().length} triggers)`,
-                  () => ScrollTrigger.refresh()
-                );
-              });
-            }
-          }
+
+      trigger = ScrollTrigger.create({
+        trigger: ref.current,
+        start,
+        once: true,
+        onEnter: play,
+      });
+
+      if (!isRefreshing) {
+        isRefreshing = true;
+        requestAnimationFrame(() => {
+          isRefreshing = false;
+          perfMeasure(
+            `ScrollTrigger.refresh (${ScrollTrigger.getAll().length} triggers)`,
+            () => ScrollTrigger.refresh(),
+          );
         });
       }
+    }
+
+    const cleanup = whenRevealed(() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        skipToFullProgress();
+        return;
+      }
+
+      if (mode === 'hero' || checkInView()) {
+        play();
+      } else {
+        rafId = requestAnimationFrame(scheduleReveal);
+      }
     });
-    
-    return () => {
+
+    return function teardown() {
       cleanup();
       if (rafId) cancelAnimationFrame(rafId);
       trigger?.kill();
     };
   }, [whenRevealed, mode, start]);
 
-  return {
-    play,
-    reveal: play
-  };
+  return { play, reveal: play };
 }

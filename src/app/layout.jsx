@@ -6,6 +6,7 @@ import { getLatestAnimation, getCategories } from '@/libs/supabase/latestAnimati
 import '@/styles/main.css';
 import '@/styles/cursor.css';
 import '@/styles/prose-blog.css';
+import '@/styles/homev3/macc.css';
 
 export const metadata = {
   metadataBase: new URL("https://anm.drivexstore.shop"),

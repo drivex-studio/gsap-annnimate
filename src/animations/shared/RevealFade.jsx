@@ -1,9 +1,14 @@
 'use client';
-
 import { useEffect, useRef } from 'react';
 import { jsx } from 'react/jsx-runtime';
 import gsap from 'gsap';
 import { useReveal } from '@/animations/hooks/useReveal';
+
+function getRevealMode(trigger) {
+  if (trigger === 'pageEnter') return 'hero';
+  if (trigger === 'manual') return 'manual';
+  return 'scroll';
+}
 
 export default function RevealFade({
   as: Component = 'div',
@@ -22,37 +27,23 @@ export default function RevealFade({
 }) {
   const elementRef = useRef(null);
 
-  const { play } = useReveal(elementRef, {
-    mode:
-      trigger === 'pageEnter'
-        ? 'hero'
-        : trigger === 'manual'
-          ? 'manual'
-          : 'scroll',
+  const build = enabled
+    ? (element) => {
+        const targets = stagger > 0 ? Array.from(element.children) : [element];
 
-    build: enabled
-      ? (element) => {
-          const targets =
-            stagger > 0 ? Array.from(element.children) : [element];
-
-          return gsap.timeline({ paused: true }).fromTo(
+        return gsap
+          .timeline({ paused: true })
+          .fromTo(
             targets,
-            {
-              autoAlpha: 0,
-              y,
-            },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration,
-              ease,
-              delay,
-              stagger,
-            }
+            { autoAlpha: 0, y },
+            { autoAlpha: 1, y: 0, duration, ease, delay, stagger },
           );
-        }
-      : null,
+      }
+    : null;
 
+  const { play } = useReveal(elementRef, {
+    mode: getRevealMode(trigger),
+    build,
     start,
     deps: [enabled, y, duration, ease, delay, stagger],
   });

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
@@ -15,11 +15,91 @@ function getCarouselDimensions(containerWidth, containerHeight) {
   };
 }
 
+function CarouselCard({ item, index, cardRefs }) {
+  return (
+    <Link
+      ref={(itemEl) => {
+        cardRefs.current[index] = itemEl;
+      }}
+      href={`/animations/${item.slug}`}
+      draggable={false}
+      aria-label={item.title}
+      className="group absolute top-1/2 left-1/2 block h-(--cs-h) w-(--cs-w) overflow-hidden bg-surface text-left will-change-transform"
+      style={{ backfaceVisibility: 'hidden' }}
+    >
+      <img
+        src={item.image}
+        alt=""
+        draggable={false}
+        className="absolute inset-0 block object-cover"
+        style={{
+          width: '100%',
+          height: '100%',
+          filter: 'grayscale(1) contrast(1.35) brightness(1.05)',
+        }}
+      />
+
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 mix-blend-multiply"
+        style={{
+          backgroundImage: 'radial-gradient(circle at center, transparent 0 38%, rgba(0,0,0,0.55) 42%)',
+          backgroundSize: '4px 4px',
+        }}
+      />
+
+      <span
+        className="absolute inset-0"
+        style={{ clipPath: 'inset(0 0 0 calc((1 - var(--cs-crossed, 0)) * 100%))' }}
+      >
+        {item.video ? (
+          <video
+            src={item.video}
+            poster={item.image}
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="absolute inset-0 block object-cover"
+            style={{ width: '100%', height: '100%' }}
+          />
+        ) : (
+          <img
+            src={item.image}
+            alt=""
+            draggable={false}
+            className="absolute inset-0 block object-cover"
+            style={{ width: '100%', height: '100%' }}
+          />
+        )}
+      </span>
+
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 w-2 -translate-x-1/2 bg-brand opacity-0 group-data-[edge=true]:opacity-100"
+        style={{
+          left: 'calc((1 - var(--cs-crossed, 0)) * 100%)',
+          boxShadow: '0 0 12px 2px var(--brand), 0 0 40px 8px color-mix(in srgb, var(--brand) 50%, transparent)',
+        }}
+      />
+
+      <span
+        className="pointer-events-none absolute inset-x-0 bottom-0 px-10 pt-24 pb-8 lg:px-12 lg:pb-10"
+        style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.55), transparent)' }}
+      >
+        <span className="block text-[11px] font-medium leading-tight text-white lg:text-[12px]">
+          {item.title}
+        </span>
+      </span>
+    </Link>
+  );
+}
+
 export default function Carousel3D({ items = [], autoplay = true, speed = 0.22, className = '' }) {
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
-  const repeatedItems = [];
 
+  const repeatedItems = [];
   while (items.length && repeatedItems.length < 12) {
     repeatedItems.push(...items);
   }
@@ -47,8 +127,6 @@ export default function Carousel3D({ items = [], autoplay = true, speed = 0.22, 
       containerEl.style.setProperty('--cs-h', `${dims.h}px`);
       containerEl.style.perspective = `${dims.p}px`;
     };
-
-    updateMetrics();
 
     const renderCards = () => {
       const totalAngle = angleStep * cardEls.length;
@@ -134,6 +212,10 @@ export default function Carousel3D({ items = [], autoplay = true, speed = 0.22, 
       }
     };
 
+    const pauseAllVideos = () => {
+      cardEls.forEach((cardEl) => cardEl.querySelector('video')?.pause());
+    };
+
     containerEl.addEventListener('pointerdown', onPointerDown);
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerup', onPointerUp);
@@ -148,14 +230,14 @@ export default function Carousel3D({ items = [], autoplay = true, speed = 0.22, 
         gsap.ticker.add(onTick);
       } else {
         gsap.ticker.remove(onTick);
-        cardEls.forEach((cardEl) => cardEl.querySelector('video')?.pause());
+        pauseAllVideos();
       }
     });
 
     intersectionObserver.observe(containerEl);
     renderCards();
 
-    return () => {
+    return function cleanup() {
       gsap.ticker.remove(onTick);
       intersectionObserver.disconnect();
       resizeObserver.disconnect();
@@ -181,82 +263,7 @@ export default function Carousel3D({ items = [], autoplay = true, speed = 0.22, 
       />
 
       {repeatedItems.map((item, index) => (
-        <Link
-          key={`${item.slug}-${index}`}
-          ref={(itemEl) => {
-            cardRefs.current[index] = itemEl;
-          }}
-          href={`/animations/${item.slug}`}
-          draggable={false}
-          aria-label={item.title}
-          className="group absolute top-1/2 left-1/2 block h-(--cs-h) w-(--cs-w) overflow-hidden bg-surface text-left will-change-transform"
-          style={{ backfaceVisibility: 'hidden' }}
-        >
-          <img
-            src={item.image}
-            alt=""
-            draggable={false}
-            className="absolute inset-0 block object-cover"
-            style={{
-              width: '100%',
-              height: '100%',
-              filter: 'grayscale(1) contrast(1.35) brightness(1.05)',
-            }}
-          />
-
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 mix-blend-multiply"
-            style={{
-              backgroundImage: 'radial-gradient(circle at center, transparent 0 38%, rgba(0,0,0,0.55) 42%)',
-              backgroundSize: '4px 4px',
-            }}
-          />
-
-          <span
-            className="absolute inset-0"
-            style={{ clipPath: 'inset(0 0 0 calc((1 - var(--cs-crossed, 0)) * 100%))' }}
-          >
-            {item.video ? (
-              <video
-                src={item.video}
-                poster={item.image}
-                muted
-                loop
-                playsInline
-                preload="none"
-                className="absolute inset-0 block object-cover"
-                style={{ width: '100%', height: '100%' }}
-              />
-            ) : (
-              <img
-                src={item.image}
-                alt=""
-                draggable={false}
-                className="absolute inset-0 block object-cover"
-                style={{ width: '100%', height: '100%' }}
-              />
-            )}
-          </span>
-
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 w-2 -translate-x-1/2 bg-brand opacity-0 group-data-[edge=true]:opacity-100"
-            style={{
-              left: 'calc((1 - var(--cs-crossed, 0)) * 100%)',
-              boxShadow: '0 0 12px 2px var(--brand), 0 0 40px 8px color-mix(in srgb, var(--brand) 50%, transparent)',
-            }}
-          />
-
-          <span
-            className="pointer-events-none absolute inset-x-0 bottom-0 px-10 pt-24 pb-8 lg:px-12 lg:pb-10"
-            style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.55), transparent)' }}
-          >
-            <span className="block text-[11px] font-medium leading-tight text-white lg:text-[12px]">
-              {item.title}
-            </span>
-          </span>
-        </Link>
+        <CarouselCard key={`${item.slug}-${index}`} item={item} index={index} cardRefs={cardRefs} />
       ))}
     </div>
   );

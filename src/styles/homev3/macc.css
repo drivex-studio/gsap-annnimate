@@ -1,0 +1,201 @@
+@font-face {
+    font-family: Switzer;
+    src: url(/fonts/Switzer-Variable.woff2)format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap
+}
+
+.macc_wrap {
+    --ga-bg: #ebebe9;
+    --ga-ink: #101010;
+    --ga-fg: #fffaf2eb;
+    --ga-fg-soft: #ffffffc7;
+    --ga-fg-dim: #ffffff8c;
+    --ga-margin: 40px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100dvh;
+    padding: var(--ga-margin);
+    background-color: var(--ga-bg);
+    -webkit-font-smoothing: antialiased;
+    justify-content: center;
+    align-items: center;
+    font-family: Switzer, -apple-system, BlinkMacSystemFont, sans-serif;
+    display: flex;
+    position: relative
+}
+
+.macc_stage {
+    width: 100%;
+    max-width: 560px;
+    position: relative
+}
+
+.macc_filter_svg {
+    pointer-events: none;
+    width: 0;
+    height: 0;
+    position: absolute;
+    overflow: hidden
+}
+
+.macc_list {
+    flex-direction: column;
+    gap: 8px;
+    display: flex
+}
+
+.macc_row {
+    position: relative
+}
+
+.macc_goo {
+    z-index: 0;
+    pointer-events: none;
+    position: absolute;
+    inset: 0
+}
+
+.macc_goo_trigger,
+.macc_goo_panel {
+    background-color: var(--ga-ink);
+    will-change: transform;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.macc_goo_panel {
+    border-radius: 16px
+}
+
+.macc_trigger_crisp {
+    z-index: 3;
+    background-color: var(--ga-ink);
+    pointer-events: none;
+    transition: background-color .3s cubic-bezier(.7, 0, .16, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0
+}
+
+.macc_trigger:hover+.macc_trigger_crisp {
+    background-color: #1e1e1c
+}
+
+.macc_panel_crisp {
+    z-index: 1;
+    background-color: var(--ga-ink);
+    pointer-events: none;
+    will-change: transform;
+    border-radius: 16px;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.macc_trigger {
+    z-index: 4;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    min-height: 56px;
+    color: var(--ga-fg);
+    box-sizing: border-box;
+    background-color: #0000;
+    border: none;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px;
+    font-family: inherit;
+    display: flex;
+    position: relative
+}
+
+.macc_trigger:focus {
+    outline: none
+}
+
+.macc_trigger:focus-visible {
+    outline-offset: 2px;
+    border-radius: 999px;
+    outline: 2px solid #fd551d
+}
+
+.macc_index {
+    min-width: 22px;
+    color: var(--ga-fg-dim);
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 500
+}
+
+.macc_question {
+    letter-spacing: -.01em;
+    color: var(--ga-fg);
+    flex: 1;
+    font-size: 15px;
+    font-weight: 380;
+    line-height: 1.35
+}
+
+.macc_icon {
+    width: 16px;
+    height: 16px;
+    color: var(--ga-fg-soft);
+    transform-origin: 50%;
+    will-change: transform;
+    flex-shrink: 0
+}
+
+.macc_panel {
+    z-index: 2;
+    will-change: height;
+    height: 0;
+    position: relative;
+    overflow: hidden
+}
+
+.macc_panel_inner {
+    margin-top: 10px;
+    padding: 18px 22px 20px
+}
+
+.macc_answer {
+    letter-spacing: -.01em;
+    color: var(--ga-fg-soft);
+    margin: 0;
+    font-size: 14px;
+    font-weight: 380;
+    line-height: 1.6
+}
+
+.macc_answer_line {
+    margin-bottom: -.18em;
+    padding-bottom: .18em;
+    overflow: visible clip
+}
+
+@media (max-width:767px) {
+    .macc_wrap {
+        --ga-margin: 20px
+    }
+
+    .macc_trigger {
+        gap: 12px;
+        padding: 14px 18px
+    }
+
+    .macc_panel_inner {
+        padding: 14px 18px 18px
+    }
+}
+
+@media (max-width:479px) {
+    .macc_index {
+        display: none
+    }
+}

@@ -6,6 +6,7 @@ import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'
 import { Draggable } from 'gsap/Draggable'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+import { CustomEase } from 'gsap/CustomEase'
 
 gsap.registerPlugin(
   useGSAP,
@@ -14,7 +15,8 @@ gsap.registerPlugin(
   ScrambleTextPlugin,
   Draggable,
   InertiaPlugin,
-  MotionPathPlugin
+  MotionPathPlugin,
+  CustomEase
 )
 
 export {
@@ -25,5 +27,6 @@ export {
   ScrambleTextPlugin,
   Draggable,
   InertiaPlugin,
-  MotionPathPlugin
+  MotionPathPlugin,
+  CustomEase
 }

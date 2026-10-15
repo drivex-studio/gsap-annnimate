@@ -1,36 +1,46 @@
-"use client";
-import React, { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+'use client';
+import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
 import gsap from 'gsap';
 import { useReveal } from '@/animations/hooks/useReveal';
 
-const AnimatedDivider = forwardRef(function AnimatedDivider({
-  orientation = 'horizontal',
-  thickness = 1,
-  length = 'full',
-  color,
-  duration = 0.8,
-  delay = 0,
-  ease = 'power3.out',
-  start = 'top 85%',
-  triggerMode = 'scroll',
-  skip = false,
-  className = ''
-}, ref) {
-  let containerRef = useRef(null);
-  
-  let isHorizontal = orientation === 'horizontal';
-  let scaleProp = isHorizontal ? 'scaleX' : 'scaleY';
-  let transformOrigin = isHorizontal ? 'left center' : 'top center';
+const AnimatedDivider = forwardRef(function AnimatedDivider(
+  {
+    orientation = 'horizontal',
+    thickness = 1,
+    length = 'full',
+    color,
+    duration = 0.8,
+    delay = 0,
+    ease = 'power3.out',
+    start = 'top 85%',
+    triggerMode = 'scroll',
+    skip = false,
+    className = '',
+  },
+  ref,
+) {
+  const containerRef = useRef(null);
 
-  let { reveal } = useReveal(containerRef, {
+  const isHorizontal = orientation === 'horizontal';
+  const scaleProp = isHorizontal ? 'scaleX' : 'scaleY';
+  const transformOrigin = isHorizontal ? 'left center' : 'top center';
+
+  const build = skip
+    ? null
+    : (element) =>
+        gsap
+          .timeline({ paused: true })
+          .fromTo(
+            element,
+            { [scaleProp]: 0, transformOrigin },
+            { [scaleProp]: 1, duration, delay, ease },
+          );
+
+  const { reveal } = useReveal(containerRef, {
     mode: triggerMode === 'scroll' ? 'scroll' : 'manual',
-    build: skip ? null : (element) => gsap.timeline({ paused: true }).fromTo(
-      element,
-      { [scaleProp]: 0, transformOrigin },
-      { [scaleProp]: 1, duration, delay, ease }
-    ),
+    build,
     start,
-    deps: [isHorizontal, duration, delay, ease, skip]
+    deps: [isHorizontal, duration, delay, ease, skip],
   });
 
   useImperativeHandle(ref, () => ({ reveal }), [reveal]);
@@ -40,11 +50,11 @@ const AnimatedDivider = forwardRef(function AnimatedDivider({
     reveal();
   }, [triggerMode, skip, reveal]);
 
-  let sizeStyle = isHorizontal
+  const sizeStyle = isHorizontal
     ? { height: `${thickness}px`, width: length === 'full' ? '100%' : length }
     : { width: `${thickness}px`, height: length === 'full' ? '100%' : length };
 
-  let style = color ? { ...sizeStyle, backgroundColor: color } : sizeStyle;
+  const style = color ? { ...sizeStyle, backgroundColor: color } : sizeStyle;
 
   return (
     <div

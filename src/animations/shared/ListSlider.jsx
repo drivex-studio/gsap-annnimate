@@ -1,7 +1,16 @@
 import { Children, useRef } from 'react';
 import gsap from 'gsap';
-
 import { useReveal } from '@/animations/hooks/useReveal';
+
+function SliderItem({ child, itemClassName }) {
+  return (
+    <li className={`overflow-hidden ${itemClassName}`.trim()}>
+      <span data-anm-list-slider className="block">
+        {child}
+      </span>
+    </li>
+  );
+}
 
 export function ListSlider({
   children,
@@ -24,13 +33,7 @@ export function ListSlider({
       const tl = gsap.timeline({ paused: true });
 
       if (sliderEls.length) {
-        tl.from(sliderEls, {
-          yPercent: 100,
-          duration,
-          stagger,
-          delay,
-          ease,
-        });
+        tl.from(sliderEls, { yPercent: 100, duration, stagger, delay, ease });
       }
 
       return tl;
@@ -44,11 +47,7 @@ export function ListSlider({
   return (
     <Tag ref={listRef} className={className}>
       {childItems.map((child, index) => (
-        <li key={index} className={`overflow-hidden ${itemClassName}`.trim()}>
-          <span data-anm-list-slider className="block">
-            {child}
-          </span>
-        </li>
+        <SliderItem key={index} child={child} itemClassName={itemClassName} />
       ))}
     </Tag>
   );
