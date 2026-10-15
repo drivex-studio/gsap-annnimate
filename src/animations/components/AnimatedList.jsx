@@ -1,19 +1,10 @@
 'use client';
+
 import { useRef, Children } from 'react';
 import gsap from 'gsap';
 import { useReveal } from '@/animations/hooks/useReveal';
 
-function SliderItem({ child, itemClassName }) {
-  return (
-    <li className={`overflow-hidden ${itemClassName}`.trim()}>
-      <span data-anm-list-slider className="block">
-        {child}
-      </span>
-    </li>
-  );
-}
-
-export default function ListSlider({
+export default function AnimatedList({
   children,
   className = '',
   tag: Tag = 'ul',
@@ -25,16 +16,22 @@ export default function ListSlider({
   start = 'top 80%',
   trigger = 'scroll',
 }) {
-  const containerRef = useRef(null);
+  const listRef = useRef(null);
 
-  useReveal(containerRef, {
+  useReveal(listRef, {
     mode: trigger === 'pageEnter' ? 'hero' : 'scroll',
     build: (element) => {
-      const targets = element.querySelectorAll('[data-anm-list-slider]');
+      const sliders = element.querySelectorAll('[data-anm-list-slider]');
       const tl = gsap.timeline({ paused: true });
 
-      if (targets.length) {
-        tl.from(targets, { yPercent: 100, duration, stagger, delay, ease });
+      if (sliders.length) {
+        tl.from(sliders, {
+          yPercent: 100,
+          duration,
+          stagger,
+          delay,
+          ease,
+        });
       }
 
       return tl;
@@ -46,9 +43,13 @@ export default function ListSlider({
   const validChildren = Children.toArray(children).filter(Boolean);
 
   return (
-    <Tag ref={containerRef} className={className}>
+    <Tag ref={listRef} className={className}>
       {validChildren.map((child, index) => (
-        <SliderItem key={index} child={child} itemClassName={itemClassName} />
+        <li key={index} className={`overflow-hidden ${itemClassName}`.trim()}>
+          <span data-anm-list-slider={true} className="block">
+            {child}
+          </span>
+        </li>
       ))}
     </Tag>
   );

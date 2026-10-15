@@ -13,7 +13,7 @@ import HomeV3Showcase from '@/components/home-v3/HomeV3Showcase';
 import HomeV3Testimonials from '@/components/home-v3/HomeV3Testimonials';
 import HomeV3Pricing from '@/components/home-v3/HomeV3Pricing';
 import HomeV3StarterPack from '@/components/home-v3/HomeV3StarterPack';
-import FAQ from '@/components/landing/FAQSection';
+import HomeV3Faq from '@/components/home-v3/HomeV3Faq';
 import BottomCTA from '@/components/landing/BottomCTA';
 
 export const revalidate = 60;
@@ -138,7 +138,7 @@ export default async function HomePage() {
 
       {/* 9. FAQ */}
       <div className="v3-faq">
-        <FAQ
+        <HomeV3Faq
           faqs={t('home-v3.faq.items')}
           headline={t('home-v3.faq.headline')}
           subtext={t('home-v3.faq.subtext')}

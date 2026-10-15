@@ -1,11 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-
 import { t } from '@/libs/utils/i18n';
-
-import FaqSection from '@/components/sections/FaqSection'; // module id: 752362
-import MinimalAccordion from '@/components/ui/MinimalAccordion'; // module id: 4707
+import FaqSection from '@/components/common/FaqSection';
+import MinimalAccordion from '@/components/common/MinimalAccordion'; 
 import TransitionLink from '@/components/navigation/Link';
 
 /* Data */

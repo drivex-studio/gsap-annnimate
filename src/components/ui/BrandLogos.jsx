@@ -1,13 +1,20 @@
+'use client';
+
 import CocaColaLogo from '@/assets/logos/CocaColaLogo';
 import BodyArmorLogo from '@/assets/logos/BodyArmorLogo';
 import WkndhrsLogo from '@/assets/logos/WkndhrsLogo';
 import PoweradeLogo from '@/assets/logos/PoweradeLogo';
-
-import { ListSlider } from '@/animations/shared/ListSlider';
+import AnimatedList from '@/animations/components/AnimatedList';
 
 function GoodFellaLogo({ className = '' }) {
   return (
-    <svg className={className} viewBox="0 0 1616.59 1500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg
+      className={className}
+      viewBox="0 0 1616.59 1500"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
       <path d="M976.42,762.91h-76.36c-55.23,0-80.53,24.42-80.53,77.15v304.09c0,8.45,4.51,12.95,12.95,12.95h143.94c8.45,0,12.95-4.51,12.95-12.95v-368.29c0-8.45-4.51-12.95-12.95-12.95Z" />
       <path d="M1170.15,762.91h-144.09c-8.45,0-12.95,4.51-12.95,12.95v368.29c0,8.45,4.51,12.95,12.95,12.95h76.52c55.23,0,80.53-24.42,80.53-77.15v-304.09c0-8.45-4.51-12.95-12.95-12.95Z" />
       <path d="M1491.91,762.91h-271.43c-9.01,0-13.52,4.51-13.52,13.52v171.15h173.6v-98.05c0-15.24,23.65-15.22,23.65,0v109.2c0,6.41-5.43,13.18-11.83,13.18h-185.43v107.49c0,46.74,30.97,77.71,77.71,77.71h106.99c15.77,0,25.46-13.52,27.15-29.28v-71.66c.56-6.19,6.22-10.14,12.42-10.14,5.07,0,11.86,4.66,11.29,9.72l-.06,88.41c0,9,2.82,12.95,11.26,12.95h102.94c8.45,0,13.76-4.51,13.76-12.95v-303.53c0-46.74-31.78-77.71-78.52-77.71Z" />
@@ -29,9 +36,13 @@ const BRAND_LOGOS = [
   { name: 'Good Fella', Logo: GoodFellaLogo, className: 'h-40' },
 ];
 
-export function BrandLogos({ className = '', trigger = 'scroll', delay = 0 }) {
+export default function BrandLogos({
+  className = '',
+  trigger = 'scroll',
+  delay = 0,
+}) {
   return (
-    <ListSlider
+    <AnimatedList
       tag="ul"
       className={`flex flex-wrap items-center gap-x-24 gap-y-24 ${className}`}
       itemClassName="text-foreground-muted opacity-60 transition-opacity duration-300 hover:opacity-100"
@@ -44,6 +55,6 @@ export function BrandLogos({ className = '', trigger = 'scroll', delay = 0 }) {
           <span className="sr-only">{name}</span>
         </span>
       ))}
-    </ListSlider>
+    </AnimatedList>
   );
 }

@@ -1,4 +1,4 @@
-export const CASCADE_VERTEX_SHADER = String.raw`
+export const CASCADE_VERTEX_SHADER = `
   uniform float uPsi;       // the slide's centre angle
   uniform float uScale;     // the slide's width scale
   uniform float uR;         // cylinder radius
@@ -29,7 +29,7 @@ export const CASCADE_VERTEX_SHADER = String.raw`
   }
 `;
 
-export const CASCADE_FRAGMENT_SHADER = String.raw`
+export const CASCADE_FRAGMENT_SHADER = `
   uniform sampler2D uMap;
   uniform sampler2D uOverlay;
   uniform float uHasMap;
@@ -67,7 +67,7 @@ export const CASCADE_FRAGMENT_SHADER = String.raw`
   }
 `;
 
-export const CASCADE_POST_VERTEX_SHADER = String.raw`
+export const CASCADE_POST_VERTEX_SHADER = `
   varying vec2 vUv;
   void main() {
     vUv = uv;
@@ -75,7 +75,7 @@ export const CASCADE_POST_VERTEX_SHADER = String.raw`
   }
 `;
 
-export const CASCADE_POST_FRAGMENT_SHADER = String.raw`
+export const CASCADE_POST_FRAGMENT_SHADER = `
   uniform sampler2D tScene;
   uniform vec2 uRes;
   uniform vec3 uBrand;
