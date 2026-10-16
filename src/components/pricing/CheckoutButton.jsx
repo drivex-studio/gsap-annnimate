@@ -1,5 +1,5 @@
 import { analytics } from '@/libs/utils/analytics'; 
-import Button from '@/components/ui/Button'; 
+import AnimatedButton from '@/animations/components/AnimatedButton'; 
 import { usePppTier } from '@/hooks/usePppGeo'; 
 
 export default function CheckoutButton({
@@ -15,7 +15,7 @@ export default function CheckoutButton({
   const pppTier = usePppTier();
 
   return (
-    <Button
+    <AnimatedButton
       href={canCheckout ? `/checkout?kit=${kitSlug}` : undefined}
       onClick={() => {
         analytics.track?.('kit_checkout_cta_clicked', {
@@ -29,6 +29,6 @@ export default function CheckoutButton({
       disabled={!canCheckout}
     >
       {label}
-    </Button>
+    </AnimatedButton>
   );
 }

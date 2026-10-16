@@ -2,7 +2,7 @@
 import React, { useRef, Fragment } from 'react';
 
 import Logo from '@/assets/logos/SiteLogo';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import TextLink from '@/components/navigation/NavLink';
 import FadeIn from '@/animations/shared/FadeIn';
 import ImageCarousel from '@/components/ui/ImageCarousel';
@@ -139,7 +139,7 @@ export default function AuthStatusGrid({
             {(primary || secondary) && (
               <div className="flex flex-col gap-12">
                 {primary && (
-                  <Button 
+                  <AnimatedButton 
                     href={primary.href} 
                     onClick={primary.onClick} 
                     type={primary.href ? undefined : 'button'} 
@@ -150,7 +150,7 @@ export default function AuthStatusGrid({
                     disabled={primary.disabled}
                   >
                     {primary.label}
-                  </Button>
+                  </AnimatedButton>
                 )}
                 
                 {secondary && secondary.href ? (

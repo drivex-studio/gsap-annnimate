@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import Link from '@/components/navigation/Link'; 
 import { getConsent, acceptAll } from '@/libs/config/setConsent';
-import Button from '@/components/ui/Button'; 
+import AnimatedButton from '@/animations/components/AnimatedButton'; 
 
 export function CookieBanner({ onOpenPreferences }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,7 +74,7 @@ export function CookieBanner({ onOpenPreferences }) {
           </Link>
         </p>
         <div className="flex gap-8">
-          <Button
+          <AnimatedButton
             type="button"
             theme="light"
             size="xs"
@@ -82,8 +82,8 @@ export function CookieBanner({ onOpenPreferences }) {
             className="flex-1"
           >
             Accept all
-          </Button>
-          <Button
+          </AnimatedButton>
+          <AnimatedButton
             type="button"
             theme="surface"
             size="xs"
@@ -91,7 +91,7 @@ export function CookieBanner({ onOpenPreferences }) {
             className="flex-1"
           >
             Preferences
-          </Button>
+          </AnimatedButton>
         </div>
       </div>
     </div>

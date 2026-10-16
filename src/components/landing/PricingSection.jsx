@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { translate } from '@/libs/utils/i18n';
 import { useTransitionRouter } from '@/providers/TransitionRouterProvider';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import PricingToggle from '@/components/pricing/utils/PricingToggle';
@@ -59,9 +59,9 @@ export default function PricingSection({ shippedRecently = 0 }) {
           </div>
           
           <div className="col-span-12 mt-16 flex justify-center">
-            <Button href="/pricing" theme="brand" size="sm">
+            <AnimatedButton href="/pricing" theme="brand" size="sm">
               {translate('landing.pricingSection.bottomCta')}
-            </Button>
+            </AnimatedButton>
           </div>
           
         </div>

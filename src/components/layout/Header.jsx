@@ -1,53 +1,261 @@
 'use client';
 
-import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import gsap from 'gsap';
-import { cn } from '@/libs/utils/className';
-import { bunnyImageUrl } from '@/libs/utils/bunnyImageUrl';
-import { createClient } from '@/libs/supabase/client';
-import Logo from '@/assets/logos/SiteLogo';
-import NavLink from '@/components/navigation/NavLink';
-import Link from '@/components/navigation/Link';
-import Button from '@/components/ui/Button';
-import { translate } from '@/libs/utils/i18n';
-import { isRouteActive } from '@/libs/config/isRouteActive';
-import { useCategories } from '@/providers/CategoryProvider';
-import { themes, navItemsData } from '@/libs/config/navConfig';
-import { DesktopMegaMenuItem } from './Header/DesktopMegaMenuItem';
-import { MobileAccordionItem } from './Header/MobileAccordionItem';
-import { HeaderMarquee } from './Header/HeaderMarquee';
-import '@/styles/components/MegaMenuIntro.css';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'; // NOTE: module id: 271645
+import { usePathname } from 'next/navigation'; // NOTE: module id: 618566
+import { gsap } from 'gsap'; // NOTE: module id: 989970
+import { cn } from '@/libs/utils/className'; // NOTE: module id: 103746
+import { bunnyImageUrl } from '@/libs/utils/bunnyImageUrl'; // NOTE: module id: 632021
+import { createClient } from '@/libs/supabase/client'; // NOTE: module id: 416983
+import { t } from '@/libs/utils/i18n'; // NOTE: module id: 398682
+import Logo from '@/assets/logos/SiteLogo'; // NOTE: module id: 635566
+import NavLink from '@/components/navigation/NavLink'; // NOTE: module id: 520237
+import TransitionLink from '@/components/navigation/Link'; // NOTE: module id: 101836
+import AnimatedButton from '@/animations/components/AnimatedButton'; // NOTE: module id: 687989
+import { useCategories } from '@/providers/CategoryProvider'; // NOTE: module id: 87207
+import NavTrigger from '@/components/layout/Header/NavTrigger';
+import MobileNavAccordion from '@/components/layout/Header/MobileAccordionItem';
+import HeaderMarquee from '@/components/layout/Header/HeaderMarquee';
 
-function useHeaderAuth() {
+const NAV_CONFIG = [
+  {
+    key: 'library',
+    label: t('common.header.nav.library.label'),
+    triggerHref: '/animations',
+    mega: {
+      intro: {
+        heading: t('common.header.nav.library.intro.heading'),
+        text: t('common.header.nav.library.intro.text'),
+        cta: {
+          label: t('common.header.nav.library.intro.ctaLabel'),
+          href: '/animations',
+        },
+      },
+      columns: [
+        {
+          label: t('common.header.nav.library.columns.byCategory'),
+          dynamic: 'categories',
+          links: [],
+        },
+        {
+          label: t('common.header.nav.library.columns.collections'),
+          links: [
+            {
+              label: t('common.header.nav.library.links.allComponents'),
+              href: '/animations',
+            },
+            {
+              label: t('common.header.nav.library.links.mostPopular'),
+              href: '/animations?sort=hot',
+            },
+            {
+              label: t('common.header.nav.library.links.saved'),
+              href: '/animations/saved',
+            },
+            {
+              label: t('common.header.nav.library.links.showcase'),
+              href: '/showcase',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    key: 'kits',
+    label: t('common.header.nav.kits.label'),
+    triggerHref: '/kits',
+    badge: t('common.header.nav.kits.badge'),
+    mega: {
+      intro: {
+        heading: t('common.header.nav.kits.intro.heading'),
+        text: t('common.header.nav.kits.intro.text'),
+        cta: {
+          label: t('common.header.nav.kits.intro.ctaLabel'),
+          href: '/kits/menu',
+        },
+      },
+      columns: [
+        {
+          label: t('common.header.nav.kits.columns.theKits'),
+          links: [
+            {
+              label: t('common.header.nav.kits.links.revealKit'),
+              href: '/kits/reveal',
+            },
+            {
+              label: t('common.header.nav.kits.links.menuKit'),
+              href: '/kits/menu',
+              badge: 'New',
+            },
+          ],
+        },
+        {
+          label: t('common.header.nav.kits.columns.learn'),
+          links: [
+            {
+              label: t('common.header.nav.kits.links.whatAKitIs'),
+              href: '/kits',
+            },
+          ],
+        },
+        {
+          label: t('common.header.nav.kits.columns.stayClose'),
+          links: [
+            {
+              label: t('common.header.nav.kits.links.roadmap'),
+              href: '/roadmap',
+            },
+            {
+              label: t('common.header.nav.kits.links.pricing'),
+              href: '/pricing',
+            },
+          ],
+        },
+      ],
+      featured: {
+        title: t('common.header.nav.kits.featured.title'),
+        href: '/kits/menu',
+        image: {
+          jpg: 'https://annnimate.b-cdn.net/video-thumbnails/kits/menu/preview-index/preview-index.gif',
+          alt: t('common.header.nav.kits.featured.imageAlt'),
+        },
+      },
+    },
+  },
+  {
+    key: 'learn',
+    label: t('common.header.nav.learn.label'),
+    triggerHref: '/learn',
+    mega: {
+      intro: {
+        heading: t('common.header.nav.learn.intro.heading'),
+        text: t('common.header.nav.learn.intro.text'),
+        cta: {
+          label: t('common.header.nav.learn.intro.ctaLabel'),
+          href: '/learn',
+        },
+      },
+      columns: [
+        {
+          label: t('common.header.nav.learn.columns.concepts'),
+          links: [
+            {
+              label: t('common.header.nav.learn.links.easing'),
+              href: '/learn/easing',
+            },
+            {
+              label: t('common.header.nav.learn.links.scroll'),
+              href: '/learn/scroll',
+            },
+            {
+              label: t('common.header.nav.learn.links.timeline'),
+              href: '/learn/timeline',
+            },
+            {
+              label: t('common.header.nav.learn.links.text'),
+              href: '/learn/text',
+            },
+            {
+              label: t('common.header.nav.learn.links.react'),
+              href: '/learn/react',
+            },
+            {
+              label: t('common.header.nav.learn.links.performance'),
+              href: '/learn/performance',
+            },
+            {
+              label: t('common.header.nav.learn.links.plugins'),
+              href: '/learn/plugins',
+            },
+          ],
+        },
+        {
+          label: t('common.header.nav.learn.columns.explore'),
+          links: [
+            {
+              label: t('common.header.nav.learn.links.patterns'),
+              href: '/patterns',
+            },
+            {
+              label: t('common.header.nav.learn.links.freeTools'),
+              href: '/tools',
+            },
+            {
+              label: t('common.header.nav.learn.links.comparisons'),
+              href: '/compare',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    key: 'docs',
+    label: t('common.header.nav.docs.label'),
+    href: '/docs',
+  },
+  {
+    key: 'pricing',
+    label: t('common.header.nav.pricing.label'),
+    href: '/pricing',
+  },
+];
+
+const VALID_THEMES = ['light', 'dark', 'brand'];
+
+function isRouteActive(pathname, targetHref) {
+  if (!pathname || !targetHref) return false;
+  const basePath = targetHref.split(/[?#]/)[0];
+  if (!basePath.startsWith('/')) return false;
+  return basePath === '/'
+    ? pathname === '/'
+    : pathname === basePath || pathname.startsWith(`${basePath}/`);
+}
+
+function useAuth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const client = createClient();
+    const supabase = createClient();
 
     async function fetchUser() {
       try {
         const {
-          data: { user },
+          data: { user: authUser },
           error,
-        } = await client.auth.getUser();
+        } = await supabase.auth.getUser();
 
-        if (error || !user) {
+        if (error || !authUser) {
           setUser(null);
           return;
         }
 
-        const { data } = await client.from('users').select('*').eq('id', user.id).single();
+        const { data: profile } = await supabase
+          .from('users')
+          .select('*')
+          .eq('id', authUser.id)
+          .single();
 
         setUser({
-          id: user.id,
-          email: user.email,
-          name: data?.name || data?.display_name || user.email?.split('@')[0] || 'User',
-          avatarUrl: data?.avatar_url,
-          avatarIndex: data?.avatar_index || 0,
-          subscriptionStatus: data?.subscription_status || 'free',
-          hasAccess: data?.has_access || false,
+          id: authUser.id,
+          email: authUser.email,
+          name:
+            profile?.name ||
+            profile?.display_name ||
+            authUser.email?.split('@')[0] ||
+            'User',
+          avatarUrl: profile?.avatar_url,
+          avatarIndex: profile?.avatar_index || 0,
+          subscriptionStatus: profile?.subscription_status || 'free',
+          hasAccess: profile?.has_access || false,
         });
       } catch (err) {
         console.error('Error fetching user:', err);
@@ -61,13 +269,10 @@ function useHeaderAuth() {
 
     const {
       data: { subscription },
-    } = client.auth.onAuthStateChange((event) => {
+    } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         fetchUser();
-        return;
-      }
-
-      if (event === 'SIGNED_OUT') {
+      } else if (event === 'SIGNED_OUT') {
         setUser(null);
       }
     });
@@ -83,119 +288,135 @@ function useHeaderAuth() {
   };
 }
 
-function useHeaderTheme(ref) {
+function useHeaderState(barRef) {
   const pathname = usePathname();
   const [scrollState, setScrollState] = useState('top');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [headerTheme, setHeaderTheme] = useState('dark');
-  const isScrollLocked = useRef(false);
+  const isScrollLockedRef = useRef(false);
 
-  const updateTheme = useCallback((offset) => {
-    const elements = document.querySelectorAll('main [data-theme]');
+  const detectThemeAtOffset = useCallback((offsetY) => {
+    const themedSections = document.querySelectorAll('main [data-theme]');
+    if (themedSections.length === 0) return;
 
-    if (elements.length === 0) return;
-
-    const target = Array.from(elements).find((el) => {
-      const rect = el.getBoundingClientRect();
-      return rect.top <= offset && rect.bottom > offset;
+    const matchingSection = Array.from(themedSections).find((section) => {
+      const rect = section.getBoundingClientRect();
+      return rect.top <= offsetY && rect.bottom > offsetY;
     });
 
-    const theme = (target ?? elements[0])?.dataset.theme;
+    const theme = (matchingSection ?? themedSections[0])?.dataset.theme;
+    if (theme && VALID_THEMES.includes(theme)) {
+      setHeaderTheme(theme);
+    }
+  }, []);
 
-    if (theme && themes.includes(theme)) setHeaderTheme(theme);
+  const isTransitioningRef = useRef(false);
+
+  useEffect(() => {
+    let timeoutId = 0;
+    const handleTransition = (event) => {
+      isTransitioningRef.current = true;
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        isTransitioningRef.current = false;
+      }, 4000);
+      setScrollState('top');
+
+      const nextTheme = event.detail?.theme;
+      if (nextTheme && VALID_THEMES.includes(nextTheme)) {
+        setHeaderTheme(nextTheme);
+      }
+    };
+
+    window.addEventListener('anm:transition', handleTransition);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('anm:transition', handleTransition);
+    };
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollState(window.scrollY > 50 ? 'scrolled' : 'top');
-
-      if (ref.current) updateTheme(ref.current.offsetTop);
+      if (!isTransitioningRef.current) {
+        setScrollState(window.scrollY > 50 ? 'scrolled' : 'top');
+        if (barRef.current) {
+          detectThemeAtOffset(barRef.current.offsetTop);
+        }
+      }
     };
 
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [updateTheme, ref]);
+  }, [detectThemeAtOffset, barRef]);
 
   useEffect(() => {
-    let isUnmounted = false;
+    let isDisposed = false;
+    isTransitioningRef.current = false;
 
-    const update = () => {
-      if (!isUnmounted && ref.current) {
+    const syncHeader = () => {
+      if (!isDisposed && barRef.current) {
         setScrollState(window.scrollY > 50 ? 'scrolled' : 'top');
-        updateTheme(ref.current.offsetTop);
+        detectThemeAtOffset(barRef.current.offsetTop);
       }
     };
 
-    const header = ref.current?.closest('.v2-header');
+    const headerEl = barRef.current?.closest('.v2-header');
+    headerEl?.classList.add('no-transition');
+    syncHeader();
 
-    header?.classList.add('no-transition');
-    update();
-
-    const frame = requestAnimationFrame(() => {
-      update();
-
-      requestAnimationFrame(() => header?.classList.remove('no-transition'));
+    const frameId = requestAnimationFrame(() => {
+      syncHeader();
+      requestAnimationFrame(() => headerEl?.classList.remove('no-transition'));
     });
 
-    const observer = new MutationObserver(update);
-
-    observer.observe(document.body, {
+    const mutationObserver = new MutationObserver(syncHeader);
+    mutationObserver.observe(document.body, {
       childList: true,
       subtree: true,
       attributes: true,
       attributeFilter: ['data-theme'],
     });
 
-    const timeout = setTimeout(() => observer.disconnect(), 800);
+    const disconnectTimer = setTimeout(() => mutationObserver.disconnect(), 800);
 
     return () => {
-      isUnmounted = true;
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-      clearTimeout(timeout);
-      header?.classList.remove('no-transition');
+      isDisposed = true;
+      cancelAnimationFrame(frameId);
+      mutationObserver.disconnect();
+      clearTimeout(disconnectTimer);
+      headerEl?.classList.remove('no-transition');
     };
-  }, [updateTheme, ref]);
+  }, [pathname, detectThemeAtOffset, barRef]);
 
   const headerState = useMemo(
     () => (isMenuOpen ? 'menuOpen' : scrollState),
-    [isMenuOpen, scrollState],
+    [isMenuOpen, scrollState]
   );
 
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen((prev) => !prev);
-  }, []);
-
-  const closeMenu = useCallback(() => {
-    setIsMenuOpen(false);
-  }, []);
+  const toggleMenu = useCallback(() => setIsMenuOpen((prev) => !prev), []);
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
   useEffect(() => {
     if (!isMenuOpen) return;
-
-    const handleKeydown = (e) => {
-      if (e.key === 'Escape') closeMenu();
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+      }
     };
-
-    window.addEventListener('keydown', handleKeydown);
-
-    return () => window.removeEventListener('keydown', handleKeydown);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMenuOpen, closeMenu]);
 
   useEffect(() => {
     if (isMenuOpen) {
       document.documentElement.classList.add('v2-scroll-locked');
       window.lenis?.stop?.();
-      isScrollLocked.current = true;
-      return;
-    }
-
-    if (isScrollLocked.current) {
+      isScrollLockedRef.current = true;
+    } else if (isScrollLockedRef.current) {
       document.documentElement.classList.remove('v2-scroll-locked');
       window.lenis?.start?.();
-      isScrollLocked.current = false;
+      isScrollLockedRef.current = false;
     }
   }, [isMenuOpen]);
 
@@ -206,789 +427,584 @@ function useHeaderTheme(ref) {
     headerTheme,
     toggleMenu,
     closeMenu,
-    pathname,
   };
 }
 
-function MegaMenuIntro({ intro, onClose }) {
-  return (
-    <div data-mm-reveal className="MegaMenuIntro">
-      <p className="text-mono-sm text-foreground-muted">{intro.eyebrow}</p>
-      <p className="text-h4 text-foreground">{intro.heading}</p>
-      <p className="text-body-sm text-foreground-muted">{intro.text}</p>
-      <Link
-        href={intro.cta.href}
-        onClick={() => {}}
-        className="text-mono-sm MegaMenuIntro-cta text-foreground hover:text-foreground-muted"
-      >
-        {intro.cta.label}
-      </Link>
-    </div>
-  );
-}
-
-function MegaMenuColumn({ column }) {
-  return (
-    <div
-      data-mm-reveal
-      className="MegaMenuColumn"
-    >
-      <span className="text-mono-sm MegaMenuColumn-label text-foreground-muted">{column.label}</span>
-      {column.links.map((link) => (
-        <NavLink
-          key={link.label}
-          href={link.href}
-          className="text-body-sm MegaMenuColumn-link text-foreground-muted hover:text-foreground"
-        >
-          {link.label}
-          {link.badge ? (
-            <span className="text-accent-2xs MegaMenuColumn-badge text-black">
-              {link.badge}
-            </span>
-          ) : null}
-        </NavLink>
-      ))}
-    </div>
-  );
-}
-
-function MegaMenuColumns({ columns }) {
-  return (
-    <div className="MegaMenuColumns">
-      {columns.map((column) => (
-        <MegaMenuColumn key={column.label} column={column} />
-      ))}
-    </div>
-  );
-}
-
-function FeaturedMegaMenu({ featured, onClose }) {
-  return (
-    <div data-mm-reveal className="FeaturedMegaMenu">
-      <Link
-        href={featured.href}
-        onClick={onClose}
-        className="FeaturedMegaMenu-link"
-      >
-        <div className="FeaturedMegaMenu-imageWrapper">
-          <picture>
-            {featured.image.avif ? (
-              <source srcSet={featured.image.avif} type="image/avif" />
-            ) : null}
-            <img
-              src={featured.image.jpg}
-              alt={featured.image.alt}
-              className="FeaturedMegaMenu-image"
-              style={{ width: '100%', height: '100%' }}
-            />
-          </picture>
-        </div>
-        <div className="FeaturedMegaMenu-content">
-          <p className="text-mono-sm text-foreground-muted">{featured.eyebrow}</p>
-          <p className="text-body-sm text-foreground">{featured.title}</p>
-        </div>
-      </Link>
-    </div>
-  );
-}
-
-function LatestAnimationMegaMenu({ animation, onClose }) {
-  return (
-    <div data-mm-reveal className="LatestAnimationMegaMenu">
-      <Link
-        href={`/animations/${animation.slug}`}
-        onClick={onClose}
-        className="LatestAnimationMegaMenu-link"
-      >
-        <div className="LatestAnimationMegaMenu-mediaWrapper">
-          {animation.preview_video_url ? (
-            <video
-              src={animation.preview_video_url}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="LatestAnimationMegaMenu-media"
-            />
-          ) : animation.preview_image_url ? (
-            <img
-              src={bunnyImageUrl(animation.preview_image_url, { width: 480 })}
-              alt=""
-              className="LatestAnimationMegaMenu-media"
-            />
-          ) : null}
-        </div>
-        <div className="LatestAnimationMegaMenu-content">
-          <p className="text-mono-sm text-foreground-muted">
-            {translate('common.header.latestComponentLabel')}
-          </p>
-          <p className="text-body-sm text-foreground">{animation.title}</p>
-        </div>
-      </Link>
-    </div>
-  );
-}
-
-function MegaMenuGroup({ item, latestAnimation, onClose, setGroupRef }) {
-  return (
-    <div
-      key={item.key}
-      ref={(el) => setGroupRef(item.key, el)}
-      className="v2-mm-group"
-    >
-      <div className="MegaMenuGroup-inner">
-        <MegaMenuIntro
-          intro={item.mega.intro}
-          onClose={onClose}
-        />
-
-        <MegaMenuColumns columns={item.mega.columns} />
-
-        {item.mega.featured ? (
-          <FeaturedMegaMenu featured={item.mega.featured} onClose={onClose} />
-        ) : latestAnimation ? (
-          <LatestAnimationMegaMenu animation={latestAnimation} onClose={onClose} />
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
-function DesktopNavigation({
-  pathname,
-  navRef,
-  navItems,
-  activeMegaMenu,
-  triggerRefs,
-  indicatorRef,
-  onMouseEnter,
-  onMouseLeave,
-  clearTimeouts,
-  setActiveMegaMenu,
-}) {
-  return (
-    <nav
-      ref={navRef}
-      onMouseEnter={clearTimeouts}
-      onMouseLeave={onMouseLeave}
-      className="DesktopNavigation"
-    >
-      {navItems.map((item) =>
-        item.mega ? (
-          <DesktopMegaMenuItem
-            key={item.key}
-            item={item}
-            href={item.triggerHref}
-            badge={item.badge}
-            active={
-              activeMegaMenu === item.key ||
-              (item.triggerHref && isRouteActive(pathname, item.triggerHref))
-            }
-            expanded={activeMegaMenu === item.key}
-            setRef={(target) => {
-              triggerRefs.current[item.key] = target;
-            }}
-            onMouseEnter={() => onMouseEnter(item)}
-            onClick={() => {
-              clearTimeouts();
-              setActiveMegaMenu(null);
-            }}
-          />
-        ) : (
-          <NavLink
-            key={item.key}
-            href={item.href}
-            inline
-            active={isRouteActive(pathname, item.href)}
-            onMouseEnter={() => onMouseEnter(item)}
-            className={cn(
-              'text-mono DesktopNavigation-link',
-              isRouteActive(pathname, item.href)
-                ? 'text-foreground'
-                : 'text-foreground-muted hover:text-foreground',
-            )}
-          >
-            {item.label}
-          </NavLink>
-        ),
-      )}
-      <span ref={indicatorRef} className="v2-mm-indicator" aria-hidden="true" />
-    </nav>
-  );
-}
-
-function MobileNavigation({
-  navItems,
-  mobileExpandedItem,
-  setMobileExpandedItem,
-}) {
-  return (
-    <>
-      {navItems.map((item) =>
-        item.mega ? (
-          <MobileAccordionItem
-            key={item.key}
-            item={item}
-            expanded={mobileExpandedItem === item.key}
-            onToggle={() =>
-              setMobileExpandedItem((prev) =>
-                prev === item.key ? null : item.key,
-              )
-            }
-          />
-        ) : (
-          <Link
-            key={item.key}
-            href={item.href}
-            className="text-mono MobileNavigation-link text-foreground"
-          >
-            {item.label}
-          </Link>
-        ),
-      )}
-    </>
-  );
-}
-
-function HeaderActions({ loading, hasAccess }) {
-  return (
-    <div className="HeaderActions">
-      {!loading && (
-        <Link
-          href={hasAccess ? '/animations' : '/login'}
-          className="text-mono HeaderActions-link text-foreground-muted hover:text-foreground"
-        >
-          {hasAccess
-            ? translate('common.header.actions.account')
-            : translate('common.header.actions.login')}
-        </Link>
-      )}
-      <Button href="/checkout?plan=solo&cycle=quarterly" size="sm" theme="light">
-        {translate('common.header.actions.getAnnnimate')}
-      </Button>
-    </div>
-  );
-}
-
-function MobileMenuButton({ isMobileMenuOpen, setIsMobileMenuOpen }) {
-  return (
-    <button
-      type="button"
-      aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-      aria-expanded={isMobileMenuOpen}
-      onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-      className="MobileMenuButton"
-    >
-      <span
-        className={cn(
-          'MobileMenuButton-lineTop',
-          isMobileMenuOpen ? 'is-open' : '',
-        )}
-      />
-      <span
-        className={cn(
-          'MobileMenuButton-lineBottom',
-          isMobileMenuOpen ? 'is-open' : '',
-        )}
-      />
-    </button>
-  );
-}
-
-function MobileMenu({
-  isMobileMenuOpen,
-  navItems,
-  mobileExpandedItem,
-  setMobileExpandedItem,
-  loading,
-  hasAccess,
-}) {
-  return (
-    <div
-      className="v2-mm-collapse v2-container MobileMenu"
-      data-open={isMobileMenuOpen}
-      inert={!isMobileMenuOpen}
-    >
-      <div>
-        <div className="MobileMenu-scroll">
-          <div className="MobileMenu-content">
-            <MobileNavigation
-              navItems={navItems}
-              mobileExpandedItem={mobileExpandedItem}
-              setMobileExpandedItem={setMobileExpandedItem}
-            />
-
-            <div className="MobileMenu-actions">
-              {!loading && (
-                <Link
-                  href={hasAccess ? '/animations' : '/login'}
-                  className="text-mono text-foreground-muted"
-                >
-                  {hasAccess
-                    ? translate('common.header.actions.account')
-                    : translate('common.header.actions.login')}
-                </Link>
-              )}
-              <Button href="/checkout?plan=solo&cycle=quarterly" size="sm" theme="light">
-                {translate('common.header.actions.getAnnnimate')}
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function useMegaMenuAnimation({
-  activeMegaMenu,
-  megaItems,
-  updateIndicator,
-  dropdownRef,
-  dropdownInnerRef,
-  scrimRef,
-  groupRefs,
-  indicatorRef,
-  setIsAnimating,
-}) {
-  const prevActiveMegaMenu = useRef(null);
-
-  useEffect(() => {
-    const prevKey = prevActiveMegaMenu.current;
-
-    if (prevKey === activeMegaMenu) return;
-
-    prevActiveMegaMenu.current = activeMegaMenu;
-
-    const dropdownInner = dropdownInnerRef.current;
-    const dropdown = dropdownRef.current;
-    const scrim = scrimRef.current;
-
-    if (!dropdownInner || !dropdown) return;
-
-    const activeElements = [];
-
-    megaItems.forEach((item) => {
-      const group = groupRefs.current[item.key];
-
-      if (group) {
-        gsap.killTweensOf(group);
-        activeElements.push(...group.querySelectorAll('[data-mm-reveal]'));
-      }
-    });
-
-    gsap.killTweensOf([
-      dropdownInner,
-      scrim,
-      indicatorRef.current,
-      ...activeElements,
-    ]);
-
-    if (activeMegaMenu === null) {
-      let heightReached = false;
-
-      gsap.to(dropdownInner, {
-        height: 0,
-        duration: 0.3,
-        ease: 'power3.out',
-        onUpdate: function () {
-          if (!heightReached && this.ratio >= 0.9) {
-            heightReached = true;
-            setIsAnimating(false);
-          }
-        },
-        onComplete: () => {
-          gsap.set(dropdown, {
-            visibility: 'hidden',
-            pointerEvents: 'none',
-          });
-
-          megaItems.forEach((item) => {
-            const group = groupRefs.current[item.key];
-
-            if (group) {
-              gsap.set(group, {
-                visibility: 'hidden',
-                opacity: 0,
-                pointerEvents: 'none',
-              });
-            }
-          });
-
-          if (!heightReached) setIsAnimating(false);
-        },
-      });
-
-      gsap.to(scrim, {
-        autoAlpha: 0,
-        duration: 0.3,
-        ease: 'power3.out',
-      });
-      gsap.to(indicatorRef.current, {
-        autoAlpha: 0,
-        duration: 0.2,
-      });
-
-      return;
-    }
-
-    const currentGroup = groupRefs.current[activeMegaMenu];
-
-    if (!currentGroup) return;
-
-    const isOpeningFromClosed = prevKey === null;
-
-    setIsAnimating(true);
-
-    megaItems.forEach((item) => {
-      const group = groupRefs.current[item.key];
-
-      if (!group) return;
-
-      const isActive = item.key === activeMegaMenu;
-
-      gsap.set(group, {
-        visibility: isActive ? 'visible' : 'hidden',
-        opacity: +!!isActive,
-        pointerEvents: isActive ? 'auto' : 'none',
-      });
-    });
-
-    gsap.set(dropdown, {
-      visibility: 'visible',
-      pointerEvents: 'auto',
-    });
-
-    gsap.to(dropdownInner, {
-      height: currentGroup.offsetHeight,
-      duration: isOpeningFromClosed ? 0.5 : 0.4,
-      ease: isOpeningFromClosed ? 'expo.out' : 'expo.inOut',
-    });
-
-    gsap.to(scrim, {
-      autoAlpha: 1,
-      duration: 0.3,
-      ease: 'power2.out',
-    });
-
-    if (isOpeningFromClosed) {
-      gsap.set(indicatorRef.current, { autoAlpha: 0 });
-
-      setTimeout(() => {
-        if (prevActiveMegaMenu.current === activeMegaMenu) {
-          updateIndicator(activeMegaMenu, { instant: true });
-        }
-      }, 320);
-    } else {
-      updateIndicator(activeMegaMenu);
-    }
-
-    const revealElements = currentGroup.querySelectorAll('[data-mm-reveal]');
-
-    if (isOpeningFromClosed) {
-      gsap.fromTo(
-        revealElements,
-        { y: 24, autoAlpha: 0 },
-        {
-          y: 0,
-          autoAlpha: 1,
-          duration: 0.5,
-          ease: 'expo.out',
-          stagger: 0.05,
-        },
-      );
-
-      return;
-    }
-
-    const dir =
-      megaItems.findIndex((item) => item.key === activeMegaMenu) >=
-      megaItems.findIndex((item) => item.key === prevKey)
-        ? 1
-        : -1;
-
-    gsap.fromTo(
-      revealElements,
-      { x: 48 * dir, autoAlpha: 0 },
-      {
-        x: 0,
-        autoAlpha: 1,
-        duration: 0.45,
-        ease: 'expo.out',
-        stagger: 0.04,
-      },
-    );
-  }, [activeMegaMenu, megaItems, updateIndicator]);
-
-  return prevActiveMegaMenu;
-}
-
+// NOTE: module id: 76624
 export default function Header({ latestAnimation }) {
   const pathname = usePathname();
-  const isStarterPack = pathname === '/starter-pack';
-  const { hasAccess, isAuthenticated, loading } = useHeaderAuth();
+  const isStarterPackPage =
+    pathname === '/starter-pack' || pathname === '/v3/starter-pack';
+  const isV3HomePage = pathname === '/v3';
+
+  const { hasAccess, isAuthenticated, loading } = useAuth();
 
   const headerRef = useRef(null);
-  const mmBarRef = useRef(null);
-  const mmBarInnerRef = useRef(null);
+  const barRef = useRef(null);
+  const barInnerRef = useRef(null);
   const navRef = useRef(null);
-  const indicatorRef = useRef(null);
   const dropdownRef = useRef(null);
   const dropdownInnerRef = useRef(null);
   const scrimRef = useRef(null);
-  const triggerRefs = useRef({});
-  const groupRefs = useRef({});
-  const timeout1 = useRef(null);
-  const timeout2 = useRef(null);
-  const lastScrollY = useRef(0);
+  const megaGroupsRef = useRef({});
+  const intentTimerRef = useRef(null);
+  const closeTimerRef = useRef(null);
+  const lastScrollYRef = useRef(0);
 
-  const [activeMegaMenu, setActiveMegaMenu] = useState(null);
+  const [activeMegaKey, setActiveMegaKey] = useState(null);
+  const activeMegaKeyRef = useRef(null);
+  activeMegaKeyRef.current = activeMegaKey;
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileExpandedItem, setMobileExpandedItem] = useState(null);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [shiftY, setShiftY] = useState(0);
+  const [expandedMobileKey, setExpandedMobileKey] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [dropdownHeight, setDropdownHeight] = useState(0);
 
-  const { scrollState, headerTheme } = useHeaderTheme(mmBarRef);
+  const { headerTheme, scrollState } = useHeaderState(barRef);
 
   const padState =
-    isAnimating || isMobileMenuOpen
+    isDropdownOpen || isMobileMenuOpen
       ? 'open'
       : scrollState === 'scrolled'
         ? 'scrolled'
         : 'top';
 
-  const isSurfaceBg = scrollState === 'scrolled' || isMobileMenuOpen || isAnimating;
+  const hasSolidBackground =
+    scrollState === 'scrolled' || isMobileMenuOpen || isDropdownOpen;
+
   const categories = useCategories();
 
   const navItems = useMemo(() => {
-    const catLinks = categories.map((cat) => ({
-      label: cat.name,
-      href: `/animations?category=${cat.slug}`,
+    const categoryLinks = categories.map((category) => ({
+      label: category.name,
+      href: `/animations?category=${category.slug}`,
     }));
 
-    return navItemsData.map((item) => {
-      if (!item.mega?.columns) return item;
+    return NAV_CONFIG.map((item) =>
+      item.mega?.columns
+        ? {
+            ...item,
+            mega: {
+              ...item.mega,
+              columns: item.mega.columns.map((column) => {
+                const hydratedColumn =
+                  column.dynamic === 'categories'
+                    ? { ...column, links: categoryLinks }
+                    : column;
 
-      const columns = item.mega.columns.map((column) => {
-        if (column.dynamic === 'categories') {
-          return { ...column, links: catLinks };
-        }
-
-        return column;
-      });
-
-      const mega = { ...item.mega, columns };
-
-      if (isAuthenticated) return { ...item, mega };
-
-      const filteredColumns = columns.map((column) => ({
-        ...column,
-        links: column.links.filter((link) => link.href !== '/animations/saved'),
-      }));
-
-      return {
-        ...item,
-        mega: {
-          ...mega,
-          columns: filteredColumns,
-        },
-      };
-    });
+                return isAuthenticated
+                  ? hydratedColumn
+                  : {
+                      ...hydratedColumn,
+                      links: hydratedColumn.links.filter(
+                        (link) => link.href !== '/animations/saved'
+                      ),
+                    };
+              }),
+            },
+          }
+        : item
+    );
   }, [categories, isAuthenticated]);
 
-  const megaItems = useMemo(
+  const megaNavItems = useMemo(
     () => navItems.filter((item) => item.mega),
-    [navItems],
+    [navItems]
   );
 
-  const updateIndicator = useCallback((key, { instant = false } = {}) => {
-    const trigger = triggerRefs.current[key];
-    const indicator = indicatorRef.current;
+  const prevMegaKeyRef = useRef(null);
 
-    if (!trigger || !indicator) return;
+  useLayoutEffect(() => {
+    const prevKey = prevMegaKeyRef.current;
+    if (prevKey === activeMegaKey) return;
+    prevMegaKeyRef.current = activeMegaKey;
 
-    if (instant) {
-      gsap.set(indicator, {
-        x: trigger.offsetLeft,
-        scaleX: trigger.offsetWidth,
-        autoAlpha: 0,
-      });
-      gsap.to(indicator, {
-        autoAlpha: 1,
+    const dropdownInnerEl = dropdownInnerRef.current;
+    const dropdownEl = dropdownRef.current;
+    const scrimEl = scrimRef.current;
+    if (!dropdownInnerEl || !dropdownEl) return;
+
+    const revealElements = [];
+    megaNavItems.forEach((item) => {
+      const groupEl = megaGroupsRef.current[item.key];
+      if (groupEl) {
+        gsap.killTweensOf(groupEl);
+        revealElements.push(...groupEl.querySelectorAll('[data-mm-reveal]'));
+      }
+    });
+    gsap.killTweensOf([dropdownInnerEl, scrimEl, ...revealElements]);
+
+    if (activeMegaKey === null) {
+      let hasClosedStateTriggered = false;
+      const prevGroupEl = prevKey ? megaGroupsRef.current[prevKey] : null;
+      if (prevGroupEl) {
+        gsap.to(prevGroupEl, {
+          autoAlpha: 0,
+          duration: 0.15,
+          ease: 'power2.out',
+        });
+      }
+      gsap.to(dropdownInnerEl, {
+        height: 0,
         duration: 0.3,
-        ease: 'power2.out',
+        ease: 'expo.out',
+        onUpdate: function () {
+          if (!hasClosedStateTriggered && this.ratio >= 0.9) {
+            hasClosedStateTriggered = true;
+            setIsDropdownOpen(false);
+          }
+        },
+        onComplete: () => {
+          gsap.set(dropdownEl, {
+            visibility: 'hidden',
+            pointerEvents: 'none',
+          });
+          megaNavItems.forEach((item) => {
+            const groupEl = megaGroupsRef.current[item.key];
+            if (groupEl) {
+              gsap.set(groupEl, {
+                visibility: 'hidden',
+                opacity: 0,
+                x: 0,
+                pointerEvents: 'none',
+              });
+            }
+          });
+          if (!hasClosedStateTriggered) {
+            setIsDropdownOpen(false);
+          }
+        },
+      });
+      gsap.to(scrimEl, {
+        autoAlpha: 0,
+        duration: 0.3,
+        ease: 'expo.out',
       });
       return;
     }
 
-    gsap.to(indicator, {
-      x: trigger.offsetLeft,
-      scaleX: trigger.offsetWidth,
+    const activeGroupEl = megaGroupsRef.current[activeMegaKey];
+    if (!activeGroupEl) return;
+
+    const isOpeningFromClosed = prevKey === null;
+    const prevGroupEl = isOpeningFromClosed
+      ? null
+      : megaGroupsRef.current[prevKey];
+    const direction =
+      megaNavItems.findIndex((item) => item.key === activeMegaKey) >=
+      megaNavItems.findIndex((item) => item.key === prevKey)
+        ? 1
+        : -1;
+
+    setIsDropdownOpen(true);
+
+    megaNavItems.forEach((item) => {
+      const groupEl = megaGroupsRef.current[item.key];
+      if (!groupEl || groupEl === prevGroupEl) return;
+      const isCurrent = item.key === activeMegaKey;
+      gsap.set(groupEl, {
+        visibility: isCurrent ? 'visible' : 'hidden',
+        opacity: isCurrent ? 1 : 0,
+        x: 0,
+        pointerEvents: isCurrent ? 'auto' : 'none',
+      });
+    });
+
+    gsap.set(dropdownEl, {
+      visibility: 'visible',
+      pointerEvents: 'auto',
+    });
+    gsap.to(dropdownInnerEl, {
+      height: activeGroupEl.offsetHeight,
+      duration: isOpeningFromClosed ? 0.45 : 0.4,
+      ease: 'expo.out',
+    });
+    gsap.to(scrimEl, {
       autoAlpha: 1,
       duration: 0.4,
       ease: 'expo.out',
     });
-  }, []);
 
-  useMegaMenuAnimation({
-    activeMegaMenu,
-    megaItems,
-    updateIndicator,
-    dropdownRef,
-    dropdownInnerRef,
-    scrimRef,
-    groupRefs,
-    indicatorRef,
-    setIsAnimating,
-  });
+    const activeRevealTargets =
+      activeGroupEl.querySelectorAll('[data-mm-reveal]');
+
+    if (isOpeningFromClosed) {
+      gsap.fromTo(
+        activeRevealTargets,
+        { y: 16, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.45,
+          ease: 'expo.out',
+          stagger: 0.04,
+          delay: 0.04,
+        }
+      );
+    } else {
+      if (prevGroupEl) {
+        gsap.set(prevGroupEl, { pointerEvents: 'none' });
+        gsap.to(prevGroupEl, {
+          autoAlpha: 0,
+          x: -(16 * direction),
+          duration: 0.2,
+          ease: 'power2.out',
+        });
+      }
+      gsap.fromTo(
+        activeRevealTargets,
+        { x: 24 * direction, autoAlpha: 0 },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.4,
+          ease: 'expo.out',
+          stagger: 0.03,
+          delay: 0.06,
+        }
+      );
+    }
+  }, [activeMegaKey, megaNavItems]);
 
   useEffect(() => {
-    if (!activeMegaMenu) {
-      setShiftY(0);
+    if (!activeMegaKey) {
+      setDropdownHeight(0);
       return;
     }
-
-    const frame = requestAnimationFrame(() => {
-      const group = groupRefs.current[activeMegaMenu];
-      setShiftY(group ? group.offsetHeight : 0);
+    const frameId = requestAnimationFrame(() => {
+      const activeGroupEl = megaGroupsRef.current[activeMegaKey];
+      setDropdownHeight(activeGroupEl ? activeGroupEl.offsetHeight : 0);
     });
+    return () => cancelAnimationFrame(frameId);
+  }, [activeMegaKey]);
 
-    return () => cancelAnimationFrame(frame);
-  }, [activeMegaMenu]);
-
-  const clearTimeouts = () => {
-    clearTimeout(timeout1.current);
-    clearTimeout(timeout2.current);
+  const clearMenuTimers = () => {
+    clearTimeout(intentTimerRef.current);
+    clearTimeout(closeTimerRef.current);
   };
 
-  const handleMouseLeave = () => {
-    clearTimeouts();
-    timeout2.current = setTimeout(() => setActiveMegaMenu(null), 200);
+  const scheduleCloseMenu = () => {
+    clearMenuTimers();
+    closeTimerRef.current = setTimeout(() => setActiveMegaKey(null), 100);
   };
 
-  const handleMouseEnter = (item) => {
-    clearTimeouts();
-
-    if (!item.mega) {
-      if (activeMegaMenu) handleMouseLeave();
-      return;
-    }
-
-    if (activeMegaMenu) {
-      setActiveMegaMenu(item.key);
-      return;
-    }
-
-    timeout1.current = setTimeout(() => setActiveMegaMenu(item.key), 150);
-  };
+  const pointerStateRef = useRef({ x: 0, y: 0, t: 0, v: 0 });
 
   useEffect(() => {
-    const handleKeydown = (e) => {
-      if (e.key === 'Escape') setActiveMegaMenu(null);
+    const handlePointerMove = (event) => {
+      const state = pointerStateRef.current;
+      const now = performance.now();
+      const dt = now - state.t;
+      const velocity =
+        dt > 0 && dt < 100
+          ? Math.hypot(event.clientX - state.x, event.clientY - state.y) / dt
+          : 0;
+      state.v = 0.5 * state.v + 0.5 * velocity;
+      state.x = event.clientX;
+      state.y = event.clientY;
+      state.t = now;
     };
 
-    window.addEventListener('keydown', handleKeydown);
+    window.addEventListener('pointermove', handlePointerMove, {
+      passive: true,
+    });
+    return () => window.removeEventListener('pointermove', handlePointerMove);
+  }, []);
 
-    return () => window.removeEventListener('keydown', handleKeydown);
+  const runWithHoverIntent = (callback, startTime = performance.now()) => {
+    const state = pointerStateRef.current;
+    const now = performance.now();
+    if (now - state.t >= 45 || state.v < 0.35 || now - startTime >= 150) {
+      callback();
+    } else {
+      intentTimerRef.current = setTimeout(
+        () => runWithHoverIntent(callback, startTime),
+        45
+      );
+    }
+  };
+
+  const handleNavMouseEnter = (item) => {
+    clearMenuTimers();
+    if (item.mega) {
+      if (activeMegaKey !== item.key) {
+        runWithHoverIntent(() => setActiveMegaKey(item.key));
+      }
+    } else if (activeMegaKey) {
+      runWithHoverIntent(() => setActiveMegaKey(null));
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event) =>
+      event.key === 'Escape' && setActiveMegaKey(null);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   useEffect(() => {
-    setActiveMegaMenu(null);
+    setActiveMegaKey(null);
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
   useEffect(() => {
+    const handleTransition = () => {
+      clearTimeout(intentTimerRef.current);
+      clearTimeout(closeTimerRef.current);
+      setActiveMegaKey(null);
+      setIsMobileMenuOpen(false);
+      headerRef.current?.classList.remove('is-hidden');
+      document.documentElement.classList.remove('v2-header-hidden');
+      lastScrollYRef.current = 0;
+    };
+
+    window.addEventListener('anm:transition', handleTransition);
+    return () => window.removeEventListener('anm:transition', handleTransition);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
-      const header = headerRef.current;
+      const headerEl = headerRef.current;
+      if (!headerEl) return;
 
-      if (!header) return;
-
-      const scrollY = window.scrollY;
-
-      if (activeMegaMenu) setActiveMegaMenu(null);
-
-      let isHidden = false;
-
-      if (!isMobileMenuOpen && scrollY > 120) {
-        isHidden = scrollY > lastScrollY.current;
-        header.classList.toggle('is-hidden', isHidden);
-      } else {
-        header.classList.remove('is-hidden');
+      const currentScrollY = window.scrollY;
+      if (activeMegaKey) {
+        setActiveMegaKey(null);
       }
 
-      document.documentElement.classList.toggle('v2-header-hidden', isHidden);
-      lastScrollY.current = scrollY;
+      let shouldHide = false;
+      if (!isMobileMenuOpen && currentScrollY > 120) {
+        shouldHide = currentScrollY > lastScrollYRef.current;
+        headerEl.classList.toggle('is-hidden', shouldHide);
+      } else {
+        headerEl.classList.remove('is-hidden');
+      }
+
+      document.documentElement.classList.toggle('v2-header-hidden', shouldHide);
+      lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeMegaMenu, isMobileMenuOpen]);
+  }, [activeMegaKey, isMobileMenuOpen]);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       document.documentElement.classList.remove('v2-header-hidden');
-    };
+    },
+    []
+  );
+
+  useEffect(() => () => clearMenuTimers(), []);
+
+  const alignMegaColumns = useCallback(() => {
+    const navEl = navRef.current;
+    if (!navEl) return;
+
+    const navItemElements = Array.from(navEl.children).filter(
+      (child) => child.tagName !== 'SPAN'
+    );
+
+    Object.values(megaGroupsRef.current).forEach((groupEl) => {
+      const columns = groupEl
+        ? Array.from(groupEl.querySelectorAll('[data-mm-col]'))
+        : [];
+      if (!columns.length) return;
+
+      const anchorIndices = columns.length === 2 ? [0, 3] : [0, 2, 4];
+      columns.forEach((colEl) => {
+        colEl.style.marginLeft = '0px';
+      });
+
+      let currentLeft = columns[0].parentElement.getBoundingClientRect().left;
+
+      columns.forEach((colEl, colIndex) => {
+        const targetNavEl = navItemElements[anchorIndices[colIndex]];
+        const targetLeft = targetNavEl
+          ? ((el) => {
+              const textNode = document
+                .createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+                  acceptNode: (node) =>
+                    node.textContent.trim()
+                      ? NodeFilter.FILTER_ACCEPT
+                      : NodeFilter.FILTER_SKIP,
+                })
+                .nextNode();
+              if (!textNode) return el.getBoundingClientRect().left;
+              const range = document.createRange();
+              range.selectNodeContents(textNode);
+              return range.getBoundingClientRect().left;
+            })(targetNavEl)
+          : currentLeft + 48;
+
+        const marginLeft = Math.max(
+          colIndex ? 24 : 0,
+          targetLeft - currentLeft
+        );
+        colEl.style.marginLeft = `${marginLeft}px`;
+        currentLeft += marginLeft + colEl.getBoundingClientRect().width;
+      });
+    });
   }, []);
 
   useEffect(() => {
-    return () => clearTimeouts();
-  }, []);
+    alignMegaColumns();
+    document.fonts?.ready.then(alignMegaColumns);
+    window.addEventListener('resize', alignMegaColumns);
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (activeMegaKeyRef.current) {
+        alignMegaColumns();
+      }
+    });
+
+    document.querySelectorAll('[data-mm-col]').forEach((colEl) => {
+      resizeObserver.observe(colEl.parentElement);
+    });
+
+    return () => {
+      window.removeEventListener('resize', alignMegaColumns);
+      resizeObserver.disconnect();
+    };
+  }, [alignMegaColumns]);
+
+  useEffect(() => {
+    if (!activeMegaKey) return;
+    alignMegaColumns();
+    let frameId = requestAnimationFrame(() => {
+      frameId = requestAnimationFrame(alignMegaColumns);
+    });
+    return () => cancelAnimationFrame(frameId);
+  }, [activeMegaKey, alignMegaColumns]);
 
   useEffect(() => {
     document.documentElement.classList.toggle(
       'v2-scroll-locked',
-      isMobileMenuOpen,
+      isMobileMenuOpen
     );
   }, [isMobileMenuOpen]);
 
   return (
-    <Fragment>
+    <>
       <header
         ref={headerRef}
-        data-v2
+        data-v2={true}
         data-theme={headerTheme}
-        data-pad-state={isStarterPack ? 'top' : padState}
+        data-pad-state={isStarterPackPage ? 'top' : padState}
         style={{ top: 'var(--anm-ppp-offset, 0px)' }}
         className={cn(
-          'v2-header Header',
-          isStarterPack ? 'Header--starter' : 'Header--fixed',
+          'v2-header inset-x-0 top-0 z-[300] pt-[var(--v2-header-gap)]',
+          isStarterPackPage ? 'absolute' : 'fixed'
         )}
       >
-        <div ref={mmBarRef} className="v2-mm-bar">
+        <div ref={barRef} className="v2-mm-bar">
           <div
-            ref={mmBarInnerRef}
+            ref={barInnerRef}
             className={cn(
-              'v2-bar-padx v2-container Header-barInner',
-              isSurfaceBg ? 'is-surfaceBg' : '',
+              'v2-bar-padx v2-container flex h-full items-center justify-between transition-colors duration-300 ease-power3-out lg:grid lg:grid-cols-12 lg:gap-16',
+              hasSolidBackground
+                ? !isV3HomePage || isMobileMenuOpen || isDropdownOpen
+                  ? 'bg-surface'
+                  : 'bg-background-muted'
+                : 'bg-transparent'
             )}
           >
-            <Logo className="Header-logo" />
+            <Logo className="lg:col-span-3" />
 
-            {!isStarterPack && (
-              <DesktopNavigation
-                pathname={pathname}
-                navRef={navRef}
-                navItems={navItems}
-                activeMegaMenu={activeMegaMenu}
-                triggerRefs={triggerRefs}
-                indicatorRef={indicatorRef}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                clearTimeouts={clearTimeouts}
-                setActiveMegaMenu={setActiveMegaMenu}
-              />
+            {isStarterPackPage ? null : (
+              <nav
+                ref={navRef}
+                onMouseEnter={() => clearMenuTimers()}
+                onMouseLeave={scheduleCloseMenu}
+                className="relative hidden h-full items-center justify-center lg:col-span-4 lg:col-start-5 lg:flex"
+              >
+                {navItems.map((item) =>
+                  item.mega ? (
+                    <NavTrigger
+                      key={item.key}
+                      item={item}
+                      href={item.triggerHref}
+                      badge={item.badge}
+                      active={
+                        activeMegaKey === item.key ||
+                        (item.triggerHref &&
+                          isRouteActive(pathname, item.triggerHref))
+                      }
+                      expanded={activeMegaKey === item.key}
+                      onMouseEnter={() => handleNavMouseEnter(item)}
+                      onClick={() => {
+                        clearMenuTimers();
+                        setActiveMegaKey(null);
+                      }}
+                    />
+                  ) : (
+                    <NavLink
+                      key={item.key}
+                      href={item.href}
+                      variant="nav"
+                      onMouseEnter={() => handleNavMouseEnter(item)}
+                      className={cn(
+                        'text-mono h-full',
+                        isRouteActive(pathname, item.href)
+                          ? 'text-foreground'
+                          : 'text-foreground-muted hover:text-foreground'
+                      )}
+                    >
+                      {item.label}
+                    </NavLink>
+                  )
+                )}
+              </nav>
             )}
 
-            {!isStarterPack && (
-              <HeaderActions loading={loading} hasAccess={hasAccess} />
+            {isStarterPackPage ? null : (
+              <div className="hidden items-center justify-end gap-20 lg:col-span-3 lg:col-start-10 lg:flex">
+                {!loading && (
+                  <NavLink
+                    href={hasAccess ? '/animations' : '/login'}
+                    variant="nav"
+                    className="text-mono text-foreground-muted hover:text-foreground"
+                  >
+                    {hasAccess
+                      ? t('common.header.actions.account')
+                      : t('common.header.actions.login')}
+                  </NavLink>
+                )}
+                <AnimatedButton
+                  href="/checkout?plan=solo&cycle=quarterly"
+                  size="sm"
+                  theme="brand"
+                >
+                  {t('common.header.actions.getAccess')}
+                </AnimatedButton>
+              </div>
             )}
 
-            {!isStarterPack && (
-              <MobileMenuButton
-                isMobileMenuOpen={isMobileMenuOpen}
-                setIsMobileMenuOpen={setIsMobileMenuOpen}
-              />
+            {isStarterPackPage ? null : (
+              <button
+                type="button"
+                aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isMobileMenuOpen}
+                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                className="relative size-32 lg:hidden"
+              >
+                <span
+                  className={cn(
+                    'absolute left-1/2 h-[1.5px] w-20 -translate-x-1/2 bg-foreground transition-transform duration-300',
+                    isMobileMenuOpen
+                      ? 'top-1/2 -translate-y-1/2 rotate-45'
+                      : 'top-[calc(50%-4px)]'
+                  )}
+                />
+                <span
+                  className={cn(
+                    'absolute left-1/2 h-[1.5px] w-20 -translate-x-1/2 bg-foreground transition-transform duration-300',
+                    isMobileMenuOpen
+                      ? 'top-1/2 -translate-y-1/2 -rotate-45'
+                      : 'top-[calc(50%+4px)]'
+                  )}
+                />
+              </button>
             )}
           </div>
         </div>
@@ -996,47 +1012,219 @@ export default function Header({ latestAnimation }) {
         <div
           ref={dropdownRef}
           className="v2-mm-dropdown"
-          onMouseEnter={() => clearTimeouts()}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={() => clearMenuTimers()}
+          onMouseLeave={scheduleCloseMenu}
         >
           <div ref={dropdownInnerRef} className="v2-mm-dropdown-inner">
-            {megaItems.map((item) => (
-              <MegaMenuGroup
+            {megaNavItems.map((item) => (
+              <div
                 key={item.key}
-                item={item}
-                latestAnimation={latestAnimation}
-                onClose={() => setActiveMegaMenu(null)}
-                setGroupRef={(key, element) => {
-                  groupRefs.current[key] = element;
+                ref={(el) => {
+                  megaGroupsRef.current[item.key] = el;
                 }}
-              />
+                className="v2-mm-group"
+              >
+                <div className="grid grid-cols-12 gap-16 py-32">
+                  <div
+                    data-mm-reveal={true}
+                    className="col-span-3 col-start-1 flex flex-col gap-16"
+                  >
+                    <p className="text-h4 text-foreground">
+                      {item.mega.intro.heading}
+                    </p>
+                    <p className="text-body-sm text-foreground-muted">
+                      {item.mega.intro.text}
+                    </p>
+                    <NavLink
+                      href={item.mega.intro.cta.href}
+                      onClick={() => setActiveMegaKey(null)}
+                      variant="nav"
+                      className="text-mono-sm -mx-12 text-foreground"
+                    >
+                      {item.mega.intro.cta.label}
+                    </NavLink>
+                  </div>
+
+                  <div className="col-span-5 col-start-4 flex">
+                    {item.mega.columns.map((column) => (
+                      <div
+                        key={column.label}
+                        data-mm-reveal={true}
+                        data-mm-col={true}
+                        className="flex shrink-0 flex-col"
+                      >
+                        <span className="text-mono-sm mb-8 text-foreground-muted">
+                          {column.label}
+                        </span>
+                        {column.links.map((link) => (
+                          <NavLink
+                            key={link.label}
+                            href={link.href}
+                            variant="nav"
+                            className="text-body-sm -mx-12 text-foreground"
+                          >
+                            {link.label}
+                            {link.badge ? (
+                              <span className="text-accent-2xs ml-8 inline-block bg-brand px-6 py-2 align-middle text-black">
+                                {link.badge}
+                              </span>
+                            ) : null}
+                          </NavLink>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+
+                  {item.mega.featured ? (
+                    <div
+                      data-mm-reveal={true}
+                      className="col-span-3 col-start-10"
+                    >
+                      <TransitionLink
+                        href={item.mega.featured.href}
+                        onClick={() => setActiveMegaKey(null)}
+                        className="group flex flex-col gap-12"
+                      >
+                        <div className="aspect-[16/10] w-full overflow-hidden bg-background-muted">
+                          <picture>
+                            {item.mega.featured.image.avif ? (
+                              <source
+                                srcSet={item.mega.featured.image.avif}
+                                type="image/avif"
+                              />
+                            ) : null}
+                            <img
+                              src={item.mega.featured.image.jpg}
+                              alt={item.mega.featured.image.alt}
+                              className="block object-cover transition-transform duration-300 ease-(--ease-expo-out) group-hover:scale-[1.04] motion-reduce:transition-none"
+                              style={{ width: '100%', height: '100%' }}
+                            />
+                          </picture>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                          <p className="text-body-sm text-foreground underline decoration-transparent underline-offset-4 transition-colors duration-200 ease-(--ease-expo-out) group-hover:decoration-foreground/40">
+                            {item.mega.featured.title}
+                          </p>
+                        </div>
+                      </TransitionLink>
+                    </div>
+                  ) : latestAnimation ? (
+                    <div
+                      data-mm-reveal={true}
+                      className="col-span-3 col-start-10"
+                    >
+                      <TransitionLink
+                        href={`/animations/${latestAnimation.slug}`}
+                        onClick={() => setActiveMegaKey(null)}
+                        className="group flex flex-col gap-12"
+                      >
+                        <div className="aspect-[16/10] w-full overflow-hidden bg-background-muted">
+                          {latestAnimation.preview_video_url ? (
+                            <video
+                              src={latestAnimation.preview_video_url}
+                              autoPlay={true}
+                              loop={true}
+                              muted={true}
+                              playsInline={true}
+                              className="h-full w-full object-cover transition-transform duration-300 ease-(--ease-expo-out) group-hover:scale-[1.04] motion-reduce:transition-none"
+                            />
+                          ) : latestAnimation.preview_image_url ? (
+                            <img
+                              src={bunnyImageUrl(
+                                latestAnimation.preview_image_url,
+                                { width: 480 }
+                              )}
+                              alt=""
+                              className="h-full w-full object-cover transition-transform duration-300 ease-(--ease-expo-out) group-hover:scale-[1.04] motion-reduce:transition-none"
+                            />
+                          ) : null}
+                        </div>
+                        <div className="flex flex-col gap-4">
+                          <p className="text-mono-sm text-foreground-muted">
+                            {t('common.header.latestComponentLabel')}
+                          </p>
+                          <p className="text-body-sm text-foreground underline decoration-transparent underline-offset-4 transition-colors duration-200 ease-(--ease-expo-out) group-hover:decoration-foreground/40">
+                            {latestAnimation.title}
+                          </p>
+                        </div>
+                      </TransitionLink>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
             ))}
           </div>
         </div>
 
-        {!isStarterPack && (
+        {isStarterPackPage || isV3HomePage ? null : (
           <HeaderMarquee
             scrolled={scrollState === 'scrolled'}
-            shiftY={shiftY}
+            shiftY={dropdownHeight}
           />
         )}
 
-        <MobileMenu
-          isMobileMenuOpen={isMobileMenuOpen}
-          navItems={navItems}
-          mobileExpandedItem={mobileExpandedItem}
-          setMobileExpandedItem={setMobileExpandedItem}
-          loading={loading}
-          hasAccess={hasAccess}
-        />
+        <div
+          className="v2-mm-collapse v2-container absolute inset-x-0 top-full lg:hidden"
+          data-open={isMobileMenuOpen}
+          inert={!isMobileMenuOpen}
+        >
+          <div>
+            <div className="max-h-[calc(100vh-var(--v2-header-h)-var(--v2-header-gap))] overflow-y-auto border-b border-border bg-surface">
+              <div className="flex flex-col px-32 py-16">
+                {navItems.map((item) =>
+                  item.mega ? (
+                    <MobileNavAccordion
+                      key={item.key}
+                      item={item}
+                      expanded={expandedMobileKey === item.key}
+                      onToggle={() =>
+                        setExpandedMobileKey((prev) =>
+                          prev === item.key ? null : item.key
+                        )
+                      }
+                    />
+                  ) : (
+                    <TransitionLink
+                      key={item.key}
+                      href={item.href}
+                      className="text-mono border-b border-border-muted py-12 text-foreground"
+                    >
+                      {item.label}
+                    </TransitionLink>
+                  )
+                )}
+
+                <div className="flex items-center gap-20 pt-16">
+                  {!loading && (
+                    <TransitionLink
+                      href={hasAccess ? '/animations' : '/login'}
+                      className="text-mono text-foreground-muted"
+                    >
+                      {hasAccess
+                        ? t('common.header.actions.account')
+                        : t('common.header.actions.login')}
+                    </TransitionLink>
+                  )}
+                  <AnimatedButton
+                    href="/checkout?plan=solo&cycle=quarterly"
+                    size="sm"
+                    theme="brand"
+                  >
+                    {t('common.header.actions.getAccess')}
+                  </AnimatedButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
       <div
         ref={scrimRef}
         className="v2-mm-scrim"
-        onClick={() => setActiveMegaMenu(null)}
+        onClick={() => setActiveMegaKey(null)}
         aria-hidden="true"
       />
-    </Fragment>
+    </>
   );
 }

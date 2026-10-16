@@ -10,7 +10,7 @@ import { TESTIMONIALS } from '@/libs/auth/data/TestimonialsData';
 import { Lock } from '@phosphor-icons/react'; 
 import NewsletterForm from '@/components/ui/NewsletterEyebrow';
 import ReturnSubscriberWall from '@/components/paywall/ReturnSubscriberWall';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import NavLink from '@/components/navigation/NavLink';
 import FreeChip from '@/components/ui/FreeChip';
 import StarterPackThumbs from '@/components/paywall/StarterPackThumbs';
@@ -76,9 +76,9 @@ export default function PaywallBlock({
 
   let primaryCheckoutBlock = (
     <div className="flex flex-col items-center gap-12">
-      <Button href={checkoutUrl} onClick={handleCheckoutClick} theme="brand" size="sm">
+      <AnimatedButton href={checkoutUrl} onClick={handleCheckoutClick} theme="brand" size="sm">
         {unlockLabel}
-      </Button>
+      </AnimatedButton>
       <p className="text-accent-xs text-foreground-muted">
         Cancel anytime · 14-day money-back guarantee
       </p>
@@ -137,9 +137,9 @@ export default function PaywallBlock({
         
         {showCheckout && (
           <div className="mt-16 flex flex-col items-center gap-10 border-t border-foreground/10 pt-32">
-            <Button href={checkoutUrl} onClick={handleCheckoutClick} theme="surface" size="xs">
+            <AnimatedButton href={checkoutUrl} onClick={handleCheckoutClick} theme="surface" size="xs">
               {soloPrice ? `Unlock everything - €${soloPrice}/mo` : "Unlock everything"}
-            </Button>
+            </AnimatedButton>
             <p className="text-accent-xs text-foreground-muted">
               Cancel anytime · 14-day money-back
             </p>

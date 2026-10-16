@@ -6,7 +6,7 @@ import { analytics } from '@/libs/utils/analytics';
 import siteConfig, { effectiveCyclePrice, effectiveCycleTotal } from '@/libs/auth/data/ServerData';
 import { usePppTier } from '@/hooks/usePppGeo';
 
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import Link from '@/components/navigation/NavLink';
 import NumberRoller from '@/animations/components/AnimatedNumber';
 import FeatureList from '@/components/pricing/FeatureList';
@@ -237,7 +237,7 @@ export default function PricingCard({
       </div>
 
       <div className="mt-40 flex">
-        <Button
+        <AnimatedButton
           theme="brand"
           size="sm"
           className="w-full justify-center sm:w-auto"
@@ -258,7 +258,7 @@ export default function PricingCard({
           loading={isLoading}
         >
           {plan.cta}
-        </Button>
+        </AnimatedButton>
       </div>
 
       <p className={`text-body-sm mt-16 ${mutedText}`}>

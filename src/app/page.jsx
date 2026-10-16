@@ -14,7 +14,7 @@ import HomeV3Testimonials from '@/components/home-v3/HomeV3Testimonials';
 import HomeV3Pricing from '@/components/home-v3/HomeV3Pricing';
 import HomeV3StarterPack from '@/components/home-v3/HomeV3StarterPack';
 import HomeV3Faq from '@/components/home-v3/HomeV3Faq';
-import BottomCTA from '@/components/landing/BottomCTA';
+import EndCta from '@/components/animations/EndCta';
 
 export const revalidate = 60;
 
@@ -146,16 +146,10 @@ export default async function HomePage() {
       </div>
 
       {/* 10. End CTA with image rings (dark) */}
-      <div className="v3-end-cta">
-        <BottomCTA
-          headline={t('home-v3.endCta.headline')}
-          subtext={t('home-v3.endCta.subtext')}
-          primaryCta={{ label: 'Get access', href: '/checkout?plan=solo&cycle=quarterly' }}
-          secondaryCta={{ label: `Get ${FREE_COUNT} free components`, href: '/starter-pack' }}
-          images={ringImages}
+
+        <EndCta images={ringImages}
           bleed
-        />
-      </div>
+          />
     </>
   );
 }

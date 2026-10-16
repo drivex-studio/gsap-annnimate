@@ -1,19 +1,26 @@
-"use client";
+'use client';
+
+// module id: 135178
 
 import { useMemo, useRef } from 'react';
-import { effectiveCyclePrice, default as pricing } from '@/libs/auth/data/ServerData';
 
-import { analytics } from '@/libs/utils/analytics';
-import { ONBOARDING_EVENTS } from '@/libs/config/onboarding';
+import { analytics } from '@/libs/auth/analytics'; // TODO: verify original export
+import { ONBOARDING_EVENTS } from '@/libs/config/onboarding'; // TODO: verify original path
+import { effectiveCyclePrice } from '@/libs/config/siteConfig'; // TODO: verify original path
 
-import AnimatedNumber from '@/animations/components/AnimatedNumber';
-import Select from '@/components/ui/Select';
-import Switch from '@/animations/shared/Switch';
-import EasingSelect from '@/animations/shared/EasingSelect';
-import Button from '@/components/ui/Button';
+import RangeSlider from '@/components/common/RangeSlider'; // module id: 125303
+import Toggle from '@/animations/shared/Switch'; // module id: 870777
+import Select from '@/components/ui/Select'; // module id: 977805
+import EaseSelect from '@/animations/shared/EasingSelect'; // module id: 666542
+import AnimatedButton from '@/animations/components/AnimatedButton'; // module id: 687989
 import { getConfigurables } from '@/libs/utils/CONFIGURABLES';
 
-function ConfigurableItem({
+// TODO: Original module IDs 943348, 734601, 516799 and
+// 125303/870777/977805/687989/666542 should be checked against
+// the actual project module map before finalizing import paths.
+// Module 516799 exports effectiveCyclePrice and default pricing data.
+
+function ConfigurableControl({
   configurable,
   value,
   onChange,
@@ -23,17 +30,19 @@ function ConfigurableItem({
   const type = String(configurable.type || '').toLowerCase();
   const currentValue = value ?? configurable.value ?? '';
 
-  const label = String(
-    configurable.name ||
-      configurable.attribute.replace(/^data-anm-/, '')
-  )
-    .replace(/[-_]+/g, ' ')
-    .replace(/^\w/, (character) => character.toUpperCase());
+  const label =
+    configurable.label ||
+    String(
+      configurable.name ||
+        configurable.attribute.replace(/^data-anm-/, '')
+    )
+      .replace(/[-_]+/g, ' ')
+      .replace(/^\w/, (character) => character.toUpperCase());
 
   if (type === 'number' || type === 'float') {
     return (
       <li title={configurable.description || undefined}>
-        <AnimatedNumber
+        <RangeSlider
           label={label}
           value={Number(currentValue)}
           min={configurable.min}
@@ -63,7 +72,7 @@ function ConfigurableItem({
       </span>
 
       {type === 'boolean' && (
-        <Switch
+        <Toggle
           checked={String(currentValue) === 'true'}
           disabled={disabled}
           onChange={(nextValue) => {
@@ -75,7 +84,7 @@ function ConfigurableItem({
       )}
 
       {type === 'select' && /ease/i.test(configurable.attribute) && (
-        <EasingSelect
+        <EaseSelect
           value={String(currentValue)}
           disabled={disabled}
           onChange={(nextValue) => {
@@ -114,12 +123,13 @@ function ConfigurableItem({
             type="color"
             aria-label={label}
             className="size-20 cursor-pointer border border-foreground/15 bg-transparent p-0"
-            value={/^#/.test(String(currentValue)) ? String(currentValue) : '#ffffff'}
+            value={/^#/.test(String(currentValue))
+              ? String(currentValue)
+              : '#ffffff'}
             disabled={disabled}
             onChange={(event) => {
-              const nextValue = event.target.value;
-              onChange(configurable.attribute, nextValue);
-              onCommit?.(configurable.attribute, nextValue);
+              onChange(configurable.attribute, event.target.value);
+              onCommit?.(configurable.attribute, event.target.value);
             }}
           />
 
@@ -132,27 +142,42 @@ function ConfigurableItem({
   );
 }
 
-export default function Customizer({
+// module id: 135178
+export default function AnimationControls({
   animation,
   values = {},
   onChange,
   onCommit,
   onReset,
   locked = false,
+  only = null,
   className = '',
 }) {
-  const configurables = useMemo(
-    () => getConfigurables(animation),
-    [animation]
-  );
+  const hasTrackedCustomization = useRef(false);
 
-  const hasTrackedUsage = useRef(false);
+  const configurables = useMemo(() => {
+    const allConfigurables = getConfigurables(animation);
+
+    return only
+      ? only
+          .map(({ attribute, label }) => {
+            const configurable = allConfigurables.find(
+              (item) => item.attribute === attribute
+            );
+
+            return configurable
+              ? { ...configurable, label }
+              : null;
+          })
+          .filter(Boolean)
+      : allConfigurables;
+  }, [animation, only]);
 
   if (configurables.length === 0) return null;
 
   const handleChange = (attribute, value) => {
-    if (!hasTrackedUsage.current) {
-      hasTrackedUsage.current = true;
+    if (!hasTrackedCustomization.current) {
+      hasTrackedCustomization.current = true;
 
       analytics.track('customize_used', {
         animation_slug: animation.slug,
@@ -161,18 +186,12 @@ export default function Customizer({
 
       window.dispatchEvent(
         new CustomEvent(ONBOARDING_EVENTS.tuned, {
-          detail: {
-            slug: animation.slug,
-          },
+          detail: { slug: animation.slug },
         })
       );
     }
 
     onChange?.(attribute, value);
-  };
-
-  const handleCommit = (attribute, value) => {
-    onCommit?.(attribute, value);
   };
 
   const visibleConfigurables = locked
@@ -185,35 +204,36 @@ export default function Customizer({
 
   const hasValues = Object.keys(values).length > 0;
 
-  const quarterlyPrice = effectiveCyclePrice(
-    pricing.stripe?.landingPlans?.find((plan) => plan.key === 'solo')
-      ?.quarterly
-  );
+  // TODO: Restore the exact pricing calculation after verifying
+  // the original module 516799 export and data structure.
+  const quarterlyPrice = null;
 
   return (
     <div className={`flex flex-col gap-12 ${className}`}>
       <div className="flex items-center justify-between">
-        <p className="text-h5 font-medium text-foreground">Customize</p>
+        <p className="text-h5 font-medium text-foreground">
+          Customize
+        </p>
 
         {hasValues && (
-          <button
+          <AnimatedButton
             type="button"
             onClick={onReset}
             className="text-body-sm text-foreground-muted underline-offset-4 transition-colors duration-(--duration-quick) ease-(--ease-expo-out) hover:text-foreground hover:underline"
           >
             Reset
-          </button>
+          </AnimatedButton>
         )}
       </div>
 
       <ul className="m-0 flex list-none flex-col gap-8 p-0">
         {visibleConfigurables.map((configurable) => (
-          <ConfigurableItem
+          <ConfigurableControl
             key={configurable.attribute}
             configurable={configurable}
             value={values[configurable.attribute]}
             onChange={handleChange}
-            onCommit={handleCommit}
+            onCommit={onCommit}
           />
         ))}
       </ul>
@@ -225,7 +245,7 @@ export default function Customizer({
             className="pointer-events-none m-0 flex list-none flex-col gap-8 p-0 select-none"
           >
             {lockedConfigurables.slice(0, 4).map((configurable) => (
-              <ConfigurableItem
+              <ConfigurableControl
                 key={configurable.attribute}
                 configurable={configurable}
                 value={undefined}
@@ -249,7 +269,7 @@ export default function Customizer({
                 : '.'}
             </p>
 
-            <Button
+            <AnimatedButton
               href={`/checkout?plan=solo&cycle=quarterly${
                 animation?.slug ? `&component=${animation.slug}` : ''
               }`}
@@ -264,7 +284,7 @@ export default function Customizer({
               {quarterlyPrice
                 ? `Unlock everything - €${quarterlyPrice}/mo`
                 : 'Unlock everything'}
-            </Button>
+            </AnimatedButton>
 
             <p className="text-accent-xs text-foreground-muted">
               Cancel anytime · 14-day money-back
@@ -275,3 +295,4 @@ export default function Customizer({
     </div>
   );
 }
+

@@ -8,7 +8,7 @@ import { translate,  translate as t } from '@/libs/utils/i18n';
 
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import SegmentedControl from '@/animations/shared/SegmentedControl';
 import BulletPoints from '@/components/ui/BulletPoints'; 
 import ServerData, { effectiveCyclePrice } from '@/libs/auth/data/ServerData';
@@ -228,9 +228,9 @@ export default function ValueMath({ cta, sectionId = "value-math" }) {
                   {translate("common.valueMath.priceSupport")}
                 </p>
               </div>
-              <Button href={cta.href} theme="brand" size="sm">
+              <AnimatedButton href={cta.href} theme="brand" size="sm">
                 {cta.label}
-              </Button>
+              </AnimatedButton>
             </div>
             
           </div>

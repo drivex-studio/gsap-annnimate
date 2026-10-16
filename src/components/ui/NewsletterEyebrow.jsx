@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, Fragment } from 'react';
 import { toast } from 'sonner';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import NavLink from '@/components/navigation/NavLink'; 
 import NewsletterProfilePanel from '@/components/ui/NewsletterProfilePanel';
 import { analytics } from '@/libs/utils/analytics'; 
@@ -320,9 +320,9 @@ export default function NewsletterForm({
               >
                 Skip
               </button>
-              <Button type="submit" theme="brand" size={buttonSize} loading={isProfileLoading} disabled={!firstName.trim()}>
+              <AnimatedButton type="submit" theme="brand" size={buttonSize} loading={isProfileLoading} disabled={!firstName.trim()}>
                 Save
-              </Button>
+              </AnimatedButton>
             </div>
           </Fragment>
         )
@@ -411,9 +411,9 @@ export default function NewsletterForm({
                 </label>
               )}
               
-              <Button type="submit" theme="brand" size={buttonSize} loading={isLoading} className={buttonFullWidth ? 'w-full' : (compact ? 'self-end' : undefined)}>
+              <AnimatedButton type="submit" theme="brand" size={buttonSize} loading={isLoading} className={buttonFullWidth ? 'w-full' : (compact ? 'self-end' : undefined)}>
                 {buttonLabel}
-              </Button>
+              </AnimatedButton>
             </div>
             
             {errors.policy ? (

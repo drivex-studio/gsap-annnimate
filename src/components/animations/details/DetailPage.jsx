@@ -28,7 +28,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import CaptureForm from '@/components/ui/NewsletterEyebrow';
 import { useCategories } from '@/providers/CategoryProvider';
 import { cn } from '@/libs/utils/className';
-import Customizer from '@/components/common/Customizer';
+import Customizer from '@/components/common/AnimationControls';
 import { Copy, Check, Brain, CaretDown, CaretUp, X, ArrowSquareOut, Lock } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { sendUserEvent } from '@/libs/utils/events';
@@ -46,7 +46,7 @@ import {
   applyValuesToReact, 
   applyValuesToVue 
 } from '@/libs/utils/CONFIGURABLES';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 
 function Tracker({ animation }) {
   const viewedRef = useRef(false);
@@ -451,7 +451,7 @@ function MobilePrompt({
           <p className="text-body font-medium text-foreground">
             Copying is a desktop job. Send this to your desktop.
           </p>
-          <Button
+          <AnimatedButton
             theme="surface"
             size="sm"
             onClick={() => {
@@ -468,7 +468,7 @@ function MobilePrompt({
             }}
           >
             {copied ? 'Link copied' : 'Copy link'}
-          </Button>
+          </AnimatedButton>
         </div>
       ) : (
         <div className="mt-12 flex flex-col gap-16">
@@ -667,7 +667,7 @@ function SidebarActions({
         />
       )}
       <div className="flex w-full gap-8">
-        <Button
+        <AnimatedButton
           theme="light"
           size="sm"
           className="flex-1"
@@ -711,8 +711,8 @@ function SidebarActions({
           }}
         >
           {copiedCode ? 'Copied' : 'Copy code'}
-        </Button>
-        <Button
+        </AnimatedButton>
+        <AnimatedButton
           theme="surface"
           size="sm"
           className="flex-1"
@@ -739,7 +739,7 @@ function SidebarActions({
           }}
         >
           {copiedAi ? 'Copied' : 'Copy for AI'}
-        </Button>
+        </AnimatedButton>
       </div>
     </div>
   );
@@ -933,9 +933,9 @@ function UpgradePrompt({ isAuthenticated }) {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-x-24 gap-y-12">
-          <Button href="/pricing" theme="light" size="sm">
+          <AnimatedButton href="/pricing" theme="light" size="sm">
             Get access
-          </Button>
+          </AnimatedButton>
           <span className="text-accent-xs text-foreground-muted">
             {price ? `From €${price}/mo` : 'From €29/mo'}
           </span>
