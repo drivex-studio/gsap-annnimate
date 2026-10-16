@@ -1,7 +1,7 @@
 import { t } from '@/libs/utils/i18n';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import RevealFade from '@/animations/shared/RevealFade';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import { agentFig, awardFig, codeFig, formats, values, weekly } from '@/components/home-v3/Tile';
 import { Tile } from '@/components/home-v3/Tile';
 
@@ -38,9 +38,9 @@ export default function HomeV3Bento({ count = 0 }) {
         </div>
 
         <RevealFade trigger="scroll" className="flex justify-center">
-          <Button href="/animations" theme="brand">
+          <AnimatedButton href="/animations" theme="brand">
             {t('home-v3.bento.browse')}
-          </Button>
+          </AnimatedButton>
         </RevealFade>
       </div>
     </section>

@@ -10,7 +10,7 @@ import Customizer from '@/components/common/Customizer';
 import { HtmlCssIcon } from '@/assets/icons/HtmlCssIcon';
 import { ReactIcon } from '@/assets/icons/ReactIcon';
 import { VueIcon } from '@/assets/icons/VueIcon';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import NavLink from '@/components/navigation/NavLink';
 
 const SPOTLIGHT_TEXT_PROPS = {
@@ -117,9 +117,9 @@ export default function HomeV3Spotlight({ animation, controls, formats = [], cou
               </span>
             </div>
 
-            <Button href="/animations" theme="brand" size="sm">
+            <AnimatedButton href="/animations" theme="brand" size="sm">
               {t('home-v3.spotlight.browse', { count })}
-            </Button>
+            </AnimatedButton>
           </div>
         </div>
       </div>

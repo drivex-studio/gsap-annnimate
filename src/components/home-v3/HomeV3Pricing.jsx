@@ -12,7 +12,7 @@ import RevealFade from '@/animations/shared/RevealFade';
 import BillingCycleToggle from '@/components/pricing/utils/PricingToggle';
 import KitPrice from '@/components/pricing/utils/KitPrice';
 import SeatSlider from '@/components/pricing/SeatSlider';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import { usePppTier } from '@/hooks/usePppGeo';
 import { emptyFig, menuFig, revealFig, soloFig } from '@/components/home-v3/pricingFigures';
 import { StudioSeatsFigure } from '@/components/home-v3/StudioSeatsFigure';
@@ -268,9 +268,9 @@ function KitCard({ kit, fig, compact = false }) {
       </div>
 
       <div className="mt-auto">
-        <Button href={`/checkout?kit=${kit.slug}`} theme="surface" className="w-full justify-center">
+        <AnimatedButton href={`/checkout?kit=${kit.slug}`} theme="surface" className="w-full justify-center">
           {t('home-v3.pricing.kitCta', { title: kit.title })}
-        </Button>
+        </AnimatedButton>
       </div>
     </article>
   );
@@ -392,9 +392,9 @@ export default function HomeV3Pricing({
             />
 
             <div className="mt-auto flex flex-col gap-12">
-              <Button href={`/checkout?plan=solo&cycle=${cycle}`} theme="brand" className="w-full justify-center">
+              <AnimatedButton href={`/checkout?plan=solo&cycle=${cycle}`} theme="brand" className="w-full justify-center">
                 {SOLO_PLAN.cta}
-              </Button>
+              </AnimatedButton>
             </div>
           </PlanCard>
 
@@ -431,13 +431,13 @@ export default function HomeV3Pricing({
                     {t('home-v3.pricing.moreSeats', { max: STUDIO_PLAN.maxSeats })}
                   </a>
                 </p>
-                <Button
+                <AnimatedButton
                   href={`/checkout?plan=${STUDIO_PLAN.key}&cycle=${cycle}&seats=${seats}`}
                   theme="surface"
                   className="w-full justify-center"
                 >
                   {STUDIO_PLAN.cta}
-                </Button>
+                </AnimatedButton>
               </div>
             </PlanCard>
           )}

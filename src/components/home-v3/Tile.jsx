@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 import { PUNCH, useIsoLoop, IsoFigure, tone } from '@/components/common/iso';
 import { t } from '@/libs/utils/i18n';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import { ScrollTrigger } from '@/libs/utils/vendor';
 
 const heightConfigs = [50, 80, 32];
@@ -237,9 +237,9 @@ export default function BentoSection({ count = 0 }) {
           {renderTile('weekly', weekly, 'md:col-span-6 lg:col-span-5', { count })}
         </div>
         <ScrollTrigger trigger="scroll" className="flex justify-center">
-          <Button href="/animations" theme="brand">
+          <AnimatedButton href="/animations" theme="brand">
             {t('home-v3.bento.browse')}
-          </Button>
+          </AnimatedButton>
         </ScrollTrigger>
       </div>
     </section>

@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { PUNCH } from '@/components/common/iso';
 import { t } from '@/libs/utils/i18n';
 import { useReveal } from '@/animations/hooks/useReveal';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import AnimatedText from '@/animations/components/AnimatedText';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import RevealFade from '@/animations/shared/RevealFade';
@@ -114,15 +114,15 @@ export default function HomeV3Hero({ items = [], freeCount = 0 }) {
             className="mt-32 flex flex-wrap items-center justify-center gap-12"
             delay={0.55}
           >
-            <Button
+            <AnimatedButton
               href="/checkout?plan=solo&cycle=quarterly"
               theme="brand"
             >
               {t('home-v3.hero.cta')}
-            </Button>
-            <Button href="/starter-pack" theme="surface">
+            </AnimatedButton>
+            <AnimatedButton href="/starter-pack" theme="surface">
               {t('home-v3.hero.ctaFree', { count: freeCount })}
-            </Button>
+            </AnimatedButton>
           </RevealFade>
         </div>
         <div className="mt-32 flex flex-wrap items-center justify-center gap-x-24 gap-y-12 lg:mt-40">

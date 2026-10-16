@@ -7,7 +7,7 @@ import { useGSAP } from '@gsap/react';
 import { useTransitionRouter } from '@/providers/TransitionRouterProvider';
 import { translate } from '@/libs/utils/i18n';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 
 gsap.registerPlugin(CustomEase);
 CustomEase.create('annnimateInOut', 'M0,0 C0.7,0 0.16,1 1,1');
@@ -167,9 +167,9 @@ export default function HomeV3Showcase({ sites = [] }) {
           {translate('home-v3.showcase.headline')}
         </RevealHeadline>
 
-        <Button href="/showcase" theme="brand">
+        <AnimatedButton href="/showcase" theme="brand">
           {translate('home-v3.showcase.link')}
-        </Button>
+        </AnimatedButton>
       </div>
 
       <div
