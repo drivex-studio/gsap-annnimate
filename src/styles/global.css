@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import "./homev3/dark.css";
+@import "./homev3/macc.css";
+@import "./prose-blog.css";
+@import "./cursor.css";
 
 @custom-variant dark (&:is(.dark *));
 
