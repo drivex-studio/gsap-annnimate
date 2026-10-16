@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import PreloaderWrapper from '@/components/ui/PageLoader';
+import PageReady from '@/providers/context/PageReady'; 
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import AppLayout from '@/components/layout/AppLayout';
@@ -18,6 +19,7 @@ export default function SiteLayout({ children, latestAnimation }) {
 
   return (
     <>
+      <PageReady /> 
       <PreloaderWrapper />
       {layoutType === 'app' ? (
         <AppLayout latestAnimation={latestAnimation}>{children}</AppLayout>
