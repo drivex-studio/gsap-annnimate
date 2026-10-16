@@ -28,7 +28,7 @@ import { useBreakpoint } from '@/hooks/useBreakpoint';
 import CaptureForm from '@/components/ui/NewsletterEyebrow';
 import { useCategories } from '@/providers/CategoryProvider';
 import { cn } from '@/libs/utils/className';
-import Customizer from '@/components/common/Customizer';
+import Customizer from '@/components/common/AnimationControls';
 import { Copy, Check, Brain, CaretDown, CaretUp, X, ArrowSquareOut, Lock } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { sendUserEvent } from '@/libs/utils/events';
