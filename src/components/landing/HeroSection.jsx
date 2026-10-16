@@ -1,5 +1,5 @@
 import { translate } from '@/libs/utils/i18n';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 import AnimatedText from '@/animations/components/AnimatedText';
 import AnimationsFilterBar from '@/animations/components/AnimationsFilterBar';
@@ -39,12 +39,12 @@ export default function HeroSection({ animations = [], count = 0, pool = [] }) {
             </AnimatedSubtext>
             <AnimatedText className="mt-32" delay={0.3}>
               <div className="flex flex-wrap items-center gap-24">
-                <Button href="/animations" theme="brand" size="sm">
+                <AnimatedButton href="/animations" theme="brand" size="sm">
                   {translate('landing.hero.ctaPrimary', { count })}
-                </Button>
-                <Button href="/starter-pack" theme="surface" size="sm">
+                </AnimatedButton>
+                <AnimatedButton href="/starter-pack" theme="surface" size="sm">
                   {translate('landing.hero.ctaSecondary')}
-                </Button>
+                </AnimatedButton>
               </div>
               <p className="text-body-sm mt-16 text-foreground-muted">
                 {translate('landing.hero.ctaNote')}

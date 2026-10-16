@@ -7,7 +7,7 @@ import { useGSAP } from '@gsap/react';
 import IconBase from '@/assets/icons/IconBase';
 import { CaretDown, Play } from '@phosphor-icons/react';
 import Link from '@/components/navigation/Link';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import { cn } from '@/libs/utils/className';
 import { analytics } from '@/libs/utils/analytics';
 import ServerData, { effectiveCyclePrice } from '@/libs/auth/data/ServerData';
@@ -652,14 +652,14 @@ export default function TimelineStrip({ animation, hasAccess = false, className 
                       Members see every tween
                       {rows.length - 1 > 1 ? ` - ${rows.length - 1} more in this animation.` : '.'}
                     </p>
-                    <Button
+                    <AnimatedButton
                       href={`/checkout?plan=solo&cycle=quarterly${animation?.slug ? `&component=${animation.slug}` : ''}`}
                       onClick={() => analytics.track('timeline_unlock_clicked', { animation_slug: animation?.slug })}
                       theme="surface"
                       size="xs"
                     >
                       {price ? `Unlock everything - €${price}/mo` : 'Unlock everything'}
-                    </Button>
+                    </AnimatedButton>
                     <p className="text-accent-xs text-foreground-muted">
                       Cancel anytime · 14-day money-back
                     </p>

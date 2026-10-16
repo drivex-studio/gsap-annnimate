@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { translate } from '@/libs/utils/i18n';
 import { useReveal } from '@/animations/hooks/useReveal';
-import Button from '@/components/ui/Button'; 
+import AnimatedButton from '@/animations/components/AnimatedButton'; 
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 import RingBackground, { RING_SECTION_MIN_VH } from '@/components/landing/RingBackground';
@@ -111,14 +111,14 @@ export default function BottomCTA({
             ) : (
               <div className="mt-8 flex flex-col items-center gap-16 sm:flex-row sm:gap-12">
                 {primaryCta && (
-                  <Button href={primaryCta.href} theme="brand" size={buttonSize}>
+                  <AnimatedButton href={primaryCta.href} theme="brand" size={buttonSize}>
                     {primaryCta.label}
-                  </Button>
+                  </AnimatedButton>
                 )}
                 {secondaryCta && (
-                  <Button href={secondaryCta.href} theme="surface" size={buttonSize}>
+                  <AnimatedButton href={secondaryCta.href} theme="surface" size={buttonSize}>
                     {secondaryCta.label}
-                  </Button>
+                  </AnimatedButton>
                 )}
               </div>
             )}

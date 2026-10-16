@@ -3,7 +3,7 @@ import React, { useRef, useMemo, useEffect } from 'react';
 import gsap from 'gsap';
 import { translate as t } from '@/libs/utils/i18n';
 import { useReveal } from '@/animations/hooks/useReveal';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import AnimatedHeadline from '@/components/common/AnimatedHeadline';
 
 const TOP_LEFT = { cx: 0, cy: 0.36, rx: 0.17, ry: 0.44 };
@@ -185,9 +185,9 @@ export default function ProblemSection() {
               {t('landing.problem.resolve')}
             </p>
             <div ref={ctaRef} className="mt-48">
-              <Button href="/animations" theme="brand" size="sm">
+              <AnimatedButton href="/animations" theme="brand" size="sm">
                 {t('landing.problem.cta')}
-              </Button>
+              </AnimatedButton>
             </div>
           </div>
         </div>

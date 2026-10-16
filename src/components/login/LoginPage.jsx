@@ -8,7 +8,7 @@ import { createClient } from '@/libs/supabase/client';
 import { Envelope, GithubLogo, ArrowLeft, ArrowRight, GoogleLogo } from '@phosphor-icons/react';
 
 import Logo from '@/assets/logos/SiteLogo';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import NavLink from '@/components/navigation/NavLink';
 import AnimatedText from '@/animations/components/AnimatedText';
 import AuthShowcase from '@/components/login/AuthShowcase';
@@ -286,9 +286,9 @@ export default function Login({ images = [] }) {
                         We found an account for <span className="Login-highlight">{incompleteUserContext.email}</span> but your subscription was never activated.
                       </p>
                       <div className="Login-cardAction">
-                        <Button href={incompleteUserContext.checkoutUrl} theme="brand" size="sm">
+                        <AnimatedButton href={incompleteUserContext.checkoutUrl} theme="brand" size="sm">
                           Subscribe to Annnimate
-                        </Button>
+                        </AnimatedButton>
                       </div>
                       <p className="Login-cardNote">
                         Once you subscribe, you'll receive a magic link to sign in.
@@ -365,9 +365,9 @@ export default function Login({ images = [] }) {
                         />
                       </div>
                       
-                      <Button type="submit" theme="brand" size="sm" loading={isSendingLink} className="Login-submitBtn">
+                      <AnimatedButton type="submit" theme="brand" size="sm" loading={isSendingLink} className="Login-submitBtn">
                         Continue
-                      </Button>
+                      </AnimatedButton>
                       
                       <p className="Login-note">We'll email you a secure link to sign in instantly.</p>
                     </form>

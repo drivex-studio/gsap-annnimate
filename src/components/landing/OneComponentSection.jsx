@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { translate,  translate as t } from '@/libs/utils/i18n';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import CircularSlider from '@/components/landing/CircularSlider';
@@ -170,9 +170,9 @@ export default function OneComponentSection() {
                 </AnimatedSubtext>
               </header>
               <div className="flex flex-wrap items-center gap-16">
-                <Button href="/animations" theme="brand" size="sm">
+                <AnimatedButton href="/animations" theme="brand" size="sm">
                   {t('landing.oneComponent.cta')}
-                </Button>
+                </AnimatedButton>
               </div>
             </div>
             <div className="col-span-6 col-start-7">
@@ -226,9 +226,9 @@ export default function OneComponentSection() {
               <CodePreview tab={activeTab} setTab={setActiveTab} preset={activePreset} />
             </div>
             <div className="flex flex-wrap items-center gap-16">
-              <Button href="/animations" theme="brand" size="sm">
+              <AnimatedButton href="/animations" theme="brand" size="sm">
                 {t('landing.oneComponent.cta')}
-              </Button>
+              </AnimatedButton>
             </div>
           </div>
         )}

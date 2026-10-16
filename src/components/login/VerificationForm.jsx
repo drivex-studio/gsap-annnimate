@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 
 const isValidCode = (code) => /^\d{6}$/.test(code);
 
@@ -150,7 +150,7 @@ export default function VerificationForm({ onVerify }) {
           />
         </div>
         
-        <Button
+        <AnimatedButton
           type="submit"
           theme="surface"
           size="sm"
@@ -158,7 +158,7 @@ export default function VerificationForm({ onVerify }) {
           disabled={code.length < 6}
         >
           Sign in
-        </Button>
+        </AnimatedButton>
       </div>
     </form>
   );

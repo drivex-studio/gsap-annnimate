@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import Link from '@/components/navigation/Link';
 
 export default function EmptyState({ query, onReset, noun = "animations" }) {
@@ -16,9 +16,9 @@ export default function EmptyState({ query, onReset, noun = "animations" }) {
             {query ? " If it should exist, tell us - requests steer what ships next." : ""}
           </p>
           <div className="flex flex-col items-center gap-16 lg:flex-row lg:justify-center lg:gap-24">
-            <Button onClick={onReset} theme="light" size="sm">
+            <AnimatedButton onClick={onReset} theme="light" size="sm">
               Reset filters
-            </Button>
+            </AnimatedButton>
             {query ? (
               <Link href="/roadmap" className="text-foreground-muted">
                 Suggest it on the roadmap

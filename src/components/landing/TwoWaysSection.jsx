@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { translate } from '@/libs/utils/i18n';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import AnimatedText from '@/animations/components/AnimatedText';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
@@ -67,7 +67,7 @@ export default function TwoWaysSection({ images = [], animations = [], cursorRef
               </div>
               <p className="text-body m-0 max-w-[52ch] text-foreground-muted">{translate('landing.twoWays.libraryBody')}</p>
               <div className="mt-auto inline-flex pt-12">
-                <Button href="/animations" theme="light" size="sm">{translate('landing.twoWays.libraryCta')}</Button>
+                <AnimatedButton href="/animations" theme="light" size="sm">{translate('landing.twoWays.libraryCta')}</AnimatedButton>
               </div>
             </div>
           </article>
@@ -83,7 +83,7 @@ export default function TwoWaysSection({ images = [], animations = [], cursorRef
               </div>
               <p className="text-body m-0 max-w-[52ch] text-foreground-muted">{translate('landing.twoWays.kitBody')}</p>
               <div className="mt-auto inline-flex pt-12">
-                <Button href="/kits/menu" theme="brand" size="sm">{translate('landing.twoWays.kitCta')}</Button>
+                <AnimatedButton href="/kits/menu" theme="brand" size="sm">{translate('landing.twoWays.kitCta')}</AnimatedButton>
               </div>
             </div>
           </article>

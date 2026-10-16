@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import CloseIcon from '@/assets/icons/Icons';
 import { Dialog, DialogContent, DialogClose, DialogTitle, DialogDescription } from '@/components/ui/Dialog'; 
-import Button from '@/components/ui/Button'; 
+import AnimatedButton from '@/animations/components/AnimatedButton'; 
 import Toggle from '@/components/ui/Toggle';
 import { getConsent, defaultConsent, setConsent, dispatchConsentChanged } from '@/libs/utils/cookieConsent'; 
 
@@ -104,7 +104,7 @@ export function CookiePreferencesModal({ open, onOpenChange }) {
 
         <div className="mt-24 flex flex-col gap-8">
           <div className="flex gap-8">
-            <Button
+            <AnimatedButton
               type="button"
               theme="light"
               size="xs"
@@ -117,8 +117,8 @@ export function CookiePreferencesModal({ open, onOpenChange }) {
               className="flex-1"
             >
               Accept all
-            </Button>
-            <Button
+            </AnimatedButton>
+            <AnimatedButton
               type="button"
               theme="surface"
               size="xs"
@@ -131,9 +131,9 @@ export function CookiePreferencesModal({ open, onOpenChange }) {
               className="flex-1"
             >
               Decline all
-            </Button>
+            </AnimatedButton>
           </div>
-          <Button
+          <AnimatedButton
             type="button"
             theme="brand"
             size="xs"
@@ -141,7 +141,7 @@ export function CookiePreferencesModal({ open, onOpenChange }) {
             className="w-full"
           >
             Save preferences
-          </Button>
+          </AnimatedButton>
         </div>
       </DialogContent>
     </Dialog>

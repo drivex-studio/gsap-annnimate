@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Check } from '@phosphor-icons/react';
 import { ArrowRight, DiscordLogo } from '@phosphor-icons/react';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import Link from '@/components/navigation/Link';
 import { analytics } from '@/libs/utils/analytics';
 import { useOnboarding } from '@/providers/OnboardingProvider';
@@ -43,9 +43,9 @@ function OnboardingSuccessModal({ onClose }) {
         Copy, tune, paste - the whole library works exactly like this.
       </p>
       <div className="mt-20">
-        <Button href="/animations" onClick={onClose} theme="brand" size="xs" className="w-full">
+        <AnimatedButton href="/animations" onClick={onClose} theme="brand" size="xs" className="w-full">
           Explore the library
-        </Button>
+        </AnimatedButton>
       </div>
     </div>
   );
@@ -188,7 +188,7 @@ export default function OnboardingDiscordNudge() {
               <p className="text-body-sm mb-12 text-foreground-muted">
                 Drop in. Share what you build, see what others ship, get help when something breaks.
               </p>
-              <Button
+              <AnimatedButton
                 href={getDiscordLinkForUser(profile)}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -202,7 +202,7 @@ export default function OnboardingDiscordNudge() {
                 className="w-full"
               >
                 Join the Discord
-              </Button>
+              </AnimatedButton>
             </div>
           )}
         </React.Fragment>

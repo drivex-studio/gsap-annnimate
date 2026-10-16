@@ -1,4 +1,4 @@
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import { SentToDetail } from '@/components/ui/SentToDetail';
 import { analytics } from '@/libs/utils/analytics';
 
@@ -60,7 +60,7 @@ export default function NewsletterProfilePanel({
       
       <div className="flex flex-wrap items-center justify-between gap-12">
         {inboxDetails ? (
-          <Button 
+          <AnimatedButton 
             href={inboxDetails.href} 
             target="_blank" 
             rel="noopener noreferrer" 
@@ -69,7 +69,7 @@ export default function NewsletterProfilePanel({
             onClick={() => analytics.track('confirm_inbox_opened', { source, provider: inboxDetails.provider })}
           >
             {inboxDetails.label}
-          </Button>
+          </AnimatedButton>
         ) : (
           <span />
         )}

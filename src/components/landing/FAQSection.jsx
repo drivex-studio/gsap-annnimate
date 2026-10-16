@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { translate } from '@/libs/utils/i18n';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import RevealHeadline from '@/animations/shared/RevealHeadline'; 
 import AnimatedSubtext from '@/animations/components/AnimatedSubtext';
 import AnimatedText from '@/animations/components/AnimatedText';
@@ -86,9 +86,9 @@ export default function FAQ({
                 
                 {ctaLink ? (
                   <div className="mt-32 hidden lg:flex">
-                    <Button href={ctaLink.href} theme="brand" size="sm">
+                    <AnimatedButton href={ctaLink.href} theme="brand" size="sm">
                       {ctaLink.label}
-                    </Button>
+                    </AnimatedButton>
                   </div>
                 ) : null}
               </div>
@@ -109,9 +109,9 @@ export default function FAQ({
                 
                 {ctaLink ? (
                   <div className="mt-32 flex lg:hidden">
-                    <Button href={ctaLink.href} theme="brand" size="sm">
+                    <AnimatedButton href={ctaLink.href} theme="brand" size="sm">
                       {ctaLink.label}
-                    </Button>
+                    </AnimatedButton>
                   </div>
                 ) : null}
               </div>

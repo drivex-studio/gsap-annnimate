@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { Check } from '@phosphor-icons/react';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import FreeChip from '@/components/ui/FreeChip';
 
 function OnTheListChip() {
@@ -65,7 +65,7 @@ export default function ReturnSubscriberWall({
       
       {isInStarterPack && (
         <div className="flex flex-col items-center gap-8">
-          <Button
+          <AnimatedButton
             type="button"
             theme={status === "done" ? "surface" : "brand"}
             size="sm"
@@ -74,7 +74,7 @@ export default function ReturnSubscriberWall({
             onClick={handleResend}
           >
             {status === "done" ? "Sent, check your inbox" : "Resend the pack"}
-          </Button>
+          </AnimatedButton>
           <p className="text-accent-xs text-foreground-muted">
             Can't find it? Check spam, or reply to any of our emails.
           </p>

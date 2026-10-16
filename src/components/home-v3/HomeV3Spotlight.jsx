@@ -7,7 +7,7 @@ import { t } from '@/libs/utils/i18n'; // module id: 398682
 
 import AnimationPreview from '@/components/common/AnimationPreview'; // module id: 113861
 import AnimationControls from '@/components/common/AnimationControls'; // module id: 135178
-import Button from '@/animations/components/AnimatedButton';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 
 import Link from '@/components/navigation/NavLink';
 import AnimatedHeadline from '@/animations/shared/RevealHeadline';
@@ -194,13 +194,13 @@ export default function SpotlightSection({
               </span>
             </div>
 
-            <Button
+            <AnimatedButton
               href="/animations"
               theme="brand"
               size="sm"
             >
               {t('home-v3.spotlight.browse', { count })}
-            </Button>
+            </AnimatedButton>
           </div>
         </div>
       </div>

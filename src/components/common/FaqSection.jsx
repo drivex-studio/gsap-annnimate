@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 import { t } from '@/libs/utils/i18n';
 import RevealHeadline from '@/animations/shared/RevealHeadline';
 import AnimatedText from '@/animations/components/AnimatedText';
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import RevealFade from '@/animations/shared/RevealFade';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import FAQItem from '@/components/ui/FAQItem';
@@ -106,9 +106,9 @@ export default function FaqSection({
                 </div>
                 {ctaLink ? (
                   <div className="mt-32 hidden lg:flex">
-                    <Button href={ctaLink.href} theme="brand" size="sm">
+                    <AnimatedButton href={ctaLink.href} theme="brand" size="sm">
                       {ctaLink.label}
-                    </Button>
+                    </AnimatedButton>
                   </div>
                 ) : null}
               </div>
@@ -134,9 +134,9 @@ export default function FaqSection({
                 )}
                 {ctaLink ? (
                   <div className="mt-32 flex lg:hidden">
-                    <Button href={ctaLink.href} theme="brand" size="sm">
+                    <AnimatedButton href={ctaLink.href} theme="brand" size="sm">
                       {ctaLink.label}
-                    </Button>
+                    </AnimatedButton>
                   </div>
                 ) : null}
               </div>

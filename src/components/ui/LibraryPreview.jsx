@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '@/components/navigation/Link'; 
-import Button from '@/components/ui/Button';
+import AnimatedButton from '@/animations/components/AnimatedButton';
 import AnimatedHeadline from '@/components/common/AnimatedHeadline';
 
 export function relativeShipped(dateString) {
@@ -69,9 +69,9 @@ export default function LibraryPreview({ items = [], count = 0 }) {
         </div>
         
         <div className="mt-32 flex justify-center lg:mt-48">
-          <Button href="/animations" theme="surface" size="sm">
+          <AnimatedButton href="/animations" theme="surface" size="sm">
             Explore the full library
-          </Button>
+          </AnimatedButton>
         </div>
       </div>
     </section>

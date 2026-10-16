@@ -12,7 +12,7 @@ import RangeSlider from '@/components/common/RangeSlider'; // module id: 125303
 import Toggle from '@/animations/shared/Switch'; // module id: 870777
 import Select from '@/components/ui/Select'; // module id: 977805
 import EaseSelect from '@/animations/shared/EasingSelect'; // module id: 666542
-import AnimatedButton from '@/components/ui/Button'; // module id: 687989
+import AnimatedButton from '@/animations/components/AnimatedButton'; // module id: 687989
 import { getConfigurables } from '@/libs/utils/CONFIGURABLES';
 
 // TODO: Original module IDs 943348, 734601, 516799 and
