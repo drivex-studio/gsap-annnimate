@@ -1,27 +1,27 @@
-import React, { forwardRef } from 'react';
-import { useTransitionClick } from '@/hooks/useTransitionClick';
-import MenuTrigger from 'next/link';
+import { forwardRef } from 'react'; 5
+import Link from 'next/link'; 
+import { useTransitionClick } from '@/hooks/useTransitionClick'; 
 
-const Link = forwardRef(function Link({
+
+const Link = forwardRef(function ({
   href,
   onClick,
   children,
-  ...rest
+  ...props
 }, ref) {
-  let handleClick = useTransitionClick(href, {
-    onClick
-  });
+  const handleClick = useTransitionClick(href, { onClick });
 
   return (
-    <MenuTrigger
+    <Link
       ref={ref}
       href={href}
       onClick={handleClick}
-      {...rest}
+      {...props}
     >
       {children}
-    </MenuTrigger>
+    </Link>
   );
 });
 
 export default Link;
+

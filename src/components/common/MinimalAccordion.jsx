@@ -1,7 +1,10 @@
 'use client';
 
 import React, { useCallback, useId, useRef } from 'react';
+
 import { gsap, useGSAP, CustomEase, SplitText } from '@/libs/utils/vendor';
+
+gsap.registerPlugin(useGSAP, CustomEase, SplitText);
 
 if (!CustomEase.get('annnimate')) {
   CustomEase.create('annnimate', 'M0,0 C0.3,0.9 0.1,1 1,1');
@@ -10,6 +13,8 @@ if (!CustomEase.get('annnimate')) {
 if (!CustomEase.get('annnimateInOut')) {
   CustomEase.create('annnimateInOut', 'M0,0 C0.7,0 0.16,1 1,1');
 }
+
+/* Data */
 
 const DEFAULT_ACCORDION_ITEMS = [
   {
