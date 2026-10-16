@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useTransitionClick } from '@/hooks/useTransitionClick'; 
 
 
-const Link = forwardRef(function ({
+const TransitionLink = forwardRef(function ({
   href,
   onClick,
   children,
@@ -23,5 +23,5 @@ const Link = forwardRef(function ({
   );
 });
 
-export default Link;
+export default TransitionLink;
 

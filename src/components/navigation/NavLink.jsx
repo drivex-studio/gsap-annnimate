@@ -7,7 +7,7 @@ import NavLabel from '@/animations/shared/ButtonText';
 export const NAV_SURFACE =
   'pointer-events-none relative inline-flex items-center px-12 py-6 transition-colors duration-(--duration-quick) ease-(--ease-expo-out) group-hover:bg-foreground/[0.06] group-data-[active=true]:bg-foreground/[0.06]';
 
-export default function TransitionLink({
+export default function NavLink({
   href,
   children,
   className,
